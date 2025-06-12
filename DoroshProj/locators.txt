@@ -1,0 +1,8 @@
+#LoginPage
+
+input.login = ".//input[@id = 'login']"
+input.password = "..."
+button.login = "..."
+
+#HomePage
+button.SignOut = "..."
