@@ -5,10 +5,13 @@
   <groupId>org.example</groupId>
   <artifactId>G12_TAF</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <packaging>pom</packaging>
 
   <name>G12_TAF</name>
   <url>http://maven.apache.org</url>
+  <modules>
+    <module>overAll</module>
+  </modules>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
