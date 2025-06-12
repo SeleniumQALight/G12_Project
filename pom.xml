@@ -11,7 +11,6 @@
   <url>http://maven.apache.org</url>
   <modules>
     <module>overAll</module>
-      <module>untitled</module>
       <module>DoroshProj</module>
   </modules>
 
