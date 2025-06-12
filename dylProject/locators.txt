@@ -1,0 +1,9 @@
+// Групуємо по пейджам на яких знаходяться локатори
+
+# Login page
+input.login = .//input[@id='login']
+input.password="..."
+button.login="..."
+
+# Home page
+button.SignOut="..."
