@@ -1,0 +1,18 @@
+#01 Valid Login
+login = qaauto
+pass = 123456qwerty
+
+Pre-condition:
+1.
+
+Steps:
+1. Open Login page https://...
+2. Enter <login> into the input login on login page
+3. Enter <pass> into the input password on login page
+4. Click on button Login on login page
+
+Expected result:
+1. I see SignOut button
+
+Post Condition:
+1.
