@@ -12,6 +12,7 @@
   <modules>
     <module>overAll</module>
       <module>untitled</module>
+      <module>DoroshProj</module>
   </modules>
 
   <properties>
