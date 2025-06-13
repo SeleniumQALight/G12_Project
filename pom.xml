@@ -14,6 +14,7 @@
     <module>pylypProject</module>
     <module>nedbailoProj</module>
       <module>ilinProj</module>
+      <module>krainykProj</module>
   </modules>
 
   <properties>
