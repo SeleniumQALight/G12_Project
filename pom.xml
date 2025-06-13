@@ -12,6 +12,7 @@
   <modules>
     <module>overAll</module>
     <module>nedbailoProj</module>
+      <module>ilinProj</module>
   </modules>
 
   <properties>
