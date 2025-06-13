@@ -13,6 +13,7 @@
     <module>overAll</module>
     <module>nedbailoProj</module>
       <module>ilinProj</module>
+      <module>krainykProj</module>
   </modules>
 
   <properties>
