@@ -15,6 +15,7 @@
     <module>nedbailoProj</module>
       <module>ilinProj</module>
       <module>krainykProj</module>
+      <module>rozsokhaProj</module>
   </modules>
 
   <properties>
