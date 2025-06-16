@@ -1,0 +1,25 @@
+#001 Valid Login
+
+login = uniqe or (qaauto) //used by own
+pass =123456qwerty
+
+pre-condition
+1.
+//reg
+
+Steps:
+1. Open login form https://aqa-complexapp.onrender.com
+2. Enter <login> into input login on Login page
+3. Enter <pass> into input login on Login page
+4. Click on button Login on login page
+
+Expected result:
+1. I see SignOut button
+2. The utl address is changed
+
+
+Post condition:
+1.
+//delete all
+
+#002
