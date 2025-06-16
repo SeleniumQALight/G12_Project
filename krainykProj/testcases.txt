@@ -1,4 +1,4 @@
-#01 Valid login
+#001 Valid login
 
 login = qaauto
 pass = 123456qwerty
@@ -13,9 +13,114 @@ Steps:
 4. Click on button login on Login page
 
 Expected result:
-1. I see SignOut button on the page
+1. My Profile button is displayed on the page.
+2. The SignOut button is displayed on the page.
 
 Postconditions:
 1. Delete user
 
-#02
+#002 Header on home page for new user
+
+Summary: (this case can be checked for new users and existing users that do not follow anyone)
+
+Steps:
+1. Open login page https://aqa-complexapp.onrender.com
+2. Fill field Username following data [Janetest21]
+3. Fill field Email following data [test219313@gmail.com].
+4. Fill password following data 123456qwerty [qwerty123456].
+5. Click on button Sign up for OurApp.
+
+Expected result:
+1. Verify header is displayed with following data 'Hello username , your feed is empty.'
+2. The foolowing massage is displayed "Your feed displays the latest posts from the people you follow. If you don’t have any friends to follow that’s okay; you can use the “Search” feature in the top menu bar to find content written by people with similar interests and then follow them."
+
+Post condition:
+1. Delete user
+
+#003 Create post
+
+Preconditions:
+1. User is logged in with the following credentials:
+   - login: Janetest21
+   - password: qwerty123456
+2. User is on the home page.
+
+Steps:
+1. Click on the "Create Post" button.
+2. Enter the post title "Test Post Title by [login]" in the title field.
+3. Enter the body content "Test Post Content by [login]" in the content field.
+4. Click on the "Save new post" button to create the post page.
+
+Expected result:
+1. Verify message 'New post successfully created.' is displayed.
+2. Verify that the post is displayed with the title "Test Post Title by [login]" and content "Test Post Content by [login]".
+
+Postconditions:
+1. Delete the created post
+2. Delete user
+
+#004 Edit post
+Preconditions:
+1. User is logged in with the following credentials:
+   - login: Janetest21
+   - password: qwerty123456
+2. Create new post with title 'Test Post Title by [login]' and content 'Test Post Content by [login]'.
+3. Click 'Complex app for testing - QA' link is on the home page
+
+Steps:
+1. Click on button My Profile button on the home page.
+3. Click on the first post in the list of posts.
+2. Сlick on the "Edit" button of the post.
+3. Fill field Title following data 'Test Post Title by [login] has been addited on [date]'.
+5. Mark checkbox 'Is this post unique?'
+4. Click on button 'Save updates'.
+
+Expected result:
+1. Verify message 'Post successfully updated.' is diplayed.
+2. Verify that the post is displayed with the updated title "Test Post Title by [login] has been addited on [date_time]" and content "Test Post Content by [login]".
+3. Verify that the post is marked as unique.
+
+Postconditions:
+1. Delete the post
+2. Delete user
+
+#005 Search post with valid search data
+
+Preconditions:
+1. User is logged in with the following credentials:
+   - login: Janetest21
+   - password: qwerty123456
+2. Create new post with Title 'Test Post 219313VK'.
+3. Click 'Complex app for testing - QA' link is on the home page
+
+Steps:
+1. Click on button Search.
+2. Fill field 'What are you interested in?' following data 'Test Post 219313VK'.
+
+Expected result:
+1. Verify that post with Title 'Test Post 219313VK' is displayed in Search Results modal.
+
+Post condition:
+1. Delete created post.
+2. Delete user.
+
+#006 Follow user
+
+Preconditions:
+1. User is logged in with the following credentials:
+   - login: Janetest21
+   - password: qwerty123456
+
+Steps:
+1. Click on the "Search" button in the top menu bar.
+2. Fill in the "What are you interested in?" field with the data "Дикий заповідник Ріка-Раковець: охорона природи на Закарпатті".
+3. Сlick on the post in search result.
+4. Click on the username on the displayed post.
+5. Click on the "Follow" button to follow the user.
+
+Expected result:
+1. Verify message 'Successfully followed [username]' is displayed.
+2. Verify that the "Stop Following" button is displayed, indicating that the user is now following the selected user.
+
+Post condition:
+1. Delete user.
