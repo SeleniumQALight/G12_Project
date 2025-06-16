@@ -1,0 +1,61 @@
+#Login page
+input.registrationUsername = ".//input[@id='username-register']"
+input.registrationEmail = ".//input[@id='email-register']"
+input.registrationPassword = ".//input[@id='password-register']"
+button.signUp = ".//button[@type='submit']""
+
+input.username = ".//input[@placeholder='Username']"
+input.password = ".//input[@placeholder='Password']"
+buton.signIn = ".//button[text()='Sign In')]"
+
+#Header-bar
+link.toHomePage = "//a[@href="/" and text()='Complex app for testing - QA']"
+button.search = ".//a[@href='#']"
+button.myProfile = "..//img[@data-original-title='My Profile']//.."
+button.createPost = ".//a[@href='/create-post']"
+button.signOut = ".//button[@class='btn btn-sm btn-secondary']"
+
+#Home page
+header.helloMessage = ".//h2"
+header.feedMessage = ".//p[@class='lead text-muted']"
+
+#Create post page
+form.createPostPage = ".//form[@action='/create-post']"
+input.postTitle = ".//input[@id='post-title']"
+input.postContent = ".//textarea[@id='post-body']"
+select.dropdown = ".//select"
+dropdown.valueOnePerson = ".//option[@value='One Person']"
+button.saveNewPost = ".//button[@class='btn btn-primary']"
+
+#Post page
+div.successCreatedPostMessage = ".//div[@class='alert alert-success text-center']"
+link.postAuthor = ".//p/a[contains(@href, '/profile/')][2]"
+h2.postTitle = ".//h2"
+u.postAvailability = ".//u"
+p.postContent = ".//div[@class='body-content'][2]/p"
+button.edit= ".//a[@data-original-title='Edit']"
+button.delete = ".//button[@data-original-title='Delete']"
+
+#Profile page
+item.lastPost=".//div[@class='list-group']/a"
+button.follow = ".//button[@class='btn btn-primary btn-sm']"
+div.successFollowMessage = ".//div[@class='alert alert-success text-center']"
+button.unfollow = ".//button[@class='btn btn-danger btn-sm']"
+item.followers = ".//a[contains(@href, 'followers')]"
+
+#Edit post page
+form.editPostPage = ".//form[contains(@action, 'edit')]"                                //I think we can use this locator to check if we are on the edit page
+input.editPostTitle = ".//input[@id="post-title"]"
+input.editPostContent = ".//textarea[@id='post-body']"
+input.editIsPostUnique = ".//input[@name='uniquePost']"
+select.dropdown = ".//select"
+dropdown.valueGroupMessage = ".//option[@value='Group Message']"
+button.saveUpdates = ".//button[@class='btn btn-primary']"
+div.successUpdatedPostMessage = ".//div[@class='alert alert-success text-center']"
+
+#Search modal
+input.searchPost = ".//input[@id='live-search-field']"
+p.alertMessage = ".//p[@class='alert alert-danger text-center shadow-sm']"
+item.searchResultItem = ".//div[@class='list-group-item active']/../a"
+
+
