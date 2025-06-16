@@ -1,0 +1,41 @@
+login = qaauto
+pass = 123456qwerty
+
+hector
+hector@gmail.com
+hector123456
+
+#01 Create user
+
+
+#02 Create post
+? Pre-condition:
+1. Create uniqueUser
+Username = hector1;
+Email = hector1@gmail.com;
+Password = hector1111HW
+У випадку, якщо ці реквізити для входу будуть зайняті треба взяти будь-які інші,
+які підходять
+
+
+Steps:
+1. Open login page https://aqa-complexapp.onrender.com
+2. Enter "test1" into input Username on Login page
+3. Enter "1234567890HW" into input Password on Login page
+4. Click on button Sign In on Login page
+5. Enter "The story about QA" into input Title
+6. Enter "Discover how Quality Assurance shapes great software."
+7. Сheck the checkbox "Is this post unique?"
+8. Press the button Save New Post
+
+
+Expected result:
+1. Appears a message. Message = New post successfully created.
+2. Title is displayed. Title = "The story about QA"
+
+
+? Post condition:
+1. Delete Post
+2. Delete User
+
+#03 В прекондишинах створити статтю і потім її знайти або відредагувати
