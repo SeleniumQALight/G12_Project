@@ -16,6 +16,7 @@
       <module>ilinProj</module>
       <module>krainykProj</module>
       <module>rozsokhaProj</module>
+      <module>dylProject</module>
   </modules>
 
   <properties>
