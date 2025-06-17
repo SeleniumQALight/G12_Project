@@ -1,0 +1,7 @@
+#LoginPage
+input.login
+input.password
+button.Login
+
+#HomePage
+button.SingOut
