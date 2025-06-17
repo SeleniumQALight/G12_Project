@@ -29,6 +29,7 @@ button.saveNewPost = ".//button[@class='btn btn-primary']"
 
 #Post page
 div.successCreatedPostMessage = ".//div[@class='alert alert-success text-center']"
+text.PostedBy = ".//text()[contains(.,'Posted by')]"
 link.postAuthor = ".//p/a[contains(@href, '/profile/')][2]"
 h2.postTitle = ".//h2"
 u.postAvailability = ".//u"

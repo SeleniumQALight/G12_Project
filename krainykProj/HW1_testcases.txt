@@ -30,6 +30,7 @@ Steps:
 
 Expected result:
 1. Message 'New post successfully created.' is displayed.
+2. Check that "Posted by" is displayed on the page with the username.
 2. Created post is displayed with the title "Test Post Title by [login]" and content "Test Post Content by [login]".
 
 Postconditions:
