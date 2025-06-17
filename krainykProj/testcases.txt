@@ -1,0 +1,21 @@
+#01 Valid login
+
+login = qaauto
+pass = 123456qwerty
+
+Preconditions:
+1. Create user with login <login> and password <password> in the system
+
+Steps:
+1. Open login page https://aqa-complexapp.onrender.com
+2. Enter <login> into input login on Login page
+3. Enter <password> into input password on Login page
+4. Click on button login on Login page
+
+Expected result:
+1. I see SignOut button on the page
+
+Postconditions:
+1. Delete user
+
+#02
