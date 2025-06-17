@@ -1,86 +1,131 @@
-#001 Header on home page for new user
+#001 - Text on home page for the user that does not follow any account
+Preconditions:
+1. Create new user with the following credentials:
+   - username: TestUser001
+   - password: qwerty123456
+   - email: test219313+1@gmail.com
+2. User does not follow any account.
+3. Created user is logged in
 
 Steps:
-1. Open login page https://aqa-complexapp.onrender.com
-2. Fill field Username following data [Janetest21]
-3. Fill field Email following data [test219313@gmail.com].
-4. Fill password following data 123456qwerty [qwerty123456].
-5. Click on button Sign up for OurApp.
+1. Click on My Profile button on the header bar.
+
+Expected result: The count of following users is 0.
+
+2.Click on the Following tab
+
+Expected result: There is no following users.
+
+3. Click 'Complex app for testing - QA' link on the header bar
 
 Expected result:
-1. Header is displayed with following data 'Hello username , your feed is empty.'
+1. Header is displayed with following data 'Hello [username] , your feed is empty.'
 2. The following message is displayed "Your feed displays the latest posts from the people you follow. If you don’t have any friends to follow that’s okay; you can use the “Search” feature in the top menu bar to find content written by people with similar interests and then follow them."
 
 Post condition:
 1. Delete user
 
-#002 Create post
-
+#002 - Create post
 Preconditions:
-1. User is logged in with the following credentials:
-   - login: Janetest21
+1. Create new user with the following credentials:
+   - username: TestUser002
    - password: qwerty123456
-2. User is on the home page.
+   - email: test219313+2@gmail.com
+2. Created user is logged in
+3. User does not have any posts.
+4. User is on the home page.
 
 Steps:
 1. Click on the "Create Post" button.
-2. Enter the post title "Test Post Title by [login]" in the title field.
-3. Enter the body content "Test Post Content by [login]" in the content field.
+2. Enter the post title "Test Post Title - [username]" in the title field.
+3. Enter the body content "Test Post Content - [username]" in the content field.
 4. Click on the "Save new post" button to create the post page.
 
 Expected result:
 1. Message 'New post successfully created.' is displayed.
-2. Check that "Posted by" is displayed on the page with the username.
-2. Created post is displayed with the title "Test Post Title by [login]" and content "Test Post Content by [login]".
+2. "Posted by" is displayed on the page with the [username].
+3. Created post is displayed with the title "Test Post Title - TestUser002" and content "Test Post Content - [username]".
+4. The post note with availability "One Person" value is displayed.
+
+5. Click on My Profile button on the header bar.
+
+Expected result:
+1. The count of posts is increased by 1.
+2. The created post is displayed in the list of posts with the title "Test Post Title - [username]"
+
+6. Click on the created post in the list of posts.
+
+Expected result:
+1. "Posted by" is displayed on the page with the [username].
+2. Created post is displayed with the title "Test Post Title - [username]" and content "Test Post Content - [username]".
+3. The post note with availability "One Person" value is displayed.
 
 Postconditions:
 1. Delete the created post
 2. Delete user
 
-#003 Edit post
+#003 - Edit post
 Preconditions:
-1. User is logged in with the following credentials:
-   - login: Janetest21
+1. Create new user with the following credentials:
+   - username: TestUser003
    - password: qwerty123456
-2. Create new post with title 'Test Post Title by [login]' and content 'Test Post Content by [login]'.
-3. Click 'Complex app for testing - QA' link is on the home page
+   - email: test219313+3@gmail.com
+2. Created user is logged in
+2. Create new post with title 'Test Post Title - [username]' and content 'Test Post Content - [username]'.
+3. User is on the home page.
 
 Steps:
-1. Click on button My Profile button on the home page.
-3. Click on the first post in the list of posts.
-2. Сlick on the "Edit" button of the post.
-3. Fill field Title following data 'Test Post Title by [login] has been addited on [date]'.
+1. Click on My Profile button on the header bar.
+2. Click on the first post in the list of posts.
+3. Сlick on the "Edit" button of the post.
+4. Fill field Title following data 'Test Post Title - [username] has been addited'.
+5. Fill field Content following data 'Test Post Content - [username] has been addited too'.
 5. Mark checkbox 'Is this post unique?'
 6. Select value 'Group Message' from dropdown 'Select value'.
-4. Click on button 'Save updates'.
+7. Click on button 'Save updates'.
 
 Expected result:
-1. Message 'Post successfully updated.' is diplayed.
-2. Edited post is displayed with the updated title "Test Post Title by [login] has been addited on [date_time]" and content "Test Post Content by [login]".
+1. Message 'Post successfully updated.' is displayed.
+2. "« Back to post permalink" link is displayed.
+3. Edited post is displayed with the updated title "Test Post Title - [username] has been addited" and content "Test Post Content - [username] has been addited too".
+4. Checkbox 'Is this post unique?' is not marked.
+5. Dropdown 'Select value' displays value 'All Users'.
+
+8. Click on My Profile button on the header bar.
+
+Expected result:
+1. The updated post is displayed in the list of posts with the title "Test Post Title - [username] has been addited"
+2. The count of posts is not changed.
+
+9. Click on the updated post in the list of posts.
+
+Expected result:
+1. "Posted by" is displayed on the page with the [username].
+2. Edited post is displayed with the updated title "Test Post Title - [username] has been addited" and content "Test Post Content - [username] has been addited too".
 3. Checkbox 'Is this post unique?' is marked.
-4. Dropdown 'Select value' displays value 'Group Message'.
+4. The post note with availability "Group Message" value is displayed.
 
 Postconditions:
 1. Delete the post
 2. Delete user
 
 #004 Search post with non-valid search data
-
 Preconditions:
-1. User is logged in with the following credentials:
-   - login: Janetest21
+1. Create new user with the following credentials:
+   - username: TestUser003
    - password: qwerty123456
-2. Create new post with title 'Test Post Title added_testVK' and content 'Test Post Content added_testVK'.
-3. Click 'Complex app for testing - QA' link is on the home page
+   - email: test219313+3@gmail.com
+2. Created user is logged in
+3. Create new post with title 'Test Post Title - [username]' and content 'Test Post Content - [username]'.
+3. User is on the home page.
 
 Steps:
 1. Click on Search button.
 2. Click on the "What are you interested in?" field.
-3. Fill field 'What are you interested in?' following data 'VK'.
+3. Fill field 'What are you interested in?' by non-valid data (for example: '.').
 
 Expected result:
 1. The following message is displayed: "Sorry, we could not find any results for that search."
-
 
 Post condition:
 1. Delete created post.
@@ -89,23 +134,38 @@ Post condition:
 #005 Follow user
 
 Preconditions:
-1. User is logged in with the following credentials:
-   - login: Janetest21
+1. Create user1 with the following credentials:
+   - login: TestUser005
    - password: qwerty123456
-2. User is on the home page.
+   - email: test219313+5@gmail.com
+2. Create post by user1 with title 'Test Post VK01' and content 'Test Post VK01'.
+3. Create user2 with the following credentials:
+   - login: TestUser006
+   - password: qwerty123456
+   - email: test219313+6@gmail.com
+5. User2 is logged in
+6. User2 is on the home page.
 
 Steps:
 1. Click on the "Search" button in the top menu bar.
-2. Fill in the "What are you interested in?" field with the data "Дикий заповідник Ріка-Раковець: охорона природи на Закарпатті".
+2. Fill in the "What are you interested in?" field with the data "Test Post VK01".
 3. Click on the post in search result.
 4. Click on the username on the displayed post.
-5. Click on the "Follow" button to follow the user.
+5. Click on the "Follow" button to follow the user1.
 
 Expected result:
 1. Message 'Successfully followed [username]' is displayed.
 2. The "Stop Following" button is displayed, indicating that the user is now following the selected user.
 3. The count of followers for the followed user is increased by 1.
 
+6. Click on the "My Profile" button in the header bar.
+7. Click on the "Followers" tab.
+
+Expected result:
+1. The count of followers is increased by 1.
+2. The following user is displayed in the list of followers.
+
 Post condition:
-1. Unfollow followed user.
-2. Delete user.
+1. Deleted post by user 1
+2. Delete user1
+3. Delete user2

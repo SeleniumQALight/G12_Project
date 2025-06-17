@@ -16,8 +16,9 @@ button.createPost = ".//a[@href='/create-post']"
 button.signOut = ".//button[@class='btn btn-sm btn-secondary']"
 
 #Home page
-header.helloMessage = ".//h2"
-header.feedMessage = ".//p[@class='lead text-muted']"
+text.helloMessage = ".//h2"
+text.feedMessage = ".//p[@class='lead text-muted']"
+text.username = ".//h2/strong"
 
 #Create post page
 form.createPostPage = ".//form[@action='/create-post']"
@@ -28,21 +29,28 @@ dropdown.valueOnePerson = ".//option[@value='One Person']"
 button.saveNewPost = ".//button[@class='btn btn-primary']"
 
 #Post page
-div.successCreatedPostMessage = ".//div[@class='alert alert-success text-center']"
+div.successCreatedPostMessage = ".//div[text()='New post successfully created.']"
 text.PostedBy = ".//text()[contains(.,'Posted by')]"
 link.postAuthor = ".//p/a[contains(@href, '/profile/')][2]"
 h2.postTitle = ".//h2"
+i.postNote = ".//i"
 u.postAvailability = ".//u"
+p.nonUniquePostMessage = ".//p[contains(text(), 'Is this post unique? : no')]"
+p.uniquePostMessage = ".//p[contains(text(), 'Is this post unique? : yes')]"
 p.postContent = ".//div[@class='body-content'][2]/p"
 button.edit= ".//a[@data-original-title='Edit']"
 button.delete = ".//button[@data-original-title='Delete']"
 
 #Profile page
-item.lastPost=".//div[@class='list-group']/a"
+item.lastPost=".//div[@class='list-group']/a[1]"
+item.PostTitle = ".//div[@class='list-group']/a/strong"
 button.follow = ".//button[@class='btn btn-primary btn-sm']"
-div.successFollowMessage = ".//div[@class='alert alert-success text-center']"
+div.successFollowMessage = ".//div[text()='Post successfully deleted.']"
 button.unfollow = ".//button[@class='btn btn-danger btn-sm']"
-item.followers = ".//a[contains(@href, 'followers')]"
+tab.posts = "//a[contains(text(), 'Posts:')]"
+tab.followers = ".//a[contains(@href, 'followers')]"
+tab.following = ".//a[contains(@href, 'following')]"
+div.followingList = ".//div[@class='list-group']"
 
 #Edit post page
 form.editPostPage = ".//form[contains(@action, 'edit')]"                                //I think we can use this locator to check if we are on the edit page
@@ -51,8 +59,10 @@ input.editPostContent = ".//textarea[@id='post-body']"
 input.editIsPostUnique = ".//input[@name='uniquePost']"
 select.dropdown = ".//select"
 dropdown.valueGroupMessage = ".//option[@value='Group Message']"
+dropdown.valueGroupMessage = ".//option[@value='All Users']"
 button.saveUpdates = ".//button[@class='btn btn-primary']"
-div.successUpdatedPostMessage = ".//div[@class='alert alert-success text-center']"
+div.successUpdatedPostMessage = ".//div[text()='Post successfully updated.']"
+link.backToPost = ".//a[contains(text(),'Back to post permalink')]"
 
 #Search modal
 input.searchPost = ".//input[@id='live-search-field']"
