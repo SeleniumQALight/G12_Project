@@ -1,0 +1,8 @@
+//Should be grouped by page on which they are presented
+#LoginPage
+input.login = ".//input[@id='login']"
+input.password = ".//input[@id='password']"
+button.login = ".//button[@id='login-button']"
+
+#HomePage
+button.signOut = ".//button[@id='sign-out-button']"
