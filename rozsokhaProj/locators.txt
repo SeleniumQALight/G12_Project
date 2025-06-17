@@ -1,12 +1,27 @@
 #LoginPage
-input.login=".//input[@id='login']"
-input.password="..."
-button.Login="..."
+input.username="//input[@id='username7']"
+input.password="//input[@placeholder='Password']"
+button.signIn="//button[@class='btn btn-primary btn-sm']"
+alert.invalidUsernamePassword="//div[text()='Invalid username/password.']"
+input.pickAUsername="//input[@id='username-register']"
+input.email="//input[@id='email-register']"
+input.createAPassword="//input[@id='password-register']"
+button.sighUpForOurApp="//button[@type='submit']"
 
 #HomePage
-SignOut button="..."
-
-#CreatePost
-
+button.signOut="//button[@class='btn btn-sm btn-secondary']"
+button.createPost="//a[@href='/create-post']"
+button.myProfile="//img[@alt='My profile']"
 
 #MyProfile
+tab.posts="//a[@class='profile-nav-link nav-item nav-link active']"
+
+#CreatePost
+input.title="//input[@id='post-title']"
+textarea.bodyContent="//textarea[@id='post-body']"
+input.isThisPostUnique=//input[@type='checkbox' and @name="uniquePost"]
+select.selectValue=//select[@id='select1']
+selectOption.groupMessage="//select//option[3]"
+button.saveNewPost="//button[contains(text(),'Save New Post')]"
+alert.newPostSuccessfullyCreated="//div[text()='New post successfully created.']"
+info.postedBy="//p[@class='text-muted small mb-4']"
