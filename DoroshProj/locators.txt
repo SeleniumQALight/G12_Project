@@ -1,8 +1,36 @@
-#LoginPage
+#Login page
+username.input = “.//input[@id = 'username1']”
+password.input = “.//input[@placeholder='Password']”
+username.register = “.//input[@id = ‘username-register’]”
+email.register = “.//input[@id = ‘email-register’]”
+pass.register = “.//input[@id = ‘password-register’]”
+signup.button = “.//button[@type = ‘submit’]”
+wrong.pass.message = “.//div[contains(text(), 'Password must be at least 12 characters.')]”
 
-input.login = ".//input[@id = 'login']"
-input.password = "..."
-button.login = "..."
 
-#HomePage
-button.SignOut = "..."
+# Home page
+chat.icon = “.//span[@class='text-white mr-2 header-chat-icon']”
+create.post.button = “.//a[@href = '/create-post']”
+search.button = “//a[ @data-original-title=’Search’]”
+search.input = “.//input[@id='live-search-field']”
+fail.search.message = “.//p[@class='alert alert-danger text-center shadow-sm']”
+signout.button = “.//button[contains(text(), ‘Sign Out’)]”
+
+#Chat modal
+message.input = “.//input[@placeholder='Type a message…']”
+chat.close.button = “.//span[@class=’chat-title-bar-close’]”
+chat.message = “.//div[contains(text(), 'hello')]”
+message.avatar = “.//img[@class='chat-avatar avatar-tiny']”
+
+ # New post creation page
+post.title = “.//input[@id= 'post-title']”
+post.body = “.//textarea[@id= 'post-body']”
+uniqueness.checkbox = “.//input[@name= 'uniquePost']”
+access.dropdown =”.//select//option[@value='All Users']”
+save.post.button = “.//button[@class = 'btn btn-primary']”
+
+
+
+# Post page
+post.creation.message = “.//div[@class = 'alert alert-success text-center']”
+delete.post.button = ” .//form[@class="delete-post-form d-inline"]”
