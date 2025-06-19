@@ -1,0 +1,7 @@
+#LoginPage
+input login = "jhjhhjh"
+input password = "..."
+button_login = "..."
+
+#HomePage
+button Signout = "..."
