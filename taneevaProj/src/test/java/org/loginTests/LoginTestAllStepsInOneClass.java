@@ -32,6 +32,7 @@ public class LoginTestAllStepsInOneClass {
         logger.info("Browser was closed");
 
     }
+
     @Test
     public void validLogin(){
         webDriver.get("https://aqa-complexapp.onrender.com");
