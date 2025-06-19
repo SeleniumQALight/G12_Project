@@ -1,4 +1,125 @@
-#01 Valid login
+#1 Sending messages in chat
+
+Pre-condition
+Sign in into application, user is in the Home page
+1.login = Ador
+2. password = 123456qwerty$
+
+Steps
+1.Click Chat button on Home page
+2.Type a message = “hello” into message input
+3.Click Enter
+4.Click Close button to close chat
+5.Click Chat button
+
+Expected result
+We see the message “hello” in the chat
+We can see an image of chat avatar
+
+Post condition
+ Close the chat
+
+# 2 Сreation of Post
+
+Pre-condition:
+Sign in into application, user is in the Home page
+1.login = Ador
+2. password = 123456qwerty$
+
+Steps:
+1.Click button “Create post” in Home Page
+2.Enter <title> into title input on New post creation page
+3. Enter <body content> into Body Content text area on New post creation page
+4.Put a checkmark in  “Is this post unique?” checkbox on New post creation  page
+5.Select value “Загальнодоступне” in access dropdown on New post creation  page
+6.Click button “Save new post” on New post creation page
+
+Expected result:
+1.I see text “New post successfully created” in the Post page
+2.I see “Delete” button in the Post page
+
+Post condition:
+1.Delete created post
+
+
+
+
+
+# 3 Searching posts
+
+Pre-condition
+Sign in into application, user is in the Home page
+1.login = Ador
+2. password = 123456qwerty$
+
+Steps
+1.Click “Search” button in Home page
+2.Enter non-existed text in search input
+
+Expected result
+I see text “Sorry, we could not find any results for that search”
+
+Post condition
+Click close button , come back  to Home page
+
+#4 Sign out test
+
+Pre-condition
+
+Sign in into application, user is in the Home page
+1.login = Ador
+2. password = 123456qwerty$
+
+Steps
+1.Click “Sign out” button
+
+Expected result
+1.I see “Username” and “Password” inputs on Login Page
+
+
+
+#5 Creating user with non valid password
+
+Pre-condition:
+1.username =” qaqa” + “Current date”,
+2.email = “qatester” + “random number “+ “@gmail.com”
+3. password = 1111
+
+Steps:
+1.Open login page https://aqa-complexapp.onrender.com
+2.Enter <userrname> into input Username on Login page
+3. Enter <email> into input Email on Login page
+4.Enter incorrect <pass> into input password on Login page
+
+Expected result:
+1. I see Sign up for OurApp button on Login page
+2. I see text “Password must be at least 12 characters”
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// CW example
+#06 Valid login
 
 login = qaauto
 pass = 123456qwerty
@@ -18,4 +139,3 @@ Expected result:
 Post condition:
 1.
 
-#2
