@@ -1,8 +1,6 @@
 package org.loginTests;
 
 import org.baseTest.BaseTest;
-import org.example.pages.HomePage;
-import org.junit.Assert;
 import org.junit.Test;
 
 public class LoginTestWithPageObject extends BaseTest {
