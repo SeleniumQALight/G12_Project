@@ -14,7 +14,7 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = "//input[@placeholder='Password']")
     private WebElement inputPassword;
 
-    @FindBy(xpath = "//input[@placeholder='Password']")
+    @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
 
     public LoginPage(WebDriver webDriver) {
@@ -42,6 +42,7 @@ public class LoginPage extends ParentPage {
 
     public void clickOnButtonSignIn() {
 //        webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
+        buttonSignIn.click();
         logger.info("Button Sinn In was clicked");
     }
 }
