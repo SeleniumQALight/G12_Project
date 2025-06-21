@@ -1,4 +1,4 @@
-#01 Valid Login
+#01 ------Valid Login------
 login = qaauto
 pass = 123456qwerty
 
@@ -6,13 +6,56 @@ Pre-condition:
 1.
 
 Steps:
-1. Open Login page https://...
-2. Enter <login> into the input login on login page
-3. Enter <pass> into the input password on login page
+1. Open Login page "https://aqa-complexapp.onrender.com/"
+2. Enter "qaauto" into the input login on login page
+3. Enter "123456qwerty" into the input password on login page
 4. Click on button Login on login page
 
 Expected result:
 1. I see SignOut button
 
-Post Condition:
-1.
+Post condition:
+1. Click the "Sign out" button
+
+#02 ------Invalid Login: invalid username------
+
+Steps:
+1. Open Login page "https://aqa-complexapp.onrender.com/"
+2. Enter "qaautoooo" into the input login on login page
+3. Enter "123456qwerty" into the input password on login page
+4. Click on button Login on login page
+
+Expected result:
+1. I see an error message with text "Invalid username/password."
+
+#03 ------Invalid Login: invalid password------
+
+Steps:
+1. Open Login page "https://aqa-complexapp.onrender.com/"
+2. Enter "qaauto" into the input login on login page
+3. Enter "123456qwertyyy" into the input password on login page
+4. Click on button Login on login page
+
+Expected result:
+1. I see an error message with text "Invalid username/password."
+
+
+#04 ------Post Creation: create new post------
+1. Click the button "Create Post"
+2. Fill in the "title" input field with text "Test text in input field "title", post creation YK"
+3. Fill in the "body content" text area with text "Test text in text area, post creation YK"
+4. Mark check-box "Is this post unique?"
+5. Click the button "Save New Post"
+
+Expected result:
+1. I see the success message with text "New post successfully created.".
+
+#05 ------Search: search created post by title------
+1. Click the magnifying glass icon "Search"
+2. Fill in the input Search field with text: "Test text in input field "title", post creation YK"
+3. Click the post with exact title "Test text in input field "title", post creation YK"
+
+
+Expected result:
+1. I see the post title is exactly same as "Test text in input field "title", post creation YK"
+
