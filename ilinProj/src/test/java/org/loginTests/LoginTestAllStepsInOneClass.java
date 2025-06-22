@@ -85,7 +85,7 @@ public class LoginTestAllStepsInOneClass {
         try{
             boolean state = webDriver.findElement(By.xpath(".//button[text()='Sign In']")).isDisplayed();
             logger.info("Element 'Sign in' is visible - " + state);
-            return true;
+            return state;
         }catch (Exception e) {
             logger.info("Element 'Sign in' is not found");
             return false;
