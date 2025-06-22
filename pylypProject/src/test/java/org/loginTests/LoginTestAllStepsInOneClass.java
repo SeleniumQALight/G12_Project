@@ -52,6 +52,37 @@ public class LoginTestAllStepsInOneClass {
     Assert.assertTrue("User is not LoggedIn: button SignOut is not visible" , isButtonSignOutVisible() );
 
 }
+    @Test
+    public void invalidLogin() {
+        webDriver.get("https://aqa-complexapp.onrender.com/");
+        logger.info("Site was opened");
+
+        WebElement inputUserName = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
+        inputUserName.clear();
+        inputUserName.sendKeys("qaauto");
+        logger.info("qaauto was entered in input UserName");
+
+        WebElement inputPassword = webDriver.findElement(By.xpath("//input[@placeholder='Password']"));
+        inputPassword.clear();
+        inputPassword.sendKeys("Not_valid");
+        logger.info("Invalid password was entered in input Password");
+
+        webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
+        logger.info("Button Sign In was clicked");
+
+        // Перевірка №1: що кнопка Sign Out не показується
+        Assert.assertFalse("Sign Out button should not be visible", isButtonSignOutVisible());
+
+        // Перевірка №2: що кнопка Sign In присутня
+        Assert.assertTrue("Sign In button should be visible",
+                webDriver.findElement(By.xpath("//button[text()='Sign In']")).isDisplayed());
+
+        // Перевірка №3: що з'явилось повідомлення "Invalid username/password."
+        WebElement alertMessage = webDriver.findElement(By.xpath("//div[contains(text(),'Invalid username/password.')]"));
+        Assert.assertTrue("Error message is not displayed", alertMessage.isDisplayed());
+        logger.info("Error message is visible: " + alertMessage.getText());
+    }
+
 
     private boolean isButtonSignOutVisible() {
     try {
