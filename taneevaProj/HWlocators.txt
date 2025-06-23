@@ -1,39 +1,43 @@
-# ===== Registration form =====
-input_username_register      = ".//input[@id='username-register']"
-input_email_register         = ".//input[@id='email-register']"
-input_password_register      = ".//input[@id='password-register']"
-button_sign_up               = ".//button[@type='submit']"
+# ===== Registration Form =====
+input_username_register        = ".//input[@id='username-register']"
+input_email_register           = ".//input[@id='email-register']"
+input_password_register        = ".//input[@id='password-register']"
+button_sign_up                 = ".//button[@type='submit']"
 
-# ===== Login form =====
-input_username_login         = ".//input[@placeholder='Username']"
-input_password_login         = ".//input[@placeholder='Password']"
-button_sign_in               = ".//button[text()='Sign In']"
-button_sign_out              = "//button[text()='Sign Out']"
+# ===== Login Page =====
+input_username_login           = ".//input[@placeholder='Username']"
+input_password_login           = ".//input[@placeholder='Password']"
+button_sign_in                 = ".//button[text()='Sign In']"
 
-# ===== Create New Post =====
-button_create_post           = ".//form[@action='/create-post']"
-input_post_title             = ".//input[@id='post-title']"
-textarea_post_body           = ".//textarea[@id='post-body']"
-checkbox_unique_post         = ".//input[@type='checkbox' and @name='uniquePost']"
-dropdown_select_visibility   = ".//select[@id='select1']"
-option_visibility_one_person = ".//option[@value='One Person']"
-button_save_new_post         = ".//button[contains(@class,'btn-primary') and text()='Save New Post']"
+# ===== Home Page =====
+button_sign_out                = "//button[text()='Sign Out']"
+icon_chat_open                 = ".//span[contains(@class, 'header-chat-icon')]"
+button_create_post             = ".//form[@action='/create-post']"
 
-# ===== After post creation/edit =====
-success_message_created      = ".//div[contains(@class, 'alert-success') and contains(text(), 'New post successfully created.')]"
-success_message_updated      = ".//div[contains(@class, 'alert-success') and contains(text(), 'Post successfully updated.')]"
+# ===== Create New Post Page =====
+button_create_post             = ".//form[@action='/create-post']"
+input_post_title               = ".//input[@id='post-title']"
+textarea_post_body             = ".//textarea[@id='post-body']"
+checkbox_unique_post           = ".//input[@type='checkbox' and @name='uniquePost']"
+dropdown_select_visibility     = ".//select[@id='select1']"
+option_visibility_one_person   = ".//option[@value='One Person']"
+button_save_new_post           = ".//button[contains(@class,'btn-primary') and text()='Save New Post']"
 
-post_title_text              = ".//h2[contains(text(),'My first test post') or contains(text(),'Edited post title')]"
-post_author_name             = ".//a[@href='/profile/anjtest' and text()='anjtest']"
-post_author_avatar           = ".//a[@href='/profile/anjtest']/img[@class='avatar-tiny']"
-note_all_users_info          = ".//p[contains(text(),'Note: This post was written for All Users')]"
-post_body_text               = ".//p[contains(text(),'This is the content of my post') or contains(text(),'Updated post content.')]"
+# ===== Post View Page (After Creation or Editing) =====
+success_message_created        = ".//div[contains(@class, 'alert-success') and contains(text(), 'New post successfully created.')]"
+success_message_updated        = ".//div[contains(@class, 'alert-success') and contains(text(), 'Post successfully updated.')]"
 
-button_edit_post             = ".//a[contains(@href, '/edit') and contains(@class, 'text-primary')]"
-button_delete_post           = ".//form[contains(@class,'delete-post-form')]//button[contains(@class,'delete-post-button')]"
+post_title_text                = ".//h2[contains(text(),'My first test post') or contains(text(),'Edited post title')]"
+post_author_name               = ".//a[@href='/profile/anjtest' and text()='anjtest']"
+post_author_avatar             = ".//a[@href='/profile/anjtest']/img[@class='avatar-tiny']"
+note_all_users_info            = ".//p[contains(text(),'Note: This post was written for All Users')]"
+post_body_text                 = ".//p[contains(text(),'This is the content of my post') or contains(text(),'Updated post content.')]"
+
+button_edit_post               = ".//a[contains(@href, '/edit') and contains(@class, 'text-primary')]"
+button_delete_post             = ".//form[contains(@class,'delete-post-form')]//button[contains(@class,'delete-post-button')]"
 
 # ===== Chat =====
-icon_chat_open               = ".//span[contains(@class, 'header-chat-icon')]"
-chat_input_field             = ".//input[@id='chatField' and @placeholder='Type a message…']"
-chat_close_icon              = ".//svg[@data-icon='times-circle']"
-chat_message_hello           = ".//div[contains(@class, 'chat-message-inner') and normalize-space(text())='Hello']"
+icon_chat_open                 = ".//span[contains(@class, 'header-chat-icon')]"
+chat_input_field               = ".//input[@id='chatField' and @placeholder='Type a message…']"
+chat_close_icon                = ".//svg[@data-icon='times-circle']"
+chat_message_hello             = ".//div[contains(@class, 'chat-message-inner') and normalize-space(text())='Hello']"
