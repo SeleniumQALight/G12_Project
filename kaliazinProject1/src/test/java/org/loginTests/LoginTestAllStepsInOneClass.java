@@ -54,10 +54,15 @@ public class LoginTestAllStepsInOneClass {
     }
 
     private boolean isButtonSignOutVisible() {
+        try {
 
-        boolean state = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
-        logger.info(state + "Button sign Out is displayed");
-        return state;
+            boolean state = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
+            logger.info(state + "Button sign Out is displayed");
+            return state;
+        } catch (Exception e) {
+            logger.info("element is not found");
+            return false;
+        }
     }
 
 }
