@@ -46,10 +46,10 @@ Expected results:
 4. The creation date is displayed (for example, "6/17/2025")
 5. The information is displayed: Note: This post was written for All Users
 6. The post text is displayed: "This is the content of my post."
-
+7. The post is visible in the user’s post list on their profile page
 
 Post-condition:
-
+1. Delete created post
 
 #TC003 Valid Login
 Credentials:
