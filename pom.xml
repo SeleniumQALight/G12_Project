@@ -11,6 +11,7 @@
   <url>http://maven.apache.org</url>
   <modules>
     <module>overAll</module>
+    <module>radulenkoProj</module>
     <module>kaliazinProject1</module>
     <module>pylypProject</module>
     <module>nedbailoProj</module>
