@@ -1,5 +1,5 @@
 #LoginPage
-input.login=.//input[@id='username1']
+input.login=.//input[@placeholder='Username']
 input.password=.//input[@placeholder='Password']
 button.SignIn=.//button[@class='btn btn-primary btn-sm']
 
