@@ -19,21 +19,23 @@ public class LoginTestAllStepsInOneClass {
     private Logger logger = Logger.getLogger(getClass());
 
     @Before
-    public void setUp(){
+    public void setUp() {
         WebDriverManager.chromedriver().setup();
         webDriver = new ChromeDriver();
         webDriver.manage().window().maximize();
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         logger.info("Browser was opened");
     }
+
     @After
-    public void tearDown(){
+    public void tearDown() {
         webDriver.quit();
         logger.info("Browser was closed");
 
     }
+
     @Test
-    public void validLogin(){
+    public void validLogin() {
         webDriver.get("https://aqa-complexapp.onrender.com");
         logger.info("Site was opened");
 
@@ -54,6 +56,7 @@ public class LoginTestAllStepsInOneClass {
 
 
     }
+
     @Test
     public void invalidLogin() {
         webDriver.get("https://aqa-complexapp.onrender.com");
@@ -71,14 +74,6 @@ public class LoginTestAllStepsInOneClass {
 
         webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
         logger.info("Button Sign In was clicked");
-
-        // Можеш додати паузу на 2 секунди, якщо помилка ще не з'являється
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         logger.info("Is Sign Out visible: " + isButtonSignOutVisible());
         logger.info("Is Sign In visible: " + isButtonSignInVisible());
         logger.info("Is error message visible: " + isErrorMessageVisible("Invalid username/password."));
@@ -117,6 +112,4 @@ public class LoginTestAllStepsInOneClass {
             return false;
         }
     }
-
-
 }
