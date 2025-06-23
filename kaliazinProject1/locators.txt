@@ -16,6 +16,14 @@ checkbox "Is this post unique?" = "//input[@type='checkbox' and @name='uniquePos
 button "Save Post" = "//button [@class = 'btn btn-primary' and contains(text(), 'Save New Post')]";
 success message post creation = "//div[@class= 'alert alert-success text-center' and contains(text(), 'New post successfully created.')]";
 
+#Post Editing
+
+save updates button = "//button[@class = 'btn btn-primary' and contains(text(), 'Save Updates') ]"
+
+#Post Detailed view
+delete Post button = "//button[@class = 'delete-post-button text-danger' ]";
+edit Post button = "//a[@data-original-title = 'Edit']";
+
 #Search
 input Search field = "//input[@id='live-search-field']";
 post with exact text = "//a[@class='list-group-item list-group-item-action' and .//strong[text()='Test text in input field "title", post creation YK']]";

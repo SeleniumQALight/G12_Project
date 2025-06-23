@@ -28,19 +28,31 @@ Steps:
 Expected result:
 1. I see an error message with text "Invalid username/password."
 
-#03 ------Invalid Login: invalid password------
+#03 ------Post Editing: check the edits of post are applied------
+
+Pre-condition:
+1. User is Logged In
+2. User has created a new Post with text "Test text in input field "title", post creation YK"
 
 Steps:
-1. Open Login page "https://aqa-complexapp.onrender.com/"
-2. Enter "qaauto" into the input login on login page
-3. Enter "123456qwertyyy" into the input password on login page
-4. Click on button Login on login page
+1. Click the magnifying glass icon "Search"
+2. Fill in the input Search field with text: "Test text in input field "title", post creation YK"
+3. Click the post with exact title "Test text in input field "title", post creation YK"
+4. Click the "Edit" button
+5. Change the title of the Post to "text in "title", post editing YK"
+6. Click "Save Updates" button
 
 Expected result:
-1. I see an error message with text "Invalid username/password."
+1. I see the changes are saved, th post is displayed with new title, changes applied
 
+Post-condition:
+1. Delete the edited post
 
-#04 ------Post Creation: create new post------
+#04 ------Post Creation: create a new post with specific title------
+Pre-condition:
+1. User is Logged In
+
+Steps:
 1. Click the button "Create Post"
 2. Fill in the "title" input field with text "Test text in input field "title", post creation YK"
 3. Fill in the "body content" text area with text "Test text in text area, post creation YK"
@@ -48,9 +60,18 @@ Expected result:
 5. Click the button "Save New Post"
 
 Expected result:
-1. I see the success message with text "New post successfully created.".
+1. The post is created and listed in the general list of created posts
+2. I see the success message with text "New post successfully created.".
+
+Post Condition:
+1. Delete the created post
 
 #05 ------Search: search created post by title------
+Pre-condition:
+1. User is Logged In
+2. User has created a new Post with text "Test text in input field "title", post creation YK"
+
+Steps:
 1. Click the magnifying glass icon "Search"
 2. Fill in the input Search field with text: "Test text in input field "title", post creation YK"
 3. Click the post with exact title "Test text in input field "title", post creation YK"
@@ -58,4 +79,3 @@ Expected result:
 
 Expected result:
 1. I see the post title is exactly same as "Test text in input field "title", post creation YK"
-
