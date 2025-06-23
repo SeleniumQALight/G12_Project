@@ -78,7 +78,7 @@ public class LoginTestAllStepsInOneClass {
         logger.info("Sign In button was clicked");
 
         Assert.assertTrue("Button Sign In is not visible", isButtonSignInVisible());
-        Assert.assertTrue("Error message is not displayed", errorMessageIsDisplayed());
+        Assert.assertTrue("Error message is not displayed", isErrorMessageDisplayed());
         Assert.assertFalse("Button Sign Out is visible", isButtonSignOutVisible());
 
     }
@@ -105,7 +105,7 @@ public class LoginTestAllStepsInOneClass {
         }
     }
 
-    private boolean errorMessageIsDisplayed() {
+    private boolean isErrorMessageDisplayed() {
         try {
             boolean state = webDriver.findElement(By.xpath("//div[@class='alert alert-danger text-center']")).isDisplayed();
             logger.info("Error message is displayed: " + state);
