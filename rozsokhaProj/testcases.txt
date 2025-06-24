@@ -76,4 +76,7 @@ Steps:
 4. Click 'Save New Post' button
 
 Expected Result:
-Created post is displayed on the page. "New post successfully created." message is shown to user.
+Created post is displayed on the page. "New post successfully created." message is shown to user. Created post is displayed on the 'My Profile' page in 'Posts' tab.
+
+Postconditions:
+- delete created post with title 'rozmak test title'.

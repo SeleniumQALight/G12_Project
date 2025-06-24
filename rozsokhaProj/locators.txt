@@ -1,5 +1,5 @@
 #LoginPage
-input.username="//input[@id='username7']"
+input.username="//input[@placeholder='Username']"
 input.password="//input[@placeholder='Password']"
 button.signIn="//button[@class='btn btn-primary btn-sm']"
 alert.invalidUsernamePassword="//div[text()='Invalid username/password.']"
@@ -25,3 +25,6 @@ selectOption.groupMessage="//select//option[3]"
 button.saveNewPost="//button[contains(text(),'Save New Post')]"
 alert.newPostSuccessfullyCreated="//div[text()='New post successfully created.']"
 info.postedBy="//p[@class='text-muted small mb-4']"
+
+#MyPost
+button.deletePost="//button[@class='delete-post-button text-danger']"
