@@ -1,22 +1,71 @@
-#01 Valid login
-
-login = qaauto
-pass = 123456qwerty
+#01 Login with valid data
 
 Precondition:
-1.
+1. the user must be logged in
 
 Steps:
-1. Open login page https://aqa-complexapp.onrender.com
-2. Enter <login> into input login on Login page
-3. Enter <pass> into input login on Login page
-4. Click on button Sign in on Login page
+1. Open page 'https://aqa-complexapp.onrender.com'
+2. Enter 'qaauto' into input 'Username' on the Login page
+3. Enter '123456qwerty' into input 'Password' on the Login page
+4. Click 'Sign In' button on the Login page
 
-Expected result:
-1. See/not see certain items before/after login
-1. I see SignOut button
+Expected Result:
+'Sign Out' button is present on the page
 
-Post condition:
-1. Delete created test data
 
-#2
+#02 Login with invalid data
+
+Precondition:
+1. the user must be logged out
+
+Steps:
+1. Open page 'https://aqa-complexapp.onrender.com'
+2. Enter 'qaauto' into input 'Username' on the Login page
+3. Enter '123456' into input 'Password' on the Login page
+4. Click 'Sign In' button on the Login page
+
+Expected Result:
+The user receives a notification 'Invalid username/password.'
+
+
+#03 Open Chat
+
+Precondition:
+1. the user must be logged in
+
+Steps:
+1. Open page 'https://aqa-complexapp.onrender.com'
+2. Enter 'qaauto' into input 'Username' on the Login page
+3. Enter '123456qwerty' into input 'Password' on the Login page
+4. Click on the chat icon with the “Chat” tooltip.
+
+Expected Result:
+A window appears with a chat and a button to close the chat.
+
+
+#04 Open 'My Profile'
+Precondition:
+1. the user must be logged in
+Steps:
+1. Open page 'https://aqa-complexapp.onrender.com'
+2. Enter 'qaauto' into input 'Username' on the Login page
+3. Enter '123456qwerty' into input 'Password' on the Login page
+4. Click on my profile icon with the 'My Profile' tooltip.
+
+Expected Result:
+The 'My Profile' page opens, with available tabs: 'Posts'
+
+
+#05 Search post with text 'unique'
+Precondition:
+1. the user must be logged in
+Steps:
+1. Open page 'https://aqa-complexapp.onrender.com'
+2. Enter 'qaauto' into input 'Username' on the Login page
+3. Enter '123456qwerty' into input 'Password' on the Login page
+4. Click on search icon with the 'Search' tooltip.
+5. Input "unique".
+
+Expected Result:
+Have a result 'Search Results (1 item found)' with title 'unique post'
+
