@@ -1,37 +1,46 @@
 package org.pages;
 
-import org.openqa.selenium.By;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import org.openqa.selenium.support.FindBy;
+
 public class LoginPage extends ParentPage {
     private Logger logger = Logger.getLogger(getClass());
+
+    @FindBy(xpath = "//input[@placeholder='Username']")
+    private WebElement inputUserName;
+
+    @FindBy(xpath = "//input[@placeholder='Password']")
+    private WebElement inputPassword;
+
+    @FindBy(xpath = "//button[text()='Sign In']")
+    private WebElement buttonSignIn;
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
 
     public void openLoginPage() {
-        webDriver.get("https://aqa-complexapp.onrender.com");
-        logger.info("Login page was opened: " + baseUrl);
+        webDriver.get(baseURL);
+        logger.info("Login page was opened with url " + baseURL);
     }
 
-    public void inputUsernameIntoInputLogin(String username) {
-        WebElement inputUsername = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
-        inputUsername.clear();
-        inputUsername.sendKeys(username);
-        logger.info("Username was entered");
+    public void inputUsernameIntoInputLogin(String login) {
+        inputUserName.clear();
+        inputUserName.sendKeys(login);
+        logger.info(login + " was entered in input UserName");
     }
 
     public void inputPasswordIntoInputLogin(String password) {
-        WebElement inputPassword = webDriver.findElement(By.xpath("//input[@placeholder='Password']"));
         inputPassword.clear();
         inputPassword.sendKeys(password);
-        logger.info("Password was entered");
+        logger.info(password + " was entered in input Password");
     }
 
     public void clickSignInButton() {
-        webDriver.findElement(By.xpath("//form[@action='/login']//button")).click();
-        logger.info("Sign In button was clicked");
+        buttonSignIn.click();
+        logger.info("Button Sign In was clicked");
     }
 }

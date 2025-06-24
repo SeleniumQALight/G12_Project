@@ -1,29 +1,30 @@
 package org.pages;
 
+import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
-public class HomePage extends ParentPage {
-    private Logger logger = Logger.getLogger(getClass());
+public class HomePage extends ParentPage{
+    Logger logger = Logger.getLogger(getClass());
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
 
     public void checkSignOutButtonIsDisplayed() {
-        Assert.assertTrue("Sign Out button is not displayed after Log In", isButtonSignOutVisible());
+        Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
     }
 
     private boolean isButtonSignOutVisible() {
         try {
             boolean state = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
-            logger.info(state + " - is element visible");
+            logger.info(" element visible - " + state);
             return state;
-        } catch (Exception e) {
-            logger.info("Element not found");
+        }catch (Exception e){
+            logger.info("Element is not found");
             return false;
         }
     }
+
 }
