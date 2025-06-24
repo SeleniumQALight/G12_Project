@@ -5,15 +5,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginPage extends ParentPage{
+public class LoginPage extends ParentPage {
     private Logger logger = Logger.getLogger(getClass());
     @FindBy(xpath = "//input[@placeholder='Username']")
     private WebElement inputUserName;
 
-    @FindBy (xpath = "//input[@placeholder='Password']")
+    @FindBy(xpath = "//input[@placeholder='Password']")
     private WebElement inputPassword;
 
-    @FindBy (xpath = "//button[text()='Sign In']")
+    @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
 
     public LoginPage(WebDriver webDriver) {
@@ -26,24 +26,26 @@ public class LoginPage extends ParentPage{
     }
 
     public void enterTextIntoInputLogin(String login) {
-       // WebElement inputUserName = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
-        inputUserName.clear();
-        inputUserName.sendKeys(login);
-        logger.info(login + " was entered in input UserName");
+        // WebElement inputUserName = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
+//        inputUserName.clear();
+//        inputUserName.sendKeys(login);
+//        logger.info(login + " was entered in input UserName");
+        clearAndEnterTextToElement(inputUserName, login);
     }
 
-    public void enterTextIntoPassword (String password){
+    public void enterTextIntoPassword(String password) {
         //WebElement inputPassword = webDriver.findElement(By.xpath("//input[@placeholder='Password']"));
-        inputPassword.clear();
-        inputPassword.sendKeys(password);
-        logger.info(password + " was entered in input Password");
-
+//        inputPassword.clear();
+//        inputPassword.sendKeys(password);
+//        logger.info(password + " was entered in input Password");
+        clearAndEnterTextToElement(inputPassword, password);
     }
 
-    public void clickOnButtonSignIn(){
-       // webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
-        buttonSignIn.click();
-        logger.info("Button Sign In was clicked");
+    public void clickOnButtonSignIn() {
+        // webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
+//        buttonSignIn.click();
+//        logger.info("Button Sign In was clicked");
+        clickOnElement(buttonSignIn);
     }
 
 }
