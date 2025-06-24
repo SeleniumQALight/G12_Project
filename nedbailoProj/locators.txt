@@ -1,0 +1,33 @@
+# LoginPage
+LOGIN_PAGE_SIGN_IN_USERNAME_INPUT_FIELD = //form[@action='/login']//input[@name='username']
+LOGIN_PAGE_SIGN_IN_PASSWORD_INPUT_FIELD = //form[@action='/login']//input[@name='password']
+LOGIN_PAGE_SIGN_IN_BUTTON = //form[@action='/login']//button
+LOGIN_PAGE_SIGN_UP_USERNAME_INPUT_FIELD = //form[@action='/register']//input[@name='username']
+LOGIN_PAGE_SIGN_UP_EMAIL_INPUT_FIELD = //form[@action='/register']//input[@name='email']
+LOGIN_PAGE_SIGN_UP_USERNAME_INPUT_FIELD = //form[@action='/register']//input[@name='password']
+LOGIN_PAGE_SIGN_UP_BUTTON = //form[@action='/register']//button
+
+# FeedPage
+FEED_PAGE_PROFILE_BUTTON = //a[contains(@href, 'profile')]
+FEED_PAGE_CREATE_POST_BUTTON = //a[@href='/create-post']
+FEED_PAGE_SIGN_OUT_BUTTON = //button
+
+# CreatePostPage
+CREATE_POST_TITLE_INPUT_FIELD = //input[@id='post-title']
+CREATE_POST_BODY_CONTENT_INPUT_FIELD = //textarea[@id='post-body']
+CREATE_POST_UNIQUE_CHECKBOX = //input[@type='checkbox']
+CREATE_POST_SELECT_DROP_DOWN = //select
+CREATE_POST_SELECT_GROUP_MESSAGE_BUTTON = //option[@value='Group Message']
+CREATE_POST_SAVE_NEW_POST_BUTTON = //form[@action='/create-post']/button
+
+# PostDetailsPage
+POST_DETAILS_ALERT = //div[contains(@class, 'alert')]
+POST_DETAILS_EDIT_BUTTON = //a[contains(@href, 'edit')]
+POST_DETAILS_EDIT_BUTTON = //form[contains(@action, 'delete')]/button
+POST_DETAILS_POST_TITLE = //h2
+POST_DETAILS_POST_WRITE_FOR = //div//u
+POST_DETAILS_UNIQUE = //p[contains(text(), 'Is this post unique? : no')]
+POST_DETAILS_POST_BODY_CONTENT = //div[4]/p
+
+# ProfilePage
+PROFILE_FIRST_POST = //a[contains(@href, 'post/')]

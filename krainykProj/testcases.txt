@@ -1,4 +1,4 @@
-#01 Valid login
+#001 Valid login
 
 login = qaauto
 pass = 123456qwerty
@@ -13,9 +13,8 @@ Steps:
 4. Click on button login on Login page
 
 Expected result:
-1. I see SignOut button on the page
+1. My Profile button is displayed on the page.
+2. The SignOut button is displayed on the page.
 
 Postconditions:
 1. Delete user
-
-#02
