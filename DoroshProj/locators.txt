@@ -1,5 +1,5 @@
 #Login page
-username.input = “.//input[@id = 'username1']”
+username.input = ".//input[@placeholder= 'Username']"
 password.input = “.//input[@placeholder='Password']”
 username.register = “.//input[@id = ‘username-register’]”
 email.register = “.//input[@id = ‘email-register’]”
