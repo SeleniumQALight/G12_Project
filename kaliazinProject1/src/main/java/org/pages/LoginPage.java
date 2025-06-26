@@ -5,38 +5,41 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginPage extends ParentPage{
-private Logger logger = Logger.getLogger(getClass());
+public class LoginPage extends ParentPage {
+    private Logger logger = Logger.getLogger(getClass());
 
-        @FindBy(xpath = "//input[@placeholder='Username']")
-        private WebElement inputUserName;
+    @FindBy(xpath = "//input[@placeholder='Username']")
+    private WebElement inputUserName;
 
-        @FindBy(xpath = "//input[@placeholder='Password']")
-        private WebElement inputPassword;
+    @FindBy(xpath = "//input[@placeholder='Password']")
+    private WebElement inputPassword;
 
-        @FindBy(xpath = "//button[text()='Sign In']")
-        private WebElement buttonSignIn;
+    @FindBy(xpath = "//button[text()='Sign In']")
+    private WebElement buttonSignIn;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public void openLoginPage() {
+    public LoginPage openLoginPage() {
         webDriver.get(baseUrl);
         logger.info("Login page was opened with url: " + baseUrl);
-    }
+     return this;
+}
 
-    public void enterTextIntoInputLogin(String login) {
+    public LoginPage enterTextIntoInputLogin(String login) {
 //        WebElement inputUserName = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
 //        inputUserName.clear();
 //        inputUserName.sendKeys(login);
 //        logger.info(login + " was filled in input UserName");
         clearAndEnterTextToElement(inputUserName, login);
+        return this;
     }
 
-    public void enterTextIntoPassword(String password) {
+    public LoginPage enterTextIntoPassword(String password) {
 //        WebElement inputPassword = webDriver.findElement(By.xpath("//input[@placeholder='Password']"));
         clearAndEnterTextToElement(inputPassword, password);
+        return this;
     }
 
     public void clickLoginButtonSignIn() {
