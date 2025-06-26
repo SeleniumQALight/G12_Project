@@ -1,5 +1,6 @@
 package pages;
 
+import data.TestData;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,7 +17,6 @@ public class LoginPage extends ParentPage {
 
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
-
 
 
     public LoginPage(WebDriver webDriver) {
@@ -52,5 +52,19 @@ public class LoginPage extends ParentPage {
 //        buttonSignIn.click();
 //        logger.info("Button Sign In was clicked");
         clickOnElement(buttonSignIn);
+    }
+
+    /**
+     * Opens the login page, fills in the login form with valid credentials,
+     * and clicks the Sign In button.
+     *
+     * @return an instance of HomePage after successful login
+     */
+    public HomePage openLoginPageAndFillLoginFormWithValidCred() {
+        openLoginPage();
+        this.enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
+        this.enterTextIntoPassword(TestData.VALID_PASSWORD_UI);
+        clickOnButtonSignIn();
+        return new HomePage(webDriver);
     }
 }
