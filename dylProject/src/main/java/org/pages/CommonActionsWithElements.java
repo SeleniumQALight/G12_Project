@@ -69,9 +69,16 @@ public class CommonActionsWithElements {
      */
 
     protected void checkIsElementDisplayed(WebElement webElement) {
-            Assert.assertTrue("Element is not displayed", isElementDisplayed(webElement));
-            logger.info("Element is displayed as expected");
-        }
+        Assert.assertTrue("Element is not displayed", isElementDisplayed(webElement));
+        logger.info("Element is displayed as expected");
+    }
+
+    //Method checkTextInElement
+    protected void checkTextInElement(WebElement webElement, String expectedText) {
+        String actualText = webElement.getText();
+        Assert.assertEquals("Text in element is not as expected", expectedText, actualText);
+        logger.info("Text in element is as expected: " + expectedText);
+    }
 
     private void printErrorAndStopTest(Exception e) {
         logger.error("Error while working with element " + e.getMessage());
