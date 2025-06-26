@@ -78,6 +78,20 @@ Assert.assertTrue("Element is not displayed", isElementDisplayed(webElement));
         logger.info("Element is displayed as expected");
     }
 
+/* Method checkTextInElement
+        * Checks if the specified text is present in the WebElement.
+        * @param webElement - the WebElement to check.
+        * @param expectedText - the text expected to be present in the element.
+
+
+ */
+    protected void checkTextInElement(WebElement webElement, String expectedText) {
+            String actualText = webElement.getText();
+            Assert.assertEquals("Text in element is not as expected", expectedText, actualText);
+            logger.info("Text in element is as expected: " + expectedText);
+        }
+
+
 
     private void printErrorAndStopTest(Exception e) {
         logger.error("Error while working with element: " + e.getMessage());
