@@ -28,21 +28,24 @@ public class LoginPage extends ParentPage {
 
     public void enterTextIntoInputLogin(String login) {
  //       WebElement inputUserName = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
-        inputUserName.clear();
-        inputUserName.sendKeys(login);
-        logger.info(login + " was entered in input UserName");
+//        inputUserName.clear();
+//        inputUserName.sendKeys(login);
+//        logger.info(login + " was entered in input UserName");
+        clearAndTypeIntoInputField(inputUserName, login);
     }
 
     public void enterTextIntoPassword(String password) {
  //       WebElement inputPassword = webDriver.findElement(By.xpath("//input[@placeholder='Password']"));
-        inputPassword.clear();
-        inputPassword.sendKeys(password);
-        logger.info(password + " was entered in input Password");
+//        inputPassword.clear();
+//        inputPassword.sendKeys(password);
+//        logger.info(password + " was entered in input Password");
+        clearAndTypeIntoInputField(inputPassword, password);
     }
 
     public void clickOnButtonSignIn() {
 //        webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
-        buttonSignIn.click();
-        logger.info("Button Sinn In was clicked");
+//        buttonSignIn.click();
+//        logger.info("Button Sinn In was clicked");
+
     }
 }
