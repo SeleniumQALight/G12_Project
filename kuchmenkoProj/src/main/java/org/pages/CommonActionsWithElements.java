@@ -77,6 +77,18 @@ public class CommonActionsWithElements {
         logger.info("Element is displayed as expected");
     }
 
+    /* Method checkTextInElement
+     * Checks if the text of the specified WebElement matches the expected text.
+     * @param webElement - the WebElement to check
+     * @param expectedText - the expected text to compare with
+     */
+
+    protected void checkTextInElement(WebElement webElement, String expectedText) {
+            String actualText = webElement.getText();
+            Assert.assertEquals("Text in element does not match expected text", expectedText, actualText);
+            logger.info("Text in element matches expected text: " + expectedText);
+        }
+
 
     private void printErrorAndStopTest(Exception e) {
         logger.error("Error while working with element: " + e.getMessage());

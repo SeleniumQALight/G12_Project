@@ -8,11 +8,12 @@ import static org.data.TestData.VALID_PASSWORD_UI;
 
 public class LoginTestWithPageObject extends BaseTest {
     @Test
-    public void validLogin(){
-        pageProvider.getLoginPage().openLoginPage()
-        .enterTextIntoInputLogin(VALID_LOGIN_UI)
-        .enterTextIntoPassword(VALID_PASSWORD_UI)
-        .clickOnButtonSignIn();
+    public void validLogin() {
+        pageProvider.getLoginPage()
+                .openLoginPage()
+                .enterTextIntoInputLogin(VALID_LOGIN_UI)
+                .enterTextIntoPassword(VALID_PASSWORD_UI)
+                .clickOnButtonSignIn();
 
         pageProvider.getHomePage().checkButtonSignOutVisible();
     }
