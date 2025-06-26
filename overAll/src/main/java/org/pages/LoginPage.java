@@ -1,6 +1,7 @@
 package org.pages;
 
 import org.apache.log4j.Logger;
+import org.data.TestData;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -49,4 +50,15 @@ public class LoginPage extends ParentPage{
         clickOnElement(buttonSignIn);
     }
 
+    /** Method openLoginPageAndFillLoginFormWithValidCred
+     * Opens the login page and fills in the login form with valid credentials.
+     * @return HomePage - returns an instance of HomePage after successful login
+     */
+    public HomePage openLoginPageAndFillLoginFormWithValidCred() {
+        openLoginPage();
+        this.enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
+        this.enterTextIntoPassword(TestData.VALID_PASSWORD_UI);
+        clickOnButtonSignIn();
+        return new HomePage(webDriver);
+    }
 }
