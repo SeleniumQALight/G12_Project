@@ -1,23 +1,82 @@
-#01 Valid Login
-
-login = qaauto (but better to create own test user) qaauto use only for read only tests
-pass = 123456qwerty
+#01. Log in with valid credentials
 
 Preconditions:
-1. create user...
-2. create post..
+- user is logged out
+- use test user: username = qaauto; password = 123456qwerty
 
 Steps:
-1. Open login page https://aqa-complexapp.onrender.com
-2. Enter <login> into input login on Login page
-3. Enter <password> into input password on Login page
-4. Click on button Login on Login page
+1. Open page "https://aqa-complexapp.onrender.com"
+2. Enter 'qaauto' into input 'Username' on the Login page
+3. Enter '123456qwerty' into input 'Password' on the Login page
+4. Click 'Sign In' button on the Login page
 
 Expected Result:
-1. I see SignOut button
-
-Post condition:
-1. delete test post/user
+'Sign Out' button is present on the page
 
 
-#2
+#02. Login with invalid credentials
+
+Preconditions:
+- user is logged out
+- username = qaauto
+
+Steps:
+1. Open page "https://aqa-complexapp.onrender.com"
+2. Enter 'qaauto' into input 'Username' on the Login page
+3. Enter '123' into input 'Password' on the Login page
+4. Click 'Sign In' button on the Login page
+
+Expected Result:
+"Invalid username/password." message is shown on the page
+
+
+#03. Create new user
+
+Preconditions:
+- user is logged out
+
+Steps:
+1. Open page "https://aqa-complexapp.onrender.com"
+2. Enter 'testrozmak' to the 'Username' input
+3. Enter 'testrozmak@yopmail.com' to the 'Email' input
+4. Enter '123456qwerty' to the 'Password' input
+5. Click 'Sign up for OurApp' button
+
+Expected Result:
+User is logged in. 'Sign Out' button is present on the page
+
+Postconditions:
+- delete test user 'testrozmak'
+
+
+#04. Check 'My Profile' screen
+
+Preconditions:
+- user is logged out
+- use test user: username = qaauto; password = 123456qwerty
+
+Steps:
+1. Open page "https://aqa-complexapp.onrender.com"
+2. Log in with test user
+3. Click 'My Profile' button
+
+Expected Result:
+'My Profile' page is opened. 'Posts' tab is displayed on the page
+
+
+#05. Create new post
+
+Preconditions:
+- user is logged in
+
+Steps:
+1. Click 'Create Post' button
+2. Enter 'rozmak test title' to the 'Title' input
+3. Enter 'test content' to the 'Body Content' text area
+4. Click 'Save New Post' button
+
+Expected Result:
+Created post is displayed on the page. "New post successfully created." message is shown to user. Created post is displayed on the 'My Profile' page in 'Posts' tab.
+
+Postconditions:
+- delete created post with title 'rozmak test title'.
