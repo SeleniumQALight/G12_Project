@@ -59,6 +59,7 @@ The 'My Profile' page opens, with available tabs: 'Posts'
 #05 Search post with text 'unique'
 Precondition:
 1. the user must be logged in
+2. create post with title 'unique post'
 Steps:
 1. Open page 'https://aqa-complexapp.onrender.com'
 2. Enter 'qaauto' into input 'Username' on the Login page
@@ -69,3 +70,5 @@ Steps:
 Expected Result:
 Have a result 'Search Results (1 item found)' with title 'unique post'
 
+Postcondition:
+1. Delete post with title 'unique post'
