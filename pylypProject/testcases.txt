@@ -4,20 +4,124 @@ login = qaauto
 pass = 123456qwerty
 
 Pre-condition:
- 1.
+1. The user gaauto is registered in the system.
 
 Steps:
 1. Open login page https://aqa-complexapp.onrender.com
 2. Enter <login> into input login on Login page
 3. Enter <pass> into input password on Login page
-4. Click on button Ligin on Login page
+4. Click on button Login on Login page
 
 Expected result:
 1. I see SignOut button
 
+Post condition:
+1. The user is logged into the system and has access to authorized features
 
- Post condition:
- 1.
+
+#2 Create post
+
+Pre-condition:
+1. be logged in
+
+Steps:
+1. Сlick on the "Create Post" button in the header
+2. Fill in the Title field - enter "Шаян"
+3. Fill in the Body Content field - enter content
+4. Check the checkbox "Is this post unique?"
+5. Select a value from the dropdown (e.g., "Загальнодоступне")
+6. Click the "Save New Post" button
+
+Expected result:
+1. "New post successfully created" message is displayed at the top of the screen in a green success banner
+2. The user is redirected to the newly created post page with a unique URL: e.g. /post/684f092a799d39005d63ae2a
+3. The following post content is shown:
+   Title: "Шаян"
+   Body text as entered in the form
+   Uniqueness status: "yes"
+   Author name: "olesia"
+   Date of creation is displayed - 6/15/2025
+4. Buttons to "edit" and "delete" the post are displayed next to the post
+
+Post condition:
+ 1. A new post is successfully created and saved in the system
+ 2. The post is visible on the post details page and available for editing or deletion by the author
 
 
- #2
+#3 Edit post
+
+Pre-condition:
+1. User is logged in
+2. A post "Шаян " already exists and is visible on the post view page
+
+Steps:
+1. Click on the "Edit" (pencil) icon next to the post title
+2. Make sure the user is redirected to the edit page:
+   → URL contains /edit
+   → Fields Title, Body Content, Is this post unique?, Select value are pre-filled with the post's current dat
+3. Update the Title field (e.g., append " - updated")
+4. Update the Body Content field (e.g., add a new sentence)
+5. Optionally check or uncheck Is this post unique?
+6. Optionally change the value in the Select value dropdown
+7. Click on the “Save Updates” button
+
+Expected result:
+1. A green success banner appears with the message: “Post successfully updated.”
+2. The user remains on the /edit page
+3. The post fields display the updated values:
+• The Title field shows the new text (e.g., “Шаян (оновлено)”)
+• The Body Content field contains the edited text
+• The “Is this post unique?” checkbox reflects the current selection
+• The Select value dropdown shows the updated option
+4. A “Back to post permalink” link is available to return to the post view page.
+
+Post condition:
+1. The edited post is saved with the new values (title, body, uniqueness checkbox, visibility option)
+2. The user remains logged in and can see the updated post in the post list
+
+
+#4 Search
+
+Pre-condition:
+1. User is logged in and on the homepage
+2. The post "Шаян" already exists and is visible on the page https://aqa-complexapp.onrender.com/profile/olesia
+
+Steps:
+1. Click on the Search icon in the header
+Expected result:
+- A search input field appears at the top with the placeholder text:
+"What are you interested in?"
+- The background content is dimmed, and a close (X) icon is displayed on the right.
+2. Type “Шаян” into the search input field.
+Expected result:
+- A dropdown or results section appears below the search bar
+- It displays:
+Search Results (1 item found),
+Item title (e.g., Шаян (оновлено)),
+Author name (e.g., by olesia),
+Date of creation/update (e.g., on 6/15/2025).
+- Each result is clickable and should redirect to the corresponding content (to be verified in a separate test if needed)
+
+Post conditions:
+
+1. Search results are displayed dynamically based on the keyword input.
+2. User remains on the same page unless they interact with the search result.
+
+
+#5 Follow
+
+Pre-conditions:
+1. User is logged in as a registered user
+2. User is on the profile page of another user (e.g., https://aqa-complexapp.onrender.com/profile/qaauto)
+
+Steps:
+1. Click on the "Follow" button
+
+Expected result:
+1. The "Follow button" changes to "Stop Following"
+2. The success banner appears
+3. The followed user appears in the current user’s Following list at https://aqa-complexapp.onrender.com/profile/olesia/following
+4. The current user appears in the followed user’s Followers list at https://aqa-complexapp.onrender.com/profile/qaauto/followers
+
+Post conditions:
+1. Current user is now following the target user
