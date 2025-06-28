@@ -40,15 +40,15 @@ public class CommonActionsWithElements {
             webElement.click();
             logger.info("Element was clicked");
         } catch (Exception e) {
-           printErrorAndStopTes(e);
+            printErrorAndStopTes(e);
         }
     }
 
     /* Method isElementDisplayed
-        * Checks if the specified WebElement is displayed.
-        * @param webElement - the WebElement to check
-        * @return true if the element is displayed, false otherwise
-        */
+     * Checks if the specified WebElement is displayed.
+     * @param webElement - the WebElement to check
+     * @return true if the element is displayed, false otherwise
+     */
     protected boolean isElementDisplayed(WebElement webElement) {
         try {
             boolean state = webElement.isDisplayed();
@@ -73,6 +73,16 @@ public class CommonActionsWithElements {
         logger.info("Element is displayed as expected");
     }
 
+    /* Method checkTextInElement
+     * Checks if the text in the specified WebElement matches the expected text.
+     * @param webElement - the WebElement to check
+     * @param expectedText - the expected text to match
+     */
+    protected void checkTextInElement(WebElement webElement, String expectedText) {
+        String actualText = webElement.getText();
+        Assert.assertEquals("Text in element does not match expected text", expectedText, actualText);
+        logger.info("Text in element matches expected text: " + expectedText);
+    }
 
     private void printErrorAndStopTes(Exception e) {
         logger.error("Error while working with element: " + e.getMessage());
