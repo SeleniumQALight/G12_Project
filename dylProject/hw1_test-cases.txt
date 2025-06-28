@@ -13,6 +13,9 @@ Expected result:
 1. On the home page is button Sign Out
 2. Displayed the message with title = "Hello hector1, your feed is empty."
 
+Post condition:
+1. Delete User
+
 
 #02 Create post
 Pre-condition:
@@ -37,6 +40,7 @@ Steps:
 Expected result:
 1. Appears a message. Message = New post successfully created.
 2. Title is displayed. Title = "The story about QA"
+3. Text "Is this post unique? : yes" is displayed
 
 Post condition:
 1. Delete Post
@@ -110,6 +114,7 @@ Password = hector555555
 2. Create uniquePost
 Title = "What's new in IT"
 Body Content = "Stay updated with the latest trends, breakthroughs, and insights from the world of technology"
+3. SignOut
 
 Steps:
 1. Open login page https://aqa-complexapp.onrender.com
@@ -121,8 +126,10 @@ Steps:
 7. Click on "What's new in IT" in the Search result window
 8. On the page with post click on link with username = "hector5"
 9. On the profile page click on the button "Follow"
-10. Displayed message = "Successfully followed hector5."
-11. The number of followers on the tab Followers = 1
+
+Expected result:
+1. Displayed message = "Successfully followed hector5."
+2. The number of followers on the tab Followers = 1
 
 Post condition:
 1. Stop following

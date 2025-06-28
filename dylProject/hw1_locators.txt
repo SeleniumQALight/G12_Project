@@ -31,6 +31,7 @@ message.New post successfully created = ".//div[text()='New post successfully cr
 title = ".//*[text() ='The story about QA']"
 postedBy = ".//a[text()='hector5']"
 button.DeletePage = ".//button[@class='delete-post-button text-danger']"
+text.Is this post unique = "//p[text()='Is this post unique? : yes']"
 
 # Profile page
 button.Follow = ".//button[@class='btn btn-primary btn-sm']"
