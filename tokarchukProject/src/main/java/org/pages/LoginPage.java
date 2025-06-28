@@ -7,6 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.support.FindBy;
 
+import static org.data.TestData.VALID_LOGIN_UI;
+import static org.data.TestData.VALID_PASSWORD_UI;
+
 public class LoginPage extends ParentPage {
     private Logger logger = Logger.getLogger(getClass());
 
@@ -18,8 +21,6 @@ public class LoginPage extends ParentPage {
 
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
-
-
 
 
     public LoginPage(WebDriver webDriver) {
@@ -51,5 +52,18 @@ public class LoginPage extends ParentPage {
 //        buttonSignIn.click();
 //        logger.info("ButtonSign In was clicked");
         clickOnElement(buttonSignIn);
+    }
+
+    /**
+     * Opens the login page and fills in the login form with valid credentials.
+     * @return an instance of HomePage after successful login.
+     */
+
+    public HomePage openLoginPageAndFillLoginFormWithValidCred() {
+        openLoginPage();
+        this.enterTextIntoInputLogin(VALID_LOGIN_UI)
+            .enterTestIntoPassword(VALID_PASSWORD_UI)
+            .clickOnButtonSignIn();
+        return new HomePage(webDriver);
     }
 }
