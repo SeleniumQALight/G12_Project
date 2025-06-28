@@ -1,0 +1,41 @@
+# Login page
+input.Username.CreateUser = ".//input[@id='username-register']"
+input.Email.CreateUser = ".//input[@id='email-register']"
+input.Password.CreateUser = ".//input[@id='password-register']"
+input.Username.LoginUser = ".//input[@placeholder='Username']" or ".//input[@id='username7']" (але тут цифра 7 присутня)
+input.Password.LoginUser = ".//input[@placeholder='Password']"
+button.SignUp = ".//button[@type='submit']"
+
+# Home page
+button.CreatePost = ".//a[@href='/create-post']"
+button.Search = ".//a[@href='#']"
+window.SearchResults = ".//strong[text()='Search Results']"
+window.SearchResults.Title = .//strong[contains(text(),'Master Market')]
+window.SearchResults.Title = .//strong[contains(text(),'What's new')]
+button.Chat = ".//span[@data-original-title='Chat']" or
+".//*[contains(@class, 'fa-comment')]"
+window.Chat = ".//div[contains(text(),'AQA the best')]"
+chat.Close = ".//span[@class='chat-title-bar-close']"
+button.SignOut = ".//button[@class = 'btn btn-sm btn-secondary']" or
+".//button[text()='Sign Out']"
+welcomeMessage = "//h2[contains(text(),hector1)]"
+
+# Page for creating post
+input.Title = ".//input[@id='post-title']"
+input.BodyContent = ".//textarea[@id='post-body']"
+checkbox.Is this post unique = ".//input[@name='uniquePost']"
+button.SaveNewPost = ".//button[@class='btn btn-primary']"
+
+# Page with post
+message.New post successfully created = ".//div[text()='New post successfully created.']"
+title = ".//*[text() ='The story about QA']"
+postedBy = ".//a[text()='hector5']"
+button.DeletePage = ".//button[@class='delete-post-button text-danger']"
+text.Is this post unique = "//p[text()='Is this post unique? : yes']"
+
+# Profile page
+button.Follow = ".//button[@class='btn btn-primary btn-sm']"
+message.SuccessfullyFollowed =".//div[text()='Successfully followed hector5.']"
+tab.followers = ".//a[text()='Followers: 1']"
+button.StopFollowing = ".//button[@class='btn btn-danger btn-sm']"
+
