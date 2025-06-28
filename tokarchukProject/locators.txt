@@ -1,0 +1,22 @@
+#LoginPage
+input.login = "//input[@name='username']"
+input.password = "//input[@type='password']"
+button.Login = "//button[text()='Sign In']"
+error alert = "//div[contains(@class, 'alert-danger')]"
+
+#HomePage
+button.signout = "//button[text()='Sign Out']"
+
+#Open Chat
+chat.icon = "//span[contains(@class, 'header-chat-icon') and @data-original-title="Chat"]"
+chat.close button = "//div[@id='chat-wrapper']//span[contains(@class, 'chat-title-bar-close')]"
+
+#Open 'My Profile'
+myprofile.button = "//a[@href='/profile/qaauto']/img[@alt='My profile']"
+tab.post = "//a[@href='/profile/qaauto' and contains(@class, 'profile-nav-link')]"
+
+#Search
+button.search = "//a[contains(@class, 'header-search-icon') and @data-original-title='Search']"
+search.text.input = "//input[@id='live-search-field']"
+search result = "//div[contains(@class, 'list-group-item') and contains(@class, 'active')]/strong[text()='Search Results']"
+find post = "//div[contains(@class,'list-group') and contains(@class,'shadow-sm')]//a[contains(@class,'list-group-item') and .//strong[text()='unique post']]"

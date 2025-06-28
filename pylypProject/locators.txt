@@ -1,8 +1,42 @@
 #LoginPage
-input.login=".//input[@id='login']"
-input.password="..."
-button.Ligin="..."
+input.login=.//input[@placeholder='Username']
+input.password=.//input[@placeholder='Password']
+button.SignIn=.//button[@class='btn btn-primary btn-sm']
 
 
 #HomePage
-button.SignOut="..."
+button.SignOut=.//button[@class='btn btn-sm btn-secondary']
+
+
+#CreatePost
+button.CreatePost=.//a[@href='/create-post']
+input.Title=.//input[@id='post-title']
+textarea.BodyContent=.//textarea[@id='post-body']
+input.Checkbox=.//input[@type='checkbox']
+select.Dropdown=//select[@id='select1']/option[@value='All Users']
+button.SaveNewPost=.//button[@class='btn btn-primary']
+bunner.SuccessBannerCreate=.//div[@class='alert alert-success text-center']
+
+
+#EditPost
+icon.Edit=.//a[@href='/post/68505d79799d39005d63ae3b/edit']
+input.Title=.//input[@id='post-title']
+textarea.BodyContent=.//textarea[@id='post-body']
+input.Checkbox=.//input[@type='checkbox']
+select.Dropdown=//select[@id='select1']/option[@value='All Users']
+button.SaveUpdates=//button[@class='btn btn-primary']
+banner.SuccessBannerUpdate=.//div[@class='alert alert-success text-center']
+
+
+#Search
+icon.Search=.//a[@class='text-white mr-2 header-search-icon']
+input.Search=.//input[@id='live-search-field']
+Item.SearchResults=.//a[@href='/post/684f092a799d39005d63ae2a'] or .//div[@class='list-group-item active']
+
+
+#Follow
+button.Follow=.//button[@class='btn btn-primary btn-sm']
+banner.SuccessfullyFollowed=.//div[@class='alert alert-success text-center']
+item.FollowingFollowingOlesia=.//a[@href='/profile/qaauto' and @class='list-group-item list-group-item-action']
+item.FollowersQaauto=.//a[@href='/profile/olesia' and @class='list-group-item list-group-item-action']
+

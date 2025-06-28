@@ -1,0 +1,53 @@
+#Login page
+username.input = ".//input[@placeholder= 'Username']"
+password.input = “.//input[@placeholder='Password']”
+username.register = “.//input[@id = ‘username-register’]”
+email.register = “.//input[@id = ‘email-register’]”
+pass.register = “.//input[@id = ‘password-register’]”
+signup.button = “.//button[@type = ‘submit’]”
+wrong.pass.message = “.//div[contains(text(), 'Password must be at least 12 characters.')]”
+sign.up.for.our.app.button = ".//button[text() = 'Sign up for OurApp']"
+
+
+# Home page
+chat.icon = “.//span[@class='text-white mr-2 header-chat-icon']”
+create.post.button = “.//a[@href = '/create-post']”
+search.button = “//a[@data-original-title='Search']”
+
+search.input = “.//input[@id='live-search-field']”
+or search.input =".//input[@placeholder = 'What are you interested in?']"
+
+fail.search.message = “.//p[@class='alert alert-danger text-center shadow-sm']”
+or
+fail.search.message =".//p[text() = 'Sorry, we could not find any results for that search.']"
+
+signout.button = “.//button[contains(text(), ‘Sign Out’)]”
+welcome.new.user.message = ".//h2[text() = ', your feed is empty.']"
+
+#Chat modal
+message.input = “.//input[@placeholder='Type a message…']”
+chat.close.button = “.//span[@class=’chat-title-bar-close’]”
+chat.message = “.//div[contains(text(), 'hello')]”
+message.avatar = “.//img[@class='chat-avatar avatar-tiny']”
+
+ # New post creation page
+post.title = “.//input[@id= 'post-title']”
+post.body = “.//textarea[@id= 'post-body']”
+uniqueness.checkbox = “.//input[@name= 'uniquePost']”
+access.dropdown =”.//select//option[@value='All Users']”
+
+save.post.button = “.//button[@class = 'btn btn-primary']”
+or
+save.post.button = ".//button[text() = 'Save New Post']"
+
+
+
+# Post page
+post.creation.message = “.//div[@class = 'alert alert-success text-center']”
+delete.post.button = ” .//form[@class="delete-post-form d-inline"]”
+new.post.title = ".//h2[text()='New post 24062025']"
+my.profile.button = ".//img[@class = 'avatar-tiny']"
+
+
+#My profile page
+new.post.title.in.list = ".//strong[text() = 'New post 24062025']"

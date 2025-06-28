@@ -1,0 +1,30 @@
+#LoginPage
+input login = "//input[@placeholder='Username']";
+input password = "//input[@placeholder='Password']";
+button_login = "//div[@class = 'col-md-auto']";
+error message alert =  "//div[contains(@class, 'alert') and contains(text(), 'Invalid username/password')]";
+
+#HomePage
+button sign out = "//button[contains(text(), 'Sign Out')]";
+button create post = "//a[@class = 'btn btn-sm btn-success mr-2' and contains (text(), 'Create Post')]";
+
+#Post Creation Page
+
+input field title = "//input [@id = 'post-title']";
+text area = "//textarea [@id = 'post-body']";
+checkbox "Is this post unique?" = "//input[@type='checkbox' and @name='uniquePost']"
+button "Save Post" = "//button [@class = 'btn btn-primary' and contains(text(), 'Save New Post')]";
+success message post creation = "//div[@class= 'alert alert-success text-center' and contains(text(), 'New post successfully created.')]";
+
+#Post Editing
+
+save updates button = "//button[@class = 'btn btn-primary' and contains(text(), 'Save Updates') ]"
+
+#Post Detailed view
+delete Post button = "//button[@class = 'delete-post-button text-danger' ]";
+edit Post button = "//a[@data-original-title = 'Edit']";
+
+#Search
+input Search field = "//input[@id='live-search-field']";
+post with exact text = "//a[@class='list-group-item list-group-item-action' and .//strong[text()='Test text in input field "title", post creation YK']]";
+post title = "//div[@class='d-flex justify-content-between']//h2[contains(text(), 'Test text in input field "title", post creation YK')]"
