@@ -1,6 +1,7 @@
 package org.pages;
 
 import org.apache.log4j.Logger;
+import org.data.TestData;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,21 +28,22 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+
     public LoginPage enterTextIntoInputLogin(String login) {
  //       WebElement inputUserName = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
 //        inputUserName.clear();
 //        inputUserName.sendKeys(login);
 //        logger.info(login + " was entered in input UserName");
-        clearAndTypeIntoInputField(inputUserName, login);
+        clearAndEnterTextToElement(inputUserName, login);
         return this;
     }
 
     public LoginPage enterTextIntoPassword(String password) {
- //       WebElement inputPassword = webDriver.findElement(By.xpath("//input[@placeholder='Password']"));
+//        WebElement inputPassword = webDriver.findElement(By.xpath("//input[@placeholder='Password']"));
 //        inputPassword.clear();
 //        inputPassword.sendKeys(password);
 //        logger.info(password + " was entered in input Password");
-        clearAndTypeIntoInputField(inputPassword, password);
+        clearAndEnterTextToElement(inputPassword, password);
         return this;
     }
 
@@ -51,5 +53,18 @@ public class LoginPage extends ParentPage {
 //        logger.info("Button Sinn In was clicked");
         clickOnElement(buttonSignIn);
 
+    }
+    /**
+     * Method openLoginPageAndFIllLoginFormWithValidCred
+     * Opens the login page and fills in the login form with valid credentials.
+     * @return HomePage - returns an instance of HomePage after successful login.
+     */
+
+    public HomePage openLoginPageAndFIllLoginFormWithValidCred() {
+        openLoginPage();
+        this.enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
+        this.enterTextIntoPassword(TestData.VALID_PASSWORD_UI);
+        this.clickOnButtonSignIn();
+        return new HomePage(webDriver);
     }
 }
