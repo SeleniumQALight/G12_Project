@@ -24,7 +24,7 @@ public class CommonActionsWithElements {
         try {
             webElement.clear();
             webElement.sendKeys(text);
-            logger.info(text + "was entered into element: ");
+            logger.info(text + " was entered into element");
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -37,7 +37,7 @@ public class CommonActionsWithElements {
     protected void clickOnElement(WebElement webElement) {
         try {
             webElement.click();
-            logger.info("Element was clicked: ");
+            logger.info("Element was clicked");
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -79,6 +79,48 @@ public class CommonActionsWithElements {
         Assert.assertEquals("Text in element is not as expected", expectedText, actualText);
         logger.info("Text in element is as expected: " + expectedText);
     }
+
+    protected void selectCheckbox (WebElement webElement) {
+        try {
+            boolean state = webElement.isSelected();
+            if (state) {
+                logger.info("Checkbox already selected");
+            } else {
+                webElement.click();
+                logger.info("Checkbox was selected");
+            }
+        }  catch (Exception e) {
+logger.error ("Checkbox not found");
+            }
+    }
+
+    protected void unSelectCheckbox (WebElement webElement) {
+        try {
+            boolean state = webElement.isSelected();
+            if (!state) {
+                logger.info("Checkbox already unSelected");
+            } else {
+                webElement.click();
+                logger.info("Checkbox was unselected");
+            }
+        }  catch (Exception e) {
+            logger.error ("Checkbox not found");
+        }
+    }
+
+    protected void setCheckbox (WebElement webElement, String action) {
+        try {
+            if ("check".equalsIgnoreCase(action)) {
+                selectCheckbox(webElement);
+            } else if ("uncheck".equalsIgnoreCase(action)) {
+                unSelectCheckbox(webElement);
+            } else {
+                logger.info("Unknown action: " + action);
+            }
+        } catch(Exception e){
+                logger.error("Unexpected error " + e);
+            }
+        }
 
     private void printErrorAndStopTest(Exception e) {
         logger.error("Error while working with element " + e.getMessage());
