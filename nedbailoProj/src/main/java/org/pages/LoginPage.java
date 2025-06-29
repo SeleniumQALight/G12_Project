@@ -1,10 +1,13 @@
 package org.pages;
 
-import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.support.FindBy;
+
+import static org.data.TestData.VALID_LOGIN_UI;
+import static org.data.TestData.VALID_PASSWORD_UI;
 
 public class LoginPage extends ParentPage {
     private Logger logger = Logger.getLogger(getClass());
@@ -18,29 +21,41 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
 
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public void openLoginPage() {
+    public LoginPage openLoginPage() {
         webDriver.get(baseURL);
         logger.info("Login page was opened with url " + baseURL);
+        return this;
     }
 
-    public void inputUsernameIntoInputLogin(String login) {
-        inputUserName.clear();
-        inputUserName.sendKeys(login);
-        logger.info(login + " was entered in input UserName");
+    public LoginPage enterTextIntoInputLogin(String login) {
+        clearAndEnterTextToElement(inputUserName, login);
+        return this;
     }
 
-    public void inputPasswordIntoInputLogin(String password) {
-        inputPassword.clear();
-        inputPassword.sendKeys(password);
-        logger.info(password + " was entered in input Password");
+    public LoginPage enterTestIntoPassword(String password){
+        clearAndEnterTextToElement(inputPassword, password);
+        return this;
     }
 
-    public void clickSignInButton() {
-        buttonSignIn.click();
-        logger.info("Button Sign In was clicked");
+    public void clickOnButtonSignIn(){
+        clickOnElement(buttonSignIn);
+    }
+
+    /**
+     * Opens the login page and fills in the login form with valid credentials.
+     * @return an instance of HomePage after successful login.
+     */
+
+    public HomePage openLoginPageAndFillLoginFormWithValidCred() {
+        openLoginPage();
+        this.enterTextIntoInputLogin(VALID_LOGIN_UI)
+                .enterTestIntoPassword(VALID_PASSWORD_UI)
+                .clickOnButtonSignIn();
+        return new HomePage(webDriver);
     }
 }
