@@ -92,4 +92,9 @@ public class LoginPage extends ParentPage {
         checkTextInElement(unsuccessMessage,"Invalid username/password.");
         return new HomePage(webDriver);
     }
+
+    public void checkInputUserNameAndPasswordNotVisible() {
+        checkIsElementNotDisplayed(inputUserName);
+        checkIsElementNotDisplayed(inputPassword);
+    }
 }

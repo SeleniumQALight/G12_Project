@@ -9,6 +9,9 @@ public class CreateNewPostTest extends BaseTest {
         pageProvider.getLoginPage().
                 openLoginPageAndFillLoginFormWithValidCred()
                 .checkIsRedirectToHomePage()
+                .checkButtonCreatePostVisible()
+                .checkInputUserNameAndPasswordNotVisible();
+        pageProvider.getHomePage()
                 .clickOnButtonCreatePost()
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTextInInputTitle("G12 Andrii Post-26.06.2025")
