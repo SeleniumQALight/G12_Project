@@ -21,32 +21,34 @@ public class LoginPage extends ParentPage {
         super(webDriver);
     }
 
-    public void openLoginPage() {
+    public LoginPage openLoginPage() {
         webDriver.get(baseURL);
         logger.info("Login page was opened with url " + baseURL);
+        return this;
 
     }
 
-    public void enterTextIntoInputLogin(String login) {
+    public LoginPage enterTextIntoInputLogin(String login) {
 //        WebElement inputUserName = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
 //        inputUserName.clear();
 //        inputUserName.sendKeys(login);
 //        logger.info(login + " was entered in input UserName");
         clearAndEnterTextToElement(inputUserName, login);
+        return this;
     }
 
-    public void enterTextItoPassword(String password) {
-//        WebElement inputPassword = webDriver.findElement(By.xpath("//input[@placeholder='Password']"));
-//        inputPassword.clear();
-//        inputPassword.sendKeys(password);
-//        logger.info(password + " password was entered in input Password");
+
+    public LoginPage enterTextIntoPassword(String password) {
         clearAndEnterTextToElement(inputPassword, password);
+        return this;
     }
 
     public void clickOnButtonSignIn() {
-//        webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
-//        buttonSignIn.click();
-//        logger.info("Button Sign In was clicked");
+        //webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
+        //buttonSignIn.click();
+        //logger.info("Button Sign In was clicked");
         clickOnElement(buttonSignIn);
     }
+
+
 }
