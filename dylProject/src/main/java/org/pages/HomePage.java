@@ -1,6 +1,5 @@
 package org.pages;
 
-import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -34,6 +33,16 @@ public class HomePage extends ParentPage {
         clickOnElement(buttonCreatePost);
         return new CreateNewPostPage(webDriver);
     }
+
+    public void checkButtonSignOutNotVisible() {
+        checkIsElementNotDisplayed(buttonSignOut);
+    }
+
+    public LoginPage checkButtonCreatePostVisible() {
+        checkIsElementDisplayed(buttonCreatePost);
+        return new LoginPage(webDriver);
+    }
+
 
 //    public boolean isButtonSignOutVisible() {
 //        try {

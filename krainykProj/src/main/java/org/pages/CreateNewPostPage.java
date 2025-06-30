@@ -5,17 +5,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class CreateNewPostPage extends ParentPage {
-    @FindBy(name = "title") // "//input[@name='title']")
+    @FindBy(name = "title") // @FindBy(xpath = "//*[@name='title']")
     private WebElement inputTitle;
 
-    @FindBy(id = "post-body") // "//*[@id='post-body']")
+    @FindBy(id="post-body") // @FindBy(xpath = "//*[@id='post-body']")
     private WebElement inputBody;
 
     @FindBy(xpath = "//button[text()='Save New Post']")
-    private WebElement buttonSaveNewPost;
-
-    @FindBy(xpath = "//input[@name='uniquePost']")
-    private WebElement checkboxUniquePost;
+    private WebElement buttonCreatePost;
 
     public CreateNewPostPage(WebDriver webDriver) {
         super(webDriver);
@@ -27,24 +24,18 @@ public class CreateNewPostPage extends ParentPage {
         return this;
     }
 
-    public CreateNewPostPage enterTextInInputTitle(String title) {
+    public CreateNewPostPage enterTextIntoImputTitle (String title) {
         clearAndEnterTextToElement(inputTitle, title);
         return this;
     }
 
-    public CreateNewPostPage enterTextInInputBody(String body) {
+    public CreateNewPostPage enterTextIntoImputBody (String body) {
         clearAndEnterTextToElement(inputBody, body);
         return this;
     }
 
     public PostPage clickOnSaveNewPostButton() {
-        clickOnElement(buttonSaveNewPost);
+        clickOnElement(buttonCreatePost);
         return new PostPage(webDriver);
     }
-
-    public CreateNewPostPage selectUniquePostCheckbox(String action) {
-        setCheckbox(checkboxUniquePost, action);
-        return this;
-    }
-
 }

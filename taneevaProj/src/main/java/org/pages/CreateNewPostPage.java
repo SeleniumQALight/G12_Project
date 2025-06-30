@@ -5,46 +5,39 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class CreateNewPostPage extends ParentPage {
-    @FindBy(name = "title") // "//input[@name='title']")
+
+    @FindBy (name = "title") //*[@name='title']
     private WebElement inputTitle;
 
-    @FindBy(id = "post-body") // "//*[@id='post-body']")
+    @FindBy(id = "post-body") //*[@id='content']
     private WebElement inputBody;
 
     @FindBy(xpath = "//button[text()='Save New Post']")
     private WebElement buttonSaveNewPost;
 
-    @FindBy(xpath = "//input[@name='uniquePost']")
-    private WebElement checkboxUniquePost;
-
     public CreateNewPostPage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public CreateNewPostPage checkIsRedirectToCreateNewPostPage() {
-        // TODO check URL
-        // TODO check some unique element on the page
+    public CreateNewPostPage checkIsRedirectedToCreateNewPostPage() {
+        //TODO check URL
+        //TODO check some elements on the page
         return this;
     }
 
-    public CreateNewPostPage enterTextInInputTitle(String title) {
+    public CreateNewPostPage enterTextIntoInputTitle(String title) {
         clearAndEnterTextToElement(inputTitle, title);
         return this;
     }
 
-    public CreateNewPostPage enterTextInInputBody(String body) {
+    public CreateNewPostPage enterTextIntoInputBody(String body) {
         clearAndEnterTextToElement(inputBody, body);
         return this;
     }
-
-    public PostPage clickOnSaveNewPostButton() {
+    public PostPage clickOnButtonSaveNewPost() {
         clickOnElement(buttonSaveNewPost);
         return new PostPage(webDriver);
     }
 
-    public CreateNewPostPage selectUniquePostCheckbox(String action) {
-        setCheckbox(checkboxUniquePost, action);
-        return this;
-    }
 
 }
