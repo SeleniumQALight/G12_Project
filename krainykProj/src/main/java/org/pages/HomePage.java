@@ -8,12 +8,15 @@ public class HomePage extends ParentPage {
     @FindBy(xpath = "//button[text()='Sign Out']")
     private WebElement buttonSignOut;
 
+    @FindBy(xpath = "//a[@class='btn btn-sm btn-success mr-2']")
+    private WebElement buttonCreateNewPost;
+
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public void checkIsButtonSignOutVisible() {
-            checkIsElementDisplayed(buttonSignOut);
+    public void checkButtonSignOutVisible() {
+        checkIsElementDisplayed(buttonSignOut);
 //        Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
     }
 
@@ -28,4 +31,14 @@ public class HomePage extends ParentPage {
 //        }
 //    }
 
+    public HomePage checkIsRedirectToHomePage() {
+        // TODO check URL
+        checkButtonSignOutVisible();
+        return this;
+    }
+
+    public CreateNewPostPage createOnButtingCreateNewPost() {
+        clickOnElement(buttonCreateNewPost);
+        return new CreateNewPostPage(webDriver);
+    }
 }

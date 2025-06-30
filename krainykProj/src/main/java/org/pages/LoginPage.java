@@ -1,5 +1,6 @@
 package org.pages;
 
+import org.data.TestData;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -43,5 +44,17 @@ public class LoginPage extends ParentPage {
 //        buttonSignIn.click();
 //        logger.info("Sign In button was clicked");
         clickOnElement(buttonSignIn);
+    }
+
+    /*
+     * Opens the login page, fills in the login form with valid data, and clicks the Sign In button.
+     * @return an instance of HomePage after successful login.
+     */
+    public HomePage openLoginPageAndFillLoginFormWithValidData() {
+        openLoginPage();
+        this.enterTextInInputLogin(TestData.VALID_LOGIN_UI);
+        this.enterTextInInputPassword(TestData.VALID_PASSWORD_UI);
+        clickOnButtonSignIn();
+        return new HomePage(webDriver);
     }
 }
