@@ -18,21 +18,24 @@ public class LoginPage extends ParentPage {
         super(webDriver);
     }
 
-    public void openLoginPage() {
+    public LoginPage openLoginPage() {
         webDriver.get(baseUrl);
         logger.info("Login page was opened with URL: " + baseUrl);
+        return this; // Return the current instance for method chaining
     }
 
-    public void enterTextInInputLogin(String login) {
+    public LoginPage enterTextInInputLogin(String login) {
 //        WebElement inputUsername = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
 //        inputUsername.clear();
 //        inputUsername.sendKeys(login);
 //        logger.info(login + " was entered in input Username field");
         clearAndEnterTextToElement(inputUsername, login);
+        return this;
     }
 
-    public void enterTextInInputPassword(String password) {
+    public LoginPage enterTextInInputPassword(String password) {
         clearAndEnterTextToElement(inputPassword, password);
+        return this;
     }
 
     public void clickOnButtonSignIn() {
