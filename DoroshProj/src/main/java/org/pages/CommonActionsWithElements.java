@@ -74,6 +74,12 @@ public class CommonActionsWithElements {
         logger.info("Element is displayed as expected");
     }
 
+    protected void checkIsElementNotDisplayed(WebElement webElement) {
+    Assert.assertFalse("Element is displayed", isElementDisplayed(webElement));
+   logger.info("Element is not displayed as expected");
+    }
+
+
     // Method checkTextInElement
     /* Method checkTextInElement
      * Checks if the text of the specified WebElement matches the expected text.
