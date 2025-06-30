@@ -2,9 +2,12 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.data.TestData;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 public class LoginPage extends ParentPage {
     private Logger logger = Logger.getLogger(getClass());
@@ -17,6 +20,15 @@ public class LoginPage extends ParentPage {
 
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
+
+    @FindBy(xpath = "//button[text()='Sign Out']")
+    private List<WebElement> buttonSignOut;
+
+    @FindBy(xpath = "//div[contains(text(),'Invalid username/password.')]")
+    private WebElement invalidLoginMessage;
+
+    @FindBy(xpath = "//a[text()='Create Post']")
+    private WebElement buttonCreatePost;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -67,5 +79,30 @@ public class LoginPage extends ParentPage {
         this.enterTextIntoPassword(TestData.VALID_PASSWORD_UI);
         this.clickOnButtonSignIn();
         return new HomePage(webDriver);
+    }
+
+    // 1) Перевірка, що кнопка Sign Out не показується
+    public LoginPage checkIsButtonSignOutNotVisible() {
+        Assert.assertTrue("Sign Out button should not be visible", buttonSignOut.isEmpty());
+        return this;
+    }
+
+    // 2) Перевірка, що кнопка Sign In показується
+    public LoginPage checkIsButtonSignInVisible() {
+        checkIsElementDisplayed(buttonSignIn);
+        return this;
+    }
+
+    // 3) Перевірка повідомлення про невірний логін
+    public LoginPage checkIsInvalidLoginMessageVisible() {
+        checkIsElementDisplayed(invalidLoginMessage);
+        checkTextInElement(invalidLoginMessage, "Invalid username/password.");
+        return this;
+    }
+
+    // 4) Перевірка, що після логіну є кнопка Create Post
+    public LoginPage checkIsButtonCreatePostVisible() {
+        checkIsElementDisplayed(buttonCreatePost);
+        return this;
     }
 }
