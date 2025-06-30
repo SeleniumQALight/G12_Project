@@ -73,22 +73,51 @@ public class CommonActionsWithElements {
         Assert.assertTrue("Element is not displayed", isElementDisplayed(webElement));
         logger.info("Element is displayed as expected");
     }
- // Method checkTextInElement
+
+    // Method checkTextInElement
     /* Method checkTextInElement
      * Checks if the text of the specified WebElement matches the expected text.
      * @param webElement - the WebElement to check
      * @param expectedText - the expected text to compare with
      */
     protected void checkTextInElement(WebElement webElement, String expectedText) {
-            String actualText = webElement.getText();
-            Assert.assertEquals("Text in element does not match expected text", expectedText, actualText);
-            logger.info("Text in element matches expected text: " + expectedText);
-        }
+        String actualText = webElement.getText();
+        Assert.assertEquals("Text in element does not match expected text", expectedText, actualText);
+        logger.info("Text in element matches expected text: " + expectedText);
+    }
 
     private void printErrorAndStopTest(Exception e) {
         logger.error("Error while working with element: " + e.getMessage());
         Assert.fail("Error while working with element: " + e.getMessage());
     }
+
+    protected void makeCheckboxChecked(WebElement webElement) {
+        boolean state = webElement.isSelected();
+        if (state) {
+            logger.info("Checkbox was already checked");
+        } else {
+            clickOnElement(webElement);
+            logger.info("Checkbox is checked now");
+        }
+    }
+
+    protected void makeCheckboxUnchecked(WebElement webElement){
+        if (webElement.isSelected()){
+            clickOnElement(webElement);
+            logger.info("Checkbox is unchecked now");
+        }else{
+            logger.info("Checkbox was already unchecked");
+        }
+    }
+
+   protected void actionsWithCheckbox(WebElement webElement, String stateOfCheckbox){
+        if (stateOfCheckbox == "check"){
+            makeCheckboxChecked(webElement);
+        }else {
+            makeCheckboxUnchecked(webElement);
+        }
+   }
+
 }
 
 
