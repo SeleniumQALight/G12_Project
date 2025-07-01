@@ -1,16 +1,20 @@
 package org.loginTests;
 
-import org.junit.Test;
 import org.baseTest.BaseTest;
+import org.junit.Test;
+
+import static org.data.TestData.VALID_LOGIN_UI;
+import static org.data.TestData.VALID_PASSWORD_UI;
 
 public class LoginTestWithPageObject extends BaseTest {
     @Test
     public void validLogin() {
-        pageProvider.getLoginPage().openLoginPage();
-        pageProvider.getLoginPage().inputUsernameIntoInputLogin("qaauto");
-        pageProvider.getLoginPage().inputPasswordIntoInputLogin("123456qwerty");
-        pageProvider.getLoginPage().clickSignInButton();
+        pageProvider.getLoginPage()
+                .openLoginPage()
+                .enterTextIntoInputLogin(VALID_LOGIN_UI)
+                .enterTestIntoPassword(VALID_PASSWORD_UI)
+                .clickOnButtonSignIn();
 
-        pageProvider.getHomePage().checkSignOutButtonIsDisplayed();
+        pageProvider.getHomePage().checkButtonSignOutVisible();
     }
 }
