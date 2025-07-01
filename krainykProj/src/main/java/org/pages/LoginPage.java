@@ -15,6 +15,9 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
 
+    @FindBy(xpath = "//div[@class='alert alert-danger text-center']")
+    private WebElement errorMessage;
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -39,6 +42,16 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    public LoginPage checkErrorMessageIsVisible() {
+        checkIsElementDisplayed(errorMessage);
+        return this;
+    }
+
+    public LoginPage checkSingInButtonIsVisible() {
+        checkIsElementDisplayed(buttonSignIn);
+        return this;
+    }
+
     public void clickOnButtonSignIn() {
 //        webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
 //        buttonSignIn.click();
@@ -56,5 +69,10 @@ public class LoginPage extends ParentPage {
         this.enterTextInInputPassword(TestData.VALID_PASSWORD_UI);
         clickOnButtonSignIn();
         return new HomePage(webDriver);
+    }
+
+    public LoginPage checktextInErrorMessage(String expectedText) {
+        checkTextInElement(errorMessage, expectedText);
+        return this;
     }
 }

@@ -3,8 +3,7 @@ package org.loginTests;
 import org.baseTest.BaseTest;
 import org.junit.Test;
 
-import static org.data.TestData.VALID_LOGIN_UI;
-import static org.data.TestData.VALID_PASSWORD_UI;
+import static org.data.TestData.*;
 
 public class LoginTestWithPageObject extends BaseTest {
     @Test
@@ -20,5 +19,21 @@ public class LoginTestWithPageObject extends BaseTest {
                 .clickOnButtonSignIn();
 
         pageProvider.getHomePage().checkButtonSignOutVisible();
+    }
+
+    @Test
+    public void invalidLoginTest() {
+        pageProvider.getLoginPage()
+                .openLoginPage()
+                .enterTextInInputLogin(INVALID_LOGIN_UI)
+                .enterTextInInputPassword(INVALID_PASSWORD_UI)
+                .clickOnButtonSignIn();
+
+        pageProvider.getLoginPage()
+                .checkSingInButtonIsVisible()
+                .checkErrorMessageIsVisible()
+                .checktextInErrorMessage("Invalid username/password.");
+        pageProvider.getHomePage().checkSingOutButtonIsNotVisible();
+
     }
 }
