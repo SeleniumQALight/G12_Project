@@ -1,18 +1,23 @@
 package org.postsTests;
 
 import org.baseTest.BaseTest;
+import org.junit.After;
 import org.junit.Test;
+import org.utils.Utils_Custom;
 
 public class CreateNewPostTest extends BaseTest {
+    // GUID
+
+    final String POST_TITLE = "G12 Olesia Post Title" + Utils_Custom.getDateAndTimeFormatted();
     @Test
-    public void createNewPost(){
+    public void TR001_createNewPost(){
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidCred()
                 .checkIsRedirectedToHomePage()
                 .getHeaderForLoggedUserElement()
                 .clickOnButtonCreatePost()
                 .checkIsRedirectedToCreateNewPostPage()
-                .enterTextIntoInputTitle("G12 Olesia Post Title")
+                .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("G12 Olesia Post Body")
                 .clickOnSaveNewPostButton()
                 .checkIsRedirectedToPostPage()
@@ -22,7 +27,13 @@ public class CreateNewPostTest extends BaseTest {
 
         pageProvider.getPostsPage()
                 .getHeaderForLoggedUserElement().clickOnButtonMyProfile()
+                .checkIsRedirectedToMyProfilePage()
+                .checkPostWithTitleIsPresent(POST_TITLE, 1)
         ;
+    }
+
+    @After
+    public void deletePost() {
 
     }
 }
