@@ -13,9 +13,11 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTextIntoImputTitle("G12 - Krainyk Viktoriia post title")
                 .enterTextIntoImputBody("Body of the post created by Krainyk Viktoriia")
+                .clickOnUniquePostCheckbox("check")
                 .clickOnSaveNewPostButton()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
+                .checkUniquenessOfPost()
                 .checkTextInSuccessMessage("New post successfully created.")
 
         ;
