@@ -1,17 +1,24 @@
 package org.postsTests;
 
 import org.baseTest.BaseTest;
+import org.junit.After;
 import org.junit.Test;
+import org.pages.PostPage;
+import org.utils.Utils_Custom;
 
 public class CreateNewPostTest extends BaseTest {
+    // GUID = 1bd0f1b-2c3e-4f5a-8d6e-7f8a9b0c1d2e
+
+    final String POST_TITLE = "TR001_G12 Ador" + Utils_Custom.getDateAndTimeFormatted();
+
     @Test
-    public void createNewPost() {
+    public void TR001_createNewPost() {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidCred()
                 .checkIsRedirectToHomePage()
                 .getHeaderForLoggedUserElement().clickOnButtonCreateNewPost()
                 .checkIsRedirectToCreateNewPostPage()
-                .enterTextIntoInputTitle("G12 Ador Post Title")
+                .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("Post Body created by Ador")
                 .clickOnButtonSaveNewPost()
                 .checkIsRedirectToPostPage()
@@ -21,9 +28,18 @@ public class CreateNewPostTest extends BaseTest {
 
         pageProvider.getPostPage()
                 .getHeaderForLoggedUserElement().clickOnButtonMyProfile()
+                .checkIsRedirectToMyProfilePage()
+                .checkPostWithTitleIsPresent(POST_TITLE, 1)
 
         ;
 
     }
 
+    @After
+    public void deletePosts() {
+
     }
+
+}
+
+
