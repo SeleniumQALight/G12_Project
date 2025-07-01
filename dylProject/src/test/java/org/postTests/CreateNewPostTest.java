@@ -9,10 +9,10 @@ public class CreateNewPostTest extends BaseTest {
         pageProvider.getLoginPage().
                 openLoginPageAndFillLoginFormWithValidCred()
                 .checkIsRedirectToHomePage()
-                .checkButtonCreatePostVisible()
+                .getHeaderForLoggedUserElement().checkButtonCreatePostVisible()
                 .checkInputUserNameAndPasswordNotVisible();
         pageProvider.getHomePage()
-                .clickOnButtonCreatePost()
+                .getHeaderForLoggedUserElement().clickOnButtonCreatePost()
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTextInInputTitle("G12 Andrii Post-26.06.2025")
                 .enterTextInInputBody("This is a body of the post created by G12 Andrii on 26.06.2025")
@@ -23,5 +23,9 @@ public class CreateNewPostTest extends BaseTest {
                 .checkTextInSuccessMessage("New post successfully created.")
                 .checkIsPostUnique()
         ;
+
+        pageProvider.getPostPage()
+                .getHeaderForLoggedUserElement().clickOnButtonMyProfile();
+
     }
 }

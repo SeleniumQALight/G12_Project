@@ -15,9 +15,9 @@ public class LoginTestWithPageObject extends BaseTest {
                 .enterTextIntoPassword(VALID_PASSWORD_UI)
                 .clickOnButtonSignIn();
 
-        pageProvider.getHomePage().checkButtonSignOutVisible();
+        pageProvider.getHomePage().getHeaderForLoggedUserElement().checkButtonSignOutVisible();
 
-        pageProvider.getHomePage().checkButtonCreatePostVisible().
+        pageProvider.getHomePage().getHeaderForLoggedUserElement().checkButtonCreatePostVisible().
                 checkInputUserNameAndPasswordNotVisible();
 
 
