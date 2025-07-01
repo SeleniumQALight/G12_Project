@@ -2,7 +2,7 @@ package org.baseTest;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
-import org.example.pages.PageProvider;
+import org.pages.PageProvider;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;

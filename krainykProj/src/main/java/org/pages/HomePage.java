@@ -1,48 +1,44 @@
 package org.pages;
 
-import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends ParentPage {
-    Logger logger = Logger.getLogger(getClass());
-
     @FindBy(xpath = "//button[text()='Sign Out']")
     private WebElement buttonSignOut;
 
     @FindBy(xpath = "//a[@class='btn btn-sm btn-success mr-2']")
-    private WebElement buttonCreatePost;
+    private WebElement buttonCreateNewPost;
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
 
     public void checkButtonSignOutVisible() {
- //       Assert.assertTrue("Button Sign Out is not visible", isButtunSignOutVisible());
         checkIsElementDisplayed(buttonSignOut);
+//        Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
     }
 
-//    private boolean isButtunSignOutVisible() {
+//    public boolean isButtonSignOutVisible() {
 //        try {
-//            boolean state = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
-//            logger.info(" Element visible - " + state);
+//            boolean state = buttonSignOut.isDisplayed();
+//            logger.info("Element visible: " + state);
 //            return state;
 //        } catch (Exception e) {
-//            logger.info("Element is not found");
+//            logger.error("Element is not found: " + e); // Log the exception message .getMessage()
 //            return false;
 //        }
 //    }
 
-    public HomePage checkIsRedirectedToHomePage() {
-        //TODO check URL
+    public HomePage checkIsRedirectToHomePage() {
+        // TODO check URL
         checkButtonSignOutVisible();
         return this;
     }
 
-    public CreateNewPostPage clickOnButtonCreatePost() {
-        clickOnElement(buttonCreatePost);
+    public CreateNewPostPage createOnButtingCreateNewPost() {
+        clickOnElement(buttonCreateNewPost);
         return new CreateNewPostPage(webDriver);
     }
 }

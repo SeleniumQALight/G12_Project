@@ -18,6 +18,9 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
 
+    @FindBy(xpath = "//div[@class='alert alert-danger text-center']")
+    private WebElement unsuccessMessage;
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -65,5 +68,33 @@ public class LoginPage extends ParentPage {
         this.enterTextIntoPassword(TestData.VALID_PASSWORD_UI);
         clickOnButtonSignIn();
         return new HomePage(webDriver);
+    }
+
+    public LoginPage openLoginPageAndFillLoginFormWithInValidCred(String login, String password) {
+        openLoginPage();
+        this.enterTextIntoInputLogin(login);
+        this.enterTextIntoPassword(password);
+        clickOnButtonSignIn();
+        return this;
+    }
+
+    public LoginPage checkIsButtonSignInVisible() {
+        checkIsElementDisplayed(buttonSignIn);
+        return this;
+    }
+
+    public LoginPage checkIsUnsuccessMessageDisplayed() {
+        checkIsElementDisplayed(unsuccessMessage);
+        return this;
+    }
+
+    public HomePage checkTextInUnsuccessMessage() {
+        checkTextInElement(unsuccessMessage,"Invalid username/password.");
+        return new HomePage(webDriver);
+    }
+
+    public void checkInputUserNameAndPasswordNotVisible() {
+        checkIsElementNotDisplayed(inputUserName);
+        checkIsElementNotDisplayed(inputPassword);
     }
 }

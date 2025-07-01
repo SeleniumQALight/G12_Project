@@ -6,28 +6,29 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
     private Logger logger = Logger.getLogger(getClass());
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
-        PageFactory.initElements(webDriver, this); //ініціалізує елементи описані в FindBy
+        PageFactory.initElements(webDriver, this); // Initialize the elements described in this class in FindBy annotations
     }
+
     /* Method clearAndEnterTextToElement
      * Cleans the text field and enters the specified text into the element.
      * @param webElement - the WebElement to interact with
      * @param text - the text to enter into the element
      */
-
     protected void clearAndEnterTextToElement(WebElement webElement, String text) {
         try {
             webElement.clear();
             webElement.sendKeys(text);
-            logger.info(text + " was entered into the element: ");
+            logger.info(text + " was entered in element");
         } catch (Exception e) {
-            printErrorAndStopTes(e);
+//            logger.error("Error while working with element: " + e.getMessage());
+//            Assert.fail("Error while working with element: " + e.getMessage());
+            printErrorAndStopTest(e);
         }
     }
 
@@ -40,12 +41,14 @@ public class CommonActionsWithElements {
             webElement.click();
             logger.info("Element was clicked");
         } catch (Exception e) {
-            printErrorAndStopTes(e);
+            printErrorAndStopTest(e);
+            // The method printErrorAndStopTest(e) will stop the test and print the error message
+            // No need to return or throw an exception here, as Assert.fail already does that
         }
     }
 
     /* Method isElementDisplayed
-     * Checks if the specified WebElement is displayed.
+     * Checks if the specified WebElement is displayed on the page.
      * @param webElement - the WebElement to check
      * @return true if the element is displayed, false otherwise
      */
@@ -65,7 +68,7 @@ public class CommonActionsWithElements {
     }
 
     /* Method checkElementDisplayed
-     * Checks if the specified WebElement is displayed and throws an assertion error if it is not.
+     * Asserts that the specified WebElement is displayed on the page.
      * @param webElement - the WebElement to check
      */
     protected void checkIsElementDisplayed(WebElement webElement) {
@@ -74,9 +77,9 @@ public class CommonActionsWithElements {
     }
 
     /* Method checkTextInElement
-     * Checks if the text in the specified WebElement matches the expected text.
+     * Checks if the specified text is present in the WebElement.
      * @param webElement - the WebElement to check
-     * @param expectedText - the expected text to match
+     * @param expectedMessageText - the expected text to find in the element
      */
     protected void checkTextInElement(WebElement webElement, String expectedText) {
         String actualText = webElement.getText();
@@ -84,8 +87,9 @@ public class CommonActionsWithElements {
         logger.info("Text in element matches expected text: " + expectedText);
     }
 
-    private void printErrorAndStopTes(Exception e) {
+    private void printErrorAndStopTest(Exception e) {
         logger.error("Error while working with element: " + e.getMessage());
         Assert.fail("Error while working with element: " + e.getMessage());
     }
 }
+
