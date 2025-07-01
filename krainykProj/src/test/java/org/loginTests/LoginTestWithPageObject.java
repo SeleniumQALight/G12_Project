@@ -6,6 +6,9 @@ import org.junit.Test;
 import static org.data.TestData.*;
 
 public class LoginTestWithPageObject extends BaseTest {
+    public static final String INVALID_LOGIN_UI = "qaauto21";
+    public static final String INVALID_PASSWORD_UI = "123456qwerty21";
+
     @Test
     public void validLoginTest() {
 //        pageProvider.getLoginPage().openLoginPage();
