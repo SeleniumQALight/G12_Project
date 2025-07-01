@@ -34,6 +34,16 @@ public class HomePage extends ParentPage {
         return new CreateNewPostPage(webDriver);
     }
 
+    public void checkButtonSignOutNotVisible() {
+        checkIsElementNotDisplayed(buttonSignOut);
+    }
+
+    public LoginPage checkButtonCreatePostVisible() {
+        checkIsElementDisplayed(buttonCreatePost);
+        return new LoginPage(webDriver);
+    }
+
+
 //    public boolean isButtonSignOutVisible() {
 //        try {
 //            boolean state = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
