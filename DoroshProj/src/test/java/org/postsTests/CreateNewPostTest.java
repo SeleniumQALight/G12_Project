@@ -13,10 +13,12 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTextIntoInputTitle("G12 Ador Post Title")
                 .enterTextIntoInputBody("Post Body created by Ador")
+                .clickOnCheckboxUniguePost()
                 .clickOnButtonSaveNewPost()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
+                .checkUniquenessOfPost()
         ;
 
     }
