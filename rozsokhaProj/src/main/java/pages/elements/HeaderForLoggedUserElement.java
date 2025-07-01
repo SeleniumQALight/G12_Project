@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.CommonActionsWithElements;
 import pages.CreateNewPostPage;
+import pages.MyProfilePage;
 
 public class HeaderForLoggedUserElement extends CommonActionsWithElements {
     @FindBy(xpath = "//img[@alt='My profile']")
@@ -20,8 +21,9 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         super(webDriver);
     }
 
-    public void clickOnButtonMyProfile() {
+    public MyProfilePage clickOnButtonMyProfile() {
         clickOnElement(buttonMyProfile);
+        return new MyProfilePage(webDriver);
     }
 
     public void checkButtonSignOutVisible() {
