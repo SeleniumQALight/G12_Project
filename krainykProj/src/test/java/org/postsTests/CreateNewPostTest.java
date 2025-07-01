@@ -9,7 +9,7 @@ public class CreateNewPostTest extends BaseTest {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidData()
                 .checkIsRedirectToHomePage()
-                .createOnButtingCreateNewPost()
+                .getHeaderForLoggedUserElement().createOnButtingCreateNewPost()
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTextIntoImputTitle("G12 - Krainyk Viktoriia post title")
                 .enterTextIntoImputBody("Body of the post created by Krainyk Viktoriia")
@@ -17,7 +17,9 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
-
         ;
+
+        pageProvider.getPostPage()
+                .getHeaderForLoggedUserElement().clickOnButtonMyProfile();
     }
 }
