@@ -24,10 +24,10 @@ public class CommonActionsWithElements {
         try {
             webElement.clear();
             webElement.sendKeys(text);
-            logger.info(text + " was entered in element: " + webElement);
+            logger.info(text + " was entered in element");
         } catch (Exception e) {
-            logger.error("Error while working with element: " + e.getMessage());
-            Assert.fail("Error while working with element: " + e.getMessage());
+            logger.error("Error while working with element" );
+            Assert.fail("Error while working with element" );
         }
     }
 
@@ -40,8 +40,7 @@ public class CommonActionsWithElements {
             webElement.click();
             logger.info("Element was clicked: " + webElement);
         } catch (Exception e) {
-            logger.error("Error while clicking on element: " + e.getMessage());
-            Assert.fail("Error while clicking on element: " + e.getMessage());
+            printErrorAndStopTest(e);
         }
     }
 
@@ -54,9 +53,9 @@ public class CommonActionsWithElements {
         try {
             boolean state = webElement.isDisplayed();
             if (state) {
-                logger.info("Element is displayed: ");
+                logger.info("Element is displayed");
             } else {
-                logger.info("Element is not displayed: ");
+                logger.info("Element is not displayed");
             }
             return state;
         } catch (Exception e) {
