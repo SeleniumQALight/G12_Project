@@ -15,9 +15,10 @@ public class HomePage extends ParentPage {
         super(webDriver);
     }
 
-    public void checkButtonSignOutVisible() {
+    public HomePage checkButtonSignOutVisible() {
         checkIsElementDisplayed(buttonSignOut);
 //        Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
+        return this;
     }
 
 //    public boolean isButtonSignOutVisible() {
@@ -30,6 +31,10 @@ public class HomePage extends ParentPage {
 //            return false;
 //        }
 //    }
+    public HomePage checkSingOutButtonIsNotVisible() {
+        checkIsElementNotDisplayed(buttonSignOut);
+        return this;
+    }
 
     public HomePage checkIsRedirectToHomePage() {
         // TODO check URL
@@ -37,13 +42,13 @@ public class HomePage extends ParentPage {
         return this;
     }
 
+    public HomePage checkButtonCreatePostVisible() {
+        checkIsElementDisplayed(buttonCreateNewPost);
+        return this;
+    }
+
     public CreateNewPostPage createOnButtingCreateNewPost() {
         clickOnElement(buttonCreateNewPost);
         return new CreateNewPostPage(webDriver);
-    }
-
-    public HomePage checkSingOutButtonIsNotVisible() {
-        checkIsNotElementDisplayed(buttonSignOut);
-        return this;
     }
 }

@@ -59,6 +59,16 @@ public class LoginPage extends ParentPage {
         clickOnElement(buttonSignIn);
     }
 
+    public LoginPage checkInputloginIsNotVisible() {
+        checkIsElementNotDisplayed(inputUsername);
+        return this;
+    }
+
+    public LoginPage checkInputPasswordIsNotVisible() {
+        checkIsElementNotDisplayed(inputPassword);
+        return this;
+    }
+
     /*
      * Opens the login page, fills in the login form with valid data, and clicks the Sign In button.
      * @return an instance of HomePage after successful login.
