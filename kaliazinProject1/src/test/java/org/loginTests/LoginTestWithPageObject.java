@@ -1,7 +1,6 @@
 package org.loginTests;
 
 import org.baseTest.BaseTest;
-import org.data.TestData;
 import org.junit.Test;
 
 import static org.data.TestData.VALID_LOGIN_UI;
@@ -16,7 +15,7 @@ public class LoginTestWithPageObject extends BaseTest {
                                    .enterTextIntoPassword(VALID_PASSWORD_UI)
                                    .clickLoginButtonSignIn();
 
-        pageProvider.getHomePage().checkButtonSignOutVisible();
+        pageProvider.getHomePage().getHeaderForLoggedUserElement().checkButtonSignOutVisible();
 
     }
 }
