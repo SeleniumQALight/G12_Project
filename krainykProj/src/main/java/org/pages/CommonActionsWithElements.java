@@ -92,6 +92,39 @@ public class CommonActionsWithElements {
         logger.info("Text in element matches expected text: " + expectedText);
     }
 
+    protected void makeCheckboxSelected(WebElement webElement) {
+        if (!webElement.isSelected()) {
+            clickOnElement(webElement);
+            logger.info("Checkbox was selected");
+        } else {
+            logger.info("Checkbox is already selected");
+        }
+    }
+
+    protected void makeCheckboxNotSelected(WebElement webElement) {
+        if (webElement.isSelected()) {
+            clickOnElement(webElement);
+            logger.info("Checkbox was deselected");
+        } else {
+            logger.info("Checkbox is already deselected");
+        }
+    }
+
+    protected void makeCheckboxState(WebElement webElement, String expectedState) {
+        try {
+            if (expectedState.equals("check")) {
+                makeCheckboxSelected(webElement);
+            } else if (expectedState.equals("uncheck")) {
+                makeCheckboxNotSelected(webElement);
+            } else {
+                logger.error("Invalid expected state of checkbox: " + expectedState);
+                Assert.fail("Invalid expected state of checkbox: " + expectedState);
+            }
+        } catch (Exception e) {
+            logger.info("Element is not found, so action can not be performed");
+        }
+    }
+
     private void printErrorAndStopTest(Exception e) {
         logger.error("Error while working with element: " + e.getMessage());
         Assert.fail("Error while working with element: " + e.getMessage());
