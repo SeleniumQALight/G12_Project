@@ -9,7 +9,7 @@ public class CreateNewPostTest extends BaseTest {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidCred()
                 .checkIsRedirectToHomePage()
-                .clickOnButtonCreatePost()
+                .getHeaderForLoggedUserElement().clickOnButtonCreatePost()
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTextIntoInputTitle("G12 Artem Post Title")
                 .enterTextIntoInputBody("G12 Artem Post Body")
@@ -17,6 +17,10 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.");
+
+        pageProvider.getPostPage()
+                .getHeaderForLoggedUserElement().clickOnButtonMyProfile()
+        ;
 
     }
 
