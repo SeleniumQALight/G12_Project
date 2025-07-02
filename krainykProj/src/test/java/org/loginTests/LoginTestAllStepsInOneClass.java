@@ -58,13 +58,60 @@ public class LoginTestAllStepsInOneClass {
 
     }
 
+    @Test
+    public void invalidLogin() {
+        // This test method should contain the steps to perform a valid login
+        webDriver.get("https://aqa-complexapp.onrender.com");
+        logger.info("Site was opened");
+
+        WebElement inputUsername = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
+        inputUsername.clear();
+        inputUsername.sendKeys("qaauto21");
+        logger.info("Username was entered in input Username field");
+
+        WebElement inputPassword = webDriver.findElement(By.xpath("//input[@placeholder='Password']"));
+        inputPassword.clear();
+        inputPassword.sendKeys("123456qwerty21");
+        logger.info("Password was entered in input Password field");
+
+        webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
+        logger.info("Sign In button was clicked");
+
+        Assert.assertTrue("Button Sign In is not visible", isButtonSignInVisible());
+        Assert.assertTrue("Error message is not displayed", isErrorMessageDisplayed());
+        Assert.assertFalse("Button Sign Out is visible", isButtonSignOutVisible());
+
+    }
+
     private boolean isButtonSignOutVisible() {
         try {
             boolean state = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
             logger.info("Element visible: " + state);
             return state;
-        } catch (Exception e){
+        } catch (Exception e) {
             logger.error("Element is not found: " + e.getMessage());
+            return false;
+        }
+    }
+
+    private boolean isButtonSignInVisible() {
+        try {
+            boolean state = webDriver.findElement(By.xpath("//button[text()='Sign In']")).isDisplayed();
+            logger.info("Element visible: " + state);
+            return state;
+        } catch (Exception e) {
+            logger.error("Element is not found: " + e.getMessage());
+            return false;
+        }
+    }
+
+    private boolean isErrorMessageDisplayed() {
+        try {
+            boolean state = webDriver.findElement(By.xpath("//div[@class='alert alert-danger text-center']")).isDisplayed();
+            logger.info("Error message is displayed: " + state);
+            return state;
+        } catch (Exception e) {
+            logger.error("Error message is not found: " + e.getMessage());
             return false;
         }
     }
