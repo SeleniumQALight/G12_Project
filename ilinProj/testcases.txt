@@ -55,7 +55,7 @@ Steps:
 5. Click on button "Sign up for OurApp" on Login page
 
 Expected Result:
-1. The error message "Invalid username/password." is displayed above Registration Password input
+1. The error message "Password must be at least 12 characters." is displayed above Registration Password input
 2. After clicking on button "Sign up for OurApp" there is no redirect on home page
 
 Post condition:
