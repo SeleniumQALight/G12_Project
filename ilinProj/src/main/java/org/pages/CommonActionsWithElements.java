@@ -24,10 +24,10 @@ public class CommonActionsWithElements {
         try {
             webElement.clear();
             webElement.sendKeys(text);
-            logger.info(text + " was entered in element: " + webElement);
+            logger.info(text + " was entered in element");
         } catch (Exception e) {
-            logger.error("Error while working with element: " + e.getMessage());
-            Assert.fail("Error while working with element: " + e.getMessage());
+            logger.error("Error while working with element");
+            Assert.fail("Error while working with element");
         }
     }
 
@@ -38,10 +38,10 @@ public class CommonActionsWithElements {
     protected void clickOnElement(WebElement webElement) {
         try {
             webElement.click();
-            logger.info("Element was clicked: " + webElement);
+            logger.info("Element was clicked");
         } catch (Exception e) {
-            logger.error("Error while clicking on element: " + e.getMessage());
-            Assert.fail("Error while clicking on element: " + e.getMessage());
+            logger.error("Error while clicking on element");
+            Assert.fail("Error while clicking on element");
         }
     }
 
@@ -54,9 +54,9 @@ public class CommonActionsWithElements {
         try {
             boolean state = webElement.isDisplayed();
             if (state) {
-                logger.info("Element is displayed: ");
+                logger.info("Element is displayed");
             } else {
-                logger.info("Element is not displayed: ");
+                logger.info("Element is not displayed");
             }
             return state;
         } catch (Exception e) {
@@ -71,6 +71,10 @@ public class CommonActionsWithElements {
      */
     protected void checkIsElementDisplayed(WebElement webElement) {
         Assert.assertTrue("Element is not displayed", isElementDisplayed(webElement));
+    }
+
+    protected void checkIsElementIsNotDisplayed(WebElement webElement) {
+        Assert.assertFalse("Element is displayed, but it should not be", isElementDisplayed(webElement));
     }
 
 
@@ -89,6 +93,66 @@ public class CommonActionsWithElements {
     private void printErrorAndStopTest(Exception e) {
         logger.error("Error while working with element: " + e.getMessage());
         Assert.fail("Error while working with element: " + e.getMessage());
+    }
+
+
+    /* * Method selectCheckboxIfNotSelected
+     * Selects the checkbox if it is not already selected.
+     * @param webElement - the WebElement representing the checkbox
+     */
+
+    protected void selectCheckboxForUniquePost(WebElement webElement){
+        try{
+            boolean state = webElement.isSelected();
+            if (state) {
+                logger.info("Checkbox is selected");
+            } else {
+                webElement.click();
+                logger.info("Checkbox was selected");
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    /* Method unselectCheckboxIfSelected
+     * Unselects the checkbox if it is currently selected.
+     * @param webElement - the WebElement representing the checkbox
+     */
+    protected void unselectCheckboxForUniquePost(WebElement webElement){
+        try {
+            boolean state = webElement.isSelected();
+            if (!state) {
+                logger.info("Checkbox is already unselected");
+            } else {
+                webElement.click();
+                logger.info("Checkbox was unselected");
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+
+    //Translated with DeepL.com (free version)
+    /*     * Method setCheckboxState
+     * Sets the state of the checkbox based on the provided state string.
+     * @param webElement - the WebElement representing the checkbox
+     * @param state - the desired state of the checkbox ("check" or "uncheck")
+     */
+    protected void setCheckboxState(WebElement webElement, String state) {
+        try {
+            if (state.equalsIgnoreCase("check")) {
+                selectCheckboxForUniquePost(webElement);
+            } else if (state.equalsIgnoreCase("uncheck")) {
+                unselectCheckboxForUniquePost(webElement);
+            } else {
+                logger.error("Invalid state provided: " + state);
+                Assert.fail("Invalid state provided: " + state);
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
     }
 
 

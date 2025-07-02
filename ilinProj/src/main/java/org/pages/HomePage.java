@@ -34,4 +34,14 @@ public class HomePage extends ParentPage {
         clickOnElement(buttonCreatePost);
         return new CreateNewPostPage(webDriver);
     }
+
+    public LoginPage verifyButtonSignOutIsNotVisible() {
+        checkIsElementIsNotDisplayed(buttonSignOut);
+        return new LoginPage(webDriver);
+    }
+
+    public LoginPage verifyButtonCreatePostIsVisible() {
+        checkIsElementDisplayed(buttonCreatePost);
+        return new LoginPage(webDriver);
+    }
 }
