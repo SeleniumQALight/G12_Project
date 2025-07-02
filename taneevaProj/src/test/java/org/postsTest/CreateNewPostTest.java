@@ -9,7 +9,7 @@ public class CreateNewPostTest extends BaseTest {
         pageProvider.getLoginPage()
                 .openLoginPageAndFIllLoginFormWithValidCred()
                 .checkIsRedirectedToHomePage()
-                .clickOnButtonCreatePost()
+                .getHeaderForLoggedUserElement().clickOnButtonCreatePost()
                 .checkIsRedirectedToCreateNewPostPage()
                 .enterTextIntoInputTitle("G12 Ador Post Title")
                 .enterTextIntoInputBody("Post Body created by Ador")
@@ -19,5 +19,7 @@ public class CreateNewPostTest extends BaseTest {
                 .checkTextInSuccessMessage("New post successfully created.")
 
 ;
+        pageProvider.getPostPage()
+                .getheaderForLoggedUserElement().clickOnButtonMyProfile();
     }
 }
