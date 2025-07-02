@@ -21,14 +21,8 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
 
-    @FindBy(xpath = "//button[text()='Sign Out']")
-    private List<WebElement> buttonSignOut;
-
     @FindBy(xpath = "//div[contains(text(),'Invalid username/password.')]")
     private WebElement invalidLoginMessage;
-
-    @FindBy(xpath = "//a[text()='Create Post']")
-    private WebElement buttonCreatePost;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -81,28 +75,17 @@ public class LoginPage extends ParentPage {
         return new HomePage(webDriver);
     }
 
-    // 1) Перевірка, що кнопка Sign Out не показується
-    public LoginPage checkIsButtonSignOutNotVisible() {
-        Assert.assertTrue("Sign Out button should not be visible", buttonSignOut.isEmpty());
-        return this;
-    }
-
-    // 2) Перевірка, що кнопка Sign In показується
+    // перевірка, що кнопка Sign In показується
     public LoginPage checkIsButtonSignInVisible() {
         checkIsElementDisplayed(buttonSignIn);
         return this;
     }
 
-    // 3) Перевірка повідомлення про невірний логін
+    // перевірка повідомлення про невірний логін
     public LoginPage checkIsInvalidLoginMessageVisible() {
         checkIsElementDisplayed(invalidLoginMessage);
         checkTextInElement(invalidLoginMessage, "Invalid username/password.");
         return this;
     }
 
-    // 4) Перевірка, що після логіну є кнопка Create Post
-    public LoginPage checkIsButtonCreatePostVisible() {
-        checkIsElementDisplayed(buttonCreatePost);
-        return this;
-    }
 }
