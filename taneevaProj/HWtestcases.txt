@@ -1,0 +1,123 @@
+#TC001 Valid Registration
+
+Username: <AnjTest>
+Email: <test001@gmail.com>
+Password: <zxcasdqwe123>
+
+Pre-condition:
+// User with this login does not exist yet
+// Sign Out if logged in
+
+Steps:
+1. Open login page https://aqa-complexapp.onrender.com
+2. Fill field Username (<AnjTest>)
+3. Fill field Email (<test001@gmail.com>)
+4. Fill field Password (<zxcasdqwe123>)
+5. Click on button "Sign up for OurApp"
+
+Expected result:
+1. Above you can see My profile anjtest
+2. Greeting text is displayed: "Hello anjtest, your feed is empty. Your feed displays the latest posts from the people you follow. If you don’t have any friends to follow that’s okay; you can use the “Search” feature in the top menu bar to find content written by people with similar interests and then follow them."
+3. There is a Sign Out button
+
+Post-condition:
+1. Delete user
+
+#TC002 Create a new post
+
+Pre-condition:
+1.The user is successfully logged in (for example, in case #001 Valid Login).
+Сredentials:
+Login: <AnjTest>
+Password: <zxcasdqwe123>
+
+Steps:
+1. Click on "Create Post" button
+2. Enter the text in the Title field (for example, "My first test post")
+3. Enter text in the Body Content field (for example, "This is the content of my post.")
+4. Check the "Is this post unique?" checkbox
+5. Select "Public" from the Select value list.
+6. Click the Save New Post button
+
+Expected results:
+1. After saving, the message appears: New post successfully created.
+2. The page displays the post title: "My first test post"
+3. The author name is displayed: anjtest
+4. The creation date is displayed (for example, "6/17/2025")
+5. The information is displayed: Note: This post was written for All Users
+6. The post text is displayed: "This is the content of my post."
+7. The post is visible in the user’s post list on their profile page
+
+Post-condition:
+1. Delete created post
+
+#TC003 Valid Login
+Credentials:
+Username: <anjtest>
+Password: <zxcasdqwe123>
+
+Pre-condition:
+1. User with username <anjtest> already exists.
+2. If logged in, sign out first.
+
+Steps:
+1. Open the login page: https://aqa-complexapp.onrender.com/login
+2. Fill in the Username field with <anjtest>
+3. Fill in the Password field with <zxcasdqwe123>
+4. Click the Login button
+
+Expected result:
+1. Greeting message appears: "Hello anjtest" or a similar confirmation of successful login.
+2. The profile section shows: "My profile anjtest"
+3. The Sign Out button is displayed.
+
+Post-condition:
+
+#TC004 Edit a post
+
+Pre-condition:
+1. User is logged in (use valid login: AnjTest, password: zxcasdqwe123)
+2. A post already exists (created in TC002)
+
+Steps:
+1. Click on My Profile button (top right, next to avatar)
+2. Scroll to the list of user’s posts and click to the post that need edit
+3. Click on the edit icon next to the target post title
+4. Change the Title to: Edited post title
+5. Change the Body Content to: Updated post content.
+6. Uncheck the checkbox “Is this post unique?” (if checked)
+7. Choose a different Select value from the dropdown (e.g. select something else from "Public to Private…")
+8. Click the Save Updates button
+
+Expected result:
+1. A confirmation message is displayed: "Post successfully updated."
+2. The page displays the updated post title: "Edited post title"
+3. The page displays the updated body content: "Updated post content."
+4. The checkbox "Is this post unique?" is now unchecked.
+5. The dropdown value remains selected as "Private" .
+
+Post-condition:
+1.Delete created post
+
+#TC005 Sending messages in the chat
+
+Pre-condition:
+1. User is logged in
+   Login: <AnjTest>
+   Password: <zxcasdqwe123>
+
+Steps:
+1.Click on the Chat icon (speech bubble in the top-right corner)
+2.Type a message “Hello” into the chat input field at the bottom
+3.Press Enter key to send the message
+4.Click on the close (×) button on the top-right of the chat window
+5.Click on the Chat icon again to open the chat
+
+Expected result:
+1. The chat displays the message “Hello”
+2. The message is shown with a colored chat bubble (your avatar)
+3. Input field still shows the placeholder “Type a message…”
+4. Chat remains functional and interactive
+
+Post-condition:
+1. Click the close (×) button to close the chat window.
