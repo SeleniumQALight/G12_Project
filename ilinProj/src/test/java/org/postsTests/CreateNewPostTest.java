@@ -11,12 +11,15 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToHomePage()
                 .clickOnButtonCreatePost()
                 .checkIsRedirectToCreateNewPostPage()
-                .enterTextIntoInputTitle("G12 Artem Post Title")
-                .enterTextIntoInputBody("G12 Artem Post Body")
+                .enterTextIntoInputTitle("G12 Test Title")
+                .enterTextIntoInputBody("G12 Test Body")
+                .clickOnCheckboxForUniquePost("check")
                 .clickOnButtonSaveNewPost()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
-                .checkTextInSuccessMessage("New post successfully created.");
+                .checkTextInSuccessMessage("New post successfully created.")
+                .checkIsPostUnique()
+        ;
 
     }
 
