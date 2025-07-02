@@ -21,4 +21,147 @@ Post condition:
 2. Delete Posts
 3. etc
 
+#02 Verify that a new user is able to Sign up in app
+
+Preconditions:
+1.
+
+Steps:
+1. Open login page https://aqa-complexapp.onrender.com
+2. Enter valid <username> into input Username on Login page
+3. Enter valid <email> into input Email on Login page
+4. Enter valid <Password> into input Password on Login page
+5. Click on button "Sign up for OurApp" on Login page
+
+Expected Result:
+1. I am on home page
+2. I see welcome message
+3. There is no posts
+
+Post condition:
+1. Delete user
+
+
+
+#03 Verify that a new user isn't able to Sign Up with invalid password
+
+Preconditions:
+
+Steps:
+1. Open login page https://aqa-complexapp.onrender.com
+2. Enter valid <username> into input Username on Login page
+3. Enter valid <email> into input Email on Login page
+4. Enter invalid <password> the numbers of symbols should be less than twelve into input Password on Login page
+5. Click on button "Sign up for OurApp" on Login page
+
+Expected Result:
+1. The error message "Password must be at least 12 characters." is displayed above Registration Password input
+2. After clicking on button "Sign up for OurApp" there is no redirect on home page
+
+Post condition:
+
+
+
+#04 User is able to create post
+
+Preconditions:
+1. Create user:
+    - Enter username: test000001
+    - Enter email: test000001+1@gamil.com
+    - Enter valid password: testIlin000001
+    - Click on button "Sign up for OurApp"
+2. User is on home page
+
+
+Steps:
+1. Click on button "Create Post"
+2. Enter title of post
+3. Enter text in post body
+4. Click on checkbox
+5. Select "Загальнодоступне" in drop down list
+6. Click on button "Save New Post"
+
+Expected Result:
+1. I see message "New post successfully created."
+2. I see detailed actual information about created post:
+    - title
+    - who made this post and when
+    - Information for users who have access
+    - Information about unique this post or not
+    - The body of post
+3. In user profile the number of "Posts" increased by one
+
+Post condition:
+1. Delete post
+2. Delete user
+
+
+
+
+
+#05 Verify that a user is able to delete a post
+
+Preconditions:
+1. Create user:
+    - Enter username: test000002
+    - Enter email: test000001+2@gamil.com
+    - Enter valid password: testIlin000002
+    - Click on button "Sign up for OurApp"
+2. User is on home page
+3. Create post:
+    - Enter title
+    - Enter body
+    - Click on checkbox
+    - Select any value in dropdown
+    - Click on button "Save New Post"
+4. User is on post page
+
+Steps:
+1. Click on Delete button
+
+Expected Result:
+1. Redirection to profile occurred
+2. I see the message "Post successfully deleted." on My profile page
+3. The number of Posts are decreased by one
+
+Post condition:
+1. Delete user
+
+
+
+
+#06 Verify that a user is able to edit a post
+
+Preconditions:
+1. Create user:
+    - Enter username: test000003
+    - Enter email: test000001+3@gamil.com
+    - Enter valid password: testIlin000003
+    - Click on button "Sign up for OurApp"
+2. User is on home page
+3. Create post:
+    - Enter title
+    - Enter body
+    - Click on checkbox
+    - Select any value in dropdown
+    - Click on button "Save New Post"
+4. User is on post page
+
+Steps:
+1.Change title
+2. Change body content
+3. Click "Save Updates" button
+
+Expected Result:
+1. I see the message "Post successfully updated." on Create Post page.
+2. The data of updated according to changes on post page.
+
+Post condition:
+1. Delete User
+2. Delete Post
+
+
+
+
+
 

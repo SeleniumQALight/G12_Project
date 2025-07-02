@@ -1,12 +1,44 @@
 #LoginPage
 input.login=".//input[@id='login']"
-input.password="..."
-button.Login="..."
+input.password=".//input[@placeholder='Password']"
+button.Login=".//input[@placeholder='Username']"
+input.registrationUsername=".//input[@id='username-register']"
+input.registrationEmail=".//input[@id='email-register']"
+input.registrationPassword=".//input[@id='password-register']"
+button.Signup=".//button[@type='submit']"
 
 #HomePage
-SignOut button="..."
+text.welcomeMessageHeader = ".//h2"
+text.welcomeMessageUserName = ".//strong"
+text.welcomeMessageInfoText = ".//p[@class='lead text-muted']"
+button.createPost = ".//a[@href='/create-post']"
+SignOut button=".//button[@class='btn btn-sm btn-secondary']"
 
 #CreatePost
+input.title=".//input[@id='post-title']"
+input.body=".//textarea[@id='post-body']"
+checkbox.uniquePost =".//input[@name='uniquePost']"
+dropdown.optionForAllUsers =".//option[@value='All Users']"
+button.savePost = ".//button[@class='btn btn-primary']"
+a.backToPostPage=".//a[contains(@href, '/post')]"
+div.updateMessage =".//div[contains(text(), 'Post successfully updated.')]"
+
+
+#PostPage
+div.postSuccessMessageCreation = ".//div[@class='alert alert-success text-center']"
+div.postTitle = ".//div[@class='d-flex justify-content-between']//h2"
+p.postInfo=".//p[@class='text-muted small mb-4']"
+a.authorOfPost=".//a[contains(@href, '/profile/')][2]"
+div.postAccess=".//div[@class='body-content']//u"
+p.uniquePostInfo=".//p[contains(text(), 'Is this post unique? : yes')])"
+div.uniquePostInfo=".//p[contains(text(), 'Is this post unique? : no')])"
+p.bodyContentInfo=".//div[@class='body-content'][2]//p"
+a.editButton=".//a[@data-original-title='Edit']"
+button.deleteButton=".//button[@data-original-title='Delete']"
+
+
+
 
 
 #MyProfile
+div.updateMessage =".//div[contains(text(), 'Post successfully deleted.')]"
