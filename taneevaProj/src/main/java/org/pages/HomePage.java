@@ -1,7 +1,7 @@
 package org.pages;
 
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,12 +19,14 @@ public class HomePage extends ParentPage {
         super(webDriver);
     }
 
-    public void checkButtonSignOutVisible() {
- //       Assert.assertTrue("Button Sign Out is not visible", isButtunSignOutVisible());
+    public HomePage checkButtonSignOutVisible() {
+        //       Assert.assertTrue("Button Sign Out is not visible", isButtunSignOutVisible());
         checkIsElementDisplayed(buttonSignOut);
+        logger.info("Sign Out button is visible");
+        return this;
     }
 
-//    private boolean isButtunSignOutVisible() {
+    //    private boolean isButtunSignOutVisible() {
 //        try {
 //            boolean state = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
 //            logger.info(" Element visible - " + state);
@@ -34,6 +36,21 @@ public class HomePage extends ParentPage {
 //            return false;
 //        }
 //    }
+    public HomePage checkButtonSignOutNotVisible() {
+        try {
+            boolean isDisplayed = buttonSignOut.isDisplayed();
+            Assert.assertFalse("Sign Out button should NOT be visible", isDisplayed);
+        } catch (Exception e) {
+            logger.info("Sign Out button is not visible as expected");
+        }
+        return this;
+    }
+
+    public HomePage checkButtonCreatePostVisible() {
+        checkIsElementDisplayed(buttonCreatePost);
+        logger.info("Create Post button is visible");
+        return this;
+    }
 
     public HomePage checkIsRedirectedToHomePage() {
         //TODO check URL
