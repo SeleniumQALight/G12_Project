@@ -19,6 +19,9 @@ public class CreateNewPostPage extends ParentPage {
         super(webDriver);
     }
 
+    @FindBy(xpath = "//input[@name='uniquePost']")
+    private WebElement checkboxUniquePost;
+
     public CreateNewPostPage checkIsRedirectedToCreateNewPostPage() {
         //TODO check URL
         //TODO check some elements on the page
@@ -39,5 +42,9 @@ public class CreateNewPostPage extends ParentPage {
         return new PostPage(webDriver);
     }
 
+    public CreateNewPostPage setUniquePostCheckbox(String state) {
+        actionsWithCheckbox(checkboxUniquePost, state);
+        return this;
 
+    }
 }

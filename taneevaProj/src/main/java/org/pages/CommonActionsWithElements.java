@@ -71,6 +71,7 @@ public class CommonActionsWithElements {
         Assert.assertTrue("Element is not displayed", isElementDisplayed(webElement));
         logger.info("Element is displayed as expected");
     }
+
     /* Method checkTextInElement
      * Checks if the text of the specified WebElement matches the expected text.
      * @param webElement - the WebElement to check
@@ -85,5 +86,52 @@ public class CommonActionsWithElements {
     private void printErrorAndStopTest(Exception e) {
         logger.error("Error while working with element: " + e.getMessage());
         Assert.fail("Error while working with element: " + e.getMessage());
+    }
+
+    /* Method makeCheckboxChecked
+     * Makes the checkbox selected if it's not already selected
+     * @param webElement - the WebElement representing the checkbox
+     */
+    protected void makeCheckboxChecked(WebElement webElement) {
+        boolean state = webElement.isSelected();
+        if (state) {
+            clickOnElement(webElement);
+            logger.info("Checkbox was checked");
+        } else {
+            logger.info("Checkbox was already checked");
+        }
+    }
+    /* Method makeCheckboxUnchecked
+     * Makes the checkbox unselected if it's currently selected
+     * @param webElement - the WebElement representing the checkbox
+     */
+
+    protected void makeCheckboxUnchecked(WebElement webElement) {
+        boolean state = webElement.isSelected();
+        if (state) {
+            clickOnElement(webElement);
+            logger.info("Checkbox was unchecked");
+        } else {
+            logger.info("Checkbox was already unchecked");
+        }
+    }
+
+    /* Method makeCheckboxUnchecked
+     * Sets checkbox to desired state: "check" or "uncheck"
+     * @param webElement - the WebElement representing the checkbox
+     * @param state - desired state of the checkbox ("check" or "uncheck")
+     */
+
+    protected void actionsWithCheckbox (WebElement webElement, String desiredState) {
+        boolean isChecked = webElement.isSelected();
+        if ("check".equalsIgnoreCase(desiredState) && !isChecked) {
+            clickOnElement(webElement);
+            logger.info("Checkbox was checked");
+        } else if ("uncheck".equalsIgnoreCase(desiredState) && isChecked) {
+            clickOnElement(webElement);
+            logger.info("Checkbox was unchecked");
+        } else {
+            logger.info("Checkbox is already in the desired state: " + desiredState);
+        }
     }
 }
