@@ -1,16 +1,38 @@
 package org.loginTests;
 
+import org.data.TestData;
 import org.junit.Test;
 import org.baseTest.BaseTest;
 
 public class LoginTestWithPageObject extends BaseTest {
     @Test
     public void validLogin() {
-        pageProvider.getLoginPage().openLoginPage();
-        pageProvider.getLoginPage().inputUsernameIntoInputLogin("qaauto");
-        pageProvider.getLoginPage().inputPasswordIntoInputLogin("123456qwerty");
-        pageProvider.getLoginPage().clickSignInButton();
+        pageProvider.getLoginPage().
+                openLoginPage()
+                .enterTextIntoInputLogin(TestData.VALID_LOGIN_UI)
+                .enterTextIntoPassword(TestData.VALID_PASSWORD_UI)
+                .clickOnButtonSignIn();
 
-        pageProvider.getHomePage().checkSignOutButtonIsDisplayed();
+        pageProvider.getHomePage()
+                .checkButtonSignOutVisible()
+                .checkButtonCreatePostVisible();
+
+        pageProvider.getLoginPage()
+                .checkInputUserNameAndPasswordNotVisible();
+    }
+
+    @Test
+    public void invalidLogin() {
+        pageProvider.getLoginPage()
+                .openLoginPage()
+                .enterTextIntoInputLogin("InvalidUser")
+                .enterTextIntoPassword("WrongPassword")
+                .clickOnButtonSignIn();
+
+        pageProvider.getLoginPage()
+                .checkButtonSignOutNotVisible()
+                .checkButtonSignInVisible()
+                .checkAlertMessageVisible()
+                .checkTextInAlertMessage("Invalid username/password.");
     }
 }
