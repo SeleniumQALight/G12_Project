@@ -27,10 +27,6 @@ public class LoginPage extends ParentPage {
         super(webDriver);
     }
 
-    public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
-        return new HeaderForLoggedUserElement(webDriver);
-    }
-
     public LoginPage openLoginPage() {
         webDriver.get(baseURL);
         logger.info("Login page was opened with urk " + baseURL);
@@ -57,10 +53,10 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-    public LoginPage checkAlertMessageVisible() {
+    public HomePage checkAlertMessageVisible() {
         checkIsElementDisplayed(alertTextMessage);
         logger.info("Alert message is displayed");
-        return this;
+        return new HomePage(webDriver);
     }
 
     public LoginPage checkTextInAlertMessage(String expectedText) {

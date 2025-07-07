@@ -35,12 +35,7 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
     }
 
     public LoginPage checkButtonSignOutNotVisible(){
-        try {
-            boolean isDisplayed = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
-            Assert.assertFalse("Sign Out button should NOT be visible", isDisplayed);
-        } catch (Exception e) {
-            logger.info("Sign Out button is not visible as expected");
-        }
+        checkIsElementIsNotDisplayed(buttonSignOut);
         return new LoginPage(webDriver);
     }
 
