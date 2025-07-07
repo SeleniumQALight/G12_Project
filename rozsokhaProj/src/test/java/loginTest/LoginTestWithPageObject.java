@@ -19,7 +19,7 @@ public class LoginTestWithPageObject extends BaseTest {
                 .enterTextIntoPassword(VALID_PASSWORD_UI)
                 .clickOnButtonSignIn(); // Chaining method calls for better readability
 
-        pageProvider.getHomePage().checkButtonSignOutVisible();
+        pageProvider.getHomePage().getHeaderForLoggedUserElement().checkButtonSignOutVisible();
 
 
     }
