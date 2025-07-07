@@ -18,7 +18,7 @@ public class CreateNewPostTest extends BaseTest {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidData()
                 .checkIsRedirectToHomePage()
-                .getHeaderForLoggedUserElement().createOnButtingCreateNewPost()
+                .getHeaderForLoggedUserElement().clickOnButtonCreateNewPost()
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTextIntoImputTitle(POST_TITLE)
                 .enterTextIntoImputBody(POST_BODY)

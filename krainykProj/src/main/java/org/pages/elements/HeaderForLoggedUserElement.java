@@ -30,7 +30,7 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         checkIsElementDisplayed(buttonSignOut);
     }
 
-    public CreateNewPostPage createOnButtingCreateNewPost() {
+    public CreateNewPostPage clickOnButtonCreateNewPost() {
         clickOnElement(buttonCreateNewPost);
         return new CreateNewPostPage(webDriver);
     }
