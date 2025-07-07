@@ -1,12 +1,33 @@
 #LoginPage
-input.login=".//input[@id='login']"
-input.password="..."
-button.Login="..."
+input.login=.//input[@placeholder='Username']
+input.password=.//input[@placeholder='Password']
+button.SignIn=.//button[@class='btn btn-primary btn-sm']
+alert.invalidUsernamePassword="//div[text()='Invalid username/password.']"
+input.pickAUsername="//input[@id='username-register']"
+input.email="//input[@id='email-register']"
+input.createAPassword="//input[@id='password-register']"
+button.sighUpForOurApp="//button[@type='submit']"
 
 #HomePage
-SignOut button="..."
+button.SignOut=.//button[@class='btn btn-sm btn-secondary']
 
 #CreatePost
+button.CreatePost=.//a[@href='/create-post']
+input.Title=.//input[@id='post-title']
+textarea.BodyContent=.//textarea[@id='post-body']
+input.Checkbox=.//input[@type='checkbox']
+select.Dropdown=//select[@id='select1']/option[@value='All Users']
+button.SaveNewPost=.//button[@class='btn btn-primary']
+banner.SuccessBannerCreate=.//div[@class='alert alert-success text-center']
 
+#EditPost
+icon.Edit=.//a[@href='/post/6862ad59c7f2e100477f986e/edit']
+input.Title=.//input[@id='post-title']
+textarea.BodyContent=.//textarea[@id='post-body']
+input.Checkbox=.//input[@type='checkbox']
+select.Dropdown=//select[@id='select1']/option[@value='One Person']
+button.SaveUpdates=//button[@class='btn btn-primary']
+banner.SuccessBannerUpdate=.//div[@class='alert alert-success text-center']
 
-#MyProfile
+#DeletePost
+button.deletePost="//button[@class='delete-post-button text-danger']"
