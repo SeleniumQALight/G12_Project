@@ -2,12 +2,11 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.data.TestData;
-import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import org.openqa.selenium.support.FindBy;
+import org.pages.elements.HeaderForLoggedUserElement;
 
 public class LoginPage extends ParentPage {
     private Logger logger = Logger.getLogger(getClass());
@@ -26,6 +25,10 @@ public class LoginPage extends ParentPage {
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
+    }
+
+    public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
+        return new HeaderForLoggedUserElement(webDriver);
     }
 
     public LoginPage openLoginPage() {
@@ -66,20 +69,9 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-    public LoginPage checkButtonSignOutNotVisible(){
-        try {
-            boolean isDisplayed = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
-            Assert.assertFalse("Sign Out button should NOT be visible", isDisplayed);
-        } catch (Exception e) {
-            logger.info("Sign Out button is not visible as expected");
-        }
-        return this;
-    }
     public LoginPage checkInputUserNameAndPasswordNotVisible() {
-        Assert.assertTrue("Username input should NOT be visible",
-                webDriver.findElements(By.xpath("//input[@placeholder='Username']")).isEmpty());
-        Assert.assertTrue("Password input should NOT be visible",
-                webDriver.findElements(By.xpath("//input[@placeholder='Password']")).isEmpty());
+        checkIsElementIsNotDisplayed(inputUserName);
+        checkIsElementIsNotDisplayed(inputPassword);
         return this;
     }
 
