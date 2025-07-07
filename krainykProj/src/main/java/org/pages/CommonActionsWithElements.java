@@ -76,6 +76,11 @@ public class CommonActionsWithElements {
         logger.info("Element is displayed as expected");
     }
 
+    protected void checkIsElementNotDisplayed(WebElement webElement) {
+        Assert.assertFalse("Element is displayed", isElementDisplayed(webElement));
+        logger.info("Element is not displayed as expected");
+    }
+
     /* Method checkTextInElement
      * Checks if the specified text is present in the WebElement.
      * @param webElement - the WebElement to check
@@ -85,6 +90,39 @@ public class CommonActionsWithElements {
         String actualText = webElement.getText();
         Assert.assertEquals("Text in element does not match expected text", expectedText, actualText);
         logger.info("Text in element matches expected text: " + expectedText);
+    }
+
+    protected void makeCheckboxSelected(WebElement webElement) {
+        if (!webElement.isSelected()) {
+            clickOnElement(webElement);
+            logger.info("Checkbox was selected");
+        } else {
+            logger.info("Checkbox is already selected");
+        }
+    }
+
+    protected void makeCheckboxNotSelected(WebElement webElement) {
+        if (webElement.isSelected()) {
+            clickOnElement(webElement);
+            logger.info("Checkbox was deselected");
+        } else {
+            logger.info("Checkbox is already deselected");
+        }
+    }
+
+    protected void makeCheckboxState(WebElement webElement, String expectedState) {
+        try {
+            if (expectedState.equalsIgnoreCase("check")) {
+                makeCheckboxSelected(webElement);
+            } else if (expectedState.equalsIgnoreCase("uncheck")) {
+                makeCheckboxNotSelected(webElement);
+            } else {
+                logger.error("Invalid expected state of checkbox: " + expectedState);
+                Assert.fail("Invalid expected state of checkbox: " + expectedState);
+            }
+        } catch (Exception e) {
+            logger.info("Element is not found, so action can not be performed");
+        }
     }
 
     private void printErrorAndStopTest(Exception e) {

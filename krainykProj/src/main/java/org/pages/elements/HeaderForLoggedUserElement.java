@@ -3,9 +3,7 @@ package org.pages.elements;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.pages.CommonActionsWithElements;
-import org.pages.CreateNewPostPage;
-import org.pages.MyProfilePage;
+import org.pages.*;
 
 public class HeaderForLoggedUserElement extends CommonActionsWithElements {
     @FindBy(xpath = "//img[@alt='My profile']")
@@ -30,7 +28,16 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         checkIsElementDisplayed(buttonSignOut);
     }
 
-    public CreateNewPostPage createOnButtingCreateNewPost() {
+    public void checkSingOutButtonIsNotVisible() {
+        checkIsElementNotDisplayed(buttonSignOut);
+    }
+
+    public HomePage checkButtonCreatePostVisible() {
+        checkIsElementDisplayed(buttonCreateNewPost);
+        return this.checkButtonCreatePostVisible();
+    }
+
+    public CreateNewPostPage clickOnButtonCreateNewPost() {
         clickOnElement(buttonCreateNewPost);
         return new CreateNewPostPage(webDriver);
     }
