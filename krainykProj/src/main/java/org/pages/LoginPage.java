@@ -25,10 +25,6 @@ public class LoginPage extends ParentPage {
         super(webDriver);
     }
 
-    public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
-        return new HeaderForLoggedUserElement(webDriver);
-    }
-
     public LoginPage openLoginPage() {
         webDriver.get(baseUrl);
         logger.info("Login page was opened with URL: " + baseUrl);

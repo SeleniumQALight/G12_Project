@@ -12,6 +12,7 @@ public class CreateNewPostTest extends BaseTest {
     // date and time of creation of the test
     final String POST_TITLE = "TR001_G12 - Krainyk Viktoriia on " + getDateAndTimeFormatted();
     final String POST_BODY = "Body of the post created by Krainyk Viktoriia";
+    final String POST_UNIQUE = "check"; // or "uncheck" for non-unique posts. Pay attention that the checkbox is not checked by default
 
     @Test
     public void TR001_createNewPostTest() {
@@ -22,11 +23,11 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTextIntoImputTitle(POST_TITLE)
                 .enterTextIntoImputBody(POST_BODY)
-                .clickOnUniquePostCheckbox("check")
+                .clickOnUniquePostCheckbox(POST_UNIQUE)
                 .clickOnSaveNewPostButton()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
-                .checkUniquenessOfPost()
+                .checkUniquenessOfPost(POST_UNIQUE)
                 .checkTextInSuccessMessage("New post successfully created.")
         ;
 

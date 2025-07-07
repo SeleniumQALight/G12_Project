@@ -28,9 +28,8 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         checkIsElementDisplayed(buttonSignOut);
     }
 
-    public LoginPage checkSingOutButtonIsNotVisible() {
+    public void checkSingOutButtonIsNotVisible() {
         checkIsElementNotDisplayed(buttonSignOut);
-        return this.checkSingOutButtonIsNotVisible();
     }
 
     public HomePage checkButtonCreatePostVisible() {
