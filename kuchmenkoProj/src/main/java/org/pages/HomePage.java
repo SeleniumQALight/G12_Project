@@ -1,33 +1,21 @@
 package org.pages;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import org.pages.elements.HeaderForLoggedUserElement;
 
 public class HomePage extends ParentPage {
-
-    @FindBy(xpath = "//button[text()='Sign Out']")
-    private WebElement buttonSignOut;
-
-    @FindBy(xpath = "//a[@class='btn btn-sm btn-success mr-2']")
-    private WebElement buttonCreateNewPost;
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public void checkButtonSignOutVisible() {
-        checkIsElementDisplayed(buttonSignOut);
+    public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
+        return new HeaderForLoggedUserElement(webDriver);
     }
 
     public HomePage checkIsRedirectToHomePage() {
         //TODO check URL
-        checkButtonSignOutVisible();
+        getHeaderForLoggedUserElement().checkButtonSignOutVisible();
         return this;
-    }
-
-    public CreateNewPostPage clickOnButtonCreateNewPost() {
-        clickOnElement(buttonCreateNewPost);
-        return new CreateNewPostPage(webDriver);
     }
 }
