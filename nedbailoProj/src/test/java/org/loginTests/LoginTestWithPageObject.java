@@ -32,7 +32,9 @@ public class LoginTestWithPageObject extends BaseTest {
         pageProvider.getLoginPage()
                 .checkButtonSignInVisible()
                 .checkAlertMessageVisible()
-                .getHeaderForLoggedUserElement().checkButtonSignOutNotVisible()
                 .checkTextInAlertMessage("Invalid username/password.");
+
+        pageProvider.getHomePage()
+                .getHeaderForLoggedUserElement().checkButtonSignOutNotVisible();
     }
 }

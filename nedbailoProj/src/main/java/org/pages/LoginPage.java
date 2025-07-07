@@ -53,10 +53,10 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-    public HomePage checkAlertMessageVisible() {
+    public LoginPage checkAlertMessageVisible() {
         checkIsElementDisplayed(alertTextMessage);
         logger.info("Alert message is displayed");
-        return new HomePage(webDriver);
+        return this;
     }
 
     public LoginPage checkTextInAlertMessage(String expectedText) {
