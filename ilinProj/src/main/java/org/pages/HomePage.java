@@ -2,10 +2,15 @@ package org.pages;
 
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.pages.elements.HeaderForLoggedUserElement;
 
 public class HomePage extends ParentPage {
 //    Logger logger = Logger.getLogger(getClass());
+
+    @FindBy(xpath = "//a[@class='btn btn-sm btn-success mr-2']")
+    private WebElement buttonCreatePost;
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
@@ -26,15 +31,5 @@ public class HomePage extends ParentPage {
     public CreateNewPostPage clickOnButtonCreatePost() {
         clickOnElement(buttonCreatePost);
         return new CreateNewPostPage(webDriver);
-    }
-
-    public LoginPage verifyButtonSignOutIsNotVisible() {
-        checkIsElementIsNotDisplayed(buttonSignOut);
-        return new LoginPage(webDriver);
-    }
-
-    public LoginPage verifyButtonCreatePostIsVisible() {
-        checkIsElementDisplayed(buttonCreatePost);
-        return new LoginPage(webDriver);
     }
 }

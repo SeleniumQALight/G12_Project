@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.pages.CommonActionsWithElements;
 import org.pages.CreateNewPostPage;
+import org.pages.LoginPage;
 import org.pages.MyProfilePage;
 
 public class HeaderForLoggedUserElement extends CommonActionsWithElements {
@@ -35,6 +36,16 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
     public CreateNewPostPage clickOnButtonCreatePost() {
         clickOnElement(buttonCreatePost);
         return new CreateNewPostPage(webDriver);
+    }
+
+    public LoginPage verifyButtonSignOutIsNotVisible() {
+        checkIsElementIsNotDisplayed(buttonSignOut);
+        return new LoginPage(webDriver);
+    }
+
+    public LoginPage verifyButtonCreatePostIsVisible() {
+        checkIsElementDisplayed(buttonCreatePost);
+        return new LoginPage(webDriver);
     }
 
 

@@ -81,12 +81,12 @@ public class LoginPage extends ParentPage {
     }
 
 
-    public LoginPage verifyEnvalidMessageIsVisible() {
+    public LoginPage verifyInvalidMessageIsVisible() {
         checkIsElementDisplayed(invalidMessage);
         return this;
     }
 
-    public LoginPage verifyTextOfEnvalidMessage() {
+    public LoginPage verifyTextOfInvalidMessage() {
         checkTextInElement(invalidMessage,"Invalid username/password.");
         return this;
     }

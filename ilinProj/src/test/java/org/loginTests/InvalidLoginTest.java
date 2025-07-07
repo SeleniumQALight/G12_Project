@@ -6,11 +6,13 @@ public class InvalidLoginTest extends BaseTest {
     @Test
     public void invalidLogin() {
        pageProvider.getLoginPage()
-                   .openLoginPageAndFillLoginFormWithInvalidCred()
+                   .openLoginPageAndFillLoginFormWithInvalidCred();
+       pageProvider.getHeaderForLoggedUserElement()
                    .verifyButtonSignOutIsNotVisible()
-                   .verifyButtonSignInIsVisible()
-                   .verifyEnvalidMessageIsVisible()
-                   .verifyTextOfEnvalidMessage()
+                   .verifyButtonSignInIsVisible();
+       pageProvider.getLoginPage()
+                   .verifyInvalidMessageIsVisible()
+                   .verifyTextOfInvalidMessage()
 
        ;
 
