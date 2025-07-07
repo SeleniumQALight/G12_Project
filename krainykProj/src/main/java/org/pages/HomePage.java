@@ -36,24 +36,10 @@ public class HomePage extends ParentPage {
 //            return false;
 //        }
 //    }
-    public HomePage checkSingOutButtonIsNotVisible() {
-        checkIsElementNotDisplayed(buttonSignOut);
-        return this;
-    }
 
     public HomePage checkIsRedirectToHomePage() {
         // TODO check URL
         getHeaderForLoggedUserElement().checkButtonSignOutVisible();
         return this;
-    }
-
-    public HomePage checkButtonCreatePostVisible() {
-        checkIsElementDisplayed(buttonCreateNewPost);
-        return this;
-    }
-
-    public CreateNewPostPage createOnButtingCreateNewPost() {
-        clickOnElement(buttonCreateNewPost);
-        return new CreateNewPostPage(webDriver);
     }
 }

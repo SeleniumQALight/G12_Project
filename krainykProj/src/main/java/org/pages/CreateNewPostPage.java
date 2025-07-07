@@ -15,7 +15,7 @@ public class CreateNewPostPage extends ParentPage {
     private WebElement buttonCreatePost;
 
     @FindBy(xpath = "//input[@name='uniquePost']")
-    private WebElement UniquePostChecbox;
+    private WebElement uniquePostChecbox;
 
     public CreateNewPostPage(WebDriver webDriver) {
         super(webDriver);
@@ -38,7 +38,7 @@ public class CreateNewPostPage extends ParentPage {
     }
 
     public CreateNewPostPage clickOnUniquePostCheckbox(String expectedState) {
-        makeCheckboxState(UniquePostChecbox, expectedState);
+        makeCheckboxState(uniquePostChecbox, expectedState);
         return this;
     }
 

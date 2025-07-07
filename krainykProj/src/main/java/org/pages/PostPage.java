@@ -6,6 +6,9 @@ import org.openqa.selenium.support.FindBy;
 import org.pages.elements.HeaderForLoggedUserElement;
 
 public class PostPage extends ParentPage {
+    final String uniquePostTextTrueMessage = "Is this post unique? : yes";
+    final String uniquePostTextFalseMessage = "Is this post unique? : yes";
+
     @FindBy(xpath = "//*[@class='alert alert-success text-center']")
     private WebElement successMessage;
 
@@ -38,12 +41,12 @@ public class PostPage extends ParentPage {
     }
 
     public PostPage checkUniquenessOfPost() {
-        checkTextInElement(uniquePostText, "Is this post unique? : yes");
+        checkTextInElement(uniquePostText, uniquePostTextTrueMessage);
         return this;
     }
 
     public PostPage checkNonUniquenessOfPost() {
-        checkTextInElement(uniquePostText, "Is this post unique? : no");
+        checkTextInElement(uniquePostText, uniquePostTextFalseMessage);
         return this;
     }
 }

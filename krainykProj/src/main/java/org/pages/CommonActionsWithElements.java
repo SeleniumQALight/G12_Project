@@ -112,9 +112,9 @@ public class CommonActionsWithElements {
 
     protected void makeCheckboxState(WebElement webElement, String expectedState) {
         try {
-            if (expectedState.equals("check")) {
+            if (expectedState.equalsIgnoreCase("check")) {
                 makeCheckboxSelected(webElement);
-            } else if (expectedState.equals("uncheck")) {
+            } else if (expectedState.equalsIgnoreCase("uncheck")) {
                 makeCheckboxNotSelected(webElement);
             } else {
                 logger.error("Invalid expected state of checkbox: " + expectedState);
