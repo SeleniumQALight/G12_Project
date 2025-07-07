@@ -1,6 +1,7 @@
 package org.pages;
 
 import org.openqa.selenium.WebDriver;
+import org.pages.elements.HeaderForLoggedUserElement;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -13,6 +14,10 @@ public class HomePage extends ParentPage {
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
+    }
+
+    public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
+        return new HeaderForLoggedUserElement(webDriver);
     }
 
     public HomePage checkButtonSignOutVisible() {
@@ -38,7 +43,7 @@ public class HomePage extends ParentPage {
 
     public HomePage checkIsRedirectToHomePage() {
         // TODO check URL
-        checkButtonSignOutVisible();
+        getHeaderForLoggedUserElement().checkButtonSignOutVisible();
         return this;
     }
 

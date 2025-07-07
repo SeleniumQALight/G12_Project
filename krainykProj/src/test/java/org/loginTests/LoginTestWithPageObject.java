@@ -3,7 +3,8 @@ package org.loginTests;
 import org.baseTest.BaseTest;
 import org.junit.Test;
 
-import static org.data.TestData.*;
+import static org.data.TestData.VALID_LOGIN_UI;
+import static org.data.TestData.VALID_PASSWORD_UI;
 
 public class LoginTestWithPageObject extends BaseTest {
     public static final String INVALID_LOGIN_UI = "qaauto21";
