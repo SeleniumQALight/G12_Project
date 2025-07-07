@@ -20,3 +20,91 @@ Post condition:
 1. Delete User
 2. Delete Posts
 3. etc..
+
+#02 Create a New Post
+
+Preconditions:
+1. The user must be logged into the system.
+
+Test Steps:
+1.Click the "Create Post" button in the header.
+2.In the Title field, enter valid title (e.g., "Title").
+3.In the Body Content field, enter any valid content (e.g., "This is a test post content.").
+4.Check the checkbox labeled "Is this post unique?"
+5.From the dropdown, select a value (e.g., Загальнодоступне).
+6.Click the "Save New Post" button.
+
+Expected Results:
+1.A green success banner appears at the top of the screen with the message: "New post successfully created".
+2.The user is redirected to the post's detail page with a unique URL.
+3.The post details page displays the following information:
+
+ Title: Title
+ Body Content: This is a test post content.
+ Edit and Delete buttons are visible next to the post.
+ Note: This post was written for All Users.
+ Posted by qaauto on 6/30/2025
+ Is this post unique? Yes
+
+Post-conditions:
+1.A new post is created and saved in the system database.
+2.The post is accessible on its unique detail page and can be edited or deleted by the author.
+
+#03 Edit Post
+
+Preconditions:
+1. The user must be logged into the system.
+2. A post with the title "Title" already exists and is visible on the post view page.
+
+Test Steps:
+1. Click the "Edit" icon next to the post title.
+2. Ensure the user is redirected to the edit page (URL contains /edit).
+3. In the Title field, change the title to "Updated Title".
+4. In the Body Content field, change the content to "Updated content for the post.".
+5. Uncheck the checkbox labeled "Is this post unique?".
+6. From the dropdown, select a different value (e.g., "Приватне повідомлення").
+7. Click the "Save Updates" button.
+
+Expected Results:
+1. A green success banner appears at the top of the screen with the message: "Post successfully updated".
+2. The post details page displays the following updated information:
+
+ Title: Updated Title
+ Body Content: Updated content for the post.
+ Edit and Delete buttons are visible next to the post.
+ Note: This post was written for Приватне повідомлення.
+ Posted by qaauto on 6/30/2025
+ Is this post unique? no
+
+Post-conditions:
+1. The post is successfully updated in the system database.
+2. The updated post is visible on the post detail page with the new title, content, and other changes.
+
+#04 Create a New User
+
+Preconditions:
+1. The user must be logged out of the system.
+
+Test Steps:
+1. Open the registration page at https://aqa-complexapp.onrender.com/register.
+2. In the Username field, enter a new username (e.g., "kkkflm").
+3. In the Email field, enter a valid email address (e.g., "ekaterina.kcuhmenko@gmail.com").
+4. In the Password field, enter a valid password (e.g., "123456qwerty").
+5. Click the "Sign up for OurApp" button.
+
+Expected Results:
+1. The user is successfully registered and logged in.
+2. The "Sign Out" button is visible in the header.
+
+#05 Delete Post
+
+Preconditions:
+1. The user must be logged into the system.
+2. A post with the title "Title" exists and is visible on the post view page.
+
+Test Steps:
+1. On the post view page, click the "Delete" button next to the post.
+
+Expected Results:
+1. The post is successfully deleted from the system.
+2. The user is redirected to the post list page.

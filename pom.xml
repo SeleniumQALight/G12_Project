@@ -23,6 +23,7 @@
     <module>kuchmenkoProj</module>
     <module>DoroshProj</module>
     <module>taneevaProj</module>
+      <module>pyrohovProject</module>
   </modules>
 
   <properties>
