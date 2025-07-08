@@ -22,7 +22,5 @@ public class PageProvider {
         return new PostPage(webDriver);
     }
 
-    public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
-        return new HeaderForLoggedUserElement(webDriver);
-    }
+
 }
