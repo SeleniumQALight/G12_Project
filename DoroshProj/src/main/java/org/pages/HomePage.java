@@ -1,17 +1,16 @@
 package org.pages;
 
-import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.pages.elements.HeaderForLoggedUserElement;
 
 public class HomePage extends ParentPage {
 
-    @FindBy(xpath = "//button[text()='Sign Out']")
-    private WebElement buttonSignOut;
-    @FindBy(xpath = "//a[@class='btn btn-sm btn-success mr-2']")
-    private WebElement buttonCreateNewPost;
+//    @FindBy(xpath = "//button[text()='Sign Out']")
+//    private WebElement buttonSignOut;
+//    @FindBy(xpath = "//a[@class='btn btn-sm btn-success mr-2']")
+//    private WebElement buttonCreateNewPost;
 
 
     public HomePage(WebDriver webDriver) {
@@ -19,33 +18,27 @@ public class HomePage extends ParentPage {
 
     }
 
-    public HomePage checkButtonSignOutVisible() {
-        //  Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
-        checkIsElementDisplayed(buttonSignOut);
-        return this;
-    }
-
-    public void checkButtonSignOutNotVisible(){
-       checkIsElementNotDisplayed(buttonSignOut);
-       // Assert.assertFalse("Sign Out button should not be visible",isElementDisplayed(buttonSignOut));
-    }
-
-    public void checkButtonCreatePostVisible() {
-        checkIsElementDisplayed(buttonCreateNewPost);
+    public HeaderForLoggedUserElement getHeaderForLoggedUserElement(){
+        return new HeaderForLoggedUserElement(webDriver);
     }
 
     public HomePage checkIsRedirectToHomePage() {
         //TODO check URL
-        checkButtonSignOutVisible();
+       getHeaderForLoggedUserElement().checkButtonSignOutVisible();
         return this;
     }
 
-    public CreateNewPostPage clickOnButtonCreateNewPost() {
-        clickOnElement(buttonCreateNewPost);
-        return new CreateNewPostPage(webDriver);
-    }
-
-
+//    public void checkButtonSignOutVisible() {
+//        //  Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
+//        checkIsElementDisplayed(buttonSignOut);
+//    }
+//
+//
+//
+//    public CreateNewPostPage clickOnButtonCreateNewPost() {
+//        clickOnElement(buttonCreateNewPost);
+//        return new CreateNewPostPage(webDriver);
+//    }
 
 
 //    private boolean isButtonSignOutVisible() {
