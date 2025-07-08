@@ -15,13 +15,18 @@ Logger logger = Logger.getLogger(HomePage.class);
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/";
+    }
+
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
         return new HeaderForLoggedUserElement(webDriver);
     }
 
     public HomePage checkIsRedirectedToHomePage() {
-        //TODO check URL
-        getHeaderForLoggedUserElement().checkButtonSignOutVisible();
+checkUrl();
+getHeaderForLoggedUserElement().checkButtonSignOutVisible();
         return this;
     }
 
