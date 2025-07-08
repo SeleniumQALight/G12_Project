@@ -6,8 +6,9 @@ import org.junit.Test;
 import org.utils.Utils_Custom;
 
 public class CreateNewPostTest extends BaseTest {
-//    GUID for the post: 1f8b0c2e-3d4e-11ec-8d3d-0242ac130003
+    //    GUID for the post: 1f8b0c2e-3d4e-11ec-8d3d-0242ac130003
     final String POST_TITLE = "TR001_G12 Andrii " + Utils_Custom.getDateAndTimeFormatted();
+
     @Test
     public void TR001_createNewPost() {
         pageProvider.getLoginPage().
@@ -37,6 +38,14 @@ public class CreateNewPostTest extends BaseTest {
 
     @After
     public void deletePosts() {
-
+        logger.info("Postcondition - delete posts");
+        pageProvider.getHomePage()
+                .openHomePageAndLoginIfNeeded()
+                .getHeaderForLoggedUserElement()
+                .clickOnButtonMyProfile()
+                .checkIsRedirectToMyProfilePage()
+                .deletePostsTillPresent(POST_TITLE)
+        ;
     }
+
 }

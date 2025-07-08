@@ -1,5 +1,7 @@
 package org.pages;
 
+import org.apache.log4j.Logger;
+import org.data.TestData;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,11 +11,12 @@ import org.pages.elements.HeaderForLoggedUserElement;
 public class HomePage extends ParentPage {
 //    Logger logger = Logger.getLogger(getClass());
 
-//    @FindBy(xpath = "//button[text()='Sign Out']")
+    //    @FindBy(xpath = "//button[text()='Sign Out']")
 //    private WebElement buttonSignOut;
 //
 //    @FindBy(xpath = "//a[@class='btn btn-sm btn-success mr-2']")
 //    private WebElement buttonCreatePost;
+    Logger logger = Logger.getLogger(getClass());
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
@@ -30,6 +33,21 @@ public class HomePage extends ParentPage {
         return this;
     }
 
+    public HomePage openHomePageAndLoginIfNeeded() {
+        LoginPage loginPage = new LoginPage(webDriver);
+        loginPage.openLoginPage();
+        if (getHeaderForLoggedUserElement().isButtonSignOutVisible()) {
+            logger.info("User is already logged in");
+        } else {
+            loginPage.enterTextIntoInputLogin(TestData.VALID_LOGIN_UI)
+                    .enterTextIntoPassword(TestData.VALID_PASSWORD_UI)
+                    .clickOnButtonSignIn();
+            checkIsRedirectToHomePage();
+            logger.info("User was logged in");
+        }
+        return this;
+    }
+}
 
 //    public void checkButtonSignOutVisible() {
 ////        Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
@@ -62,4 +80,4 @@ public class HomePage extends ParentPage {
 //            return false;
 //        }
 //    }
-}
+
