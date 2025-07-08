@@ -21,8 +21,13 @@ public class MyProfilePage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/profile/[a-zA-Z0-9]*";
+    }
+
     public MyProfilePage checkIsRedirectToMyProfilePage() {
-        // TODO Implement URL check
+        checkUrlWithPattern();
         return this;
     }
 
@@ -51,12 +56,12 @@ public class MyProfilePage extends ParentPage {
                     .clickOnDeleteButton()
                     .checkIsRedirectToMyProfilePage()
                     .checkIsMessageSuccessDeletePresent();
-            logger.info("Post with title '" + postTitle + "' was deleted successfully") ;
+            logger.info("Post with title '" + postTitle + "' was deleted successfully");
             postsList = getListOfPostsWithTitle(postTitle);
             counter++; // counter = counter + 1;
 
         }
-        if (counter >= MAX_POST_COUNT){
+        if (counter >= MAX_POST_COUNT) {
             logger.error("Number of posts with title " + postTitle + " is more than " + MAX_POST_COUNT);
         }
 
