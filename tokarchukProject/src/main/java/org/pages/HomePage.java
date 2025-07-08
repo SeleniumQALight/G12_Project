@@ -31,4 +31,9 @@ public class HomePage extends ParentPage{
         clickOnElement(buttonCreatePost);
         return new CreateNewPostPage(webDriver);
     }
+
+    public HomePage checkSignOutButtonIsNotVisible() {
+        checkIsElementNotDisplayed(buttonSignOut);
+        return this;
+    }
 }
