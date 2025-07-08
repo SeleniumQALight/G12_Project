@@ -13,10 +13,12 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectedToCreateNewPostPage()
                 .enterTextIntoInputTitle("G12 Olesia Post Title")
                 .enterTextIntoInputBody("G12 Olesia Post Body")
+                .setCheckboxState("check")
                 .clickOnSaveNewPostButton()
                 .checkIsRedirectedToPostPage()
                 .checkIsSuccessMassageDisplayed()
                 .checkTextIsSuccessMessage("New post successfully created.")
+                .checkCheckboxValueIs("yes")
         ;
     }
 }

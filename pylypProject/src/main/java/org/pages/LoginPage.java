@@ -2,9 +2,12 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.data.TestData;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 public class LoginPage extends ParentPage {
     private Logger logger = Logger.getLogger(getClass());
@@ -17,6 +20,9 @@ public class LoginPage extends ParentPage {
 
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
+
+    @FindBy(xpath = "//div[contains(text(),'Invalid username/password.')]")
+    private WebElement invalidLoginMessage;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -68,4 +74,18 @@ public class LoginPage extends ParentPage {
         this.clickOnButtonSignIn();
         return new HomePage(webDriver);
     }
+
+    // перевірка, що кнопка Sign In показується
+    public LoginPage checkIsButtonSignInVisible() {
+        checkIsElementDisplayed(buttonSignIn);
+        return this;
+    }
+
+    // перевірка повідомлення про невірний логін
+    public LoginPage checkIsInvalidLoginMessageVisible() {
+        checkIsElementDisplayed(invalidLoginMessage);
+        checkTextInElement(invalidLoginMessage, "Invalid username/password.");
+        return this;
+    }
+
 }

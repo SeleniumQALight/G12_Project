@@ -27,4 +27,13 @@ public class PostPage extends ParentPage{
         checkTextInElement(successMessage, expectedMessageText);
         return this;
     }
+
+    @FindBy(xpath = "//p[contains(text(),'Is this post unique?')]")
+    private WebElement checkboxText;
+
+    public PostPage checkCheckboxValueIs(String expectedValue) {
+        String expectedText = "Is this post unique? : " + expectedValue;
+        checkTextInElement(checkboxText, expectedText);
+        return this;
+    }
 }
