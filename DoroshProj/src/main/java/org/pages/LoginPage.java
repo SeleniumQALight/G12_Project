@@ -17,6 +17,9 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
 
+    @FindBy(xpath = "//div[text() = 'Invalid username/password.']")
+    private WebElement alertTextMessage;
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -63,4 +66,27 @@ public class LoginPage extends ParentPage {
         clickOnButtonSignIn();
         return new HomePage(webDriver);
     }
+
+    public LoginPage checkButtonSignInVisible() {
+        checkIsElementDisplayed(buttonSignIn);
+        return this;
+    }
+
+    public LoginPage checkAlertMessageVisible() {
+        checkIsElementDisplayed(alertTextMessage);
+        return this;
+    }
+
+    public void checkTextInAlertMessage(String expectedMessageText) {
+        checkTextInElement(alertTextMessage, expectedMessageText);
+
+    }
+
+    public void checkInputUserNameAndPasswordNotVisible() {
+        checkIsElementNotDisplayed(inputUserName);
+        checkIsElementNotDisplayed(inputPassword);
+    }
+
 }
+
+
