@@ -38,7 +38,7 @@ public class CommonActionsWithElements {
     protected void clickOnElement(WebElement webElement) {
         try {
             webElement.click();
-            logger.info("Element was clicked: " + webElement);
+            logger.info("Element was clicked: ");
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }

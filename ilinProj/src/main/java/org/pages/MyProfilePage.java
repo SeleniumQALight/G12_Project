@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
@@ -12,6 +13,9 @@ public class MyProfilePage extends ParentPage {
     Logger logger = Logger.getLogger(getClass());
 
     private String postWithTitleLocator = "//*[text()='%s']";
+
+    @FindBy(xpath = "//*[text()='Post successfully deleted.']")
+    private WebElement successMessageDelete;
 
     public MyProfilePage(WebDriver webDriver) {
         super(webDriver);
@@ -35,5 +39,35 @@ public class MyProfilePage extends ParentPage {
                 getListOfPostsWithTitle(postTitle).size());
         logger.info("Post with title '" + postTitle + "' is present");
         return this;
+    }
+
+    public MyProfilePage deletePostsTillPresent(String postTitle) {
+        List<WebElement> postsList = getListOfPostsWithTitle(postTitle);
+        final int MAX_POSTS_COUNT = 100; // to avoid infinite loop
+        int counter = 0;
+        while (!postsList.isEmpty() && counter < MAX_POSTS_COUNT) {
+            clickOnElement(postsList.get(0));
+            new PostPage(webDriver)
+                    .checkIsRedirectToPostPage()
+                    .clickOnDeleteButton()
+                    .checkIsRedirectToMyProfilePage()
+                    .checkIsMessageSuccessDeletePresent();
+            logger.info("Post with title " + postTitle + " was deleted");
+            postsList = getListOfPostsWithTitle(postTitle);
+            counter++;
+        }
+        if (counter >= MAX_POSTS_COUNT) {
+            logger.error("Number of posts with title  " + postTitle + "' is more than " + MAX_POSTS_COUNT);
+
+        }
+        return this;
+
+
+    }
+
+    private MyProfilePage checkIsMessageSuccessDeletePresent() {
+        checkIsElementDisplayed(successMessageDelete);
+        return this;
+
     }
 }
