@@ -1,0 +1,16 @@
+#Home page
+- search.icon=".//a[@data-original-title='Search']"
+- search.field=".//div[@class='search-overlay-top shadow-sm']"
+
+
+#Chat
+- .//a[@data-original-title='Search']
+- .//input[@ id='chatField']
+
+
+#Sign up page
+- .//input[@id='username-register']
+- .//input[@id='email-register']
+- .//input[@id='password-register']
+- .//div[text()='Username cannot exceed 30 characters.']
+- .//div[text()='You must provide a valid email address.']
