@@ -1,5 +1,6 @@
 package org.pages;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,8 +19,13 @@ public class CreateNewPostPage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeURL() {
+        return "/create-post";
+    }
+
     public CreateNewPostPage checkIsRedirectToCreateNewPostPage() {
-        //TODO check URL
+        checkUrl();
         //TODO check unique elements on the page
         return this;
     }
@@ -38,5 +44,6 @@ public class CreateNewPostPage extends ParentPage {
         clickOnElement(buttonSaveNewPost);
         return new PostPage(webDriver);
     }
+
 }
 
