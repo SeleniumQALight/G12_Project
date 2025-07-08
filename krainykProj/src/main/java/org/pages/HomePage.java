@@ -1,6 +1,7 @@
 package org.pages;
 
 import org.openqa.selenium.WebDriver;
+import org.pages.elements.HeaderForLoggedUserElement;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -15,9 +16,14 @@ public class HomePage extends ParentPage {
         super(webDriver);
     }
 
-    public void checkButtonSignOutVisible() {
+    public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
+        return new HeaderForLoggedUserElement(webDriver);
+    }
+
+    public HomePage checkButtonSignOutVisible() {
         checkIsElementDisplayed(buttonSignOut);
 //        Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
+        return this;
     }
 
 //    public boolean isButtonSignOutVisible() {
@@ -33,12 +39,7 @@ public class HomePage extends ParentPage {
 
     public HomePage checkIsRedirectToHomePage() {
         // TODO check URL
-        checkButtonSignOutVisible();
+        getHeaderForLoggedUserElement().checkButtonSignOutVisible();
         return this;
-    }
-
-    public CreateNewPostPage createOnButtingCreateNewPost() {
-        clickOnElement(buttonCreateNewPost);
-        return new CreateNewPostPage(webDriver);
     }
 }
