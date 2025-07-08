@@ -1,6 +1,7 @@
 package org.pages;
 
 import org.apache.log4j.Logger;
+import org.enums.CheckboxState;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
-    private Logger logger = Logger.getLogger(getClass());
+    private final Logger logger = Logger.getLogger(getClass());
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -87,5 +88,45 @@ public class CommonActionsWithElements {
     private void printErrorAndStopTes(Exception e) {
         logger.error("Error while working with element: " + e.getMessage());
         Assert.fail("Error while working with element: " + e.getMessage());
+    }
+
+    protected boolean selectCheckboxIfNeeded(WebElement checkbox) {
+        if (!checkbox.isSelected()) {
+            clickOnElement(checkbox);
+            logger.info("Checkbox was checked.");
+            return true;
+        } else {
+            logger.info("Checkbox is already checked.");
+            return false;
+        }
+    }
+
+    protected boolean deselectCheckboxIfNeeded(WebElement checkbox) {
+        if (checkbox.isSelected()) {
+            clickOnElement(checkbox);
+            logger.info("Checkbox was unchecked.");
+            return true;
+        } else {
+            logger.info("Checkbox is already unchecked.");
+            return false;
+        }
+    }
+
+
+    protected boolean setCheckboxState(WebElement checkbox, CheckboxState desiredState) {
+        if (desiredState == CheckboxState.CHECK) {
+            return selectCheckboxIfNeeded(checkbox);
+        } else if (desiredState == CheckboxState.UNCHECK) {
+            return deselectCheckboxIfNeeded(checkbox);
+        } else {
+            logger.error("Unknown checkbox state: " + desiredState);
+            Assert.fail("Unknown checkbox state: " + desiredState);
+            return false;
+        }
+    }
+
+    protected void checkIsElementNotDisplayed(WebElement webElement) {
+        Assert.assertFalse("Element is displayed", isElementDisplayed(webElement));
+        logger.info("Element is not displayed as expected");
     }
 }
