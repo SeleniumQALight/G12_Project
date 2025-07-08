@@ -117,7 +117,7 @@ public class CommonActionsWithElements {
     }
 
    protected void actionsWithCheckbox(WebElement webElement, String stateOfCheckbox){
-        if (stateOfCheckbox == "check"){
+        if ("check".equalsIgnoreCase(stateOfCheckbox)) {
             makeCheckboxChecked(webElement);
         }else {
             makeCheckboxUnchecked(webElement);

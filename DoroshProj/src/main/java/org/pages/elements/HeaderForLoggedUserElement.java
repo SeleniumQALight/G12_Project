@@ -32,7 +32,9 @@ public MyProfilePage clickOnButtonMyProfile(){
         checkIsElementDisplayed(buttonSignOut);
     }
 
-
+    public void checkButtonSignOutNotVisible(){
+        checkIsElementNotDisplayed(buttonSignOut);
+    }
 
     public CreateNewPostPage clickOnButtonCreateNewPost() {
         clickOnElement(buttonCreateNewPost);
@@ -40,5 +42,8 @@ public MyProfilePage clickOnButtonMyProfile(){
     }
 
 
+    public void checkButtonCreatePostVisible() {
+        checkIsElementDisplayed(buttonCreateNewPost);
+    }
 }
 

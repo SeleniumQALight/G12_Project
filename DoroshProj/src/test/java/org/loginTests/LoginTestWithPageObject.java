@@ -17,8 +17,9 @@ public class LoginTestWithPageObject extends BaseTest {
                 .clickOnButtonSignIn();
         pageProvider.getLoginPage().checkInputUserNameAndPasswordNotVisible();
 
-        pageProvider.getHomePage()
-                .checkButtonSignOutVisible()
+        pageProvider.getHomePage().getHeaderForLoggedUserElement()
+                .checkButtonSignOutVisible();
+        pageProvider.getHomePage().getHeaderForLoggedUserElement()
                 .checkButtonCreatePostVisible()
         ;
 
@@ -35,9 +36,7 @@ public class LoginTestWithPageObject extends BaseTest {
                 .checkButtonSignInVisible()
                 .checkAlertMessageVisible()
                 .checkTextInAlertMessage("Invalid username/password.");
-        pageProvider.getHomePage().checkButtonSignOutNotVisible();
-
-        pageProvider.getHomePage().getHeaderForLoggedUserElement().checkButtonSignOutVisible();
+        pageProvider.getHomePage().getHeaderForLoggedUserElement().checkButtonSignOutNotVisible();
 
     }
 
