@@ -1,6 +1,7 @@
 package org.pages;
 
 import org.openqa.selenium.WebDriver;
+import org.pages.elements.HeaderForLoggedUserElement;
 
 public class PageProvider {
     private WebDriver webDriver;
@@ -20,4 +21,6 @@ public class PageProvider {
     public PostPage getPostPage() {
         return new PostPage(webDriver);
     }
+
+
 }

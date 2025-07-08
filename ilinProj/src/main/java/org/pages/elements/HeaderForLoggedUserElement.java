@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.pages.CommonActionsWithElements;
 import org.pages.CreateNewPostPage;
+import org.pages.LoginPage;
 import org.pages.MyProfilePage;
 
 public class HeaderForLoggedUserElement extends CommonActionsWithElements {
@@ -18,6 +19,8 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
     @FindBy(xpath = "//a[@class='btn btn-sm btn-success mr-2']")
     private WebElement buttonCreatePost;
 
+
+
     public HeaderForLoggedUserElement(WebDriver webDriver) {
         super(webDriver);
     }
@@ -27,9 +30,10 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         return new MyProfilePage(webDriver);
     }
 
-    public void checkButtonSignOutVisible() {
+    public HeaderForLoggedUserElement checkButtonSignOutVisible() {
         //Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
         checkIsElementDisplayed(buttonSignOut);
+        return new HeaderForLoggedUserElement(webDriver);
     }
 
     public CreateNewPostPage clickOnButtonCreatePost() {
@@ -37,11 +41,18 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         return new CreateNewPostPage(webDriver);
     }
 
+    public LoginPage verifyButtonSignOutIsNotVisible() {
+        checkIsElementIsNotDisplayed(buttonSignOut);
+        return new LoginPage(webDriver);
+    }
 
+    public LoginPage verifyButtonCreatePostIsVisible() {
+        checkIsElementDisplayed(buttonCreatePost);
+        return new LoginPage(webDriver);
+    }
 
-
-
-
-
+    public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
+        return new HeaderForLoggedUserElement(webDriver);
+    }
 }
 
