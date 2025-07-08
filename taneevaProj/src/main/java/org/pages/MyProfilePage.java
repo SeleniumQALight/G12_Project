@@ -6,7 +6,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.slf4j.ILoggerFactory;
 
 import java.util.List;
 
@@ -16,13 +15,18 @@ public class MyProfilePage extends  ParentPage{
         super(webDriver);
     }
 
+    @Override
+    protected String getRelatedURL() {
+        return "/profile/[a-zA-Z0-9]*";
+    }
+
     @FindBy (xpath = "//*[text()='Post successfully deleted.']")
     private WebElement succsesMassageDelete;
 
     private String postWithTitleLocator = "//*[text()='%s']";
 
     public MyProfilePage checkIsRedirectedToMyProfilePage() {
-        // TODO: Implement URL check
+        checkURLWithPattern();
         return this;
     }
     private List<WebElement> getListOfPostsWithTitle(String postTitle) {
