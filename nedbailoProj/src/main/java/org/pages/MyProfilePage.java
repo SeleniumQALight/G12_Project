@@ -14,12 +14,18 @@ public class MyProfilePage extends ParentPage {
     public MyProfilePage(WebDriver webDriver) {
         super(webDriver);
     }
+
+    @Override
+    protected String getRelativeURL() {
+        return "/profile/[a-zA-z0-9]*";
+    }
+
     private String postWithTitleLocator = "//*[text()='%s']";
     @FindBy(xpath = "//*[text()='Post successfully deleted.']")
     private WebElement successDeleteMessage;
 
     public MyProfilePage checkIsRedirectedToMyProfilePage() {
-        // TODO: Implement URL check
+        checkUrlWithPattern();
         return this;
     }
     private List<WebElement> getListOfPostsWithTitle(String postTitle) {
