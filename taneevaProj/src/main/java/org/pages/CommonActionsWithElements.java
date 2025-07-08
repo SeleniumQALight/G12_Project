@@ -123,15 +123,13 @@ public class CommonActionsWithElements {
      */
 
     protected void actionsWithCheckbox (WebElement webElement, String desiredState) {
-        boolean isChecked = webElement.isSelected();
-        if ("check".equalsIgnoreCase(desiredState) && !isChecked) {
-            clickOnElement(webElement);
-            logger.info("Checkbox was checked");
-        } else if ("uncheck".equalsIgnoreCase(desiredState) && isChecked) {
-            clickOnElement(webElement);
-            logger.info("Checkbox was unchecked");
+        if ("check".equalsIgnoreCase(desiredState)) {
+            makeCheckboxChecked(webElement);
+        } else if ("uncheck".equalsIgnoreCase(desiredState)) {
+            makeCheckboxUnchecked(webElement);
         } else {
-            logger.info("Checkbox is already in the desired state: " + desiredState);
+            logger.error("Unknown desired checkbox state: " + desiredState);
+            Assert.fail("Unknown desired checkbox state: " + desiredState);
         }
     }
 }
