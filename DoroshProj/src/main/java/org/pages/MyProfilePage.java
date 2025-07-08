@@ -5,28 +5,37 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.slf4j.ILoggerFactory;
 
 import java.util.List;
 
-public class MyProfilePage extends ParentPage{
+public class MyProfilePage extends ParentPage {
 
     Logger logger = Logger.getLogger(getClass());
 
     private String postWithTitleLocator = "//*[text()='%s']";
+
+    @FindBy(xpath = "//*[text()='Post successfully deleted.']")
+    private WebElement successMessageDelete;
 
 
     public MyProfilePage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public MyProfilePage checkIsRedirectToMyProfilePage(){
-        //TODO: Implement URL check
+    @Override
+    protected String getRelativeURL() {
+        return "/profile/[a-zA-Z0-9]*";
+    }
+
+    public MyProfilePage checkIsRedirectToMyProfilePage() {
+        checkUrlWithPattern();
         return this;
     }
 
-    private List<WebElement> getListOfPostWithTitle (String postTitle){
-                return webDriver.findElements(
+    private List<WebElement> getListOfPostWithTitle(String postTitle) {
+        return webDriver.findElements(
                 By.xpath(String.format(postWithTitleLocator, postTitle)));
     }
 
@@ -39,4 +48,29 @@ public class MyProfilePage extends ParentPage{
         return this;
     }
 
+    public MyProfilePage deletePostsTillPresent(String postTitle) {
+        List<WebElement> postsList = getListOfPostWithTitle(postTitle);
+        final int MAX_POST_COUNT = 100; // postList.size()
+        int counter = 0;
+        while (!postsList.isEmpty() && (counter < MAX_POST_COUNT)) {
+            clickOnElement(postsList.get(0));
+            new PostPage(webDriver)
+                    .checkIsRedirectToPostPage()
+                    .clickOnDeleteButton()
+                    .checkIsRedirectToMyProfilePage()
+                    .checkIsMessageSuccessDeletePresent();
+            logger.info("Post with title '" + postTitle + "' was deleted");
+            postsList = getListOfPostWithTitle(postTitle);
+            counter++; // counter = counter + 1;
+        }
+        if (counter >= MAX_POST_COUNT) {
+            logger.error("Number of posts with title '" + postTitle + " is more than  " + MAX_POST_COUNT);
+        }
+        return this;
+    }
+
+    private MyProfilePage checkIsMessageSuccessDeletePresent() {
+        checkIsElementDisplayed(successMessageDelete);
+        return this;
+    }
 }

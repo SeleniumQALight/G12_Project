@@ -45,5 +45,9 @@ public MyProfilePage clickOnButtonMyProfile(){
     public void checkButtonCreatePostVisible() {
         checkIsElementDisplayed(buttonCreateNewPost);
     }
+
+    public boolean isButtonSignOutVisible() {
+        return isElementDisplayed(buttonSignOut);
+    }
 }
 
