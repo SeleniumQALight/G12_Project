@@ -22,13 +22,18 @@ public class HomePage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    String getRelativeURL() {
+        return "/";
+    }
+
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
         return new HeaderForLoggedUserElement(webDriver);
     }
 
 
     public HomePage checkIsRedirectToHomePage() {
-// TODO check URL
+        checkUrl();
         getHeaderForLoggedUserElement().checkButtonSignOutVisible();
         return this;
     }
@@ -50,7 +55,7 @@ public class HomePage extends ParentPage {
 }
 
 //    public void checkButtonSignOutVisible() {
-////        Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
+/// /        Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
 //        checkIsElementDisplayed(buttonSignOut);
 //    }
 //
