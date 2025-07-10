@@ -17,6 +17,7 @@ public class LoginTestAllStepsInOneClass {
     private WebDriver webDriver;
     private Logger logger = Logger.getLogger(getClass());
 
+
     @Before
     public void setUp() {
         WebDriverManager.chromedriver().setup(); // метод скачує виконуваний файл - під кожний браузер свій
