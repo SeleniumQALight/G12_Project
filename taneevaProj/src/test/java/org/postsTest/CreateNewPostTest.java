@@ -17,12 +17,15 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectedToHomePage()
                 .getHeaderForLoggedUserElement().clickOnButtonCreatePost()
                 .checkIsRedirectedToCreateNewPostPage()
-                .enterTextIntoInputTitle(POST_TITLE)
-                .enterTextIntoInputBody("Body of the post created by Anj")
+                .enterTextIntoInputTitle("G12 Ador Post Title")
+                .enterTextIntoInputBody("Post Body created by Ador")
+                .setUniquePostCheckbox("check")
                 .clickOnButtonSaveNewPost()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
+                .checkUniquenessOfPost("Is this post unique? : yes")
+        ;
 
 ;
         pageProvider.getPostPage()
