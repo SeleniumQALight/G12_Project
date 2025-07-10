@@ -22,6 +22,7 @@ public class CreateNewPostTest extends BaseTest {
                 .enterTextInInputTitle(POST_TITLE)
                 .enterTextInInputBody("This is a body of the post created by G12 Andrii on 26.06.2025")
                 .selectUniquePostCheckbox("check")
+                .selectTextInDropdownAccess("Приватне повідомлення")
                 .clickOnSaveNewPostButton()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
