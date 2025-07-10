@@ -20,6 +20,7 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("G12 Artem Post Body")
+                .selectTextInDropdownAccess("Приватне повідомлення")
                 .clickOnButtonSaveNewPost()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
