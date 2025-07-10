@@ -20,6 +20,7 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("Post Body created by Ador")
+                .selectTextInDropdownAccess("Приватне повідомлення")
                 .clickOnCheckboxUniguePost()
                 .clickOnButtonSaveNewPost()
                 .checkIsRedirectToPostPage()
