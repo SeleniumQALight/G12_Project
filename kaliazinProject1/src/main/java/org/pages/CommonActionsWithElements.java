@@ -5,15 +5,22 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class CommonActionsWithElements {
 
     protected WebDriver webDriver;
     private Logger logger = Logger.getLogger(getClass());
+    protected WebDriverWait WebDriverWait10, WebDriverWait15;
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this); // initiates elements described in FindBy.
+        WebDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        WebDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
     }
 
     /* Method clearAndEnterTextToElement
@@ -24,6 +31,11 @@ public class CommonActionsWithElements {
 
     protected void clearAndEnterTextToElement(WebElement webElement, String text) {
         try {
+            WebDriverWait10
+                    .withMessage("Element was not found")
+                    .until(ExpectedConditions
+                            .not(ExpectedConditions
+                                    .elementToBeClickable(webElement)));
             webElement.clear();
             webElement.sendKeys(text);
             logger.info(text + " was entered into the element: ");
