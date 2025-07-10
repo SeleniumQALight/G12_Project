@@ -16,6 +16,7 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectedToCreateNewPostPage()
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("Body of the post created by Nedbailo")
+                .selectTextInDropDownAccess("Приватне повідомлення")
                 .setUniquePostCheckbox("check")
                 .clickOnButtonSaveNewPost()
                 .checkIsRedirectToPostPage()

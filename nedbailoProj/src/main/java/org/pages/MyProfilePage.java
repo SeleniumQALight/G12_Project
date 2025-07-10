@@ -11,6 +11,7 @@ import java.util.List;
 
 public class MyProfilePage extends ParentPage {
     Logger logger = Logger.getLogger(getClass());
+
     public MyProfilePage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -28,6 +29,7 @@ public class MyProfilePage extends ParentPage {
         checkUrlWithPattern();
         return this;
     }
+
     private List<WebElement> getListOfPostsWithTitle(String postTitle) {
         return webDriver.findElements(
                 By.xpath(String.format(postWithTitleLocator, postTitle)));
@@ -52,7 +54,7 @@ public class MyProfilePage extends ParentPage {
         final int MAX_POST_COUNT = 100;
         int counter = 0;
         while (!postsList.isEmpty() && (counter < MAX_POST_COUNT)) {
-            clickOnElement(postsList.get(0));
+            clickOnElement(postsList.get(0), "Post with title '" + postTitle + "'");
             new PostPage(webDriver)
                     .checkIsRedirectToPostPage()
                     .clickOnDeleteButton()
