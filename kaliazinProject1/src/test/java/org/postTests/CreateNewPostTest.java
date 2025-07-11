@@ -33,6 +33,13 @@ public class CreateNewPostTest extends BaseTest {
 
     @After
     public void deletePost(){
+        logger.info("Post Condition - delete posts");
+        pageProvider.getHomePage()
+                .openHomePageAndLoginNeeded()
+                .getHeaderForLoggedUserElement().clickOnButtonMyProfile()
+                .checkIsRedirectToMyProfilePage()
+                .deletePostsTillPresent(POST_TITLE)
+                ;
 
     }
 }
