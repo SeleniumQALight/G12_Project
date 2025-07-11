@@ -27,6 +27,11 @@ public class LoginPage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeURL() {
+        return "/profile/";
+    }
+
     public LoginPage openLoginPage() {
         webDriver.get(baseURL);
         logger.info("Login page was opened with url " + baseURL);
