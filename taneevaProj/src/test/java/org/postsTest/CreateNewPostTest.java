@@ -1,7 +1,6 @@
 package org.postsTest;
 
 import org.baseTest.BaseTest;
-import org.checkerframework.checker.units.qual.A;
 import org.junit.After;
 import org.junit.Test;
 import org.utils.Utils_Custom;
@@ -10,6 +9,7 @@ public class CreateNewPostTest extends BaseTest {
     //GUID =
 
     final String POST_TITLE = "TR001_G12 Anj" + Utils_Custom.getDateAndTimeFormatted();
+
     @Test
     public void TR001_createNewPost() {
         pageProvider.getLoginPage()
@@ -24,7 +24,7 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsSuccessMessageDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
 
-;
+        ;
         pageProvider.getPostPage()
                 .getheaderForLoggedUserElement().clickOnButtonMyProfile()
                 .checkIsRedirectedToMyProfilePage()
@@ -33,8 +33,13 @@ public class CreateNewPostTest extends BaseTest {
 
     @After
     public void deletePost() {
-//        pageProvider.getMyProfilePage()
-//                .getListOfPostsWithTitle(POST_TITLE)
-//                .forEach(post -> post.findElement(By.xpath(".//button[text()='Delete']")).click());
-//        Utils_Custom.waitABit(2);
+        logger.info("Post condition - delete post");
+        pageProvider.getHomePage()
+                .openHomePageAndLoginIfNeeds()
+                .getHeaderForLoggedUserElement().clickOnButtonMyProfile()
+                .checkIsRedirectedToMyProfilePage()
+                .deletePostTillPresent(POST_TITLE)
+        ;
+    }
+
 }
