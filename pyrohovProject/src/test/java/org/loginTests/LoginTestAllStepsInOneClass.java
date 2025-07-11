@@ -27,14 +27,15 @@ public class LoginTestAllStepsInOneClass {
         logger.info("Browser was opened");//залогували відкриття браузера
 
     }
+
     @After
-    public void tearDown(){
+    public void tearDown() {
         webDriver.quit();//закриває всі вікна після відпрацювання
         logger.info("Browser was closed");//залогували закриття браузера
     }
 
     @Test
-    public void validLogin(){
+    public void validLogin() {
         webDriver.get("https://aqa-complexapp.onrender.com/");//відкриваємо сайт в браузері
         logger.info("Site was opened");//залогували відкриття сайту
 
@@ -56,10 +57,14 @@ public class LoginTestAllStepsInOneClass {
     }
 
     private boolean isButtonSignOutVisible() {
-
-        boolean state = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
-        logger.info("Element visible "+ state);
-
-        return state;
+        try {
+            boolean state = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
+            logger.info("Element visible " + state);
+            return state;
+        } catch (Exception e) {
+            logger.info("Element is not found");
+            return false;
+        }
     }
 }
+
