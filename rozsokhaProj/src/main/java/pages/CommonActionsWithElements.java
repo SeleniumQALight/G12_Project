@@ -5,14 +5,22 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
     private Logger logger = Logger.getLogger(getClass());
+    protected WebDriverWait webDriverWait10, webDriverWait15;
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);// Initialize the elements described in FindBy annotations
+        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
     }
 
     /* Method clearAndEnterTextToElement
@@ -24,7 +32,7 @@ public class CommonActionsWithElements {
         try {
             webElement.clear();
             webElement.sendKeys(text);
-            logger.info(text + " entered into element ");
+            logger.info(text + " entered into element " + getElementName(webElement));
         } catch (Exception e) {
             printErrorAndStopTest(e);
 //            logger.error("Error while working with element " + e.getMessage());
@@ -38,8 +46,26 @@ public class CommonActionsWithElements {
      */
     protected void clickOnElement(WebElement webElement) {
         try {
+//            webDriverWait10.until(driver -> webElement.isDisplayed() && webElement.isEnabled()); // лямбда вирази - дочекася поки елемент не стане видимим і активним
+            webDriverWait10
+                    .withMessage("Element is not clickable: " + webElement)
+                    .until(ExpectedConditions.elementToBeClickable(webElement)); // Wait until the element is clickable
+            String elementName = getElementName(webElement);
             webElement.click();
-            logger.info("Clicked on element");
+            logger.info(elementName + " Element was clicked");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    protected void clickOnElement(WebElement webElement, String elementName) {
+        try {
+//            webDriverWait10.until(driver -> webElement.isDisplayed() && webElement.isEnabled()); // лямбда вирази - дочекася поки елемент не стане видимим і активним
+            webDriverWait10
+                    .withMessage("Element is not clickable: " + webElement)
+                    .until(ExpectedConditions.elementToBeClickable(webElement)); // Wait until the element is clickable
+            webElement.click();
+            logger.info(elementName + " was clicked");
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -55,9 +81,9 @@ public class CommonActionsWithElements {
         try {
             boolean state = webElement.isDisplayed();
             if (state) {
-                logger.info("Element is displayed");
+                logger.info(getElementName(webElement) + " element is displayed");
             } else {
-                logger.info("Element is not displayed");
+                logger.info(getElementName(webElement) + " element is not displayed");
             }
             return state;
         } catch (Exception e) {
@@ -86,6 +112,36 @@ public class CommonActionsWithElements {
         logger.info("Text in element matches expected text: " + expectedText);
     }
 
+    //select text in DropDown
+    protected void selectTextInDropdown(WebElement webElement, String text) {
+        try {
+            Select select = new Select(webElement);
+            select.selectByVisibleText(text);
+            logger.info("Text '" + text + "' was selected in dropdown " + getElementName(webElement));
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    //select value in DropDown
+    protected void selectValueInDropdown(WebElement webElement, String value) {
+        try {
+            Select select = new Select(webElement);
+            select.selectByValue(value);
+            logger.info("Value '" + value + "' was selected in dropdown " + getElementName(webElement));
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    // get element name
+    private String getElementName(WebElement webElement) {
+        try {
+            return webElement.getAccessibleName();
+        } catch (Exception e) {
+            return "";
+        }
+    }
 
     private void printErrorAndStopTest(Exception e) {
         logger.error("Error while clicking on element " + e.getMessage());

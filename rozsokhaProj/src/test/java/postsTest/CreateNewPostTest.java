@@ -8,6 +8,7 @@ import utils.Utils_Custom;
 public class CreateNewPostTest extends BaseTest {
 
     final String POST_TITLE = "TR001_G12 Maksym" + Utils_Custom.getDateAndTimeFormatted();
+
     @Test
     public void TR001_createNewPost() {
         pageProvider.getLoginPage()
@@ -17,6 +18,7 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("G12 Maksym Post Body")
+                .selectTextInDropDownAccess("Приватне повідомлення") // Assuming this is the correct text for the dropdown
                 .clickOnSaveNewPostButton()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
@@ -33,6 +35,12 @@ public class CreateNewPostTest extends BaseTest {
 
     @After
     public void deletePost() {
-
+        logger.info("Post condition - delete posts");
+        pageProvider.getHomePage()
+                .openHomePageAndLoginIfNeeded()
+                .getHeaderForLoggedUserElement().clickOnButtonMyProfile()
+                .checkIsRedirectToMyProfilePage()
+                .deletePostsTillPresent(POST_TITLE)
+        ;
     }
 }
