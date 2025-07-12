@@ -10,11 +10,12 @@ public class LogOutTest extends BaseTest {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidCred()
                 .getHeaderForLoggedUserElement()
-                .checkIsElementsInHeaderForLoggedUserPresent()
+                .checkIsElementsInHeaderForLoggedUserVisible()
                 .clickOnButtonSignOut();
         pageProvider.getLoginPage()
                 .getHeaderForLoggedUserElement()
-                .checkElementsInHeaderForLoggedUserIsNotPresent();
+                .checkElementsInHeaderForLoggedUserIsNotVisible()
+                .checkElementsForLoginIsVisible();
     }
 
 }

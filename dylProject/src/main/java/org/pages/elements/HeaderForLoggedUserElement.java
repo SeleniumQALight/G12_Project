@@ -55,7 +55,7 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         return isElementDisplayed(buttonSignOut);
     }
 
-    public HeaderForLoggedUserElement checkIsElementsInHeaderForLoggedUserPresent() {
+    public HeaderForLoggedUserElement checkIsElementsInHeaderForLoggedUserVisible() {
         checkButtonSearchIsVisible()
                 .checkButtonChatCallIsVisible()
                 .checkButtonMyProfileIsVisible()
@@ -84,7 +84,7 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         clickOnElement(buttonSignOut);
     }
 
-    public LoginPage checkElementsInHeaderForLoggedUserIsNotPresent() {
+    public LoginPage checkElementsInHeaderForLoggedUserIsNotVisible() {
         checkButtonSearchIsNotVisible()
                 .checkButtonChatCallIsNotVisible()
                 .checkButtonMyProfileIsNotVisible()
