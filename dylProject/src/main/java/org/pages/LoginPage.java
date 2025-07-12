@@ -5,6 +5,7 @@ import org.data.TestData;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.pages.elements.HeaderForLoggedUserElement;
 
 public class LoginPage extends ParentPage {
     Logger logger = Logger.getLogger(getClass());
@@ -101,5 +102,9 @@ public class LoginPage extends ParentPage {
     public void checkInputUserNameAndPasswordNotVisible() {
         checkIsElementNotDisplayed(inputUserName);
         checkIsElementNotDisplayed(inputPassword);
+    }
+
+    public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
+        return new HeaderForLoggedUserElement(webDriver);
     }
 }

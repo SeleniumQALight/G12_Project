@@ -3,10 +3,7 @@ package org.pages.elements;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.pages.CommonActionsWithElements;
-import org.pages.CreateNewPostPage;
-import org.pages.LoginPage;
-import org.pages.MyProfilePage;
+import org.pages.*;
 
 public class HeaderForLoggedUserElement extends CommonActionsWithElements {
     @FindBy(xpath = "//img[@alt='My profile']")
@@ -18,11 +15,17 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
     @FindBy(xpath = "//a[@class='btn btn-sm btn-success mr-2']")
     private WebElement buttonCreatePost;
 
+    @FindBy(xpath = "//a[@href='#']")
+    private WebElement buttonSearch;
+
+    @FindBy(xpath = "//span[@data-original-title='Chat']")
+    private WebElement buttonChatCall;
+
     public HeaderForLoggedUserElement(WebDriver webDriver) {
         super(webDriver);
     }
 
-public MyProfilePage clickOnButtonMyProfile() {
+    public MyProfilePage clickOnButtonMyProfile() {
         clickOnElement(buttonMyProfile);
         return new MyProfilePage(webDriver);
     }
@@ -38,8 +41,9 @@ public MyProfilePage clickOnButtonMyProfile() {
         return new CreateNewPostPage(webDriver);
     }
 
-    public void checkButtonSignOutNotVisible() {
+    public LoginPage checkButtonSignOutIsNotVisible() {
         checkIsElementNotDisplayed(buttonSignOut);
+        return new LoginPage(webDriver);
     }
 
     public LoginPage checkButtonCreatePostVisible() {
@@ -49,6 +53,64 @@ public MyProfilePage clickOnButtonMyProfile() {
 
     public boolean isButtonSignOutVisible() {
         return isElementDisplayed(buttonSignOut);
+    }
+
+    public HeaderForLoggedUserElement checkIsElementsInHeaderForLoggedUserPresent() {
+        checkButtonSearchIsVisible()
+                .checkButtonChatCallIsVisible()
+                .checkButtonMyProfileIsVisible()
+                .checkButtonCreatePostVisible();
+        checkButtonSignOutVisible();
+        return this;
+    }
+
+    public HeaderForLoggedUserElement checkButtonSearchIsVisible() {
+        checkIsElementDisplayed(buttonSearch);
+        return this;
+    }
+
+    public HeaderForLoggedUserElement checkButtonChatCallIsVisible() {
+        checkIsElementDisplayed(buttonChatCall);
+
+        return this;
+    }
+
+    public HeaderForLoggedUserElement checkButtonMyProfileIsVisible() {
+        checkIsElementDisplayed(buttonMyProfile);
+        return this;
+    }
+
+    public void clickOnButtonSignOut() {
+        clickOnElement(buttonSignOut);
+    }
+
+    public LoginPage checkElementsInHeaderForLoggedUserIsNotPresent() {
+        checkButtonSearchIsNotVisible()
+                .checkButtonChatCallIsNotVisible()
+                .checkButtonMyProfileIsNotVisible()
+                .checkButtonCreatePostIsNotVisible();
+        checkButtonSignOutIsNotVisible();
+        return new LoginPage(webDriver);
+    }
+
+    private HeaderForLoggedUserElement checkButtonCreatePostIsNotVisible() {
+        checkIsElementNotDisplayed(buttonCreatePost);
+        return this;
+    }
+
+    private HeaderForLoggedUserElement checkButtonMyProfileIsNotVisible() {
+        checkIsElementNotDisplayed(buttonMyProfile);
+        return this;
+    }
+
+    private HeaderForLoggedUserElement checkButtonChatCallIsNotVisible() {
+        checkIsElementNotDisplayed(buttonChatCall);
+        return this;
+    }
+
+    private HeaderForLoggedUserElement checkButtonSearchIsNotVisible() {
+        checkIsElementNotDisplayed(buttonSearch);
+        return this;
     }
 }
 
