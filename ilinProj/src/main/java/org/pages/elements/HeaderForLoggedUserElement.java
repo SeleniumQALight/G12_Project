@@ -38,10 +38,8 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
     }
 
 
-
-
-
-
-
+    public boolean isButtonSignOutVisible() {
+        return isElementDisplayed(buttonSignOut);
+    }
 }
 
