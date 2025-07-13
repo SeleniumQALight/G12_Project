@@ -112,6 +112,12 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         checkIsElementNotDisplayed(buttonSearch);
         return this;
     }
+
+    public SearchElements clickOnButtonSearch() {
+        clickOnElement(buttonSearch);
+        return new SearchElements(webDriver);
+    }
+
 }
 
 

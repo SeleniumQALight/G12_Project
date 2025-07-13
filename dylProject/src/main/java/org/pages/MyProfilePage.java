@@ -37,6 +37,11 @@ public class MyProfilePage extends ParentPage {
                 By.xpath(String.format(postWithTitleLocator, postTitle)));
     }
 
+    private List<WebElement> getListOfPostsWithTitle(String postTitle1, String postTitle2) {
+        String xpath = String.format("//*[text()='%s' or text()='%s']", postTitle1, postTitle2);
+                return webDriver.findElements(By.xpath(xpath));
+    }
+
     public MyProfilePage checkPostWithTitleIsPresent(String postTitle, int expectedAmountOfPosts) {
         Assert.assertEquals(
                 "Amount of posts with title " + postTitle + " is not equal to expected",
@@ -66,6 +71,30 @@ public class MyProfilePage extends ParentPage {
         }
         return this;
     }
+
+    public MyProfilePage deletePostsTillPresent(String postTitle1, String postTitle2) {
+        List<WebElement> postsList = getListOfPostsWithTitle(postTitle1,postTitle2);
+        final int MAX_POST_COUNT = postsList.size();
+        int counter = 0;
+        while (!postsList.isEmpty() && counter < MAX_POST_COUNT) {
+            WebElement post = postsList.get(0);
+            String postTitle = post.getText();
+            clickOnElement(post,"Post with title '" + postTitle + "'");
+            new PostPage(webDriver)
+                    .checkIsRedirectToPostPage()
+                    .clickOnDeleteButton()
+                    .checkIsRedirectToMyProfilePage()
+                    .checkIsMessageSuccessDeletePresent();
+            logger.info("Post with title " + postTitle + " was deleted");
+            postsList = getListOfPostsWithTitle(postTitle1, postTitle2);
+            counter++;
+        }
+        if (counter > MAX_POST_COUNT) {
+            logger.error("Number of posts is more than " + MAX_POST_COUNT);
+        }
+        return this;
+    }
+
 
     private MyProfilePage checkIsMessageSuccessDeletePresent() {
         checkIsElementDisplayed(successMessageDelete);
