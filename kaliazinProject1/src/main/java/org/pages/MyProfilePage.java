@@ -50,7 +50,8 @@ public class MyProfilePage extends ParentPage {
         final int MAX_POST_COUNT = 100; // postsList.size();
         int counter = 0;
         while (!postsList.isEmpty() && counter < MAX_POST_COUNT) {
-            clickOnElement(postsList.get(0));
+            clickOnElement(postsList.get(0),
+                    "Click on post with title '" + postTitle + "'");
             new PostPage(webDriver)
                     .checkIsRedirectToPostPage()
                     .clickOnDeleteButton()
