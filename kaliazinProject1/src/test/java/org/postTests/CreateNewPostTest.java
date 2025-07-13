@@ -18,9 +18,11 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("G12 Yan Post Body")
+                .setCheckbox("check") // or "uncheck" for non-unique posts
                 .clickOnSaveNewPostButton()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
+                .checkCheckboxSetState()
                 .checkTextInSuccessMessage("New post successfully created.")
                 ;
 

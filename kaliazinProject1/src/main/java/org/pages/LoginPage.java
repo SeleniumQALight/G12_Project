@@ -2,6 +2,7 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.data.TestData;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,6 +18,12 @@ public class LoginPage extends ParentPage {
 
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
+
+    @FindBy (xpath = "//button[contains(text(), 'Sign Out')]")
+    private WebElement signOutButton;
+
+    @FindBy (xpath = "//div[contains(@class, 'alert') and contains(text(), 'Invalid username/password')]")
+    private WebElement unsuccessMessage;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -60,5 +67,29 @@ public class LoginPage extends ParentPage {
         this.enterTextIntoPassword(TestData.VALID_PASSWORD_UI);
         this.clickLoginButtonSignIn();
         return new HomePage(webDriver);
+    }
+
+    public LoginPage openLoginPageAndFillLoginFormWithInvalidValidCred(String login, String password) {
+        openLoginPage();
+        this.enterTextIntoInputLogin(login);
+        this.enterTextIntoPassword(password);
+        this.clickLoginButtonSignIn();
+        return this;
+    }
+
+    public LoginPage checkIsButtonSignInVisible() {
+        isElementDisplayed(buttonSignIn);
+        return this;
+    }
+
+    public LoginPage checkIsButtonSignOutIsNotVisible() {
+        Assert.assertFalse("Sign Out button SHOULD NOT be visible!", isElementDisplayed(signOutButton));
+        return this;
+    }
+
+    public LoginPage checkIsUnsuccessMessageDisplayed() {
+        Assert.assertTrue("Unsuccess message is not displayed!",
+                isElementDisplayed(unsuccessMessage));
+        return this;
     }
 }

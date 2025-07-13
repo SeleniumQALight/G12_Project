@@ -5,6 +5,9 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+
+import static java.awt.SystemColor.text;
 
 public class CommonActionsWithElements {
 
@@ -96,5 +99,50 @@ Assert.assertTrue("Element is not displayed", isElementDisplayed(webElement));
     private void printErrorAndStopTest(Exception e) {
         logger.error("Error while working with element: " + e.getMessage());
         Assert.fail("Error while working with element: " + e.getMessage());
+    }
+
+    protected boolean checkBoxToSet(WebElement webElement) {
+        try {
+            boolean state = webElement.isSelected();
+            if (state) {
+                logger.info("Checkbox is checked");
+            } else {
+                logger.info("Checkbox is not checked");
+            }
+            return state;
+        } catch (Exception e) {
+            logger.error("Checkbox is not found or not displayed: " + e.getMessage());
+            return false;
+        }
+    }
+
+    protected boolean checkBoxToUnSet(WebElement webElement) {
+        try {
+            boolean state = webElement.isSelected();
+            if (!state) {
+                logger.info("Checkbox is not checked");
+            } else {
+                logger.info("Checkbox is checked");
+            }
+            return !state;
+        } catch (Exception e) {
+            logger.error("Checkbox is not found or not displayed: " + e.getMessage());
+            return false;
+        }
+    }
+    protected void setCheckboxState (WebElement webElement, String action) {
+        try {
+            if ("check".equalsIgnoreCase(action)) {
+                checkBoxToSet(webElement);
+            } else if ("uncheck".equalsIgnoreCase(action)) {
+                checkBoxToUnSet(webElement);
+            } else {
+                logger.info("Unknown action: " + action);
+            }
+        } catch(Exception e){
+            logger.error("Unexpected error " + e);
+        }
+
+
     }
 }

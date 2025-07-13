@@ -38,4 +38,8 @@ public class CreateNewPostPage extends ParentPage {
         clickOnElement(buttonSaveNewPost);
         return new PostPage(webDriver);
     }
+
+    public CreateNewPostPage setCheckbox(String check) {
+        return this;
+    }
 }
