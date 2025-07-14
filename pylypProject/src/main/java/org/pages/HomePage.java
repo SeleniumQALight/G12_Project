@@ -1,30 +1,51 @@
 package org.pages;
 
+
 import org.apache.log4j.Logger;
-import org.junit.Assert;
-import org.openqa.selenium.By;
+import org.data.TestData;
 import org.openqa.selenium.WebDriver;
+import org.pages.elements.HeaderForLoggedUserElement;
+
+import javax.net.ssl.HostnameVerifier;
 
 public class HomePage extends ParentPage{
-    Logger logger = Logger.getLogger(getClass());
+Logger logger = Logger.getLogger(HomePage.class);
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public void checkButtonSignOutVisible() {
-        Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
+    @Override
+    protected String getRelativeUrl() {
+        return "/";
     }
 
-    private boolean isButtonSignOutVisible() {
-        try {
-            boolean state = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
-            logger.info( " element visible - " + state);
-            return state;
-        }catch (Exception e){
-            logger.info("Element is not found");
-            return false;
+    public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
+        return new HeaderForLoggedUserElement(webDriver);
+    }
+
+    public HomePage checkIsRedirectedToHomePage() {
+checkUrl();
+getHeaderForLoggedUserElement().checkButtonSignOutVisible();
+        return this;
+    }
+
+    public HomePage openHomePageAndLoginIfNeeded() {
+        LoginPage loginPage = new LoginPage(webDriver);
+        loginPage.openLoginPage();
+        if(getHeaderForLoggedUserElement().isButtonSignOutVisible()) {
+            logger.info("User is already logged in");
+        } else {
+            loginPage.enterTextIntoInputLogin(TestData.VALID_LOGIN_UI)
+            .enterTextIntoPassword(TestData.VALID_PASSWORD_UI)
+            .clickOnButtonSignIn();
+            checkIsRedirectedToHomePage();
+            logger.info("User was logged in");
+
         }
-    }
 
+
+        return this;
+
+    }
 }
