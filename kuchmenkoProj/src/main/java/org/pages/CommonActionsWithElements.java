@@ -5,14 +5,21 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
     private Logger logger = Logger.getLogger(getClass());
+    protected WebDriverWait webDriverWait10, webDriverWait15;
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);// ініціалізує елементи описані в FindBy
+        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
     }
 
     /* Method clearAndEnterTextToElement
@@ -39,7 +46,11 @@ public class CommonActionsWithElements {
 
     protected void clickOnElement(WebElement webElement) {
         try {
-            webElement.click();
+//            webDriverWait10.until(driver -> webElement.isDisplayed() && webElement.isEnabled());
+            webDriverWait10
+                    .withMessage("Element is not clickable: " + webElement)
+                    .until(ExpectedConditions.elementToBeClickable(webElement))
+                    .click();
             logger.info("Element was clicked");
         } catch (Exception e) {
             printErrorAndStopTest(e);
@@ -69,7 +80,7 @@ public class CommonActionsWithElements {
 
     /* Method checkElementDisplayed
      * Checks if the specified WebElement is displayed on the page.
-        * @param webElement - the WebElement to check
+     * @param webElement - the WebElement to check
      */
 
     protected void checkIsElementDisplayed(WebElement webElement) {
@@ -84,10 +95,10 @@ public class CommonActionsWithElements {
      */
 
     protected void checkTextInElement(WebElement webElement, String expectedText) {
-            String actualText = webElement.getText();
-            Assert.assertEquals("Text in element does not match expected text", expectedText, actualText);
-            logger.info("Text in element matches expected text: " + expectedText);
-        }
+        String actualText = webElement.getText();
+        Assert.assertEquals("Text in element does not match expected text", expectedText, actualText);
+        logger.info("Text in element matches expected text: " + expectedText);
+    }
 
 
     private void printErrorAndStopTest(Exception e) {
