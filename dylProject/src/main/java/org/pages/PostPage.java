@@ -18,9 +18,6 @@ public class PostPage extends ParentPage{
     @FindBy(xpath = "//a[@data-original-title='Edit']")
     private WebElement buttonEditPost;
 
-    @FindBy(xpath = "//button[text()='Save Updates']")
-    private WebElement buttonSaveUpdates;
-
     public PostPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -66,8 +63,4 @@ return this;
         return new CreateNewPostPage(webDriver);
     }
 
-    public PostPage clickOnSaveUpdatesButton() {
-clickOnElement(buttonSaveUpdates);
-return this;
-    }
 }

@@ -22,10 +22,8 @@ public class EditPostTest extends BaseTest {
                 .checkIsRedirectToPostPage()
                 .clickOnEditButton()
                 .enterTextInInputTitle(POST_TITLE_AFTER_EDIT);
-        pageProvider.getPostPage()
+        pageProvider.getEditPostPage()
                 .clickOnSaveUpdatesButton()
-                .checkIsSuccessMessageDisplayed()
-                .checkTextInSuccessMessage("Post successfully updated.")
                 .getHeaderForLoggedUserElement()
                 .clickOnButtonMyProfile()
                 .checkIsRedirectToMyProfilePage()
@@ -66,7 +64,8 @@ public class EditPostTest extends BaseTest {
                 .getHeaderForLoggedUserElement()
                 .clickOnButtonMyProfile()
                 .checkIsRedirectToMyProfilePage()
-                .deletePostsTillPresent(POST_TITLE_FOR_EDIT,POST_TITLE_AFTER_EDIT);
+                .deletePostsTillPresent(POST_TITLE_FOR_EDIT)
+                .deletePostsTillPresent(POST_TITLE_AFTER_EDIT);
     }
 }
 

@@ -104,10 +104,6 @@ public class LoginPage extends ParentPage {
         checkIsElementNotDisplayed(inputPassword);
     }
 
-    public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
-        return new HeaderForLoggedUserElement(webDriver);
-    }
-
     public void checkElementsForLoginIsVisible() {
         checkIsElementDisplayed(inputUserName);
         checkIsElementDisplayed(inputPassword);

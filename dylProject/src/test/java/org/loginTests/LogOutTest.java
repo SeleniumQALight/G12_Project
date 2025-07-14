@@ -12,7 +12,7 @@ public class LogOutTest extends BaseTest {
                 .getHeaderForLoggedUserElement()
                 .checkIsElementsInHeaderForLoggedUserVisible()
                 .clickOnButtonSignOut();
-        pageProvider.getLoginPage()
+        pageProvider.getHomePage()
                 .getHeaderForLoggedUserElement()
                 .checkElementsInHeaderForLoggedUserIsNotVisible()
                 .checkElementsForLoginIsVisible();
