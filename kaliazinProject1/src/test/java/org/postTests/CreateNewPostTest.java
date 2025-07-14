@@ -18,6 +18,7 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("G12 Yan Post Body")
+                .selectTextInDropdownAccess("Приватне повідомлення")
                 .clickOnSaveNewPostButton()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
@@ -33,6 +34,13 @@ public class CreateNewPostTest extends BaseTest {
 
     @After
     public void deletePost(){
+        logger.info("Post Condition - delete posts");
+        pageProvider.getHomePage()
+                .openHomePageAndLoginNeeded()
+                .getHeaderForLoggedUserElement().clickOnButtonMyProfile()
+                .checkIsRedirectToMyProfilePage()
+                .deletePostsTillPresent(POST_TITLE)
+                ;
 
     }
 }
