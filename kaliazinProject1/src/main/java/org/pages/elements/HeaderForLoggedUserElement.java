@@ -33,6 +33,10 @@ public CreateNewPostPage clickOnButtonCreatePost() {
     clickOnElement(buttonCreatePost);
     return new CreateNewPostPage(webDriver);
  }
+
+    public boolean isButtonSighnOutVisible() {
+        return isElementDisplayed(buttonSignOut);
+    }
 }
 
 

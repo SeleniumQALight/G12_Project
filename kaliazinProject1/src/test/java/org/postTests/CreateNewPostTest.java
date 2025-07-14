@@ -18,11 +18,10 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("G12 Yan Post Body")
-                .setCheckbox("check") // or "uncheck" for non-unique posts
+                .selectTextInDropdownAccess("Приватне повідомлення")
                 .clickOnSaveNewPostButton()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
-                .checkCheckboxSetState()
                 .checkTextInSuccessMessage("New post successfully created.")
                 ;
 
@@ -35,6 +34,13 @@ public class CreateNewPostTest extends BaseTest {
 
     @After
     public void deletePost(){
+        logger.info("Post Condition - delete posts");
+        pageProvider.getHomePage()
+                .openHomePageAndLoginNeeded()
+                .getHeaderForLoggedUserElement().clickOnButtonMyProfile()
+                .checkIsRedirectToMyProfilePage()
+                .deletePostsTillPresent(POST_TITLE)
+                ;
 
     }
 }

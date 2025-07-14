@@ -14,12 +14,20 @@ public class CreateNewPostPage extends ParentPage {
     @FindBy(xpath = "//button[text()='Save New Post']")
     private WebElement buttonSaveNewPost;
 
+    @FindBy(xpath = "//select")
+    private WebElement dropdownAccess;
+
     public CreateNewPostPage(WebDriver webDriver) {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/create-post";
+    }
+
     public CreateNewPostPage checkIsRedirectToCreateNewPostPage() {
-        //TODO check URL
+        checkUrl();
         //TODO some unique element on the page
         return this;
     }
@@ -39,7 +47,9 @@ public class CreateNewPostPage extends ParentPage {
         return new PostPage(webDriver);
     }
 
-    public CreateNewPostPage setCheckbox(String check) {
+    public CreateNewPostPage selectTextInDropdownAccess(String textForSelection) {
+        selectTextInDropdown(dropdownAccess, textForSelection);
+
         return this;
     }
 }
