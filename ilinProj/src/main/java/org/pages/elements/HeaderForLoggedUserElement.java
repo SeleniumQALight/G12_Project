@@ -19,8 +19,6 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
     @FindBy(xpath = "//a[@class='btn btn-sm btn-success mr-2']")
     private WebElement buttonCreatePost;
 
-
-
     public HeaderForLoggedUserElement(WebDriver webDriver) {
         super(webDriver);
     }
@@ -30,10 +28,9 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         return new MyProfilePage(webDriver);
     }
 
-    public HeaderForLoggedUserElement checkButtonSignOutVisible() {
+    public void checkButtonSignOutVisible() {
         //Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
         checkIsElementDisplayed(buttonSignOut);
-        return new HeaderForLoggedUserElement(webDriver);
     }
 
     public CreateNewPostPage clickOnButtonCreatePost() {
@@ -41,6 +38,10 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         return new CreateNewPostPage(webDriver);
     }
 
+
+    public boolean isButtonSignOutVisible() {
+        return isElementDisplayed(buttonSignOut);
+    }
     public LoginPage verifyButtonSignOutIsNotVisible() {
         checkIsElementIsNotDisplayed(buttonSignOut);
         return new LoginPage(webDriver);

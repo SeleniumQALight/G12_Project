@@ -49,4 +49,8 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         logger.info("Create Post button is visible");
         return new HomePage(webDriver);
     }
+
+    public boolean isButtonSignOutVisible() {
+        return isElementDisplayed(buttonSignOut);
+    }
 }
