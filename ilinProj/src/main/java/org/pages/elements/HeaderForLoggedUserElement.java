@@ -28,9 +28,10 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         return new MyProfilePage(webDriver);
     }
 
-    public void checkButtonSignOutVisible() {
+    public HeaderForLoggedUserElement checkButtonSignOutVisible() {
         //Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
         checkIsElementDisplayed(buttonSignOut);
+        return new HeaderForLoggedUserElement(webDriver);
     }
 
     public CreateNewPostPage clickOnButtonCreatePost() {
@@ -47,9 +48,9 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         return new LoginPage(webDriver);
     }
 
-    public LoginPage verifyButtonCreatePostIsVisible() {
+    public HeaderForLoggedUserElement verifyButtonCreatePostIsVisible() {
         checkIsElementDisplayed(buttonCreatePost);
-        return new LoginPage(webDriver);
+        return this;
     }
 
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {

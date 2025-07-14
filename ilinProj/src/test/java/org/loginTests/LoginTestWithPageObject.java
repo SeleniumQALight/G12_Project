@@ -18,8 +18,8 @@ public class LoginTestWithPageObject extends BaseTest {
         pageProvider.getHomePage()
                 .getHeaderForLoggedUserElement()
                 .checkButtonSignOutVisible()
-                .verifyButtonCreatePostIsVisible()
-                .verifyInputsIsNotVisible();
+                .verifyButtonCreatePostIsVisible();
+        pageProvider.getLoginPage().verifyInputsIsNotVisible();
 
 
 

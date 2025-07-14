@@ -6,8 +6,8 @@ public class InvalidLoginTest extends BaseTest {
     @Test
     public void invalidLogin() {
        pageProvider.getLoginPage()
-                   .openLoginPageAndFillLoginFormWithInvalidCred();
-       pageProvider.getHeaderForLoggedUserElement()
+                   .openLoginPageAndFillLoginFormWithInvalidCred()
+                   .getHeaderForLoggedUserElement()
                    .verifyButtonSignOutIsNotVisible()
                    .verifyButtonSignInIsVisible();
        pageProvider.getLoginPage()
