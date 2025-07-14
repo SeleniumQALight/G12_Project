@@ -19,6 +19,7 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectedToCreateNewPostPage()
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("G12 Olesia Post Body")
+                .selectTextInDropdownAccess("Приватне повідомлення")
                 .clickOnSaveNewPostButton()
                 .checkIsRedirectedToPostPage()
                 .checkIsSuccessMassageDisplayed()
@@ -34,6 +35,13 @@ public class CreateNewPostTest extends BaseTest {
 
     @After
     public void deletePost() {
+        logger.info("Post condition - delete");
+pageProvider.getHomePage()
+        .openHomePageAndLoginIfNeeded()
+        .getHeaderForLoggedUserElement().clickOnButtonMyProfile()
+        .checkIsRedirectedToMyProfilePage()
+        .deletePostsTillPresent(POST_TITLE)
 
+;
     }
 }

@@ -16,7 +16,7 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
     private WebElement buttonSignOut;
 
     @FindBy(xpath = "//a[@class='btn btn-sm btn-success mr-2']")
-    private WebElement buttonCreatePost;
+    private WebElement buttonCreateNewPost;
 
     public HeaderForLoggedUserElement(WebDriver webDriver) {
         super(webDriver);
@@ -28,7 +28,7 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
     }
 
     public void checkButtonSignOutVisible() {
-        //       Assert.assertTrue("Button Sign Out is not visible", isButtunSignOutVisible());
+        //  Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
         checkIsElementDisplayed(buttonSignOut);
     }
 
@@ -43,7 +43,21 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
 
     public CreateNewPostPage clickOnButtonCreatePost() {
         clickOnElement(buttonCreatePost);
+    public void checkButtonSignOutNotVisible() {
+        checkIsElementNotDisplayed(buttonSignOut);
+    }
+
+    public CreateNewPostPage clickOnButtonCreateNewPost() {
+        clickOnElement(buttonCreateNewPost);
         return new CreateNewPostPage(webDriver);
+    }
+
+    public void checkButtonCreatePostVisible() {
+        checkIsElementDisplayed(buttonCreateNewPost);
+    }
+
+    public boolean isButtonSignOutVisible() {
+        return isElementDisplayed(buttonSignOut);
     }
 
     public void checkButtonCreatePostVisible() {

@@ -9,6 +9,9 @@ public class PostPage extends ParentPage {
     @FindBy(xpath = "//*[@class='alert alert-success text-center']")
     private WebElement successMessage;
 
+    @FindBy(xpath = "//button[@class='delete-post-button text-danger']")
+    private WebElement buttonDeletePost;
+
     @FindBy(xpath = "//p[contains(text(), 'Is this post unique?')]")
     private WebElement uniquePostText;
 
@@ -16,12 +19,17 @@ public class PostPage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelatedURL() {
+        return "/post/[a-zA-Z0-9]*";
+    }
+
     public HeaderForLoggedUserElement getheaderForLoggedUserElement() {
         return new HeaderForLoggedUserElement(webDriver);
     }
 
     public PostPage checkIsRedirectToPostPage() {
-        // TODO check URL
+        checkURLWithPattern();
         // TODO check same unique element on the page
         return this;
     }
@@ -41,4 +49,8 @@ public class PostPage extends ParentPage {
         return this;
     }
 
+    public MyProfilePage cllickOnDeleteButtomn() {
+        clickOnElement(buttonDeletePost, "'Delete Post button'");
+        return new MyProfilePage(webDriver);
+    }
 }
