@@ -9,18 +9,19 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class MyProfilePage extends  ParentPage{
+public class MyProfilePage extends ParentPage {
     Logger logger = Logger.getLogger(getClass());
+
     public MyProfilePage(WebDriver webDriver) {
         super(webDriver);
     }
 
     @Override
     protected String getRelatedURL() {
-        return "/profile/[a-zA-Z0-9]*";
+        return "/profile/[a-zA-Z0-9]+";
     }
 
-    @FindBy (xpath = "//*[text()='Post successfully deleted.']")
+    @FindBy(xpath = "//*[text()='Post successfully deleted.']")
     private WebElement succsesMassageDelete;
 
     private String postWithTitleLocator = "//*[text()='%s']";
@@ -29,6 +30,7 @@ public class MyProfilePage extends  ParentPage{
         checkURLWithPattern();
         return this;
     }
+
     private List<WebElement> getListOfPostsWithTitle(String postTitle) {
         return webDriver.findElements(
                 By.xpath(String.format(postWithTitleLocator, postTitle)));
@@ -43,12 +45,13 @@ public class MyProfilePage extends  ParentPage{
         return this;
     }
 
-    public MyProfilePage deletePostTillPresent (String postTitle) {
+    public MyProfilePage deletePostTillPresent(String postTitle) {
         List<WebElement> postsList = getListOfPostsWithTitle(postTitle);
         final int MAX_POST_COUNT = 100; //postlist.size()
         int counter = 0;
         while (!postsList.isEmpty() && (counter < MAX_POST_COUNT)) {
-            clickOnElement(postsList.get(0));
+            clickOnElement(postsList.get(0),
+                    "Post with title '" + postTitle + "' from list of posts");
             new PostPage(webDriver)
                     .checkIsRedirectToPostPage()
                     .cllickOnDeleteButtomn()
@@ -66,7 +69,6 @@ public class MyProfilePage extends  ParentPage{
 
     private MyProfilePage checkISMassageSuccessDeletePresent() {
         checkIsElementDisplayed(succsesMassageDelete);
-        logger.info("Success message about post deletion is displayed");
-                return this;
+        return this;
     }
 }

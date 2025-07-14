@@ -2,6 +2,10 @@ package org.pages;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 abstract class ParentPage extends CommonActionsWithElements {
     protected String baseURL = "https://aqa-complexapp.onrender.com";
@@ -29,6 +33,12 @@ abstract class ParentPage extends CommonActionsWithElements {
                         "Expected url: " + baseURL + getRelatedURL() +
                         "\n Actual url: " + webDriver.getCurrentUrl(),
                 webDriver.getCurrentUrl().matches(baseURL + getRelatedURL()));
+    }
+
+    protected WebDriverWait webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+
+    protected void waitForUrlToMatch(String regex) {
+        webDriverWait10.until(ExpectedConditions.urlMatches(baseURL + regex));
     }
 
 }
