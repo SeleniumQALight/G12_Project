@@ -1,6 +1,10 @@
 #Home page
-- search.icon=".//a[@data-original-title='Search']"
-- search.field=".//div[@class='search-overlay-top shadow-sm']"
+- search.icon - .//a[@data-original-title='Search']
+- search.field - .//div[@class='search-overlay-top shadow-sm']
+- create.post - .//a[@class='btn btn-sm btn-success mr-2']
+- post.title - .//input[@ id='post-title']
+- post.body - .//textarea[@ id='post-body']
+- saveNewPost.btn - .//button[@class='btn btn-primary']
 
 
 #Chat
@@ -14,3 +18,10 @@
 - .//input[@id='password-register']
 - .//div[text()='Username cannot exceed 30 characters.']
 - .//div[text()='You must provide a valid email address.']
+- .//button[@class='py-3 mt-4 btn btn-lg btn-success btn-block']
+
+#Profile page
+- icon - .//img[@alt='My profile']
+- posts - .//a[@class='profile-nav-link nav-item nav-link active']
+- followers - .//a[contains(text(),'Followers:')]
+- following - .//a[contains(text(),'Following:')]
