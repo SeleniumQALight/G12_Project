@@ -54,6 +54,8 @@ Steps:
 Expected result:
  1. There is redirect on the page with "Create post" and "Sign out" buttons in the header
 
+Post condition:
+1. Need to delete created user
 
  #4 Check notification of incorrect data in second "Username" field and "Email" field in signing
 
