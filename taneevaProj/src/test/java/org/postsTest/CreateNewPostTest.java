@@ -20,8 +20,6 @@ public class CreateNewPostTest extends BaseTest {
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("Body of the post created by Anj")
                 .selectTextInDropdownAccess("Приватне повідомлення")
-                .enterTextIntoInputTitle("G12 Ador Post Title")
-                .enterTextIntoInputBody("Post Body created by Ador")
                 .setUniquePostCheckbox("check")
                 .clickOnButtonSaveNewPost()
                 .checkIsRedirectToPostPage()

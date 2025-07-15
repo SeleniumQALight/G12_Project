@@ -25,9 +25,6 @@ public class CreateNewPostPage extends ParentPage {
         super(webDriver);
     }
 
-    @FindBy(xpath = "//input[@name='uniquePost']")
-    private WebElement checkboxUniquePost;
-
     @Override
     protected String getRelatedURL() {
         return "/create-post";

@@ -41,19 +41,9 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         }
     }
 
-    public CreateNewPostPage clickOnButtonCreatePost() {
-        clickOnElement(buttonCreatePost);
-    public void checkButtonSignOutNotVisible() {
-        checkIsElementNotDisplayed(buttonSignOut);
-    }
-
     public CreateNewPostPage clickOnButtonCreateNewPost() {
         clickOnElement(buttonCreateNewPost);
         return new CreateNewPostPage(webDriver);
-    }
-
-    public void checkButtonCreatePostVisible() {
-        checkIsElementDisplayed(buttonCreateNewPost);
     }
 
     public boolean isButtonSignOutVisible() {
@@ -61,7 +51,7 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
     }
 
     public void checkButtonCreatePostVisible() {
-        checkIsElementDisplayed(buttonCreatePost);
+        checkIsElementDisplayed(buttonCreateNewPost);
         logger.info("Create Post button is visible");
     }
 }

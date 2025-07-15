@@ -16,7 +16,7 @@ import static java.awt.SystemColor.text;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
-    private Logger logger = Logger.getLogger(getClass());
+    protected Logger logger = Logger.getLogger(getClass());
     protected WebDriverWait webDriverWait10, webDriverWait15;
 
     public CommonActionsWithElements(WebDriver webDriver) {
@@ -159,8 +159,7 @@ public class CommonActionsWithElements {
      * @param webElement - the WebElement representing the checkbox
      */
     protected void makeCheckboxChecked(WebElement webElement) {
-        boolean state = webElement.isSelected();
-        if (state) {
+        if (!webElement.isSelected()) {
             clickOnElement(webElement);
             logger.info("Checkbox was checked");
         } else {
