@@ -17,4 +17,12 @@ public class UtilsCustom {
         Date date = new Date();
         return dateFormat.format(date);
     }
+
+    public static void waitABit(Integer second){
+        try {
+            Thread.sleep(second * 1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
