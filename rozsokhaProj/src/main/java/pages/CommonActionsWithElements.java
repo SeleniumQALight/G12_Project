@@ -134,6 +134,55 @@ public class CommonActionsWithElements {
         }
     }
 
+    // Method to make checkbox selected
+
+    public void makeCheckboxSelected(WebElement webElement) {
+        try {
+            if (webElement.isSelected()) {
+                webElement.click();
+                logger.info("Checkbox " + getElementName(webElement) + " was selected");
+            } else {
+                logger.info("Checkbox " + getElementName(webElement) + " is already selected");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // Method to make checkbox unselected
+
+    protected void makeCheckboxUnselected(WebElement webElement) {
+        try {
+            if (webElement.isSelected()) {
+                webElement.click();
+                logger.info("Checkbox " + getElementName(webElement) + " was unselected");
+            } else {
+                logger.info("Checkbox " + getElementName(webElement) + " is already unselected");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    // Method to get checkbox state
+
+    protected boolean isUniquePostCheckbox(WebElement webElement) {
+        try {
+            boolean state = webElement.isSelected();
+            if (state) {
+                logger.info("Checkbox " + getElementName(webElement) + " is selected");
+            } else {
+                logger.info("Checkbox " + getElementName(webElement) + " is not selected");
+            }
+            return state;
+        } catch (Exception e) {
+            logger.error("Error while checking checkbox state: " + e.getMessage());
+            return false;
+        }
+    }
+
+
     // get element name
     private String getElementName(WebElement webElement) {
         try {
