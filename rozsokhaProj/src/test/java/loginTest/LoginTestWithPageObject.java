@@ -17,9 +17,11 @@ public class LoginTestWithPageObject extends BaseTest {
         pageProvider.getLoginPage().openLoginPage()
                 .enterTextIntoInputLogin(VALID_LOGIN_UI)
                 .enterTextIntoPassword(VALID_PASSWORD_UI)
-                .clickOnButtonSignIn(); // Chaining method calls for better readability
+                .clickOnButtonSignIn();
+        pageProvider.getLoginPage().checkInputsUserNameAndPasswordNotVisible();// Chaining method calls for better readability
 
         pageProvider.getHomePage().getHeaderForLoggedUserElement().checkButtonSignOutVisible();
+        pageProvider.getHomePage().getHeaderForLoggedUserElement().checkButtonCreatePostVisible();
 
 
     }

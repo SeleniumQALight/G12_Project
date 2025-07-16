@@ -59,6 +59,14 @@ public class LoginPage extends ParentPage {
         clickOnElement(buttonSignIn);
     }
 
+    // Method to check that inputs for username and password are not visible
+
+    public void checkInputsUserNameAndPasswordNotVisible() {
+        checkIsElementNotDisplayed(inputUserName);
+        checkIsElementNotDisplayed(inputPassword);
+    }
+
+
     /**
      * Opens the login page, fills in the login form with valid credentials,
      * and clicks the Sign In button.

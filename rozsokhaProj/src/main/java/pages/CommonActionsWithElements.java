@@ -182,6 +182,10 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected void checkIsElementNotDisplayed(WebElement webElement) {
+        Assert.assertFalse("Element is displayed", isElementDisplayed(webElement));
+        logger.info("Element is not displayed");
+    }
 
     // get element name
     private String getElementName(WebElement webElement) {

@@ -3,9 +3,7 @@ package pages.elements;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.CommonActionsWithElements;
-import pages.CreateNewPostPage;
-import pages.MyProfilePage;
+import pages.*;
 
 public class HeaderForLoggedUserElement extends CommonActionsWithElements {
     @FindBy(xpath = "//img[@alt='My profile']")
@@ -29,6 +27,12 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
     public void checkButtonSignOutVisible() {
 //        Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
         checkIsElementDisplayed(buttonSignOut);
+    }
+
+// Method to check if the Create Post button is visible
+
+    public void checkButtonCreatePostVisible() {
+        checkIsElementDisplayed(clickOnButtonCreatePost);
     }
 
     public CreateNewPostPage clickOnButtonCreatePost() {
