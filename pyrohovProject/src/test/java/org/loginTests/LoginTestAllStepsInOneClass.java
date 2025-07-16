@@ -1,4 +1,4 @@
-package org.loginTests;
+package org.loginTests;  // this class we leave hir for remember what we can fold evereting in one class
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
