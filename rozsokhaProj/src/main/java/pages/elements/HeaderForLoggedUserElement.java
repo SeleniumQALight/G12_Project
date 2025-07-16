@@ -29,6 +29,10 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         checkIsElementDisplayed(buttonSignOut);
     }
 
+    public void checkButtonSignOutNotVisible() {
+        checkIsElementNotDisplayed(buttonSignOut);
+    }
+
 // Method to check if the Create Post button is visible
 
     public void checkButtonCreatePostVisible() {

@@ -25,4 +25,16 @@ public class LoginTestWithPageObject extends BaseTest {
 
 
     }
+
+    @Test
+    public void invalidLogin() {
+        pageProvider.getLoginPage().openLoginPage()
+                .enterTextIntoInputLogin(TestData.INVALID_LOGIN_UI)
+                .enterTextIntoPassword(TestData.INVALID_PASSWORD_UI)
+                .clickOnButtonSignIn();
+        pageProvider.getLoginPage().checkButtonSignInVisible();
+        pageProvider.getLoginPage().checkTextInAlertMessage("Invalid username/password.");
+        pageProvider.getHomePage().getHeaderForLoggedUserElement().checkButtonSignOutNotVisible();
+
+    }
 }
