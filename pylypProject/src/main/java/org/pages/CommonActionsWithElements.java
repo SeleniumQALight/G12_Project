@@ -2,6 +2,7 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -125,6 +126,16 @@ public class CommonActionsWithElements {
             Select select = new Select(webElement);
             select.selectByValue(value);
             logger.info("Value '" + value + "' was selected in dropdown " + getElementName(webElement));
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    // open new tab
+    protected void openNewTab() {
+        try {
+            ((JavascriptExecutor) webDriver).executeScript("window.open()");
+            logger.info("New tab was opened");
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
