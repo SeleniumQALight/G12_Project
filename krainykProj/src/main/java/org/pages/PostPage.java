@@ -14,8 +14,16 @@ public class PostPage extends ParentPage {
     @FindBy(xpath = "//p[contains(text(), 'Is this post unique?')]")
     private WebElement uniquePostText;
 
+    @FindBy(xpath = "//button[@class='delete-post-button text-danger']")
+    private WebElement buttonDeletePost;
+
     public PostPage(WebDriver webDriver) {
         super(webDriver);
+    }
+
+    @Override
+    protected String getRelativeUrl() {
+        return "/post/[a-zA-Z0-9]*";
     }
 
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
@@ -23,8 +31,7 @@ public class PostPage extends ParentPage {
     }
 
     public PostPage checkIsRedirectToPostPage() {
-        // TODO check URL
-        // TODO check some unique element on the page
+        checkUrlWithPattern();
         return this;
     }
 
@@ -47,5 +54,10 @@ public class PostPage extends ParentPage {
             checkTextInElement(uniquePostText, uniquePostTextMessage + "no");
         }
         return this;
+    }
+
+    public MyProfilePage clickOnDeletePostButton() {
+        clickOnElement(buttonDeletePost);
+        return new MyProfilePage(webDriver);
     }
 }
