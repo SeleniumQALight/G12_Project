@@ -28,23 +28,6 @@ public class HomePage extends ParentPage {
         return new HeaderForLoggedUserElement(webDriver);
     }
 
-    public HomePage checkButtonSignOutVisible() {
-        checkIsElementDisplayed(buttonSignOut);
-//        Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
-        return this;
-    }
-
-//    public boolean isButtonSignOutVisible() {
-//        try {
-//            boolean state = buttonSignOut.isDisplayed();
-//            logger.info("Element visible: " + state);
-//            return state;
-//        } catch (Exception e) {
-//            logger.error("Element is not found: " + e); // Log the exception message .getMessage()
-//            return false;
-//        }
-//    }
-
     public HomePage checkIsRedirectToHomePage() {
         checkUrl();
         getHeaderForLoggedUserElement().checkButtonSignOutVisible();

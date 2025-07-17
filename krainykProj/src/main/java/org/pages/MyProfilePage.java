@@ -23,7 +23,7 @@ public class MyProfilePage extends ParentPage {
 
     @Override
     protected String getRelativeUrl() {
-        return "/profile/";
+        return "/profile/[a-zA-Z0-9]*";
     }
 
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
@@ -31,7 +31,7 @@ public class MyProfilePage extends ParentPage {
     }
 
     public MyProfilePage checkIsRedirectToMyProfilePage() {
-        checkUrl();
+        checkUrlWithPattern();
         return this;
     }
 

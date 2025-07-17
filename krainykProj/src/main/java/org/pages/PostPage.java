@@ -23,7 +23,7 @@ public class PostPage extends ParentPage {
 
     @Override
     protected String getRelativeUrl() {
-        return "/post/";
+        return "/post/[a-zA-Z0-9]*";
     }
 
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
@@ -31,7 +31,7 @@ public class PostPage extends ParentPage {
     }
 
     public PostPage checkIsRedirectToPostPage() {
-        checkUrl();
+        checkUrlWithPattern();
         return this;
     }
 

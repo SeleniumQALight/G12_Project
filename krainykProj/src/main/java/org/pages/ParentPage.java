@@ -17,4 +17,16 @@ abstract public class ParentPage extends CommonActionsWithElements {
         , webDriver.getCurrentUrl()
         );
     }
+
+    // метод по перевірці чи відкрита потрібна сторінка по патерну
+    //https://aqa-complexapp.onrender.com/post/64d21e84903640003414c338
+    // regex for 64d21e84903640003414c338
+    // [a-zA-Z0-9]{24}
+
+    protected void checkUrlWithPattern(){
+        Assert.assertTrue("URL is not expected\n" +
+                        "Expected url: " + baseUrl + getRelativeUrl() +
+                        "\nActual url: " + webDriver.getCurrentUrl(),
+                webDriver.getCurrentUrl().matches(baseUrl + getRelativeUrl()));
+    }
 }
