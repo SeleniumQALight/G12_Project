@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.pages.PageProvider;
+import org.pages.elements.HeaderForLoggedUserElement;
 
 import java.util.concurrent.TimeUnit;
 

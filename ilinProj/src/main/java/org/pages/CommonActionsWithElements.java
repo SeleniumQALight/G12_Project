@@ -85,7 +85,7 @@ public class CommonActionsWithElements {
             }
             return state;
         } catch (Exception e) {
-            logger.info("Element is not found, so it is not displayed");
+            logger.info(getElementName(webElement) + "Element is not found, so it is not displayed");
             return false;
         }
     }
@@ -96,6 +96,10 @@ public class CommonActionsWithElements {
      */
     protected void checkIsElementDisplayed(WebElement webElement) {
         Assert.assertTrue("Element is not displayed", isElementDisplayed(webElement));
+    }
+
+    protected void checkIsElementIsNotDisplayed(WebElement webElement) {
+        Assert.assertFalse("Element is displayed, but it should not be", isElementDisplayed(webElement));
     }
 
 
