@@ -21,13 +21,17 @@ public class PostPage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/post/";
+    }
+
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
         return new HeaderForLoggedUserElement(webDriver);
     }
 
     public PostPage checkIsRedirectToPostPage() {
-        // TODO check URL
-        // TODO check some unique element on the page
+        checkUrl();
         return this;
     }
 

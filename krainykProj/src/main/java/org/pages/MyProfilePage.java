@@ -21,12 +21,17 @@ public class MyProfilePage extends ParentPage {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/profile/";
+    }
+
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
         return new HeaderForLoggedUserElement(webDriver);
     }
 
     public MyProfilePage checkIsRedirectToMyProfilePage() {
-        // TODO check URL
+        checkUrl();
         return this;
     }
 
