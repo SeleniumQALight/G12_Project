@@ -134,4 +134,20 @@ public class LoginPage extends ParentPage {
 
         return this;
     }
+//HW 4 LogOutTest
+    public LoginPage checkLoginFieldIsVisible() {
+        checkIsElementDisplayed(inputUserName);
+        return this;
+    }
+
+    public LoginPage checkPasswordFieldIsVisible() {
+        checkIsElementDisplayed(inputPassword);
+        return this;
+    }
+
+    public LoginPage checkSignInButtonIsVisible() {
+        checkIsElementDisplayed(buttonSignIn);
+        return this;
+    }
+
 }
