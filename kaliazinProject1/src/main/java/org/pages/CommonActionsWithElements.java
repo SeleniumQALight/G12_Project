@@ -2,8 +2,10 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -134,6 +136,38 @@ Assert.assertTrue("Element is not displayed", isElementDisplayed(webElement));
             Select select = new Select(webElement);
             select.selectByValue(value);
             logger.info("Value " + value + " was selected in dropdown" + getElementName(webElement));
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    // accept alert
+    protected void acceptAlert() {
+        try {
+            webDriverWait15.until(ExpectedConditions.alertIsPresent());
+            webDriver.switchTo().alert().accept();
+            logger.info("Alert was accepted");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    // scroll to element using Actions
+    protected void scrollToElement(WebElement webElement) {
+        try {
+Actions actions = new Actions(webDriver);
+actions.moveToElement(webElement).perform();
+logger.info("Scrolled to element: " + getElementName(webElement));
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    // open new tab JavaScript
+    protected void openNewTab(String url) {
+        try {
+            ((JavascriptExecutor) webDriver).executeScript("window.open(arguments[0], '_blank'");
+            logger.info("New tab opened with URL: " + url);
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
