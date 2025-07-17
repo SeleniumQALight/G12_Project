@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.PageProvider;
+import utils.ConfigProvider;
 
 import java.util.concurrent.TimeUnit;
 
@@ -20,7 +21,8 @@ public class BaseTest {
         WebDriverManager.chromedriver().setup();//скачує виконуваний файл для хром браузера
         webDriver = new ChromeDriver();
         webDriver.manage().window().maximize();
-        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);//час протягом якого браузер буде намагатися виконати дію, якщо виконався раніш то не чекає
+        webDriver.manage().timeouts().implicitlyWait(
+                ConfigProvider.configProperties.TIME_FOR_IMPLICIT_WAIT(), TimeUnit.SECONDS);//час протягом якого браузер буде намагатися виконати дію, якщо виконався раніш то не чекає
         logger.info("Browser was opened");
         pageProvider = new PageProvider(webDriver);
     }
