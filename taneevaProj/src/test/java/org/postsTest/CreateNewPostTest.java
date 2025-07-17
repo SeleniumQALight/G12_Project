@@ -10,6 +10,7 @@ public class CreateNewPostTest extends BaseTest {
 
     final String POST_TITLE = "TR001_G12 Anj" + Utils_Custom.getDateAndTimeFormatted();
 
+
     @Test
     public void TR001_createNewPost() {
         pageProvider.getLoginPage()
