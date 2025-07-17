@@ -40,6 +40,12 @@ public class CreateNewPostTest extends BaseTest {
 
     @After
     public void deletePosts() {
-        // TODO: Implement deletion of posts created by the test
+        logger.info("Post condition - delete test");
+        pageProvider.getHomePage()
+                .openHomePageAndLoginIfNeeded()
+                .getHeaderForLoggedUserElement().clickOnButtonMyProfile()
+                .checkIsRedirectToMyProfilePage()
+                .deletePostTillPresent(POST_TITLE)
+        ;
     }
 }
