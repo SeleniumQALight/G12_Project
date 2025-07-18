@@ -2,12 +2,15 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.utils.ConfigProvider;
 
 
 import java.time.Duration;
@@ -20,8 +23,8 @@ public class CommonActionsWithElements {
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);// ініціалізує елементи описані в FindBy; в this прийдуть усі елементи з яких ми прийдепо (LoginPage, HomePage)
-        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
+        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(ConfigProvider.configProperties.TIME_FOR_EXPLICIT_WAIT_LOW()));
+        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(ConfigProvider.configProperties.TIME_FOR_DEFAULT_WAIT()));
 
     }
 
@@ -132,6 +135,39 @@ public class CommonActionsWithElements {
             printErrorAndStopTest(e);
         }
     }
+
+    // accept Alert
+    protected void acceptAlert() {
+        try {
+            webDriverWait10.until(ExpectedConditions.alertIsPresent());
+            webDriver.switchTo().alert().accept();
+            logger.info("Alert was accepted");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    //scroll to element using Actions
+    protected void scrollToElement(WebElement webElement) {
+        try{
+            Actions actions = new Actions(webDriver);
+            actions.moveToElement(webElement).perform();
+            logger.info("Scrolled to element: " + getElementName(webElement));
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    // open new tab
+    protected void openNewTab() {
+        try{
+            ((JavascriptExecutor) webDriver).executeScript("window.open();");
+            logger.info("New tab was opened");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
 
     //get element name
     private String getElementName(WebElement webElement){
