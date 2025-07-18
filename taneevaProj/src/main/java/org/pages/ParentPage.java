@@ -1,17 +1,18 @@
 package org.pages;
 
-import io.opentelemetry.sdk.autoconfigure.spi.ConfigProperties;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.utils.ConfigProperties;
+import org.utils.ConfigProvider;
 
 import java.time.Duration;
 
 abstract class ParentPage extends CommonActionsWithElements {
     static String environment = System.getProperty("evn", "aqa");
-    protected String baseURL = "https://"+environment+"-complexapp.onrender.com";
-    protected String baseURL = ConfigProperties.configProperties.base_url().replace("[env]");
+//    protected String baseURL = "https://"+environment+"-complexapp.onrender.com";
+    protected String baseURL = ConfigProvider.configProperties.base_url().replace("[env]",environment);
     public ParentPage(WebDriver webDriver) {
         super(webDriver);
     }
