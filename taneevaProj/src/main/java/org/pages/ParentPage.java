@@ -8,8 +8,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 abstract class ParentPage extends CommonActionsWithElements {
-    protected String baseURL = "https://aqa-complexapp.onrender.com";
-
+    static String environment = System.getProperty("evn", "aqa");
+    protected String baseURL = "https://"+environment+"-complexapp.onrender.com";
+    protected String baseURL = ConfigProperties.configProperties.base_url().replace("[env]");
     public ParentPage(WebDriver webDriver) {
         super(webDriver);
     }
