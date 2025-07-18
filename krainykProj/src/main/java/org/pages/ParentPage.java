@@ -2,6 +2,7 @@ package org.pages;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 abstract public class ParentPage extends CommonActionsWithElements {
     protected String baseUrl = "https://aqa-complexapp.onrender.com";
@@ -24,9 +25,12 @@ abstract public class ParentPage extends CommonActionsWithElements {
     // [a-zA-Z0-9]{24}
 
     protected void checkUrlWithPattern(){
+        String expectedPattern = baseUrl + getRelativeUrl();
+        webDriverWait10.until(ExpectedConditions.urlMatches(expectedPattern));
+
         Assert.assertTrue("URL is not expected\n" +
-                        "Expected url: " + baseUrl + getRelativeUrl() +
+                        "Expected url: " + expectedPattern +
                         "\nActual url: " + webDriver.getCurrentUrl(),
-                webDriver.getCurrentUrl().matches(baseUrl + getRelativeUrl()));
+                webDriver.getCurrentUrl().matches(expectedPattern));
     }
 }
