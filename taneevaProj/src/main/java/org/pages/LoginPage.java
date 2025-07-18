@@ -1,10 +1,19 @@
 package org.pages;
 
 import org.apache.log4j.Logger;
+import org.assertj.core.api.SoftAssertions;
 import org.data.TestData;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.utils.Utils_Custom;
+
+import java.util.List;
+
+import static org.data.RegistrationValidationMassages.SEMICOLON;
 
 public class LoginPage extends ParentPage {
     private Logger logger = Logger.getLogger(getClass());
@@ -17,6 +26,19 @@ public class LoginPage extends ParentPage {
 
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
+
+    @FindBy(id = "username-register")
+    private WebElement inputUserNameRegistrationForm;
+
+    @FindBy(id = "email-register")
+    private WebElement inputUserEmailRegistrationForm;
+
+    @FindBy(id = "password-register")
+    private WebElement inputPasswordInRegistrationForm;
+    
+    final static String listOfElementsMassagesLocator = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
+    @FindBy(xpath = listOfElementsMassagesLocator)
+    private List<WebElement> listOfActualMassages;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -71,5 +93,45 @@ public class LoginPage extends ParentPage {
         this.enterTextIntoPassword(TestData.VALID_PASSWORD_UI);
         this.clickOnButtonSignIn();
         return new HomePage(webDriver);
+    }
+
+    public LoginPage enterTextIntoRegistrationUserNameField(String userName) {
+        clearAndEnterTextToElement(inputUserNameRegistrationForm, userName);
+        return this;
+    }
+
+    public LoginPage enterTextIntoRegistrationEmailField(String email) {
+        clearAndEnterTextToElement(inputUserEmailRegistrationForm, email);
+        return this;
+    }
+
+    public LoginPage enterTextIntoRegistrationPasswordField(String password) {
+        clearAndEnterTextToElement(inputPasswordInRegistrationForm, password);
+        return this;
+
+    }
+
+    public LoginPage checkErrorMassages(String expectedErrorMassageAsString) {
+        //error1; error2;error3 ->[error1, error2, error3]
+        String[] expectedErrorMassages = expectedErrorMassageAsString.split(SEMICOLON);
+
+        webDriverWait10.until(ExpectedConditions.numberOfElementsToBe(By.xpath(listOfElementsMassagesLocator), expectedErrorMassages.length));
+
+        Utils_Custom.waitABit(1);
+
+        Assert.assertEquals("Number of error messages", expectedErrorMassages.length, listOfActualMassages.size());
+
+        SoftAssertions softAssertions = new SoftAssertions();
+        for (int i = 0; i < expectedErrorMassages.length; i++) {
+            softAssertions.assertThat(listOfActualMassages.get(i).getText())
+                    .as("Message " + i)
+                    .isIn(expectedErrorMassages);
+        }
+
+        softAssertions.assertAll();
+
+
+
+        return this;
     }
 }
