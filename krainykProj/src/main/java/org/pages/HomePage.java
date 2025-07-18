@@ -37,7 +37,7 @@ public class HomePage extends ParentPage {
     public HomePage openHomePageAndLoginIfNeeded() {
         LoginPage loginPage = new LoginPage(webDriver);
         loginPage.openLoginPage();
-        if (getHeaderForLoggedUserElement().isButtonSignOutVisible()){
+        if (getHeaderForLoggedUserElement().isButtonSignOutVisible()) {
             logger.info("User is already logged in");
         } else {
             loginPage.enterTextInInputLogin(TestData.VALID_LOGIN_UI)
