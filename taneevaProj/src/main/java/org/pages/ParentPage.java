@@ -1,5 +1,6 @@
 package org.pages;
 
+import io.opentelemetry.sdk.autoconfigure.spi.ConfigProperties;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
