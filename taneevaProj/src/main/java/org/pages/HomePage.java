@@ -22,8 +22,14 @@ public class HomePage extends ParentPage {
     }
 
     public HomePage checkIsRedirectedToHomePage() {
+        //TODO check URL
+        getHeaderForLoggedUserElement().checkButtonSignOutVisible();
         checkURL();
         getHeaderForLoggedUserElement().checkButtonSignOutVisible();
+        return this;
+    }
+    public HomePage checkButtonCreatePostVisible() {
+        getHeaderForLoggedUserElement().checkButtonCreatePostVisible();
         return this;
     }
 
