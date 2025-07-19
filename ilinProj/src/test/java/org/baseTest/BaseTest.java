@@ -12,6 +12,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.pages.PageProvider;
 import org.utils.ConfigProvider;
+import org.pages.elements.HeaderForLoggedUserElement;
 
 import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
@@ -28,7 +29,7 @@ public class BaseTest {
 //        webDriver = new ChromeDriver();
         initDriver();
         webDriver.manage().window().maximize();
-        webDriver.manage().timeouts().implicitlyWait(ConfigProvider.configProperties.TIME_FOR_DEFAULT_WAIT(), TimeUnit.SECONDS);
+        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         logger.info("Browser was opened");
         pageProvider = new PageProvider(webDriver);
 
