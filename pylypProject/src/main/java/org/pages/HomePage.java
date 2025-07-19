@@ -54,4 +54,8 @@ Logger logger = Logger.getLogger(HomePage.class);
         getHeaderForLoggedUserElement().clickOnButtonSignOut();
         return new LoginPage(webDriver);
     }
+
+    public CreateNewPostPage clickOnCreatePostButton() {
+        return getHeaderForLoggedUserElement().clickOnButtonCreatePost();
+    }
 }

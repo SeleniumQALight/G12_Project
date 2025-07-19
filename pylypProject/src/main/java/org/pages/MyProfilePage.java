@@ -12,7 +12,7 @@ import java.util.List;
 public class MyProfilePage extends ParentPage{
     Logger logger = Logger.getLogger(getClass());
 
-    private String postWithTitleLocator = "//*[text()='%s']";
+    private final String postWithTitleLocator = ".//*[text()='%s']";
 
     @FindBy(xpath = "//*[text()='Post successfully deleted.']")
     private WebElement successMessageDelete;
@@ -70,5 +70,14 @@ if (counter >= MAX_POST_COUNT){
     private MyProfilePage checkIsMessageSuccessDeletePresent() {
         checkIsElementDisplayed(successMessageDelete);
         return this;
+    }
+
+    public PostPage clickOnPostWithTitle(String title) {
+        clickOnElement(By.xpath(String.format(postWithTitleLocator, title)));
+        return new PostPage(webDriver);
+    }
+
+    public boolean isPostWithTitlePresent(String title) {
+        return isElementWithTextPresent(".//h2", title);
     }
 }
