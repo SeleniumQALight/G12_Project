@@ -24,6 +24,7 @@ public class CreateNewPostTest extends BaseTest {
                 .enterTextIntoImputTitle(POST_TITLE)
                 .enterTextIntoImputBody(POST_BODY)
                 .clickOnUniquePostCheckbox(POST_UNIQUE)
+                .selectTextInDropdownAccess("Приватне повідомлення")
                 .clickOnSaveNewPostButton()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
