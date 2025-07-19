@@ -14,6 +14,7 @@ import org.pages.PageProvider;
 import org.utils.ConfigProvider;
 import org.pages.elements.HeaderForLoggedUserElement;
 
+import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
