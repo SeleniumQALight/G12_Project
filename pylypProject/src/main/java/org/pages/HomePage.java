@@ -6,8 +6,6 @@ import org.data.TestData;
 import org.openqa.selenium.WebDriver;
 import org.pages.elements.HeaderForLoggedUserElement;
 
-import javax.net.ssl.HostnameVerifier;
-
 public class HomePage extends ParentPage{
 Logger logger = Logger.getLogger(HomePage.class);
 
@@ -25,8 +23,14 @@ Logger logger = Logger.getLogger(HomePage.class);
     }
 
     public HomePage checkIsRedirectedToHomePage() {
-checkUrl();
-getHeaderForLoggedUserElement().checkButtonSignOutVisible();
+        checkUrl();
+        getHeaderForLoggedUserElement().checkButtonSignOutVisible();
+        getHeaderForLoggedUserElement().checkSearchIconIsVisible();
+        getHeaderForLoggedUserElement().checkChatIconIsVisible();
+        getHeaderForLoggedUserElement().isMyProfileIconVisible();
+        getHeaderForLoggedUserElement().isCreatePostButtonVisible();
+
+        logger.info("User is redirected to Home Page");
         return this;
     }
 
@@ -41,11 +45,13 @@ getHeaderForLoggedUserElement().checkButtonSignOutVisible();
             .clickOnButtonSignIn();
             checkIsRedirectedToHomePage();
             logger.info("User was logged in");
-
         }
-
-
         return this;
 
+    }
+
+    public LoginPage clickOnButtonSignOut() {
+        getHeaderForLoggedUserElement().clickOnButtonSignOut();
+        return new LoginPage(webDriver);
     }
 }
