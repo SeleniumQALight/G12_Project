@@ -44,8 +44,9 @@ public class LoginPage extends ParentPage{
 
     public void clickOnButtonSignIn(){
         //   webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
-        buttonSignIn.click();
-        logger.info("Button Sign In was clicked");
+//        buttonSignIn.click();
+//        logger.info("Button Sign In was clicked");
+        clickOnElement(buttonSignIn);
     }
 
 }
