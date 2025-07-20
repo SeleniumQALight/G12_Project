@@ -200,7 +200,7 @@ logger.error ("Checkbox not found");
     }
 
     //open new tab
-    protected void openNewTab() {
+    public void openNewTab() {
         try {
             ((JavascriptExecutor) webDriver).executeScript("window.open()");
             logger.info("New tab was opened");
@@ -208,6 +208,43 @@ logger.error ("Checkbox not found");
             printErrorAndStopTest(e);
         }
     }
+
+    //switch to new tab
+    public void switchToNewTab() {
+        try {
+            String originalHandle = webDriver.getWindowHandle();
+            for (String handle : webDriver.getWindowHandles()) {
+                if (!handle.equals(originalHandle)) {
+                    webDriver.switchTo().window(handle);
+                    logger.info("Switched to new tab " + handle);
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+//    close new tab and switch to original tab
+    public void closeNewTabAndSwitchToOriginal() {
+        try {
+            String originalHandle = webDriver.getWindowHandle();
+            for (String handle : webDriver.getWindowHandles()) {
+                if (!handle.equals(originalHandle)) {
+                    webDriver.switchTo().window(handle);
+                    webDriver.close();
+                    webDriver.switchTo().window(originalHandle);
+                    logger.info("Closed new tab and switched to original tab " + originalHandle);
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+
+
 
     //get element name
     private String getElementName(WebElement webElement) {
@@ -218,8 +255,19 @@ logger.error ("Checkbox not found");
         }
     }
 
+    public void refreshPage() {
+        try {
+            webDriver.navigate().refresh();
+            logger.info("Page was refreshed");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+
+    }
+
     private void printErrorAndStopTest(Exception e) {
         logger.error("Error while working with element " + e.getMessage());
         Assert.fail("Error while working with element " + e.getMessage());
     }
+
 }

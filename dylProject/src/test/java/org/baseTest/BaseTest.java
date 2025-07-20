@@ -10,6 +10,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import org.pages.CommonActionsWithElements;
 import org.pages.PageProvider;
 import org.utils.ConfigProvider;
 
@@ -20,6 +21,7 @@ public class BaseTest {
     private WebDriver webDriver;
     protected Logger logger = Logger.getLogger(getClass());
     protected PageProvider pageProvider;
+    protected CommonActionsWithElements commonActionsWithElements;
 
 
     @Before
@@ -32,6 +34,7 @@ public class BaseTest {
                 ConfigProvider.configProperties.TIME_FOR_IMPLICIT_WAIT(), TimeUnit.SECONDS);
         logger.info("Browser was opened");
         pageProvider = new PageProvider(webDriver);
+        commonActionsWithElements = new CommonActionsWithElements(webDriver);
 
     }
 
