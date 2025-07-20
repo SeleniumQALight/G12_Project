@@ -3,6 +3,7 @@ package org.pages;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -18,6 +19,7 @@ public class CommonActionsWithElements {
     protected WebDriver webDriver;
     private Logger logger = Logger.getLogger(getClass());
     protected WebDriverWait webDriverWait10, webDriverWait15;
+    protected Actions actions;
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -26,6 +28,7 @@ public class CommonActionsWithElements {
                 ConfigProvider.configProperties.TIME_FOR_EXPLICIT_WAIT_LOW()));
         webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(
                 ConfigProvider.configProperties.TIME_FOR_DEFAULT_WAIT()));
+        this.actions = new Actions(webDriver);
     }
     /* Method clearAndEnterTextToElement
      * Cleans the text
@@ -191,7 +194,6 @@ logger.error ("Checkbox not found");
     //scroll to element using Actions
     protected void scrollToElement(WebElement webElement) {
         try {
-            Actions actions = new Actions(webDriver);
             actions.moveToElement(webElement).perform();
             logger.info("Scrolled to element: " + getElementName(webElement));
         } catch (Exception e) {
@@ -243,9 +245,6 @@ logger.error ("Checkbox not found");
         }
     }
 
-
-
-
     //get element name
     private String getElementName(WebElement webElement) {
         try{
@@ -265,9 +264,28 @@ logger.error ("Checkbox not found");
 
     }
 
+public void pressKey(Keys key, int quantity) {
+    try {
+        for (int i = 0; i < quantity; i++) {
+            actions.sendKeys(key).perform();
+            logger.info(key.name() + " key was pressed on the page");
+        }
+    } catch (Exception e) {
+        printErrorAndStopTest(e);
+    }
+}
+
+public void enterTextWithActions(String text) {
+    try {
+        actions.sendKeys(text).perform();
+        logger.info(text + " was entered into input using Actions");
+    } catch (Exception e) {
+        printErrorAndStopTest(e);
+    }
+}
+
     private void printErrorAndStopTest(Exception e) {
         logger.error("Error while working with element " + e.getMessage());
         Assert.fail("Error while working with element " + e.getMessage());
     }
-
 }
