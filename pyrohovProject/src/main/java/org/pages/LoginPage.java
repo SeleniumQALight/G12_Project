@@ -21,22 +21,25 @@ public class LoginPage extends ParentPage{
         super(webDriver);
     }
 
-    public void openLoginPage() {
+    public LoginPage openLoginPage() {
         webDriver.get(baseURL);
         logger.info("Login page was opened with url " + baseURL);
+        return this; // повертаємо поточний об'єкт для можливості ланцюгового виклику методів
 
     }
 
-    public void enterTextIntiInputLogin(String login) {
+    public LoginPage enterTextIntiInputLogin(String login) {
         /* WebElement inputUserName = webDriver.findElement(By.xpath("//input[@placeholder='Username']")); */
 //        inputUserName.clear();
 //        inputUserName.sendKeys(login);
 //        logger.info(login + "was entered in input userName");
         clearAndEnterTextToElement(inputUserName, login);
+        return this; // повертаємо поточний об'єкт для можливості ланцюгового виклику методів
 
     }
-    public void enterTextIntoPassword (String password){
+    public LoginPage enterTextIntoPassword (String password){
         clearAndEnterTextToElement(inputPassword, password);
+        return this;
     //    WebElement inputPassword = webDriver.findElement(By.xpath("//input[@placeholder='Password']"));
 //
 
