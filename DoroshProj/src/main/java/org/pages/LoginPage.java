@@ -102,6 +102,12 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    public LoginPage checkInputUserNameAndPasswordVisible() {
+        checkIsElementDisplayed(inputUserName);
+        checkIsElementDisplayed(inputPassword);
+        return this;
+    }
+
     public LoginPage checkAlertMessageVisible() {
         checkIsElementDisplayed(alertTextMessage);
         return this;
