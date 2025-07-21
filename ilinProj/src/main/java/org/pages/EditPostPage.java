@@ -19,8 +19,6 @@ public class EditPostPage extends ParentPage{
     @FindBy(xpath = "//div[@class='alert alert-success text-center']")
     private WebElement successMessage;
 
-    @FindBy(xpath = "//img[@alt='My profile']")
-    private WebElement buttonMyProfile;
 
     public EditPostPage(WebDriver webDriver) {
         super(webDriver);
@@ -51,8 +49,12 @@ public class EditPostPage extends ParentPage{
         return this;
     }
 
+    public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
+        return new HeaderForLoggedUserElement(webDriver);
+    }
+
     public MyProfilePage clickOnMyProfileButton() {
-        clickOnElement(buttonMyProfile);
+        getHeaderForLoggedUserElement().clickOnButtonMyProfile();
         return new MyProfilePage(webDriver);
     }
 }

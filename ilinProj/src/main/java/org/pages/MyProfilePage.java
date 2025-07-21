@@ -48,7 +48,6 @@ public class MyProfilePage extends ParentPage {
     }
 
     public MyProfilePage deletePostsTillPresent(String postTitle) {
-        logger.info("TEST_TEST_TEST_TEST:" + postTitle + "'");
         List<WebElement> postsList = getListOfPostsWithTitle(postTitle);
         final int MAX_POSTS_COUNT = 100; // to avoid infinite loop
         int counter = 0;

@@ -29,7 +29,7 @@ public class BaseTest {
 //        webDriver = new ChromeDriver();
         initDriver();
         webDriver.manage().window().maximize();
-        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        webDriver.manage().timeouts().implicitlyWait(ConfigProvider.configProperties.TIME_FOR_DEFAULT_WAIT(), TimeUnit.SECONDS);
         logger.info("Browser was opened");
         pageProvider = new PageProvider(webDriver);
 
