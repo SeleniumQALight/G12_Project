@@ -49,13 +49,13 @@ public class MyProfilePage extends ParentPage {
         List<WebElement> postsList = getListOfPostsWithTitle(postTitle);
         final int MAX_POST_COUNT = 100; //postlist.size()
         int counter = 0;
+
         while (!postsList.isEmpty() && (counter < MAX_POST_COUNT)) {
             clickOnElement(postsList.get(0),
                     "Post with title '" + postTitle + "' from list of posts");
             new PostPage(webDriver)
                     .checkIsRedirectToPostPage()
-                    .cllickOnDeleteButtomn()
-                    .checkIsRedirectedToMyProfilePage()
+                    .clickOnDeleteButton()
                     .checkISMassageSuccessDeletePresent();
             logger.info("Post with title '" + postTitle + "' was deleted");
             postsList = getListOfPostsWithTitle(postTitle);

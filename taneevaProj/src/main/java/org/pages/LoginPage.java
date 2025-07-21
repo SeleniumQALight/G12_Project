@@ -27,6 +27,9 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
 
+    @FindBy(xpath = "//div[text()='Invalid username/password.']")
+    private WebElement alertTextMessage;
+
     @FindBy(id = "username-register")
     private WebElement inputUserNameRegistrationForm;
 
@@ -35,7 +38,7 @@ public class LoginPage extends ParentPage {
 
     @FindBy(id = "password-register")
     private WebElement inputPasswordInRegistrationForm;
-    
+
     final static String listOfElementsMassagesLocator = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
     @FindBy(xpath = listOfElementsMassagesLocator)
     private List<WebElement> listOfActualMassages;
@@ -79,8 +82,32 @@ public class LoginPage extends ParentPage {
 //        buttonSignIn.click();
 //        logger.info("Button Sinn In was clicked");
         clickOnElement(buttonSignIn);
-
     }
+    public LoginPage checkButtonSignInVisible() {
+        checkIsElementDisplayed(buttonSignIn);
+        return this;
+    }
+
+    public LoginPage checkAlertMessageVisible() {
+        checkIsElementDisplayed(alertTextMessage);
+        logger.info("Alert message is displayed");
+        return this;
+    }
+
+    public LoginPage checkTextInAlertMessage(String expectedText) {
+        checkTextInElement(alertTextMessage, expectedText);
+        logger.info("Alert message text is checked: " + expectedText);
+        return this;
+    }
+    public LoginPage checkInputUserNameAndPasswordNotVisible() {
+        Assert.assertTrue("Username input should NOT be visible",
+                webDriver.findElements(By.xpath("//input[@placeholder='Username']")).isEmpty());
+        Assert.assertTrue("Password input should NOT be visible",
+                webDriver.findElements(By.xpath("//input[@placeholder='Password']")).isEmpty());
+        return this;
+    }
+
+
     /**
      * Method openLoginPageAndFIllLoginFormWithValidCred
      * Opens the login page and fills in the login form with valid credentials.
