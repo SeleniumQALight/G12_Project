@@ -187,7 +187,6 @@ public class CommonActionsWithElements {
         logger.info("Element is not displayed");
     }
 
-
     // get element name
     private String getElementName(WebElement webElement) {
         try {
