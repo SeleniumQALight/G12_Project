@@ -16,7 +16,7 @@ import static java.awt.SystemColor.text;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
-    private Logger logger = Logger.getLogger(getClass());
+    protected Logger logger = Logger.getLogger(getClass());
     protected WebDriverWait webDriverWait10, webDriverWait15;
 
     public CommonActionsWithElements(WebDriver webDriver) {
@@ -152,5 +152,49 @@ public class CommonActionsWithElements {
     private void printErrorAndStopTest(Exception e) {
         logger.error("Error while working with element: " + e.getMessage());
         Assert.fail("Error while working with element: " + e.getMessage());
+    }
+
+    /* Method makeCheckboxChecked
+     * Makes the checkbox selected if it's not already selected
+     * @param webElement - the WebElement representing the checkbox
+     */
+    protected void makeCheckboxChecked(WebElement webElement) {
+        if (!webElement.isSelected()) {
+            clickOnElement(webElement);
+            logger.info("Checkbox was checked");
+        } else {
+            logger.info("Checkbox was already checked");
+        }
+    }
+    /* Method makeCheckboxUnchecked
+     * Makes the checkbox unselected if it's currently selected
+     * @param webElement - the WebElement representing the checkbox
+     */
+
+    protected void makeCheckboxUnchecked(WebElement webElement) {
+        boolean state = webElement.isSelected();
+        if (state) {
+            clickOnElement(webElement);
+            logger.info("Checkbox was unchecked");
+        } else {
+            logger.info("Checkbox was already unchecked");
+        }
+    }
+
+    /* Method makeCheckboxUnchecked
+     * Sets checkbox to desired state: "check" or "uncheck"
+     * @param webElement - the WebElement representing the checkbox
+     * @param state - desired state of the checkbox ("check" or "uncheck")
+     */
+
+    protected void actionsWithCheckbox (WebElement webElement, String desiredState) {
+        if ("check".equalsIgnoreCase(desiredState)) {
+            makeCheckboxChecked(webElement);
+        } else if ("uncheck".equalsIgnoreCase(desiredState)) {
+            makeCheckboxUnchecked(webElement);
+        } else {
+            logger.error("Unknown desired checkbox state: " + desiredState);
+            Assert.fail("Unknown desired checkbox state: " + desiredState);
+        }
     }
 }
