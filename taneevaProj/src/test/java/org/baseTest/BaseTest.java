@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.pages.PageProvider;
-import org.utils.ConfigProperties;
+import org.utils.ConfigProvider;
 
 import java.util.concurrent.TimeUnit;
 
@@ -22,7 +22,7 @@ public class BaseTest {
         webDriver = new ChromeDriver();
         webDriver.manage().window().maximize();
         webDriver.manage().timeouts().implicitlyWait(
-                ConfigProperties.configProperties.TIME_FOR, TimeUnit.SECONDS);
+                ConfigProvider.configProperties.TIME_FOR_DEFAULT_WAIT(), TimeUnit.SECONDS);
         logger.info("Browser was opened");
         pageProvider = new PageProvider(webDriver);
 

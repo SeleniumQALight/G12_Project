@@ -72,7 +72,7 @@ public class PostPage extends ParentPage {
         return this;
     }
 
-    private WebElement getTitleText() {
+    private String getTitleText() {
         return webDriver.findElement(By.xpath("//div[@class='post-title']")).getText();
     }
 }
