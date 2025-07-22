@@ -14,7 +14,6 @@ import org.utils.Utils_Custom;
 import java.util.List;
 
 import static org.data.RegistrationValidationMessages.SEMICOLON;
-import org.pages.elements.HeaderForLoggedUserElement;
 
 public class LoginPage extends ParentPage {
     Logger logger = Logger.getLogger(getClass());
@@ -125,6 +124,11 @@ public class LoginPage extends ParentPage {
     public void checkInputUserNameAndPasswordNotVisible() {
         checkIsElementNotDisplayed(inputUserName);
         checkIsElementNotDisplayed(inputPassword);
+    }
+    public void checkElementsForLoginIsVisible() {
+        checkIsElementDisplayed(inputUserName);
+        checkIsElementDisplayed(inputPassword);
+        checkIsButtonSignInVisible();
     }
 
     public LoginPage enterTextIntoRegistrationUserNameField(String userName) {
