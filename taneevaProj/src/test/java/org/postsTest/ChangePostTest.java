@@ -6,8 +6,8 @@ import org.utils.Utils_Custom;
 
 public class ChangePostTest extends BaseTest {
 
-    final String POST_TITLE = "TR005_G12 HW4_ Anj" + Utils_Custom.getDateAndTimeFormatted();
-    final String UPDATED_TITLE = "TR005_G12 HW4_ Anj_UPDATED" + Utils_Custom.getDateAndTimeFormatted();
+    final String POST_TITLE = "TR005_G12 HW4_ Anj " + Utils_Custom.getDateAndTimeFormatted();
+    final String UPDATED_TITLE = "TR005_G12 HW4_ Anj_UPDATED " + Utils_Custom.getDateAndTimeFormatted();
 
     @Test
     public void TC005_ChangePostTest() {
@@ -24,8 +24,15 @@ public class ChangePostTest extends BaseTest {
                 .enterTextIntoInputTitle(UPDATED_TITLE)
                 .clickOnButtonSaveUpdates()
                 .checkTextInSuccessMessage("Post successfully updated.")
-                .checkTitleIsPresent(UPDATED_TITLE);
+                .clickBackToPostPermalink()
+                .checkTitleIsPresent(UPDATED_TITLE)
+                .clickOnPostTitle(UPDATED_TITLE)
+                .waitForPostTitleVisible(UPDATED_TITLE)
+                .getheaderForLoggedUserElement().clickOnButtonMyProfile()
+                .checkIsRedirectedToMyProfilePage()
+                .checkPostWithTitleIsPresent(UPDATED_TITLE, 1)
+                .deletePostTillPresent(UPDATED_TITLE)
+                .deletePostTillPresent(POST_TITLE);
 
     }
-
 }

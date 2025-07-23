@@ -39,6 +39,9 @@ public class LoginPage extends ParentPage {
     @FindBy(id = "password-register")
     private WebElement inputPasswordInRegistrationForm;
 
+    @FindBy(xpath = "//button[text()='Sign Out']")
+    private WebElement buttonSignOut;
+
     final static String listOfElementsMassagesLocator = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
     @FindBy(xpath = listOfElementsMassagesLocator)
     private List<WebElement> listOfActualMassages;
@@ -174,6 +177,21 @@ public class LoginPage extends ParentPage {
 
     public LoginPage checkSignInButtonIsVisible() {
         checkIsElementDisplayed(buttonSignIn);
+        return this;
+    }
+
+    public LoginPage clickOnSignOutButton() {
+        clickOnElement(buttonSignOut);
+        return this;
+    }
+
+    public LoginPage checkButtonSignOutVisible() {
+        checkIsElementDisplayed(buttonSignOut);
+        return this;
+    }
+
+    public LoginPage checkButtonSignOutNotVisible() {
+        checkIsElementNotDisplayed(buttonSignOut);
         return this;
     }
 
