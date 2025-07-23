@@ -1,5 +1,6 @@
 package org.pages.elements;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -43,17 +44,18 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         checkIsElementDisplayed(buttonSignOut);
     }
 
-    public void checkButtonSignOutNotVisible() {
-        checkIsElementNotDisplayed(buttonSignOut);
+    public void  checkButtonSignOutNotVisible() {
+        try {
+            boolean isDisplayed = buttonSignOut.isDisplayed();
+            Assert.assertFalse("Sign Out button should NOT be visible", isDisplayed);
+        } catch (Exception e) {
+            logger.info("Sign Out button is not visible, as expected");
+        }
     }
 
     public CreateNewPostPage clickOnButtonCreateNewPost() {
         clickOnElement(buttonCreateNewPost);
         return new CreateNewPostPage(webDriver);
-    }
-
-    public void checkButtonCreatePostVisible() {
-        checkIsElementDisplayed(buttonCreateNewPost);
     }
 
     public boolean isButtonSignOutVisible() {
@@ -101,4 +103,9 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         return this;
     }
 
+
+    public void checkButtonCreatePostVisible() {
+        checkIsElementDisplayed(buttonCreateNewPost);
+        logger.info("Create Post button is visible");
+    }
 }
