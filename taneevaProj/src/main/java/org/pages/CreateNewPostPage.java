@@ -21,6 +21,9 @@ public class CreateNewPostPage extends ParentPage {
     @FindBy(tagName = "select") // "//select"
     private WebElement dropdownAccess;
 
+    @FindBy(xpath = ".//button[text()='Save Updates']")
+    private WebElement buttonSaveUpdates;
+
     public CreateNewPostPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -58,5 +61,10 @@ public class CreateNewPostPage extends ParentPage {
         actionsWithCheckbox(checkboxUniquePost, state);
         return this;
 
+    }
+
+    public PostPage clickOnButtonSaveUpdates() {
+        clickOnElement(buttonSaveUpdates);
+        return new PostPage(webDriver);
     }
 }
