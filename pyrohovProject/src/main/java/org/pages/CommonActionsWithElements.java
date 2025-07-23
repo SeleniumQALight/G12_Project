@@ -66,8 +66,8 @@ public class CommonActionsWithElements {  //передача webDriver чере�
     }
 
     /* method checkElementDisplayed
-    * Asserts that the specified WebElement is displayed on the page
-    * param webElement - the WebElement to check
+     * Asserts that the specified WebElement is displayed on the page
+     * param webElement - the WebElement to check
 
      */
     protected void checkIsElementDisplayed(WebElement webElement) {
@@ -76,10 +76,22 @@ public class CommonActionsWithElements {  //передача webDriver чере�
         logger.info("Element is displayed as expected");
     }
 
-        private void printErrorsAndStopTest (Exception e){
-            logger.error("Error while working with element: " + e.getMessage());
-            Assert.fail("Error while working with element: " + e.getMessage());
-        }
+    /* method checkTextInElement
+     * Checks if the specified text is present in the WebElement
+     * param webElement - the WebElement to check
+     * param expectedText - the expected text to find in the element
+     */
+    protected void checkTextInElement(WebElement webElement, String expectedText) {
+        String actualText = webElement.getText(); // отримує текст з елемента
+        Assert.assertEquals("Text in element does not match expected text", expectedText, actualText);
+        logger.info("Text in element matches expected text: " + expectedText);
+
+    }
+
+    private void printErrorsAndStopTest(Exception e) {
+        logger.error("Error while working with element: " + e.getMessage());
+        Assert.fail("Error while working with element: " + e.getMessage());
+    }
 
 
 }
