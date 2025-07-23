@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import static org.data.RegistrationValidationMessages.*;
 
 @RunWith(JUnitParamsRunner.class)
-
 public class ValidationMessagesTest extends BaseTest {
     @Test
     @Parameters(method = "parametersForTestValidationMessages")
@@ -20,14 +19,16 @@ public class ValidationMessagesTest extends BaseTest {
                 .enterTextIntoRegistrationUserNameField(userName)
                 .enterTextIntoRegistrationEmailField(email)
                 .enterTextIntoRegistrationPasswordField(password)
-                .checkErrorMessages(expectedMessages)
-        ;
+                .checkErrorsMessages(expectedMessages)
+                ;
+
     }
 
-    public Object[][] parametersForTestValidationMessages() {
-        return new Object[][] {
-                {"tr", "tr1", "tr2", ERROR_USERNAME + SEMICOLON + ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD},
-                {"kateryna", "tr1", "tr2", ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD}
+    public Object[][] parametersForTestValidationMessages(){
+        return new Object[][]{
+                {"tr", "tr1" , "tr2", ERROR_USERNAME + SEMICOLON + ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD},
+                {"ta", "tr1", "tr2", ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD}
         };
     }
+
 }
