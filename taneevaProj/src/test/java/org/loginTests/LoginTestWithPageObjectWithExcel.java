@@ -16,17 +16,17 @@ public class LoginTestWithPageObjectWithExcel extends BaseTest {
         Map<String, String> dataForValidLogin =
                 ExcelDriver.getData(ConfigProvider.configProperties.DATA_FILE(), "validLogOn");
 
-        pageProvider.getLoginPage().
-                openLoginPage()
+        pageProvider.getLoginPage()
+                .openLoginPage()
                 .enterTextIntoInputLogin(dataForValidLogin.get("login"))
                 .enterTextIntoPassword(dataForValidLogin.get("pass"))
                 .clickOnButtonSignIn();
+        pageProvider.getLoginPage().checkInputUserNameAndPasswordNotVisible();
 
-        pageProvider.getHomePage()
+        pageProvider.getHomePage().getHeaderForLoggedUserElement()
+                .checkButtonSignOutVisible();
+        pageProvider.getHomePage().getHeaderForLoggedUserElement()
                 .checkButtonCreatePostVisible();
-
-        pageProvider.getLoginPage()
-                .checkInputUserNameAndPasswordNotVisible();
     }
 
 }
