@@ -11,7 +11,7 @@ public class LoginTestWithPageObject extends BaseTest {
     public static final String INVALID_PASSWORD_UI = "123456qwerty21";
 
     @Test
-    public void validLoginTest() {
+    public void TC002_validLoginTest() {
         pageProvider.getLoginPage()
                 .openLoginPage()
                 .enterTextInInputLogin(VALID_LOGIN_UI)
@@ -28,7 +28,7 @@ public class LoginTestWithPageObject extends BaseTest {
     }
 
     @Test
-    public void invalidLoginTest() {
+    public void TC004_invalidLoginTest() {
         pageProvider.getLoginPage()
                 .openLoginPage()
                 .enterTextInInputLogin(INVALID_LOGIN_UI)
