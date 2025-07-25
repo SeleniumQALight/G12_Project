@@ -8,8 +8,8 @@ import org.junit.Test;
 import static org.utils.Utils_Custom.getDateAndTimeFormatted;
 
 public class EditPostTest extends BaseTest {
-    final String POST_TITLE_FOR_EDIT = "TR005_G12 - Krainyk Viktoriia on " + getDateAndTimeFormatted();
-    final String EDITED_POST_TITLE = "TR005_G12 - Title has beed edited by Krainyk Viktoriia at " + getDateAndTimeFormatted();
+    final String POST_TITLE_FOR_EDIT = "TR006_G12 - Krainyk Viktoriia on " + getDateAndTimeFormatted();
+    final String EDITED_POST_TITLE = "TR006_G12 - Title has beed edited by Krainyk Viktoriia at " + getDateAndTimeFormatted();
 
     @Before
     public void createTestPost() {
@@ -28,7 +28,7 @@ public class EditPostTest extends BaseTest {
     }
 
     @Test
-    public void TC005_editPostTest() {
+    public void TC006_editPostTest() {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidData()
                 .checkIsRedirectToHomePage()
