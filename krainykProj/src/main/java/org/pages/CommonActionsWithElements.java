@@ -2,6 +2,7 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -89,6 +90,21 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected boolean isElementDisplayed(WebElement webElement, String elementName) {
+        try {
+            boolean state = webElement.isDisplayed();
+            if (state) {
+                logger.info("Element is displayed: " + elementName);
+            } else {
+                logger.info("Element is not displayed: " + elementName);
+            }
+            return state;
+        } catch (Exception e) {
+            logger.info("Element is not found, so it is not displayed");
+            return false;
+        }
+    }
+
     /* Method checkElementDisplayed
      * Asserts that the specified WebElement is displayed on the page.
      * @param webElement - the WebElement to check
@@ -98,7 +114,17 @@ public class CommonActionsWithElements {
         logger.info("Element is displayed as expected");
     }
 
+    protected void checkIsElementDisplayed(WebElement webElement, String elementName) {
+        Assert.assertTrue("Element is not displayed", isElementDisplayed(webElement, elementName));
+        logger.info("Element is displayed as expected");
+    }
+
     protected void checkIsElementNotDisplayed(WebElement webElement) {
+        Assert.assertFalse("Element is displayed", isElementDisplayed(webElement));
+        logger.info("Element is not displayed as expected");
+    }
+
+    protected void checkIsElementNotDisplayed(WebElement webElement, String elementName) {
         Assert.assertFalse("Element is displayed", isElementDisplayed(webElement));
         logger.info("Element is not displayed as expected");
     }
@@ -167,6 +193,11 @@ public class CommonActionsWithElements {
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
+    }
+
+    protected WebElement findElementByLocator(String locator, String text) {
+        return webDriver.findElement(
+                By.xpath(String.format(locator, text)));
     }
 
     //get element name
