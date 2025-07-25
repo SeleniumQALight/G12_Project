@@ -38,7 +38,7 @@ public class MyProfilePage extends ParentPage {
 
     }
 
-    public MyProfilePage checkPostTitleIsPresent(String postTitle, int expectedAmount) {
+    public MyProfilePage checkNewPostTitleIsPresent(String postTitle, int expectedAmount) {
         Assert.assertEquals(
                 "Amount of posts with title '" + postTitle + "'",
                 expectedAmount,
@@ -75,5 +75,16 @@ public class MyProfilePage extends ParentPage {
         checkIsElementDisplayed(successMessageDelete);
         return this;
 
+    }
+
+    public void clickOnPostTitle(String postTitleChange) {
+        List<WebElement> postsList = getListOfPostsWithTitle(postTitleChange);
+        if (postsList.isEmpty()) {
+            logger.error("Post with title '" + postTitleChange + "' is not present");
+            Assert.fail("Post with title '" + postTitleChange + "' is not present");
+        } else {
+            clickOnElement(postsList.get(0), "Post with title '" + postTitleChange + "'");
+            new PostPage(webDriver).checkIsRedirectToPostPage();
+        }
     }
 }

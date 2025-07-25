@@ -101,6 +101,10 @@ public class CommonActionsWithElements {
         Assert.assertTrue("Element is not displayed", isElementDisplayed(webElement));
     }
 
+    protected void checkIsElementIsNotDisplayed(WebElement webElement) {
+        Assert.assertFalse("Element is displayed, but it should not be", isElementDisplayed(webElement));
+    }
+
 
     /* Method checkTextInElement
      * Checks if the text of the specified WebElement matches the expected text.
