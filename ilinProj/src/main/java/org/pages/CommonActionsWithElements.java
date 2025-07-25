@@ -2,17 +2,30 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.utils.ConfigProvider;
+
+
+import java.time.Duration;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
     private Logger logger = Logger.getLogger(getClass());
+    protected WebDriverWait webDriverWait10, webDriverWait15;
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);// ініціалізує елементи описані в FindBy; в this прийдуть усі елементи з яких ми прийдепо (LoginPage, HomePage)
+        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(ConfigProvider.configProperties.TIME_FOR_EXPLICIT_WAIT_LOW()));
+        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(ConfigProvider.configProperties.TIME_FOR_DEFAULT_WAIT()));
+
     }
 
     /* Method clearAndEnterTextToElement
@@ -24,10 +37,10 @@ public class CommonActionsWithElements {
         try {
             webElement.clear();
             webElement.sendKeys(text);
-            logger.info(text + " was entered in element: " + webElement);
+            logger.info(text + " was entered in element "  + getElementName(webElement));
         } catch (Exception e) {
-            logger.error("Error while working with element: " + e.getMessage());
-            Assert.fail("Error while working with element: " + e.getMessage());
+            logger.error("Error while working with element" );
+            Assert.fail("Error while working with element" );
         }
     }
 
@@ -37,11 +50,26 @@ public class CommonActionsWithElements {
      */
     protected void clickOnElement(WebElement webElement) {
         try {
-            webElement.click();
-            logger.info("Element was clicked: " + webElement);
+            webDriverWait10
+                    .withMessage("Element is not clickable: " + webElement)
+                    .until(ExpectedConditions.elementToBeClickable(webElement));
+                    String elementName = getElementName(webElement);
+                    webElement.click();
+            logger.info(getElementName(webElement) + " element was clicked");
         } catch (Exception e) {
-            logger.error("Error while clicking on element: " + e.getMessage());
-            Assert.fail("Error while clicking on element: " + e.getMessage());
+            printErrorAndStopTest(e);
+        }
+    }
+
+    protected void clickOnElement(WebElement webElement, String elementName) {
+        try {
+            webDriverWait10
+                    .withMessage("Element is not clickable: " + webElement)
+                    .until(ExpectedConditions.elementToBeClickable(webElement));
+            webElement.click();
+            logger.info(elementName + " was clicked");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
         }
     }
 
@@ -54,9 +82,9 @@ public class CommonActionsWithElements {
         try {
             boolean state = webElement.isDisplayed();
             if (state) {
-                logger.info("Element is displayed: ");
+                logger.info(getElementName(webElement) + " element is displayed");
             } else {
-                logger.info("Element is not displayed: ");
+                logger.info(getElementName(webElement) + " element is not displayed");
             }
             return state;
         } catch (Exception e) {
@@ -84,6 +112,70 @@ public class CommonActionsWithElements {
         String actualText = webElement.getText();
         Assert.assertEquals("Text in element does not match expected text", expectedText, actualText);
         logger.info("Text in element matches expected text: " + expectedText);
+    }
+
+    //select test in DropDown
+    protected void selectTextInDropDown(WebElement webElement, String text) {
+        try {
+            Select select = new Select(webElement);
+            select.selectByVisibleText(text);
+            logger.info("Text '" + text + "' was selected in dropdown "  + getElementName(webElement));
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    // select value in DropDown
+    protected void selectValueInDropDown(WebElement webElement, String value) {
+        try {
+            Select select = new Select(webElement);
+            select.selectByValue(value);
+            logger.info("Value '" + value + "' was selected in dropdown " + getElementName(webElement));
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    // accept Alert
+    protected void acceptAlert() {
+        try {
+            webDriverWait10.until(ExpectedConditions.alertIsPresent());
+            webDriver.switchTo().alert().accept();
+            logger.info("Alert was accepted");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    //scroll to element using Actions
+    protected void scrollToElement(WebElement webElement) {
+        try{
+            Actions actions = new Actions(webDriver);
+            actions.moveToElement(webElement).perform();
+            logger.info("Scrolled to element: " + getElementName(webElement));
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    // open new tab
+    protected void openNewTab() {
+        try{
+            ((JavascriptExecutor) webDriver).executeScript("window.open();");
+            logger.info("New tab was opened");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+
+    //get element name
+    private String getElementName(WebElement webElement){
+        try {
+            return webElement.getAccessibleName();
+        } catch (Exception e) {
+            return "";
+        }
     }
 
     private void printErrorAndStopTest(Exception e) {

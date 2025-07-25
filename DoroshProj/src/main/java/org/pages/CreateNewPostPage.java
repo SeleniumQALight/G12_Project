@@ -15,18 +15,29 @@ public class CreateNewPostPage extends ParentPage {
     @FindBy(xpath = "//button[text()='Save New Post']")
     private WebElement buttonSaveNewPost;
 
+    @FindBy(xpath = "//input[@name='uniquePost']")
+    private WebElement checkboxUniquePost;
+
+    @FindBy(tagName = "select") //"//select"
+    private WebElement dropdownAccess;
+
     public CreateNewPostPage(WebDriver webDriver) {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeURL() {
+        return "/create-post";
+    }
+
     public CreateNewPostPage checkIsRedirectToCreateNewPostPage() {
-        // TODO check URL
+        checkURL();
         // TODO check same unique element on the page
         return this;
     }
 
     public CreateNewPostPage enterTextIntoInputTitle(String title) {
-clearAndEnterTextToElement(inputTitle,title);
+        clearAndEnterTextToElement(inputTitle, title);
         return this;
     }
 
@@ -35,8 +46,18 @@ clearAndEnterTextToElement(inputTitle,title);
         return this;
     }
 
+    public CreateNewPostPage clickOnCheckboxUniguePost() {
+        actionsWithCheckbox(checkboxUniquePost, "check");
+        return this;
+    }
+
     public PostPage clickOnButtonSaveNewPost() {
         clickOnElement(buttonSaveNewPost);
         return new PostPage(webDriver);
+    }
+
+    public CreateNewPostPage selectTextInDropdownAccess(String textForSelection) {
+       selectTextInDropdown(dropdownAccess, textForSelection);
+        return this;
     }
 }

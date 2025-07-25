@@ -1,47 +1,46 @@
 package pages;
 
+import data.TestData;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import pages.elements.HeaderForLoggedUserElement;
 
 public class HomePage extends ParentPage {
-//    Logger logger = Logger.getLogger(getClass());
-
-    @FindBy(xpath = "//button[text()='Sign Out']")
-    private WebElement buttonSignOut;
-
-    @FindBy(xpath = "//a[@class='btn btn-sm btn-success mr-2']")
-    private WebElement clickOnButtonCreatePost;
+    Logger logger = Logger.getLogger(getClass());
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public void checkButtonSignOutVisible() {
-//        Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
-        checkIsElementDisplayed(buttonSignOut);
+    @Override
+    protected String getRelativeUrl() {
+        return "/";
+    }
+
+    public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
+        return new HeaderForLoggedUserElement(webDriver);
     }
 
     public HomePage checkIsRedirectToHomePage() {
-        //TODO check URL
-        checkButtonSignOutVisible();
+        checkUrl();
+        getHeaderForLoggedUserElement().checkButtonSignOutVisible();
         return this;
     }
 
-    public CreateNewPostPage clickOnButtonCreatePost() {
-        clickOnElement(clickOnButtonCreatePost);
-        return new CreateNewPostPage(webDriver);
-    }
+    public HomePage openHomePageAndLoginIfNeeded() {
+        LoginPage loginPage = new LoginPage(webDriver);
+        loginPage.openLoginPage();
+        if (getHeaderForLoggedUserElement().isButtonSignOutVisible()) {
+            logger.info("User is already logged in, no need to login again.");
+        } else {
+            loginPage.enterTextIntoInputLogin(TestData.VALID_LOGIN_UI)
+                    .enterTextIntoPassword(TestData.VALID_PASSWORD_UI)
+                    .clickOnButtonSignIn();
+            checkIsRedirectToHomePage();
+            logger.info("User logged in successfully.");
 
-//    private boolean isButtonSignOutVisible() {
-//        try {
-//            boolean state = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
-//            logger.info("is element visible - " + state);
-//            return state;
-//        } catch (Exception e) {
-//            logger.info("Element SignOut is not visible");
-//            return false;
-//        }
-//    }
+        }
+        return this;
+    }
 }
+

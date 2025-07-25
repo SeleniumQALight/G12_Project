@@ -1,18 +1,24 @@
 package org.postsTests;
 
 import org.baseTest.BaseTest;
+import org.junit.After;
 import org.junit.Test;
+import org.utils.Utils_Custom;
 
 public class CreateNewPostTest extends BaseTest {
+
+    final String POST_TITLE = "TR001_G12 Kuchmenko" + Utils_Custom.getDateAndTimeFormatted();
+
     @Test
-    public void createNewPost(){
+    public void TR001_createNewPost() {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidCred()
                 .checkIsRedirectToHomePage()
-                .clickOnButtonCreateNewPost()
+                .getHeaderForLoggedUserElement().clickOnButtonCreateNewPost()
                 .checkIsRedirectToCreateNewPostPage()
-                .enterTextIntoInputTitle("G12 Kuchmenko Post Title")
+                .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("G12 Kuchmenko Post Body")
+                .selectTextInDropdownAccess("Приватне повідомлення") // Private post
                 .clickOnSaveNewPostButton()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMassageDisplayed()
@@ -20,5 +26,22 @@ public class CreateNewPostTest extends BaseTest {
 
         ;
 
+        pageProvider.getPostPage()
+                .getHeaderForLoggedUserElement().clickOnButtonMyProfile()
+                .checkIsRedirectedToMyProfilePage()
+                .checkPostTitleIsDisplayed(POST_TITLE, 1)
+        ;
+
+    }
+
+    @After
+    public void deletePostAfterTest() {
+        logger.info("Post condition - delete posts");
+        pageProvider.getHomePage()
+                .openHomePageAndLoginIfNeeded()
+                .getHeaderForLoggedUserElement().clickOnButtonMyProfile()
+                .checkIsRedirectedToMyProfilePage()
+                .deletePostsTillPresent(POST_TITLE)
+        ;
     }
 }

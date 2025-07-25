@@ -2,6 +2,8 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.data.TestData;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,8 +20,16 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
 
+    @FindBy(xpath = "//div[text()='Invalid username/password.']")
+    private WebElement alertTextMessage;
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
+    }
+
+    @Override
+    protected String getRelatedURL() {
+        return "/";
     }
 
     public LoginPage openLoginPage() {
@@ -52,8 +62,32 @@ public class LoginPage extends ParentPage {
 //        buttonSignIn.click();
 //        logger.info("Button Sinn In was clicked");
         clickOnElement(buttonSignIn);
-
     }
+    public LoginPage checkButtonSignInVisible() {
+        checkIsElementDisplayed(buttonSignIn);
+        return this;
+    }
+
+    public LoginPage checkAlertMessageVisible() {
+        checkIsElementDisplayed(alertTextMessage);
+        logger.info("Alert message is displayed");
+        return this;
+    }
+
+    public LoginPage checkTextInAlertMessage(String expectedText) {
+        checkTextInElement(alertTextMessage, expectedText);
+        logger.info("Alert message text is checked: " + expectedText);
+        return this;
+    }
+    public LoginPage checkInputUserNameAndPasswordNotVisible() {
+        Assert.assertTrue("Username input should NOT be visible",
+                webDriver.findElements(By.xpath("//input[@placeholder='Username']")).isEmpty());
+        Assert.assertTrue("Password input should NOT be visible",
+                webDriver.findElements(By.xpath("//input[@placeholder='Password']")).isEmpty());
+        return this;
+    }
+
+
     /**
      * Method openLoginPageAndFIllLoginFormWithValidCred
      * Opens the login page and fills in the login form with valid credentials.

@@ -6,6 +6,7 @@ import org.junit.Test;
 import static org.data.TestData.*;
 
 public class LoginTestWithPageObject extends BaseTest {
+  
     @Test
     public void validLogin(){
         pageProvider.getLoginPage().openLoginPage()
@@ -29,6 +30,10 @@ public class LoginTestWithPageObject extends BaseTest {
         pageProvider.getHomePage().checkIsButtonSignOutNotVisible();
         pageProvider.getLoginPage().checkIsButtonSignInVisible();
         pageProvider.getLoginPage().checkIsInvalidLoginMessageVisible();
+        pageProvider.getHomePage()
+                .getHeaderForLoggedUserElement().checkButtonSignOutVisible()
+        ;
+
     }
 }
 

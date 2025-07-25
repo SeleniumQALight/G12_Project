@@ -14,7 +14,29 @@ public class LoginTestWithPageObject extends BaseTest {
                 .enterTextIntoPassword(VALID_PASSWORD_UI)
                 .clickOnButtonSignIn();
 
-        pageProvider.getHomePage().checkButtonSignOutVisible();
+        pageProvider.getHomePage()
+                .checkButtonCreatePostVisible();
 
+        pageProvider.getLoginPage()
+                .checkInputUserNameAndPasswordNotVisible();
+
+    }
+
+    @Test
+    public void invalidLogin() {
+        pageProvider.getLoginPage()
+                .openLoginPage()
+                .enterTextIntoInputLogin("InvalidUser")
+                .enterTextIntoPassword("WrongPassword")
+                .clickOnButtonSignIn();
+
+        pageProvider.getLoginPage()
+                .checkButtonSignInVisible()
+                .checkAlertMessageVisible()
+                .checkTextInAlertMessage("Invalid username/password.");
+
+        pageProvider.getHomePage()
+                .getHeaderForLoggedUserElement()
+                .checkButtonSignOutNotVisible();
     }
 }
