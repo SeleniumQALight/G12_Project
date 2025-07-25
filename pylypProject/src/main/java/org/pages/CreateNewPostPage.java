@@ -17,6 +17,8 @@ public class CreateNewPostPage extends ParentPage {
     @FindBy(tagName = "select")
     private WebElement dropdownAccess;
 
+    @FindBy(xpath = ".//button[text()='Save Updates']")
+    private WebElement buttonSaveUpdates;
 
     public CreateNewPostPage(WebDriver webDriver) {
         super(webDriver);
@@ -48,8 +50,13 @@ public class CreateNewPostPage extends ParentPage {
         return new PostPage(webDriver);
     }
 
-    public CreateNewPostPage selectTextInDropdownAccess(String textForSelectiom) {
-        selectTextInDropDown(dropdownAccess, textForSelectiom);
+    public PostPage clickOnSaveUpdatesButton() {
+        clickOnElement(buttonSaveUpdates);
+        return new PostPage(webDriver);
+    }
+
+    public CreateNewPostPage selectTextInDropdownAccess (String textForSelection) {
+        selectTextInDropDown(dropdownAccess, textForSelection); // виклик методу з CommonActionsWithElements
         return this;
     }
 }

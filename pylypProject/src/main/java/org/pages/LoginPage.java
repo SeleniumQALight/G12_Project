@@ -133,4 +133,25 @@ public class LoginPage extends ParentPage {
         softAssertions.assertAll();
         return this;
     }
+
+    public LoginPage checkIsRedirectedToLoginPage() {
+        checkUrl(); // перевіряє, що URL співпадає з "/"
+        checkIsElementDisplayed(buttonSignIn); // Sign In — точно є на LoginPage
+        return this;
+    }
+
+    public LoginPage checkIsLoginInputVisible() {
+        checkIsElementDisplayed(inputUserName);
+        return this;
+    }
+
+    public LoginPage checkIsPasswordInputVisible() {
+        checkIsElementDisplayed(inputPassword);
+        return this;
+    }
+
+    public LoginPage checkIsSignInButtonVisible() {
+        checkIsElementDisplayed(buttonSignIn);
+        return this;
+    }
 }

@@ -2,6 +2,7 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -109,6 +110,15 @@ public class CommonActionsWithElements {
             logger.info("Text in element matches expected text: " + expectedText);
         }
 
+    protected boolean isElementWithTextPresent(String xpathLocator, String text) {
+        try {
+            return webDriver.findElement(By.xpath(String.format(xpathLocator + "[text()='%s']", text))).isDisplayed();
+        } catch (Exception e) {
+            logger.info("Element with text '" + text + "' not found for locator: " + xpathLocator);
+            return false;
+        }
+    }
+
         // select test in DropDown
     protected void selectTextInDropDown(WebElement webElement, String text) {
         try {
@@ -155,4 +165,15 @@ public class CommonActionsWithElements {
         Assert.fail("Error while working with element " + e.getMessage());
     }
 
+    protected void clickOnElement(By locator) {
+        try {
+            WebElement element = webDriverWait10
+                    .withMessage("Element is not clickable: " + locator)
+                    .until(ExpectedConditions.elementToBeClickable(locator));
+            element.click();
+            logger.info("Element found by locator " + locator + " was clicked");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
 }

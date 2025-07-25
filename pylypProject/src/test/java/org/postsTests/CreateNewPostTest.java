@@ -22,7 +22,7 @@ public class CreateNewPostTest extends BaseTest {
                 .selectTextInDropdownAccess("Приватне повідомлення")
                 .clickOnSaveNewPostButton()
                 .checkIsRedirectedToPostPage()
-                .checkIsSuccessMassageDisplayed()
+                .checkIsSuccessMessageDisplayed()
                 .checkTextIsSuccessMessage("New post successfully created.")
         ;
 

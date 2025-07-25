@@ -34,5 +34,4 @@ abstract public class ParentPage extends CommonActionsWithElements {
                         "\n Actual url: " + webDriver.getCurrentUrl(),
                 webDriver.getCurrentUrl().matches(baseURL + getRelativeUrl ()));
     }
-
 }
