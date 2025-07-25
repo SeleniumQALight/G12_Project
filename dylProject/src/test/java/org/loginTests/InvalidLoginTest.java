@@ -12,6 +12,6 @@ public class InvalidLoginTest extends BaseTest {
                 .checkIsButtonSignInVisible()
                 .checkIsUnsuccessMessageDisplayed()
                 .checkTextInUnsuccessMessage()
-                .getHeaderForLoggedUserElement().checkButtonSignOutNotVisible();
+                .getHeaderForLoggedUserElement().checkButtonSignOutIsNotVisible();
     }
 }

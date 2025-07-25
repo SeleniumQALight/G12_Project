@@ -3,6 +3,7 @@ package org.pages;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -221,5 +222,10 @@ logger.error ("Checkbox not found");
     private void printErrorAndStopTest(Exception e) {
         logger.error("Error while working with element " + e.getMessage());
         Assert.fail("Error while working with element " + e.getMessage());
+    }
+
+    protected WebElement findElementByLocator(String locator,String text) {
+        return webDriver.findElement(
+                By.xpath(String.format(locator, text)));
     }
 }
