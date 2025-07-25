@@ -52,7 +52,7 @@ public class EditPostTest extends BaseTest {
     }
 
     @After
-    public void deleteChangedOrNotChangedPost() {
+    public void deleteEditedOrNotEditedPost() {
         logger.info("POSTCONDITION: delete updated or not updated post");
         pageProvider.getHomePage()
                 .openHomePageAndLoginIfNeeded()
