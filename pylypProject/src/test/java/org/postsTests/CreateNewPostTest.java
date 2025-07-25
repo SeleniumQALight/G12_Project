@@ -19,11 +19,13 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectedToCreateNewPostPage()
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("G12 Olesia Post Body")
+                .setCheckboxState("check")
                 .selectTextInDropdownAccess("Приватне повідомлення")
                 .clickOnSaveNewPostButton()
                 .checkIsRedirectedToPostPage()
                 .checkIsSuccessMassageDisplayed()
                 .checkTextIsSuccessMessage("New post successfully created.")
+                .checkCheckboxValueIs("yes")
         ;
 
         pageProvider.getPostsPage()

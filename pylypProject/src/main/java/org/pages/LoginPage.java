@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.data.TestData;
 import org.junit.Assert;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,8 +13,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.utils.Utils_Custom;
 
 import java.util.List;
-
 import static org.data.RegistrationValidationMessages.SEMICOLON;
+import java.util.List;
 
 public class LoginPage extends ParentPage {
     private Logger logger = Logger.getLogger(getClass());
@@ -26,6 +27,9 @@ public class LoginPage extends ParentPage {
 
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
+
+    @FindBy(xpath = "//div[contains(text(),'Invalid username/password.')]")
+    private WebElement invalidLoginMessage;
 
     @FindBy(id = "username-register")  // xpath = ".//*[@id='username-register']"
     private WebElement inputUserNameRegistrationForm;
@@ -53,7 +57,6 @@ public class LoginPage extends ParentPage {
         webDriver.get(baseURL);
         logger.info("Login page was opened with url " + baseURL);
         return this;
-
     }
 
     public LoginPage enterTextIntoInputLogin(String login) {
@@ -94,6 +97,19 @@ public class LoginPage extends ParentPage {
         this.enterTextIntoPassword(TestData.VALID_PASSWORD_UI);
         this.clickOnButtonSignIn();
         return new HomePage(webDriver);
+    }
+
+    // перевірка, що кнопка Sign In показується
+    public LoginPage checkIsButtonSignInVisible() {
+        checkIsElementDisplayed(buttonSignIn);
+        return this;
+    }
+
+    // перевірка повідомлення про невірний логін
+    public LoginPage checkIsInvalidLoginMessageVisible() {
+        checkIsElementDisplayed(invalidLoginMessage);
+        checkTextInElement(invalidLoginMessage, "Invalid username/password.");
+        return this;
     }
 
     public LoginPage enterTextIntoRegistrationUserNameField(String userName) {
