@@ -15,7 +15,7 @@ public class CreateNewPostTest extends BaseTest {
     final String POST_UNIQUE = "check"; // or "uncheck" for non-unique posts. Pay attention that the checkbox is not checked by default
 
     @Test
-    public void TR001_createNewPostTest() {
+    public void TC001_createNewPostTest() {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidData()
                 .checkIsRedirectToHomePage()
