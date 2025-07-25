@@ -40,6 +40,9 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = listOfActualMessagesLocator)
     private List<WebElement> listOfActualMessages;
 
+    @FindBy(xpath = "//div[@class='alert alert-danger text-center']")
+    private WebElement invalidMessage;
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -89,6 +92,35 @@ public class LoginPage extends ParentPage {
         this.enterTextIntoPassword(TestData.VALID_PASSWORD_UI);
         clickOnButtonSignIn();
         return new HomePage(webDriver);
+    }
+
+    public HomePage openLoginPageAndFillLoginFormWithInvalidCred() {
+        openLoginPage();
+        this.enterTextIntoInputLogin("invalidLogin");
+        this.enterTextIntoPassword("invalidPassword");
+        clickOnButtonSignIn();
+        return new HomePage(webDriver);
+    }
+
+    public LoginPage verifyButtonSignInIsVisible() {
+        checkIsElementDisplayed(buttonSignIn);
+        return this;
+    }
+
+
+    public LoginPage verifyInvalidMessageIsVisible() {
+        checkIsElementDisplayed(invalidMessage);
+        return this;
+    }
+
+    public LoginPage verifyTextOfInvalidMessage() {
+        checkTextInElement(invalidMessage,"Invalid username/password.");
+        return this;
+    }
+
+    public void verifyInputsIsNotVisible() {
+        checkIsElementIsNotDisplayed(inputUserName);
+        checkIsElementIsNotDisplayed(inputPassword);
     }
 
     public LoginPage enterTextIntoRegistrationUserNameField(String userName) {
