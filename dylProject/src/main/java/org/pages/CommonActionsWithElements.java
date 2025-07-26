@@ -275,6 +275,15 @@ public void pressKey(Keys key, int quantity) {
     }
 }
 
+    public void pressKey(Keys key) {
+        try {
+                actions.sendKeys(key).perform();
+                logger.info(key.name() + " key was pressed on the page");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
 public void enterTextWithActions(String text) {
     try {
         actions.sendKeys(text).perform();

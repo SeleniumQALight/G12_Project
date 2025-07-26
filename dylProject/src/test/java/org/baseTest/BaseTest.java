@@ -34,8 +34,6 @@ public class BaseTest {
                 ConfigProvider.configProperties.TIME_FOR_IMPLICIT_WAIT(), TimeUnit.SECONDS);
         logger.info("Browser was opened");
         pageProvider = new PageProvider(webDriver);
-        commonActionsWithElements = new CommonActionsWithElements(webDriver);
-
     }
 
     @After

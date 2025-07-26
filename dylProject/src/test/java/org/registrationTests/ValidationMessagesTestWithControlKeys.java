@@ -10,14 +10,13 @@ public class ValidationMessagesTestWithControlKeys extends BaseTest {
     @Test
     public void ValidationMessagesWithControlKeys() {
         pageProvider.getLoginPage()
-                .openLoginPage();
-        commonActionsWithElements.pressKey(Keys.TAB, 5);
-        commonActionsWithElements.enterTextWithActions("aa");
-        commonActionsWithElements.pressKey(Keys.TAB, 1);
-        commonActionsWithElements.enterTextWithActions("bb");
-        commonActionsWithElements.pressKey(Keys.TAB, 1);
-        commonActionsWithElements.enterTextWithActions("cc");
-        commonActionsWithElements.pressKey(Keys.ENTER, 1);
+                .openLoginPage().pressKey(Keys.TAB, 5);
+        pageProvider.getLoginPage().enterTextWithActions("aa");
+        pageProvider.getLoginPage().pressKey(Keys.TAB);
+        pageProvider.getLoginPage().enterTextWithActions("bb");
+        pageProvider.getLoginPage().pressKey(Keys.TAB);
+        pageProvider.getLoginPage().enterTextWithActions("cc");
+        pageProvider.getLoginPage().pressKey(Keys.ENTER);
         pageProvider.getLoginPage()
                 .checkErrorsMessages(ERROR_USERNAME + SEMICOLON
                         + ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD);

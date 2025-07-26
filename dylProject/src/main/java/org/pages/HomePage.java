@@ -52,11 +52,6 @@ public class HomePage extends ParentPage {
         return this;
     }
 
-    public void getHeaderAndCheckButtonSignOut() {
-        HeaderForLoggedUserElement header = getHeaderForLoggedUserElement();
-        header.checkButtonSignOutVisible();
-    }
-
 }
 
 

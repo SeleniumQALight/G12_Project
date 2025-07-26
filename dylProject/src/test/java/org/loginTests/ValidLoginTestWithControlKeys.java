@@ -14,10 +14,10 @@ public class ValidLoginTestWithControlKeys extends BaseTest {
         pageProvider.getLoginPage()
                 .openLoginPage()
                 .pressKey(Keys.TAB, 2);
-        commonActionsWithElements.enterTextWithActions(VALID_LOGIN_UI);
-        commonActionsWithElements.pressKey(Keys.TAB, 1);
-        commonActionsWithElements.enterTextWithActions(TestData.VALID_PASSWORD_UI);
-        commonActionsWithElements.pressKey(Keys.ENTER, 1);
+        pageProvider.getLoginPage().enterTextWithActions(VALID_LOGIN_UI);
+        pageProvider.getLoginPage().pressKey(Keys.TAB);
+        pageProvider.getLoginPage().enterTextWithActions(TestData.VALID_PASSWORD_UI);
+        pageProvider.getLoginPage().pressKey(Keys.ENTER);
         pageProvider.getHomePage()
                 .getHeaderForLoggedUserElement()
                 .checkButtonSignOutVisible();

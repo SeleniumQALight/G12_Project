@@ -9,19 +9,24 @@ public class LoginTestWithJavaScript extends BaseTest {
     public void loginTestWithJavaScript() {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidCred()
-                .getHeaderAndCheckButtonSignOut();
-        commonActionsWithElements.openNewTab();
-        commonActionsWithElements.switchToNewTab();
+                .getHeaderForLoggedUserElement()
+                .checkButtonSignOutVisible();
+        pageProvider.getLoginPage()
+                .openNewTab();
+        pageProvider.getLoginPage().switchToNewTab();
         pageProvider.getLoginPage()
                 .openLoginPage();
         pageProvider.getHomePage()
-                .getHeaderAndCheckButtonSignOut();
-        commonActionsWithElements.switchToNewTab();
+                .getHeaderForLoggedUserElement()
+                .checkButtonSignOutVisible();
+        pageProvider.getLoginPage().switchToNewTab();
         pageProvider.getHomePage()
-                .getHeaderAndCheckButtonSignOut();
-        commonActionsWithElements
+                .getHeaderForLoggedUserElement()
+                .checkButtonSignOutVisible();
+        pageProvider.getHomePage()
                 .closeNewTabAndSwitchToOriginal();
         pageProvider.getHomePage()
-                .getHeaderAndCheckButtonSignOut();
+                .getHeaderForLoggedUserElement()
+                .checkButtonSignOutVisible();
     }
 }

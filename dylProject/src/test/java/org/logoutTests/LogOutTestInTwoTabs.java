@@ -9,19 +9,21 @@ public class LogOutTestInTwoTabs extends BaseTest {
     public void logOutInTwoTabs() {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidCred()
-                .getHeaderAndCheckButtonSignOut();
-        commonActionsWithElements.openNewTab();
-        commonActionsWithElements.switchToNewTab();
+                .getHeaderForLoggedUserElement()
+                .checkButtonSignOutVisible();
+        pageProvider.getLoginPage().openNewTab();
+        pageProvider.getLoginPage().switchToNewTab();
         pageProvider.getLoginPage().openLoginPage();
         pageProvider.getHomePage()
-                .getHeaderAndCheckButtonSignOut();
-        commonActionsWithElements.switchToNewTab();
+                .getHeaderForLoggedUserElement()
+                .checkButtonSignOutVisible();
+        pageProvider.getHomePage().switchToNewTab();
         pageProvider.getHomePage().
                 getHeaderForLoggedUserElement().clickOnButtonSignOut();
         pageProvider.getHomePage()
                 .getHeaderForLoggedUserElement().checkButtonSignOutNotVisible();
-        commonActionsWithElements.switchToNewTab();
-        commonActionsWithElements.refreshPage();
+        pageProvider.getHomePage().switchToNewTab();
+        pageProvider.getHomePage().refreshPage();
         pageProvider.getHomePage()
                 .getHeaderForLoggedUserElement().checkButtonSignOutNotVisible();
 

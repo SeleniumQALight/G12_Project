@@ -12,8 +12,8 @@ public class LoginTestWithRefresh extends BaseTest {
     public void loginTestWithRefresh() {
         pageProvider.getLoginPage().openLoginPage()
                 .enterTextIntoInputLogin(VALID_LOGIN_UI)
-                .enterTextIntoPassword(VALID_PASSWORD_UI);
-        commonActionsWithElements.refreshPage();
+                .enterTextIntoPassword(VALID_PASSWORD_UI)
+                .refreshPage();
         pageProvider.getLoginPage()
                 .clickOnButtonSignIn();
         pageProvider.getHomePage()
