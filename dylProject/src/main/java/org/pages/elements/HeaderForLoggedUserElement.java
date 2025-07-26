@@ -50,6 +50,10 @@ public MyProfilePage clickOnButtonMyProfile() {
     public boolean isButtonSignOutVisible() {
         return isElementDisplayed(buttonSignOut);
     }
+
+    public void clickOnButtonSignOut() {
+        clickOnElement(buttonSignOut);
+    }
 }
 
 
