@@ -279,6 +279,15 @@ public class CommonActionsWithElements {
         }
     }
 
+    public void refreshPage() {
+        try {
+            webDriver.navigate().refresh();  // Метод для обновления страницы
+            logger.info("Page refreshed successfully");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);  // Обработка ошибок
+        }
+    }
+
 }
 
 
