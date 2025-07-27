@@ -97,4 +97,9 @@ public class LoginPage extends ParentPage {
                 isElementDisplayed(unsuccessMessage));
         return this;
     }
+
+    public LoginPage checkTextInUnsuccessMessage() {
+        checkTextInElement(unsuccessMessage,"Invalid username/password.");
+        return new LoginPage(webDriver);
+    }
 }

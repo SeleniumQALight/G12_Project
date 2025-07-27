@@ -9,7 +9,9 @@ public class InvalidLoginTest extends BaseTest {
                 .openLoginPageAndFillLoginFormWithInvalidValidCred("test","000000")
                 .checkIsButtonSignInVisible()
                 .checkIsUnsuccessMessageDisplayed()
-                .checkIsButtonSignOutIsNotVisible();
+                .checkIsButtonSignOutIsNotVisible()
+                .checkTextInUnsuccessMessage();
+                pageProvider.getHomePage().getHeaderForLoggedUserElement().isButtonSighnOutVisible();
     }
 
 
