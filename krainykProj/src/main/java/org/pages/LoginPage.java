@@ -88,8 +88,18 @@ public class LoginPage extends ParentPage {
         clickOnElement(buttonSignIn);
     }
 
+    public LoginPage checkInputloginIsVisible() {
+        checkIsElementDisplayed(inputUsername);
+        return this;
+    }
+
     public LoginPage checkInputloginIsNotVisible() {
         checkIsElementNotDisplayed(inputUsername);
+        return this;
+    }
+
+    public LoginPage checkInputPasswordIsVisible() {
+        checkIsElementDisplayed(inputPassword);
         return this;
     }
 
@@ -112,6 +122,13 @@ public class LoginPage extends ParentPage {
 
     public LoginPage checktextInErrorMessage(String expectedText) {
         checkTextInElement(errorMessage, expectedText);
+        return this;
+    }
+
+    public LoginPage checkElementsForLoginIsVisible() {
+        checkInputloginIsVisible();
+        checkInputPasswordIsVisible();
+        checkSingInButtonIsVisible();
         return this;
     }
 
