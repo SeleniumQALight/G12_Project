@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.pages.elements.HeaderForLoggedUserElement;
@@ -61,7 +62,7 @@ public class LoginPage extends ParentPage {
 
 
     public LoginPage enterTextIntoInputLogin(String login) {
- //       WebElement inputUserName = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
+        //       WebElement inputUserName = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
 //        inputUserName.clear();
 //        inputUserName.sendKeys(login);
 //        logger.info(login + " was entered in input UserName");
@@ -84,6 +85,7 @@ public class LoginPage extends ParentPage {
 //        logger.info("Button Sinn In was clicked");
         clickOnElement(buttonSignIn);
     }
+
     public LoginPage checkButtonSignInVisible() {
         checkIsElementDisplayed(buttonSignIn);
         return this;
@@ -100,6 +102,7 @@ public class LoginPage extends ParentPage {
         logger.info("Alert message text is checked: " + expectedText);
         return this;
     }
+
     public LoginPage checkInputUserNameAndPasswordNotVisible() {
         Assert.assertTrue("Username input should NOT be visible",
                 webDriver.findElements(By.xpath("//input[@placeholder='Username']")).isEmpty());
@@ -112,6 +115,7 @@ public class LoginPage extends ParentPage {
     /**
      * Method openLoginPageAndFIllLoginFormWithValidCred
      * Opens the login page and fills in the login form with valid credentials.
+     *
      * @return HomePage - returns an instance of HomePage after successful login.
      */
 
@@ -159,10 +163,10 @@ public class LoginPage extends ParentPage {
         softAssertions.assertAll();
 
 
-
         return this;
     }
-//HW 4 LogOutTest
+
+    //HW 4 LogOutTest
     public LoginPage checkLoginFieldIsVisible() {
         checkIsElementDisplayed(inputUserName);
         return this;
@@ -175,6 +179,33 @@ public class LoginPage extends ParentPage {
 
     public LoginPage checkSignInButtonIsVisible() {
         checkIsElementDisplayed(buttonSignIn);
+        return this;
+    }
+
+    //HW5
+    public LoginPage pressEnterOnSignUpButton() {
+        Actions actions = new Actions(webDriver);
+        actions.sendKeys("\uE007").build().perform(); // "\uE007" – це Enter
+        logger.info("Pressed Enter on Sign Up");
+        return this;
+    }
+
+    public LoginPage checkErrorMessagesCount(int expectedCount) {
+        webDriverWait10.until(ExpectedConditions.numberOfElementsToBe(
+                By.xpath(listOfElementsMassagesLocator), expectedCount
+        ));
+
+        Assert.assertEquals("Count of error messages", expectedCount, listOfActualMassages.size());
+        logger.info("Checked error messages count: " + expectedCount);
+        return this;
+    }
+
+    public LoginPage checkTextInErrorMessages(String expectedText) {
+        boolean isTextPresent = listOfActualMassages.stream()
+                .anyMatch(element -> element.getText().equals(expectedText));
+
+        Assert.assertTrue("Error message not found: " + expectedText, isTextPresent);
+        logger.info("Found expected error message: " + expectedText);
         return this;
     }
 }
