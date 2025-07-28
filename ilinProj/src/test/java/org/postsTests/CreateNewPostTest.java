@@ -32,7 +32,7 @@ public class CreateNewPostTest extends BaseTest {
         pageProvider.getPostPage()
                 .getHeaderForLoggedUserElement().clickOnButtonMyProfile()
                 .checkIsRedirectToMyProfilePage()
-                .checkPostTitleIsPresent(POST_TITLE, 1)
+                .checkNewPostTitleIsPresent(POST_TITLE, 1)
         ;
 
     }
