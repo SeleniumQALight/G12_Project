@@ -241,8 +241,14 @@ public class CommonActionsWithElements {
     }
 
     protected WebElement findElementByLocator(String locator, String text) {
-        return webDriver.findElement(
-                By.xpath(String.format(locator, text)));
+        try {
+            return webDriver.findElement(
+                    By.xpath(String.format(locator, text)));
+        } catch (Exception e) {
+            logger.error("Element not found by locator: " + locator + " with text: " + text);
+            Assert.fail("Element not found by locator: " + locator + " with text: " + text);
+            return null; // This line will never be reached, but is needed to satisfy the compiler
+        }
     }
 
     //get element name
