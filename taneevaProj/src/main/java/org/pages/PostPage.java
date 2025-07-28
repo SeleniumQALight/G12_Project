@@ -21,6 +21,9 @@ public class PostPage extends ParentPage {
     @FindBy(xpath = "//a[@data-original-title='Edit']")
     private WebElement buttonEdit;
 
+    @FindBy(xpath = ".//a[contains(@class,'edit-post')]")
+    private WebElement buttonEdit;
+
     @FindBy(xpath = "//p[contains(text(), 'Is this post unique?')]")
     private WebElement uniquePostText;
 
@@ -118,4 +121,21 @@ public class PostPage extends ParentPage {
         return this;
     }
 
+
+    public PostPage checkIsRedirectedToPostPage() {
+        Assert.assertTrue("URL does not contain /post/", webDriver.getCurrentUrl().contains("/post/"));
+        return this;
+    }
+    public CreateNewPostPage clickOnEditButton() {
+        clickOnElement(buttonEdit);
+        return new CreateNewPostPage(webDriver);
+    }
+    public PostPage checkTitleIsPresent(String expectedTitle) {
+        Assert.assertEquals("Title is not matched", expectedTitle, getTitleText());
+        return this;
+    }
+
+    private String getTitleText() {
+        return webDriver.findElement(By.xpath("//div[@class='post-title']")).getText();
+    }
 }

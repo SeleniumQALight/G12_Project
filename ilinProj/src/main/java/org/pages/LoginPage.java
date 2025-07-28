@@ -27,6 +27,9 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
 
+    @FindBy(xpath = "//div[@class='alert alert-danger text-center']")
+    private WebElement invalidMessage;
+
     @FindBy(id = "username-register")
     private WebElement inputUserNameRegistrationForm;
 
@@ -158,6 +161,13 @@ public class LoginPage extends ParentPage {
 
         }
         softAssertions.assertAll(); // перевіряємо всі месседжі, якщо хоча б один не пройшов, то тест валиться
+        return this;
+    }
+
+    public LoginPage checkLoginPageElementsIsVisible(){
+        checkIsElementDisplayed(inputUserName);
+        checkIsElementDisplayed(inputPassword);
+        verifyButtonSignInIsVisible();
         return this;
     }
 }

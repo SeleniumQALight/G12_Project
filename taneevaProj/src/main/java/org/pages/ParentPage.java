@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.utils.ConfigProperties;
 import org.utils.ConfigProvider;
+import org.utils.ConfigProvider;
 
 import java.time.Duration;
 
@@ -13,6 +14,8 @@ abstract class ParentPage extends CommonActionsWithElements {
     static String environment = System.getProperty("evn", "aqa");
 //    protected String baseURL = "https://"+environment+"-complexapp.onrender.com";
     protected String baseURL = ConfigProvider.configProperties.base_url().replace("[env]",environment);
+   // protected String baseURL = "https://"+environment+"-complexapp.onrender.com";
+    protected String baseURL = ConfigProvider.configProperties.base_url().replace("[env]", environment);
     public ParentPage(WebDriver webDriver) {
         super(webDriver);
     }
