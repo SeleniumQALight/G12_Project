@@ -6,6 +6,10 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -155,4 +159,56 @@ public class CommonActionsWithElements {
         Assert.fail("Error while working with element " + e.getMessage());
     }
 
+    public void setCheckboxSelectedIfNeeded(WebElement checkbox) {
+        try {
+            if (!checkbox.isSelected()) {
+                clickOnElement(checkbox);
+                logger.info("Checkbox was not selected. Now it's selected.");
+            } else {
+                logger.info("Checkbox is already selected.");
+            }
+        } catch (Exception e) {
+            logger.error("Cannot work with checkbox: " + e);
+            Assert.fail("Cannot interact with checkbox.");
+        }
+    }
+
+    public void setCheckboxUnselectedIfNeeded(WebElement checkbox) {
+        try {
+            if (checkbox.isSelected()) {
+                clickOnElement(checkbox);
+                logger.info("Checkbox was selected. Now it's unselected.");
+            } else {
+                logger.info("Checkbox is already unselected.");
+            }
+        } catch (Exception e) {
+            logger.error("Cannot work with checkbox: " + e);
+            Assert.fail("Cannot interact with checkbox.");
+        }
+    }
+
+    public void setCheckboxState(WebElement checkbox, String desiredState) {
+        try {
+            if (desiredState.equalsIgnoreCase("check")) {
+                setCheckboxSelectedIfNeeded(checkbox);
+            } else if (desiredState.equalsIgnoreCase("uncheck")) {
+                setCheckboxUnselectedIfNeeded(checkbox);
+            } else {
+                logger.error("Invalid desired state: " + desiredState);
+                Assert.fail("Checkbox state must be 'check' or 'uncheck'");
+            }
+        } catch (Exception e) {
+            logger.error("Cannot set checkbox state: " + e);
+            Assert.fail("Cannot set checkbox state: " + e.getMessage());
+        }
+    }
+
+    public boolean isElementDisplayed(String xpathLocator) {
+        try {
+            return webDriver.findElement(By.xpath(xpathLocator)).isDisplayed();
+        } catch (NoSuchElementException e) {
+            logger.info("Element with xpath '" + xpathLocator + "' is not found, so it is not displayed");
+            return false;
+        }
+    }
 }
