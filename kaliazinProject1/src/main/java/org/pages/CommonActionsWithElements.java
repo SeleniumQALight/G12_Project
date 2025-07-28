@@ -181,6 +181,50 @@ logger.info("Scrolled to element: " + getElementName(webElement));
             return "";
         }
     }
+    protected boolean checkBoxToSet(WebElement webElement) {
+        try {
+            boolean state = webElement.isSelected();
+            if (state) {
+                logger.info("Checkbox is checked");
+            } else {
+                logger.info("Checkbox is not checked");
+            }
+            return state;
+        } catch (Exception e) {
+            logger.error("Checkbox is not found or not displayed: " + e.getMessage());
+            return false;
+        }
+    }
+
+    protected boolean checkBoxToUnSet(WebElement webElement) {
+        try {
+            boolean state = webElement.isSelected();
+            if (!state) {
+                logger.info("Checkbox is not checked");
+            } else {
+                logger.info("Checkbox is checked");
+            }
+            return !state;
+        } catch (Exception e) {
+            logger.error("Checkbox is not found or not displayed: " + e.getMessage());
+            return false;
+        }
+    }
+    protected void setCheckboxState (WebElement webElement, String action) {
+        try {
+            if ("check".equalsIgnoreCase(action)) {
+                checkBoxToSet(webElement);
+            } else if ("uncheck".equalsIgnoreCase(action)) {
+                checkBoxToUnSet(webElement);
+            } else {
+                logger.info("Unknown action: " + action);
+            }
+        } catch(Exception e){
+            logger.error("Unexpected error " + e);
+        }
+
+
+    }
 
     private void printErrorAndStopTest(Exception e) {
         logger.error("Error while working with element: " + e.getMessage());
