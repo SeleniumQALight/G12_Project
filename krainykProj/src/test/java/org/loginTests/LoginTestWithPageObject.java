@@ -12,22 +12,18 @@ public class LoginTestWithPageObject extends BaseTest {
 
     @Test
     public void validLoginTest() {
-//        pageProvider.getLoginPage().openLoginPage();
-//        pageProvider.getLoginPage().enterTextInInputLogin(VALID_LOGIN_UI);
-//        pageProvider.getLoginPage().enterTextInInputPassword(VALID_PASSWORD_UI);
-//        pageProvider.getLoginPage().clickOnButtonSignIn();
         pageProvider.getLoginPage()
                 .openLoginPage()
                 .enterTextInInputLogin(VALID_LOGIN_UI)
                 .enterTextInInputPassword(VALID_PASSWORD_UI)
                 .clickOnButtonSignIn();
 
-        pageProvider.getHomePage()
-                .checkButtonSignOutVisible()
-                .getHeaderForLoggedUserElement().checkButtonCreatePostVisible();
+        pageProvider.getHomePage().getHeaderForLoggedUserElement()
+                .checkButtonSignOutVisible();
 
-        pageProvider.getLoginPage()
-                .checkInputloginIsNotVisible()
+        pageProvider.getHomePage().getHeaderForLoggedUserElement().checkButtonCreatePostVisible();
+
+        pageProvider.getLoginPage().checkInputloginIsNotVisible()
                 .checkInputPasswordIsNotVisible();
     }
 
