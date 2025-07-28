@@ -18,6 +18,12 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
     @FindBy(xpath = "//a[@class='btn btn-sm btn-success mr-2']")
     private WebElement buttonCreatePost;
 
+    @FindBy(xpath = "//a[@href='#']")
+    private WebElement buttonSearch;
+
+    @FindBy(xpath = "//span[@class='text-white mr-2 header-chat-icon']")
+    private WebElement buttonChat;
+
     public HeaderForLoggedUserElement(WebDriver webDriver) {
         super(webDriver);
     }
@@ -27,9 +33,10 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         return new MyProfilePage(webDriver);
     }
 
-    public void checkButtonSignOutVisible() {
+    public HeaderForLoggedUserElement checkButtonSignOutVisible() {
         //Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
         checkIsElementDisplayed(buttonSignOut);
+        return new HeaderForLoggedUserElement(webDriver);
     }
 
     public CreateNewPostPage clickOnButtonCreatePost() {
@@ -40,6 +47,43 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
 
     public boolean isButtonSignOutVisible() {
         return isElementDisplayed(buttonSignOut);
+    }
+    public LoginPage verifyButtonSignOutIsNotVisible() {
+        checkIsElementIsNotDisplayed(buttonSignOut);
+        return new LoginPage(webDriver);
+    }
+
+    public HeaderForLoggedUserElement verifyButtonCreatePostIsVisible() {
+        checkIsElementDisplayed(buttonCreatePost);
+        return this;
+    }
+
+    public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
+        return new HeaderForLoggedUserElement(webDriver);
+    }
+
+
+    public HeaderForLoggedUserElement checkAllHeaderElementsVisible(){
+        checkIsElementDisplayed(buttonSearch);
+        checkIsElementDisplayed(buttonChat);
+        checkIsElementDisplayed(buttonMyProfile);
+        checkIsElementDisplayed(buttonCreatePost);
+        checkIsElementDisplayed(buttonSignOut);
+        return this;
+    }
+
+    public HeaderForLoggedUserElement clickOnButtonSignOut(){
+        clickOnElement(buttonSignOut);
+        return this;
+    }
+
+    public LoginPage checkHomePageHeaderElementsIsNotVisible() {
+        checkIsElementIsNotDisplayed(buttonSearch);
+        checkIsElementIsNotDisplayed(buttonChat);
+        checkIsElementIsNotDisplayed(buttonMyProfile);
+        checkIsElementIsNotDisplayed(buttonCreatePost);
+        checkIsElementIsNotDisplayed(buttonSignOut);
+        return new LoginPage(webDriver);
     }
 }
 

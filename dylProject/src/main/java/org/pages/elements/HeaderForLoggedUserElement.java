@@ -55,6 +55,10 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         return isElementDisplayed(buttonSignOut);
     }
 
+    public void clickOnButtonSignOut() {
+        clickOnElement(buttonSignOut);
+    }
+
     public HeaderForLoggedUserElement checkIsElementsInHeaderForLoggedUserVisible() {
         checkButtonSearchIsVisible()
                 .checkButtonChatCallIsVisible()

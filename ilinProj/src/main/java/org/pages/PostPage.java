@@ -9,8 +9,14 @@ public class PostPage extends ParentPage {
     @FindBy(xpath = "//*[@class='alert alert-success text-center']")
     private WebElement successMessage;
 
+    @FindBy(xpath = "//p[text() = 'Is this post unique? : yes']")
+    private WebElement messageUniquePost;
+
     @FindBy(xpath = "//button[@class='delete-post-button text-danger']")
     private WebElement buttonDeletePost;
+
+    @FindBy(xpath = "//a[@class='text-primary mr-2']")
+    private WebElement buttonEditPost;
 
 
     public PostPage(WebDriver webDriver) {
@@ -46,5 +52,15 @@ public class PostPage extends ParentPage {
     public MyProfilePage clickOnDeleteButton() {
         clickOnElement(buttonDeletePost, "Delete post button");
         return new MyProfilePage(webDriver);
+    }
+
+    public PostPage checkIsPostUnique() {
+        checkIsElementDisplayed(messageUniquePost);
+        return this;
+    }
+
+    public EditPostPage clickOnEditPostButton() {
+        clickOnElement(buttonEditPost, "Edit post button");
+        return new EditPostPage(webDriver);
     }
 }

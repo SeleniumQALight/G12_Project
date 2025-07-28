@@ -27,6 +27,9 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
 
+    @FindBy(xpath = "//div[@class='alert alert-danger text-center']")
+    private WebElement invalidMessage;
+
     @FindBy(id = "username-register")
     private WebElement inputUserNameRegistrationForm;
 
@@ -39,6 +42,9 @@ public class LoginPage extends ParentPage {
     final static String listOfActualMessagesLocator = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
     @FindBy(xpath = listOfActualMessagesLocator)
     private List<WebElement> listOfActualMessages;
+
+    @FindBy(xpath = "//div[@class='alert alert-danger text-center']")
+    private WebElement invalidMessage;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -91,6 +97,35 @@ public class LoginPage extends ParentPage {
         return new HomePage(webDriver);
     }
 
+    public HomePage openLoginPageAndFillLoginFormWithInvalidCred() {
+        openLoginPage();
+        this.enterTextIntoInputLogin("invalidLogin");
+        this.enterTextIntoPassword("invalidPassword");
+        clickOnButtonSignIn();
+        return new HomePage(webDriver);
+    }
+
+    public LoginPage verifyButtonSignInIsVisible() {
+        checkIsElementDisplayed(buttonSignIn);
+        return this;
+    }
+
+
+    public LoginPage verifyInvalidMessageIsVisible() {
+        checkIsElementDisplayed(invalidMessage);
+        return this;
+    }
+
+    public LoginPage verifyTextOfInvalidMessage() {
+        checkTextInElement(invalidMessage,"Invalid username/password.");
+        return this;
+    }
+
+    public void verifyInputsIsNotVisible() {
+        checkIsElementIsNotDisplayed(inputUserName);
+        checkIsElementIsNotDisplayed(inputPassword);
+    }
+
     public LoginPage enterTextIntoRegistrationUserNameField(String userName) {
         clearAndEnterTextToElement(inputUserNameRegistrationForm, userName);
         return this;
@@ -126,6 +161,13 @@ public class LoginPage extends ParentPage {
 
         }
         softAssertions.assertAll(); // перевіряємо всі месседжі, якщо хоча б один не пройшов, то тест валиться
+        return this;
+    }
+
+    public LoginPage checkLoginPageElementsIsVisible(){
+        checkIsElementDisplayed(inputUserName);
+        checkIsElementDisplayed(inputPassword);
+        verifyButtonSignInIsVisible();
         return this;
     }
 }

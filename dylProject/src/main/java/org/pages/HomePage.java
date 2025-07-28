@@ -29,7 +29,6 @@ public class HomePage extends ParentPage {
         return new HeaderForLoggedUserElement(webDriver);
     }
 
-
     public HomePage checkIsRedirectToHomePage() {
         checkUrl();
         getHeaderForLoggedUserElement().checkButtonSignOutVisible();
@@ -50,7 +49,9 @@ public class HomePage extends ParentPage {
         }
         return this;
     }
+
 }
+
 
 //    public void checkButtonSignOutVisible() {
 /// /        Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
