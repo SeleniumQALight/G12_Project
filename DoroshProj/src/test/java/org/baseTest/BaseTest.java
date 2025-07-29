@@ -4,6 +4,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
+import org.junit.rules.TestName;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -22,9 +24,12 @@ public class BaseTest {
     private WebDriver webDriver;
     protected Logger logger = Logger.getLogger(getClass());
     protected PageProvider pageProvider;
+    final String symbols = "-".repeat(20);
 
     @Before
-    public void setUp() throws MalformedURLException{
+    public void setUp() throws MalformedURLException {
+        logger.info(symbols + testName.getMethodName() + " was started " + symbols);
+
         // WebDriverManager.chromedriver().setup();// downloads executive file
         // webDriver = new ChromeDriver();
         initDriver();
@@ -36,12 +41,18 @@ public class BaseTest {
 
     }
 
+
     @After
     public void tearDown() {
         webDriver.quit();
         logger.info("Browser was closed");
+        logger.info(symbols + testName.getMethodName() + " was finished " + symbols);
 
     }
+
+    @Rule
+    public TestName testName = new TestName();
+
 
     private WebDriver initDriver() throws MalformedURLException {
         String browserFromProperty = System.getProperty("browser");
