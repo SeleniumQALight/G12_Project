@@ -18,6 +18,6 @@ public class LoginTestWithRefresh extends BaseTest {
                 .clickOnButtonSignIn();
         pageProvider.getHomePage()
                 .getHeaderForLoggedUserElement()
-                .checkButtonSignOutNotVisible();
+                .checkButtonSignOutIsNotVisible();
     }
 }

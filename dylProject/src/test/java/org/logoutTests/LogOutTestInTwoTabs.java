@@ -21,11 +21,11 @@ public class LogOutTestInTwoTabs extends BaseTest {
         pageProvider.getHomePage().
                 getHeaderForLoggedUserElement().clickOnButtonSignOut();
         pageProvider.getHomePage()
-                .getHeaderForLoggedUserElement().checkButtonSignOutNotVisible();
+                .getHeaderForLoggedUserElement().checkButtonSignOutIsNotVisible();
         pageProvider.getHomePage().switchToNewTab();
         pageProvider.getHomePage().refreshPage();
         pageProvider.getHomePage()
-                .getHeaderForLoggedUserElement().checkButtonSignOutNotVisible();
+                .getHeaderForLoggedUserElement().checkButtonSignOutIsNotVisible();
 
     }
 }

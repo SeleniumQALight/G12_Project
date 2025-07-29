@@ -2,10 +2,7 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -297,4 +294,10 @@ public void enterTextWithActions(String text) {
         logger.error("Error while working with element " + e.getMessage());
         Assert.fail("Error while working with element " + e.getMessage());
     }
+
+    protected WebElement findElementByLocator(String locator,String text) {
+        return webDriver.findElement(
+                By.xpath(String.format(locator, text)));
+    }
+
 }
