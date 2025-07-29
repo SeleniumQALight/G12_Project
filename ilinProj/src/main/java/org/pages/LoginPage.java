@@ -43,9 +43,6 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = listOfActualMessagesLocator)
     private List<WebElement> listOfActualMessages;
 
-    @FindBy(xpath = "//div[@class='alert alert-danger text-center']")
-    private WebElement invalidMessage;
-
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
