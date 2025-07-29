@@ -20,10 +20,13 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("Post Body created by Ador")
+                .selectTextInDropdownAccess("Приватне повідомлення")
+                .clickOnCheckboxUniguePost()
                 .clickOnButtonSaveNewPost()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
+                .checkUniquenessOfPost()
         ;
 
         pageProvider.getPostPage()
@@ -37,6 +40,15 @@ public class CreateNewPostTest extends BaseTest {
 
     @After
     public void deletePosts() {
+        logger.info("Post condition - delete posts");
+        pageProvider.getHomePage()
+                .openHomePageAndLoginIfNeeded()
+                .getHeaderForLoggedUserElement().clickOnButtonMyProfile()
+                .checkIsRedirectToMyProfilePage()
+                .deletePostsTillPresent(POST_TITLE)
+
+                ;
+
 
     }
 

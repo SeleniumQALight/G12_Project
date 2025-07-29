@@ -11,28 +11,24 @@ public class LoginTestWithPageObject extends BaseTest {
     public static final String INVALID_PASSWORD_UI = "123456qwerty21";
 
     @Test
-    public void validLoginTest() {
-//        pageProvider.getLoginPage().openLoginPage();
-//        pageProvider.getLoginPage().enterTextInInputLogin(VALID_LOGIN_UI);
-//        pageProvider.getLoginPage().enterTextInInputPassword(VALID_PASSWORD_UI);
-//        pageProvider.getLoginPage().clickOnButtonSignIn();
+    public void TC002_validLoginTest() {
         pageProvider.getLoginPage()
                 .openLoginPage()
                 .enterTextInInputLogin(VALID_LOGIN_UI)
                 .enterTextInInputPassword(VALID_PASSWORD_UI)
                 .clickOnButtonSignIn();
 
-        pageProvider.getHomePage()
-                .checkButtonSignOutVisible()
-                .getHeaderForLoggedUserElement().checkButtonCreatePostVisible();
+        pageProvider.getHomePage().getHeaderForLoggedUserElement()
+                .checkButtonSignOutVisible();
 
-        pageProvider.getLoginPage()
-                .checkInputloginIsNotVisible()
+        pageProvider.getHomePage().getHeaderForLoggedUserElement().checkButtonCreatePostVisible();
+
+        pageProvider.getLoginPage().checkInputloginIsNotVisible()
                 .checkInputPasswordIsNotVisible();
     }
 
     @Test
-    public void invalidLoginTest() {
+    public void TC004_invalidLoginTest() {
         pageProvider.getLoginPage()
                 .openLoginPage()
                 .enterTextInInputLogin(INVALID_LOGIN_UI)

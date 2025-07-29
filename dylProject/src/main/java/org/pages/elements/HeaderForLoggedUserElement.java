@@ -46,6 +46,14 @@ public MyProfilePage clickOnButtonMyProfile() {
         checkIsElementDisplayed(buttonCreatePost);
         return new LoginPage(webDriver);
     }
+
+    public boolean isButtonSignOutVisible() {
+        return isElementDisplayed(buttonSignOut);
+    }
+
+    public void clickOnButtonSignOut() {
+        clickOnElement(buttonSignOut);
+    }
 }
 
 

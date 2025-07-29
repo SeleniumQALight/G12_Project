@@ -2,17 +2,33 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.utils.ConfigProvider;
+
+import java.time.Duration;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
     private Logger logger = Logger.getLogger(getClass());
+    protected WebDriverWait webDriverWait10, webDriverWait15;
+    protected Actions actions;
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this); // ініціалізує елементи описані в FindBy
+        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(
+                ConfigProvider.configProperties.TIME_FOR_EXPLICIT_WAIT_LOW()));
+        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(
+                ConfigProvider.configProperties.TIME_FOR_DEFAULT_WAIT()));
+        this.actions = new Actions(webDriver);
     }
     /* Method clearAndEnterTextToElement
      * Cleans the text
@@ -24,7 +40,7 @@ public class CommonActionsWithElements {
         try {
             webElement.clear();
             webElement.sendKeys(text);
-            logger.info(text + " was entered into element");
+            logger.info(text + " was entered into element " + getElementName(webElement));
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -36,8 +52,24 @@ public class CommonActionsWithElements {
      */
     protected void clickOnElement(WebElement webElement) {
         try {
+            webDriverWait10
+                    .withMessage("Element is not clickable: " + webElement)
+                    .until(ExpectedConditions.elementToBeClickable(webElement));
+            String elementName = getElementName(webElement);
             webElement.click();
-            logger.info("Element was clicked");
+            logger.info(elementName + " Element was clicked");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    protected void clickOnElement(WebElement webElement, String elementName) {
+        try {
+            webDriverWait10
+                    .withMessage("Element is not clickable: " + webElement)
+                    .until(ExpectedConditions.elementToBeClickable(webElement));
+            webElement.click();
+            logger.info(elementName + " Element was clicked");
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -52,9 +84,9 @@ public class CommonActionsWithElements {
         try {
             boolean state = webElement.isDisplayed();
             if (state) {
-                logger.info("Element is displayed");
+                logger.info(getElementName(webElement) + " element is displayed");
             } else {
-                logger.info("Element is not displayed");
+                logger.info(getElementName(webElement) + " element is not displayed");
             }
             return state;
         } catch (Exception e) {
@@ -126,6 +158,140 @@ logger.error ("Checkbox not found");
                 logger.error("Unexpected error " + e);
             }
         }
+
+        //select text in DropDown
+    protected void selectTextInDropDown(WebElement webElement, String text) {
+        try {
+            Select select = new Select(webElement);
+            select.selectByVisibleText(text);
+            logger.info("Text '" + text + "' was selected in dropdown " + getElementName(webElement));
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    //select value in DropDown
+    protected void selectValueInDropDown(WebElement webElement, String value) {
+        try {
+            Select select = new Select(webElement);
+            select.selectByValue(value);
+            logger.info("Value '" + value + "' was selected in dropdown " + getElementName(webElement));
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    //accept Alert
+    protected void acceptAlert() {
+        try {
+            webDriver.switchTo().alert().accept();
+            logger.info("Alert was accepted");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    //scroll to element using Actions
+    protected void scrollToElement(WebElement webElement) {
+        try {
+            actions.moveToElement(webElement).perform();
+            logger.info("Scrolled to element: " + getElementName(webElement));
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    //open new tab
+    public void openNewTab() {
+        try {
+            ((JavascriptExecutor) webDriver).executeScript("window.open()");
+            logger.info("New tab was opened");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    //switch to new tab
+    public void switchToNewTab() {
+        try {
+            String originalHandle = webDriver.getWindowHandle();
+            for (String handle : webDriver.getWindowHandles()) {
+                if (!handle.equals(originalHandle)) {
+                    webDriver.switchTo().window(handle);
+                    logger.info("Switched to new tab " + handle);
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+//    close new tab and switch to original tab
+    public void closeNewTabAndSwitchToOriginal() {
+        try {
+            String originalHandle = webDriver.getWindowHandle();
+            for (String handle : webDriver.getWindowHandles()) {
+                if (!handle.equals(originalHandle)) {
+                    webDriver.switchTo().window(handle);
+                    webDriver.close();
+                    webDriver.switchTo().window(originalHandle);
+                    logger.info("Closed new tab and switched to original tab " + originalHandle);
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    //get element name
+    private String getElementName(WebElement webElement) {
+        try{
+            return webElement.getAccessibleName();
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    public void refreshPage() {
+        try {
+            webDriver.navigate().refresh();
+            logger.info("Page was refreshed");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+
+    }
+
+public void pressKey(Keys key, int quantity) {
+    try {
+        for (int i = 0; i < quantity; i++) {
+            actions.sendKeys(key).perform();
+            logger.info(key.name() + " key was pressed on the page");
+        }
+    } catch (Exception e) {
+        printErrorAndStopTest(e);
+    }
+}
+
+    public void pressKey(Keys key) {
+        try {
+                actions.sendKeys(key).perform();
+                logger.info(key.name() + " key was pressed on the page");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+public void enterTextWithActions(String text) {
+    try {
+        actions.sendKeys(text).perform();
+        logger.info(text + " was entered into input using Actions");
+    } catch (Exception e) {
+        printErrorAndStopTest(e);
+    }
+}
 
     private void printErrorAndStopTest(Exception e) {
         logger.error("Error while working with element " + e.getMessage());

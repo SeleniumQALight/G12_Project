@@ -1,0 +1,101 @@
+#1 Check correct work of search field
+
+Pre-condition:
+ 1. Login in the site //aqa-complexapp.onrender.com/
+ Credentials:
+ - login = qaauto
+ - pass = 123456qwerty
+ 2. Click on "Create Post" button in the header
+ 3. Enter "ss" letters in "Title" field
+ 4. Enter "test" word in "Body Content" field
+ 5. Click on "Save new Post" button
+ 6. Page with "New post successfully created." text is visible
+ 7. Save the URL and insert it in step 2 of ER
+
+Steps:
+ 1. Open page https://aqa-complexapp.onrender.com/
+ 2. Click on the search button(magnifying glass icon) in header
+ 3. Input text in the search field "ss"
+ 4. Click on first string of search results
+
+Expected result:
+ 1. In "Search Results" pop-up appear string with name of user and date when
+   user added comment
+ 2. After clicked on first result it should redirect to
+   "URL take from Pre-condition"
+
+
+#2 Check correct work of chat
+
+Pre-condition:
+ 1. Login in the site //aqa-complexapp.onrender.com/
+ Credentials:
+ - login = qaauto
+ - pass = 123456qwerty
+
+Steps:
+ 1. Click on the "chat" button(cloud icon) in header
+ 2. Input a text "Hello" in the field with text "Type a message..."
+
+Expected result:
+ 1. In the right low conner the chat is visible after click icon in header
+ 2. Text is visible in Chat field after sending
+
+
+#3 Validation of sign up flow
+
+Steps:
+ 1. Open page https://aqa-complexapp.onrender.com/
+ 2. Input in Username field value - Test+"current date in format - dd.mm.yyyy"
+ 3. Input in Email field value - Test01+aqa@gmail.com
+ 4. Input in Password field value - qwerty123456
+ 5. Click on "Sign up for OurApp" button
+
+Expected result:
+ 1. There is redirect on the page with "Create post" and "Sign out" buttons in the header
+
+Post condition:
+1. Need to delete created user
+
+ #4 Check notification of incorrect data in second "Username" field and "Email" field in signing
+
+ Steps:
+ !Warning - In these steps we apply same steps but two different set of data
+  Username
+ 1. Input name ... in second Username field
+    - less than three characters, for example - Ya
+    - leave field empty
+ 2. Delete previous name and input a name that already exists, for example - Test01
+  Email
+ 3. Input email ...
+    - without "@"
+    - domen
+    - leave field empty
+ 4. Delete previous email and input email that already exists, for example - test01+aqa@gmail.com
+
+
+
+ Expected result:
+ 1. Pop-up is appear over second Username field and in first case notification
+    will contain text - "Username must be at least 3 characters."
+ 2. Pop-up is appear over Username field and in second case notification
+    will contain text - "This username is already taken."
+
+
+#5 Check for correct display of "Profile" page
+
+Pre-condition:
+ 1. Login in the site //aqa-complexapp.onrender.com/
+ Credentials:
+ - login = qaauto
+ - pass = 123456qwerty
+
+ Steps:
+  1. Click on the "My Profile" button(white+blue icon) in header
+
+Expected result:
+  1. After clicking "My Profile" redirect to URL https://aqa-complexapp.onrender.com with endpoint /profile/"name of user"
+  2. On the page visible three section:
+     - Posts
+     - Followers
+     - Following

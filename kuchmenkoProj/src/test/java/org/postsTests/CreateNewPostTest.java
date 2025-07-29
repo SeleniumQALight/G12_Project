@@ -8,8 +8,9 @@ import org.utils.Utils_Custom;
 public class CreateNewPostTest extends BaseTest {
 
     final String POST_TITLE = "TR001_G12 Kuchmenko" + Utils_Custom.getDateAndTimeFormatted();
+
     @Test
-    public void TR001_createNewPost(){
+    public void TR001_createNewPost() {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidCred()
                 .checkIsRedirectToHomePage()
@@ -17,6 +18,7 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("G12 Kuchmenko Post Body")
+                .selectTextInDropdownAccess("Приватне повідомлення") // Private post
                 .clickOnSaveNewPostButton()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMassageDisplayed()
@@ -34,6 +36,12 @@ public class CreateNewPostTest extends BaseTest {
 
     @After
     public void deletePostAfterTest() {
-
+        logger.info("Post condition - delete posts");
+        pageProvider.getHomePage()
+                .openHomePageAndLoginIfNeeded()
+                .getHeaderForLoggedUserElement().clickOnButtonMyProfile()
+                .checkIsRedirectedToMyProfilePage()
+                .deletePostsTillPresent(POST_TITLE)
+        ;
     }
 }

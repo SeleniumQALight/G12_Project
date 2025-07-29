@@ -4,7 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class CreateNewPostPage extends ParentPage{
+public class CreateNewPostPage extends ParentPage {
+  
     @FindBy(name = "title")
     private WebElement inputTitle;
 
@@ -14,14 +15,24 @@ public class CreateNewPostPage extends ParentPage{
     @FindBy(xpath = "//button[text()='Save New Post']")
     private WebElement buttonSaveNewPost;
 
+    @FindBy(xpath = ".//input[@type='checkbox']")
+    private WebElement checkboxIsThisPostUnique;
+
+    @FindBy(tagName = "select")
+    private WebElement dropdownAccess;
 
     public CreateNewPostPage(WebDriver webDriver) {
         super(webDriver);
     }
 
+    @Override
+    protected String getRelativeUrl() {
+        return "/create-post";
+    }
+
     public CreateNewPostPage checkIsRedirectedToCreateNewPostPage() {
-        //TODO check URL
-        //TODO check some elements on the page
+        checkUrl();
+//TODO check some elements on the page
         return this;
     }
 
@@ -38,5 +49,23 @@ public class CreateNewPostPage extends ParentPage{
     public PostPage clickOnSaveNewPostButton() {
         clickOnElement(buttonSaveNewPost);
         return new PostPage(webDriver);
+    }
+
+    public CreateNewPostPage selectCheckboxIfNeeded() {
+        setCheckboxSelectedIfNeeded(checkboxIsThisPostUnique);
+        return this;
+    }
+
+    public CreateNewPostPage unselectCheckboxIfNeeded() {
+        setCheckboxUnselectedIfNeeded(checkboxIsThisPostUnique);
+        return this;
+    }
+
+    public CreateNewPostPage setCheckboxState(String desiredState) {
+        setCheckboxState(checkboxIsThisPostUnique, desiredState);
+
+    public CreateNewPostPage selectTextInDropdownAccess(String textForSelectiom) {
+        selectTextInDropDown(dropdownAccess, textForSelectiom);
+        return this;
     }
 }
