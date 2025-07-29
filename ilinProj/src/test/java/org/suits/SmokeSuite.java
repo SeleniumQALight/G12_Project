@@ -17,4 +17,5 @@ import org.reggistrationTests.ValidationMessagesTest;
         CreateNewPostTest.class
 })
 public class SmokeSuite {
+
 }
