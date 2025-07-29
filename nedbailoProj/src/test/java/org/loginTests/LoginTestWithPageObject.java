@@ -1,11 +1,14 @@
 package org.loginTests;
 
+import org.categories.SmokeTestFilters;
 import org.data.TestData;
 import org.junit.Test;
 import org.baseTest.BaseTest;
+import org.junit.experimental.categories.Category;
 
 public class LoginTestWithPageObject extends BaseTest {
     @Test
+    @Category(SmokeTestFilters.class)
     public void validLogin() {
         pageProvider.getLoginPage().
                 openLoginPage()
