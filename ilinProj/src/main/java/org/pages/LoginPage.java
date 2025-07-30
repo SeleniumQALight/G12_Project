@@ -1,5 +1,6 @@
 package org.pages;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.data.TestData;
@@ -43,9 +44,6 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = listOfActualMessagesLocator)
     private List<WebElement> listOfActualMessages;
 
-    @FindBy(xpath = "//div[@class='alert alert-danger text-center']")
-    private WebElement invalidMessage;
-
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -55,6 +53,7 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
+    @Step
     public LoginPage openLoginPage() {
         webDriver.get(baseURL);
         logger.info("Login page was opened with url " + baseURL);
@@ -62,6 +61,7 @@ public class LoginPage extends ParentPage {
 
     }
 
+    @Step
     public LoginPage enterTextIntoInputLogin(String login) {
 //        WebElement inputUserName = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
 //        inputUserName.clear();
@@ -71,12 +71,13 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-
+    @Step
     public LoginPage enterTextIntoPassword(String password) {
         clearAndEnterTextToElement(inputPassword, password);
         return this;
     }
 
+    @Step
     public void clickOnButtonSignIn() {
         //webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
         //buttonSignIn.click();
@@ -89,6 +90,7 @@ public class LoginPage extends ParentPage {
      * Opens the login page, fills in the login form with valid credentials.
      * @return HomePage - returns an instance of HomePage after successful login.
      */
+    @Step
     public HomePage openLoginPageAndFillLoginFormWithValidCred() {
         openLoginPage();
         this.enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
@@ -97,6 +99,7 @@ public class LoginPage extends ParentPage {
         return new HomePage(webDriver);
     }
 
+    @Step
     public HomePage openLoginPageAndFillLoginFormWithInvalidCred() {
         openLoginPage();
         this.enterTextIntoInputLogin("invalidLogin");
@@ -105,42 +108,49 @@ public class LoginPage extends ParentPage {
         return new HomePage(webDriver);
     }
 
+    @Step
     public LoginPage verifyButtonSignInIsVisible() {
         checkIsElementDisplayed(buttonSignIn);
         return this;
     }
 
-
+    @Step
     public LoginPage verifyInvalidMessageIsVisible() {
         checkIsElementDisplayed(invalidMessage);
         return this;
     }
 
+    @Step
     public LoginPage verifyTextOfInvalidMessage() {
         checkTextInElement(invalidMessage,"Invalid username/password.");
         return this;
     }
 
+    @Step
     public void verifyInputsIsNotVisible() {
         checkIsElementIsNotDisplayed(inputUserName);
         checkIsElementIsNotDisplayed(inputPassword);
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationUserNameField(String userName) {
         clearAndEnterTextToElement(inputUserNameRegistrationForm, userName);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationEmailField(String email) {
         clearAndEnterTextToElement(inputEmailInRegistrationForm, email);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationPasswordField(String password) {
         clearAndEnterTextToElement(inputPasswordInRegistrationForm, password);
         return this;
     }
 
+    @Step
     public LoginPage checkErrorMessages(String expectedErrorMessageAsString) {
         // error;error2;error3 -> [error1, error2, error3]
         String[] expectedErrorMessages = expectedErrorMessageAsString.split(SEMICOLON);
@@ -164,6 +174,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    @Step
     public LoginPage checkLoginPageElementsIsVisible(){
         checkIsElementDisplayed(inputUserName);
         checkIsElementDisplayed(inputPassword);
