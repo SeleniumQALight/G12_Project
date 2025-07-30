@@ -43,9 +43,6 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = listOfActualMessagesLocator)
     private List<WebElement> listOfActualMessages;
 
-    @FindBy(xpath = "//div[@class='alert alert-danger text-center']")
-    private WebElement invalidMessage;
-
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -77,11 +74,12 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-    public void clickOnButtonSignIn() {
+    public LoginPage clickOnButtonSignIn() {
         //webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
         //buttonSignIn.click();
         //logger.info("Button Sign In was clicked");
         clickOnElement(buttonSignIn);
+        return this;
     }
 
     /**
@@ -170,4 +168,6 @@ public class LoginPage extends ParentPage {
         verifyButtonSignInIsVisible();
         return this;
     }
+
+
 }
