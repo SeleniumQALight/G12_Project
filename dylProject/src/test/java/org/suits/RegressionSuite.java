@@ -12,5 +12,5 @@ import org.registrationTests.ValidationMessagesTest;
         CreateNewPostTest.class,
         ValidationMessagesTest.class
 })
-public class RegressionSuit {
+public class RegressionSuite {
 }

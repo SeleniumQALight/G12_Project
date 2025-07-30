@@ -10,8 +10,9 @@ import org.junit.runner.RunWith;
 
 import static org.data.RegistrationValidationMessages.*;
 
-@Category(SmokeTestsFilter.class)
+
 @RunWith(JUnitParamsRunner.class)
+@Category(SmokeTestsFilter.class)
 public class ValidationMessagesTest extends BaseTest {
     @Test
     @Parameters(method = "parametersForTestValidationMessages")
