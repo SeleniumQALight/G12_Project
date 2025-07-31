@@ -63,6 +63,8 @@ public class CreateNewPostPage extends ParentPage {
 
     public CreateNewPostPage setCheckboxState(String desiredState) {
         setCheckboxState(checkboxIsThisPostUnique, desiredState);
+        return this;
+    }
 
     public CreateNewPostPage selectTextInDropdownAccess(String textForSelectiom) {
         selectTextInDropDown(dropdownAccess, textForSelectiom);
