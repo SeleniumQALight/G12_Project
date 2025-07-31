@@ -1,5 +1,6 @@
 package org.pages;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.data.TestData;
 import org.openqa.selenium.WebDriver;
@@ -25,16 +26,19 @@ public class HomePage extends ParentPage {
     protected String getRelativeURL() {
         return "/";
     }
+    @Step
 
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
         return new HeaderForLoggedUserElement(webDriver);
     }
+    @Step
 
     public HomePage checkIsRedirectToHomePage() {
         checkURL();
         getHeaderForLoggedUserElement().checkButtonSignOutVisible();
         return this;
     }
+    @Step
 
     public HomePage openHomePageAndLoginIfNeeded() {
         LoginPage loginPage = new LoginPage(webDriver);
