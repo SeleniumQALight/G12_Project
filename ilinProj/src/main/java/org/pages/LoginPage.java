@@ -1,6 +1,5 @@
 package org.pages;
 
-import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.data.TestData;
@@ -43,6 +42,7 @@ public class LoginPage extends ParentPage {
     final static String listOfActualMessagesLocator = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
     @FindBy(xpath = listOfActualMessagesLocator)
     private List<WebElement> listOfActualMessages;
+
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
