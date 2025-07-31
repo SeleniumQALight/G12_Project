@@ -23,7 +23,7 @@ public class LoginTestWithPageObject extends BaseTest {
     public void validLogin(){
         pageProvider.getLoginPage()
                 .openLoginPage()
-                .enterTextIntoInputLogin(VALID_LOGIN_UI+1)
+                .enterTextIntoInputLogin(VALID_LOGIN_UI)
                 .enterTextIntoPassword(VALID_PASSWORD_UI)
                 .clickOnButtonSignIn();
 
