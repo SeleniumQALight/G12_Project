@@ -1,5 +1,6 @@
 package org.pages;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.data.TestData;
 import org.openqa.selenium.WebDriver;
@@ -20,7 +21,7 @@ public class HomePage extends ParentPage {
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
         return new HeaderForLoggedUserElement(webDriver);
     }
-
+    @Step
     public HomePage checkIsRedirectedToHomePage() {
         //TODO check URL
         getHeaderForLoggedUserElement().checkButtonSignOutVisible();
@@ -32,7 +33,7 @@ public class HomePage extends ParentPage {
         getHeaderForLoggedUserElement().checkButtonCreatePostVisible();
         return this;
     }
-
+    @Step
     public HomePage openHomePageAndLoginIfNeeds() {
         LoginPage loginPage = new LoginPage(webDriver);
         loginPage.openLoginPage();
