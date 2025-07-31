@@ -1,5 +1,6 @@
 package org.pages;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.data.TestData;
