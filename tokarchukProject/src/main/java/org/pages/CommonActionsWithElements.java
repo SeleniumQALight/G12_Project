@@ -113,15 +113,14 @@ public class CommonActionsWithElements {
     }
 
 
-    protected boolean setCheckboxState(WebElement checkbox, CheckboxState desiredState) {
+    protected void setCheckboxState(WebElement checkbox, CheckboxState desiredState) {
         if (desiredState == CheckboxState.CHECK) {
-            return selectCheckboxIfNeeded(checkbox);
+            selectCheckboxIfNeeded(checkbox);
         } else if (desiredState == CheckboxState.UNCHECK) {
-            return deselectCheckboxIfNeeded(checkbox);
+            deselectCheckboxIfNeeded(checkbox);
         } else {
             logger.error("Unknown checkbox state: " + desiredState);
             Assert.fail("Unknown checkbox state: " + desiredState);
-            return false;
         }
     }
 

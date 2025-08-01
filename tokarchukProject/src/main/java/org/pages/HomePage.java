@@ -44,7 +44,7 @@ public class HomePage extends ParentPage{
     }
 
     public HomePage checkSignOutButtonIsNotVisible() {
-        checkIsElementNotDisplayed(buttonSignOut);
+        getHeaderForLoggedUserElement().checkButtonSignOutIsNotVisible();
         return this;
     }
 }
