@@ -1,5 +1,6 @@
 package org.pages.elements;
 
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,16 +35,19 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         super(webDriver);
     }
 
+    @Step
     public MyProfilePage clickOnButtonMyProfile() {
         clickOnElement(buttonMyProfile);
         return new MyProfilePage(webDriver);
     }
 
+    @Step
     public void checkButtonSignOutVisible() {
         //  Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
         checkIsElementDisplayed(buttonSignOut);
     }
 
+    @Step
     public void  checkButtonSignOutNotVisible() {
         try {
             boolean isDisplayed = buttonSignOut.isDisplayed();
@@ -53,11 +57,13 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         }
     }
 
+    @Step
     public CreateNewPostPage clickOnButtonCreateNewPost() {
         clickOnElement(buttonCreateNewPost);
         return new CreateNewPostPage(webDriver);
     }
 
+    @Step
     public boolean isButtonSignOutVisible() {
         return isElementDisplayed(buttonSignOut);
     }
