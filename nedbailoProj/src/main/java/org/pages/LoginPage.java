@@ -1,5 +1,6 @@
 package org.pages;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.data.TestData;
@@ -53,6 +54,7 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
+    @Step
     public LoginPage openLoginPage() {
         webDriver.get(baseURL);
         logger.info("Login page was opened with urk " + baseURL);
@@ -60,43 +62,51 @@ public class LoginPage extends ParentPage {
     }
 
 
+    @Step
     public LoginPage enterTextIntoInputLogin(String login) {
         clearAndEnterTextToElement(inputUserName, login);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoPassword(String password) {
         clearAndEnterTextToElement(inputPassword, password);
         return this;
     }
 
+    @Step
     public void clickOnButtonSignIn() {
         clickOnElement(buttonSignIn);
     }
 
+    @Step
     public LoginPage checkButtonSignInVisible() {
         checkIsElementDisplayed(buttonSignIn);
         return this;
     }
 
+    @Step
     public LoginPage checkAlertMessageVisible() {
         checkIsElementDisplayed(alertTextMessage);
         logger.info("Alert message is displayed");
         return this;
     }
 
+    @Step
     public LoginPage checkTextInAlertMessage(String expectedText) {
         checkTextInElement(alertTextMessage, expectedText);
         logger.info("Alert message text is checked: " + expectedText);
         return this;
     }
 
+    @Step
     public LoginPage checkInputUserNameAndPasswordNotVisible() {
         checkIsElementIsNotDisplayed(inputUserName);
         checkIsElementIsNotDisplayed(inputPassword);
         return this;
     }
 
+    @Step
     public HomePage openLoginPageAndFIllLoginFormWithValidCred() {
         openLoginPage();
         this.enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
@@ -105,21 +115,25 @@ public class LoginPage extends ParentPage {
         return new HomePage(webDriver);
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationUserNameField(String userName) {
         clearAndEnterTextToElement(inputUserNameRegistrationForm, userName);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationEmailField(String email) {
         clearAndEnterTextToElement(inputEmailRegistrationForm, email);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationPasswordField(String password) {
         clearAndEnterTextToElement(inputPasswordRegistrationForm, password);
         return this;
     }
 
+    @Step
     public LoginPage checkErrorMessages(String expectedErrorMessagesAsString) {
         String[] expectedErrorMessages = expectedErrorMessagesAsString.split(SEMICOLON);
 
