@@ -3,6 +3,7 @@ package org.postsTests;
 import org.baseTest.BaseTest;
 import org.junit.After;
 import org.junit.Test;
+import org.enums.CheckboxState;
 import org.utils.Utils_Custom;
 
 public class CreateNewPostTest extends BaseTest {
@@ -10,7 +11,9 @@ public class CreateNewPostTest extends BaseTest {
     final String POST_TITLE = "TR001_G12 Nataliia Post Title" + Utils_Custom.getDateAndTimeFormatted();
 
     @Test
-    public void TR001_createNewPost() {
+    public void createNewPost() {
+        final CheckboxState UNIQUE_STATE = CheckboxState.CHECK;
+
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidCred()
                 .checkIsRedirectedToHomePage()

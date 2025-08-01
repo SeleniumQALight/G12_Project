@@ -11,7 +11,7 @@ import static org.data.TestData.VALID_LOGIN_UI;
 import static org.data.TestData.VALID_PASSWORD_UI;
 
 public class LoginPage extends ParentPage {
-    private Logger logger = Logger.getLogger(getClass());
+    private final Logger logger = Logger.getLogger(getClass());
 
     @FindBy(xpath = "//input[@placeholder='Username']")
     private WebElement inputUserName;
@@ -21,6 +21,9 @@ public class LoginPage extends ParentPage {
 
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
+
+    @FindBy(xpath = "//div[@class='alert alert-danger text-center']")
+    private WebElement errorMessage;
 
 
     public LoginPage(WebDriver webDriver) {
@@ -70,5 +73,20 @@ public class LoginPage extends ParentPage {
             .enterTestIntoPassword(VALID_PASSWORD_UI)
             .clickOnButtonSignIn();
         return new HomePage(webDriver);
+    }
+
+    public LoginPage checkTextInErrorMessage(String expectedText) {
+        checkTextInElement(errorMessage, expectedText);
+        return this;
+    }
+
+    public LoginPage checkSignInButtonIsVisible() {
+        checkIsElementDisplayed(buttonSignIn);
+        return this;
+    }
+
+    public LoginPage checkErrorMessageIsVisible() {
+        checkIsElementDisplayed(errorMessage);
+        return this;
     }
 }
