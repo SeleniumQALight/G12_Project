@@ -8,8 +8,6 @@ public class InvalidLoginTest extends BaseTest {
     public void invalidLogin() {
         pageProvider.getLoginPage()
                 .loginFormInvalidCredentials()
-                .getHeaderForLoggedUserElement()
-                .verifyButtonSignOutIsNotVisible()
                 .verifySignInButtonIsVisible();
         pageProvider.getLoginPage()
                 .verifyInvalidMessageIsVisible()

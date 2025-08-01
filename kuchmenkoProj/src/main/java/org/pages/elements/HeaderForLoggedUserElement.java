@@ -55,8 +55,4 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         checkIsElementDisplayed(buttonCreateNewPost);
         return this;
     }
-
-    public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
-        return new HeaderForLoggedUserElement(webDriver);
-    }
 }

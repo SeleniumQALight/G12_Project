@@ -140,12 +140,12 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-    public HomePage loginFormInvalidCredentials() {
+    public LoginPage loginFormInvalidCredentials() {
         openLoginPage();
         this.enterTextIntoInputLogin("invalidLogin");
         this.enterTextIntoPassword("invalidPassword");
         clickOnButtonSignIn();
-        return new HomePage(webDriver);
+        return new LoginPage(webDriver);
     }
 
     public LoginPage verifySignInButtonIsVisible() {
