@@ -21,6 +21,7 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("G12 Nataliia Post Body")
+                .selectTextInDropdownAccess("Приватне повідомлення")
                 .clickOnSaveNewPost()
                 .checkIsRedirectedToPostPage()
                 .checkIsSuccessMessageDisplayed()

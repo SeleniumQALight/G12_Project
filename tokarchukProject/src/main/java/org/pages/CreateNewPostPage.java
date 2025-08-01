@@ -15,6 +15,9 @@ public class CreateNewPostPage extends ParentPage {
     @FindBy(xpath = "//button[text()='Save New Post']")
     private WebElement buttonSaveNewPost;
 
+    @FindBy(tagName = "select")
+    private WebElement dropdownAccess;
+
     @FindBy(xpath = "//input[@name='uniquePost']")
     private WebElement uniquePostCheckbox;
 
@@ -53,4 +56,8 @@ public class CreateNewPostPage extends ParentPage {
         return this;
     }
 
+    public CreateNewPostPage selectTextInDropdownAccess(String textForSelection) {
+        selectTextInDropdown(dropdownAccess, textForSelection);
+        return this;
+    }
 }
