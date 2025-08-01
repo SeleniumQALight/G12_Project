@@ -1,6 +1,7 @@
 package org.pages;
 
 import org.apache.log4j.Logger;
+import org.enums.CheckboxState;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -143,5 +144,44 @@ public class CommonActionsWithElements {
     private void printErrorAndStopTes(Exception e) {
         logger.error("Error while working with element: " + e.getMessage());
         Assert.fail("Error while working with element: " + e.getMessage());
+    }
+
+    protected boolean selectCheckboxIfNeeded(WebElement checkbox) {
+        if (!checkbox.isSelected()) {
+            clickOnElement(checkbox);
+            logger.info("Checkbox was checked.");
+            return true;
+        } else {
+            logger.info("Checkbox is already checked.");
+            return false;
+        }
+    }
+
+    protected boolean deselectCheckboxIfNeeded(WebElement checkbox) {
+        if (checkbox.isSelected()) {
+            clickOnElement(checkbox);
+            logger.info("Checkbox was unchecked.");
+            return true;
+        } else {
+            logger.info("Checkbox is already unchecked.");
+            return false;
+        }
+    }
+
+
+    protected void setCheckboxState(WebElement checkbox, CheckboxState desiredState) {
+        if (desiredState == CheckboxState.CHECK) {
+            selectCheckboxIfNeeded(checkbox);
+        } else if (desiredState == CheckboxState.UNCHECK) {
+            deselectCheckboxIfNeeded(checkbox);
+        } else {
+            logger.error("Unknown checkbox state: " + desiredState);
+            Assert.fail("Unknown checkbox state: " + desiredState);
+        }
+    }
+
+    protected void checkIsElementNotDisplayed(WebElement webElement) {
+        Assert.assertFalse("Element is displayed", isElementDisplayed(webElement));
+        logger.info("Element is not displayed as expected");
     }
 }

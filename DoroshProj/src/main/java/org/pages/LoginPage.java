@@ -1,5 +1,6 @@
 package org.pages;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.data.RegistrationValidationMessages;
@@ -53,13 +54,14 @@ public class LoginPage extends ParentPage {
     protected String getRelativeURL() {
         return "/";
     }
+@Step
 
     public LoginPage openLoginPage() {
         webDriver.get(baseURL);
         logger.info("Login page was opened with url " + baseURL);
         return this;
     }
-
+    @Step
     public LoginPage enterTextIntoInputLogin(String login) {
         // WebElement inputUserName = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
 //        inputUserName.clear();
@@ -68,6 +70,7 @@ public class LoginPage extends ParentPage {
         clearAndEnterTextToElement(inputUserName, login);
         return this;
     }
+    @Step
 
     public LoginPage enterTextIntoPassword(String password) {
         //WebElement inputPassword = webDriver.findElement(By.xpath("//input[@placeholder='Password']"));
@@ -77,7 +80,7 @@ public class LoginPage extends ParentPage {
         clearAndEnterTextToElement(inputPassword, password);
         return this;
     }
-
+    @Step
     public void clickOnButtonSignIn() {
         // webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
 //        buttonSignIn.click();
@@ -89,6 +92,8 @@ public class LoginPage extends ParentPage {
      * Method openLoginPageAndFillLoginFormWithValidCred
      * This method opens the login page, fills in the login form with valid credentials,
      */
+    @Step
+
     public HomePage openLoginPageAndFillLoginFormWithValidCred() {
         openLoginPage();
         this.enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
@@ -96,41 +101,49 @@ public class LoginPage extends ParentPage {
         clickOnButtonSignIn();
         return new HomePage(webDriver);
     }
+    @Step
 
     public LoginPage checkButtonSignInVisible() {
         checkIsElementDisplayed(buttonSignIn);
         return this;
     }
+    @Step
 
     public LoginPage checkAlertMessageVisible() {
         checkIsElementDisplayed(alertTextMessage);
         return this;
     }
+    @Step
 
     public void checkTextInAlertMessage(String expectedMessageText) {
         checkTextInElement(alertTextMessage, expectedMessageText);
 
     }
+    @Step
 
     public void checkInputUserNameAndPasswordNotVisible() {
         checkIsElementNotDisplayed(inputUserName);
         checkIsElementNotDisplayed(inputPassword);
     }
+    @Step
 
     public LoginPage enterTextIntoRegistrationUserNameField(String userName) {
         clearAndEnterTextToElement(inputUserNameRegistrationForm, userName);
         return this;
     }
+    @Step
 
     public LoginPage enterTextIntoRegistrationEmailField(String email) {
         clearAndEnterTextToElement(inputEmailInRegistrationForm, email);
         return this;
     }
+    @Step
 
     public LoginPage enterTextIntoRegistrationPasswordField(String password) {
         clearAndEnterTextToElement(inputPasswordInRegistrationForm, password);
         return this;
     }
+    @Step
 
     public LoginPage checkErrorsMesssages(String expectedErrorMessagesAsString) {
         // error1;error2;error3 -> [error1, error2, error3]

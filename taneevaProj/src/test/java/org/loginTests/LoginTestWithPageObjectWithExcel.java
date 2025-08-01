@@ -2,6 +2,7 @@ package org.loginTests;
 
 import org.baseTest.BaseTest;
 import org.junit.Test;
+import org.utils.ConfigProvider;
 import org.utils.ExcelDriver;
 
 import java.io.IOException;
