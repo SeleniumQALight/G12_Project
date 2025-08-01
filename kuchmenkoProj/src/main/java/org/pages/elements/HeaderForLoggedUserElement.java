@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.pages.CommonActionsWithElements;
 import org.pages.CreateNewPostPage;
+import org.pages.LoginPage;
 import org.pages.MyProfilePage;
 
 public class HeaderForLoggedUserElement extends CommonActionsWithElements {
@@ -29,8 +30,9 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
     }
 
     @Step
-    public void checkButtonSignOutVisible() {
+    public HeaderForLoggedUserElement checkButtonSignOutVisible() {
         checkIsElementDisplayed(buttonSignOut);
+        return new HeaderForLoggedUserElement(webDriver);
     }
 
     @Step
@@ -42,5 +44,19 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
     @Step
     public boolean isButtonSignOutVisible() {
         return isElementDisplayed(buttonSignOut);
+    }
+
+    public LoginPage verifyButtonSignOutIsNotVisible() {
+        checkIsElementDisplayed(buttonSignOut);
+        return new LoginPage(webDriver);
+    }
+
+    public HeaderForLoggedUserElement verifyButtonCreatePostIsVisible() {
+        checkIsElementDisplayed(buttonCreateNewPost);
+        return this;
+    }
+
+    public HeaderForLoggedUserElement getHeaderForLoggedUserElement() {
+        return new HeaderForLoggedUserElement(webDriver);
     }
 }

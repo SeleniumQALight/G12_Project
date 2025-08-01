@@ -18,6 +18,9 @@ public class CreateNewPostPage extends  ParentPage{
     @FindBy(tagName = "select")
     private WebElement dropdownAccess;
 
+    @FindBy(xpath = "//input[@name='uniquePost']")
+    private WebElement checkboxUniquePost;
+
     public CreateNewPostPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -50,6 +53,11 @@ public class CreateNewPostPage extends  ParentPage{
 
     public CreateNewPostPage selectTextInDropdownAccess(String textForSelection) {
         selectTextInDropdown(dropdownAccess, textForSelection);
+        return this;
+    }
+
+    public CreateNewPostPage clickOnUniquePostCheckbox(String action) {
+        setCheckboxState(checkboxUniquePost, action);
         return this;
     }
 }
