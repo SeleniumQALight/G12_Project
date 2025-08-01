@@ -114,4 +114,9 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         checkIsElementDisplayed(buttonCreateNewPost);
         logger.info("Create Post button is visible");
     }
+
+    public HeaderForLoggedUserElement checkIsButtonSignOutVisible() {
+        checkIsElementDisplayed(buttonSignOut);
+        return this;
+    }
 }
