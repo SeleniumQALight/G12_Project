@@ -3,8 +3,6 @@ package org.pages;
 import org.apache.log4j.Logger;
 import org.data.TestData;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.pages.elements.HeaderForLoggedUserElement;
 
 
