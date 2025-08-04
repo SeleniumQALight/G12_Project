@@ -1,9 +1,13 @@
 package org.pages.elements;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.pages.*;
+import org.pages.CommonActionsWithElements;
+import org.pages.CreateNewPostPage;
+import org.pages.LoginPage;
+import org.pages.MyProfilePage;
 
 public class HeaderForLoggedUserElement extends CommonActionsWithElements {
     @FindBy(xpath = "//img[@alt='My profile']")
@@ -25,23 +29,26 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         super(webDriver);
     }
 
+    @Step
     public MyProfilePage clickOnButtonMyProfile() {
         clickOnElement(buttonMyProfile);
         return new MyProfilePage(webDriver);
     }
 
+    @Step
     public void checkButtonSignOutVisible() {
 //        Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
         checkIsElementDisplayed(buttonSignOut);
     }
 
-
+    @Step
     public CreateNewPostPage clickOnButtonCreatePost() {
         clickOnElement(buttonCreatePost);
         return new CreateNewPostPage(webDriver);
     }
 
-    public LoginPage checkButtonSignOutIsNotVisible() {
+    @Step
+    public LoginPage checkButtonSignOutIsNotVisibleNotVisible() {
         checkIsElementNotDisplayed(buttonSignOut);
         return new LoginPage(webDriver);
     }
@@ -51,10 +58,12 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         return new LoginPage(webDriver);
     }
 
+    @Step
     public boolean isButtonSignOutVisible() {
         return isElementDisplayed(buttonSignOut);
     }
 
+    @Step
     public void clickOnButtonSignOut() {
         clickOnElement(buttonSignOut);
     }

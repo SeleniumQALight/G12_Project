@@ -1,5 +1,6 @@
 package org.pages;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.data.TestData;
@@ -52,13 +53,14 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
+    @Step
     public LoginPage openLoginPage() {
         webDriver.get(baseURL);
         logger.info("Login page was opened with urk " + baseURL);
         return this;
     }
 
-
+    @Step
     public LoginPage enterTextIntoInputLogin(String login) {
  //       WebElement inputUserName = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
 //        inputUserName.clear();
@@ -67,7 +69,7 @@ public class LoginPage extends ParentPage {
         clearAndEnterTextToElement(inputUserName, login);
         return this;
     }
-
+    @Step
     public LoginPage enterTextIntoPassword(String password) {
 //        WebElement inputPassword = webDriver.findElement(By.xpath("//input[@placeholder='Password']"));
 //        inputPassword.clear();
@@ -76,29 +78,33 @@ public class LoginPage extends ParentPage {
         clearAndEnterTextToElement(inputPassword, password);
         return this;
     }
-
+    @Step
     public void clickOnButtonSignIn() {
 //        webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
 //        buttonSignIn.click();
 //        logger.info("Button Sinn In was clicked");
         clickOnElement(buttonSignIn);
     }
+
+    @Step
     public LoginPage checkButtonSignInVisible() {
         checkIsElementDisplayed(buttonSignIn);
         return this;
     }
-
+    @Step
     public LoginPage checkAlertMessageVisible() {
         checkIsElementDisplayed(alertTextMessage);
         logger.info("Alert message is displayed");
         return this;
     }
-
+    @Step
     public LoginPage checkTextInAlertMessage(String expectedText) {
         checkTextInElement(alertTextMessage, expectedText);
         logger.info("Alert message text is checked: " + expectedText);
         return this;
     }
+
+    @Step
     public LoginPage checkInputUserNameAndPasswordNotVisible() {
         Assert.assertTrue("Username input should NOT be visible",
                 webDriver.findElements(By.xpath("//input[@placeholder='Username']")).isEmpty());
@@ -113,7 +119,7 @@ public class LoginPage extends ParentPage {
      * Opens the login page and fills in the login form with valid credentials.
      * @return HomePage - returns an instance of HomePage after successful login.
      */
-
+    @Step
     public HomePage openLoginPageAndFIllLoginFormWithValidCred() {
         openLoginPage();
         this.enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
@@ -122,11 +128,13 @@ public class LoginPage extends ParentPage {
         return new HomePage(webDriver);
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationUserNameField(String userName) {
         clearAndEnterTextToElement(inputUserNameRegistrationForm, userName);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationEmailField(String email) {
         clearAndEnterTextToElement(inputUserEmailRegistrationForm, email);
         return this;
@@ -138,6 +146,7 @@ public class LoginPage extends ParentPage {
 
     }
 
+    @Step
     public LoginPage checkErrorMassages(String expectedErrorMassageAsString) {
         //error1; error2;error3 ->[error1, error2, error3]
         String[] expectedErrorMassages = expectedErrorMassageAsString.split(SEMICOLON);
