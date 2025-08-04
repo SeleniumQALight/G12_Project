@@ -37,6 +37,12 @@ public class LoginPage extends ParentPage {
     @FindBy(id = "password-register")
     private WebElement inputPasswordInregistrationForm;
 
+    @FindBy (xpath = "//button[contains(text(), 'Sign Out')]")
+    private WebElement signOutButton;
+
+    @FindBy (xpath = "//div[contains(@class, 'alert') and contains(text(), 'Invalid username/password')]")
+    private WebElement unsuccessMessage;
+
     final static String listOfActualErrorMessagesLocator = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
     @FindBy (xpath = listOfActualErrorMessagesLocator)
     private List<WebElement> listOfActualErrorMessages;
@@ -124,6 +130,31 @@ public class LoginPage extends ParentPage {
                     .isIn(expectedErrorMessages);
         }
         softAssertions.assertAll();
+        return this;
+    }
+
+
+    public LoginPage openLoginPageAndFillLoginFormWithInvalidValidCred(String login, String password) {
+        openLoginPage();
+        this.enterTextIntoInputLogin(login);
+        this.enterTextIntoPassword(password);
+        this.clickLoginButtonSignIn();
+        return this;
+    }
+
+    public LoginPage checkIsButtonSignInVisible() {
+        isElementDisplayed(buttonSignIn);
+        return this;
+    }
+
+    public LoginPage checkIsButtonSignOutIsNotVisible() {
+        Assert.assertFalse("Sign Out button SHOULD NOT be visible!", isElementDisplayed(signOutButton));
+        return this;
+    }
+
+    public LoginPage checkIsUnsuccessMessageDisplayed() {
+        Assert.assertTrue("Unsuccess message is not displayed!",
+                isElementDisplayed(unsuccessMessage));
         return this;
     }
 }
