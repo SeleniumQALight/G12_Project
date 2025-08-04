@@ -2,9 +2,14 @@ package org.pages;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.utils.ConfigProvider;
 
 abstract public class ParentPage extends CommonActionsWithElements {
-    protected String baseURL = "https://aqa-complexapp.onrender.com";
+    static String environment = System.getProperty("env","aqa");
+//    protected String baseUrl = "https://"+environment+"-complexapp.onrender.com";
+
+protected String baseUrl = ConfigProvider.configProperties.base_url()
+        .replace("[env]", environment);
 
     public ParentPage(WebDriver webDriver) {
         super(webDriver);
@@ -14,7 +19,7 @@ abstract public class ParentPage extends CommonActionsWithElements {
 
     protected void checkURL() {
         Assert.assertEquals("URL is not expexted"
-                , baseURL + getRelativeURL()
+                , baseUrl + getRelativeURL()
                 , webDriver.getCurrentUrl()
         );
     }
@@ -26,8 +31,8 @@ abstract public class ParentPage extends CommonActionsWithElements {
 
     protected void checkURLWithPattern() {
         Assert.assertTrue("URL is not expected \n" +
-                        "Expected url: " + baseURL + getRelativeURL() +
+                        "Expected url: " + baseUrl + getRelativeURL() +
                         "\n Actual url: " + webDriver.getCurrentUrl(),
-                webDriver.getCurrentUrl().matches(baseURL + getRelativeURL()));
+                webDriver.getCurrentUrl().matches(baseUrl + getRelativeURL()));
     }
 }
