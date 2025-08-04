@@ -97,8 +97,8 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         checkButtonSearchIsNotVisible()
                 .checkButtonChatCallIsNotVisible()
                 .checkButtonMyProfileIsNotVisible()
-                .checkButtonCreatePostIsNotVisible();
-        checkButtonSignOutIsNotVisible();
+                .checkButtonCreatePostIsNotVisible()
+                .checkButtonSignOutIsNotVisible();
         return new LoginPage(webDriver);
     }
 
@@ -126,6 +126,11 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         clickOnElement(buttonSearch);
         return new SearchElements(webDriver);
     }
+
+        public LoginPage checkButtonSignOutIsNotVisible() {
+            checkIsElementNotDisplayed(buttonSignOut);
+            return new LoginPage(webDriver);
+        }
 
 }
 
