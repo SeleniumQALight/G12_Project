@@ -6,6 +6,7 @@ import org.assertj.core.api.SoftAssertions;
 import org.data.TestData;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -219,6 +220,26 @@ public class LoginPage extends ParentPage {
 
         Assert.assertTrue("Error message not found: " + expectedText, isTextPresent);
         logger.info("Found expected error message: " + expectedText);
+        return this;
+    }
+    public LoginPage pressKey(Keys key) {
+        Actions actions = new Actions(webDriver);
+        actions.sendKeys(key).perform();
+        return this;
+    }
+
+    public LoginPage pressKey(Keys key, int times) {
+        Actions actions = new Actions(webDriver);
+        for (int i = 0; i < times; i++) {
+            actions.sendKeys(key);
+        }
+        actions.perform();
+        return this;
+    }
+
+    public LoginPage enterTextWithActions(String text) {
+        Actions actions = new Actions(webDriver);
+        actions.sendKeys(text).perform();
         return this;
     }
 }
