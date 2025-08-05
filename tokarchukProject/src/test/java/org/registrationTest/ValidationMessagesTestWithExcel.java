@@ -1,4 +1,4 @@
-package org.registrationTests;
+package org.registrationTest;
 
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
@@ -12,30 +12,39 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Collection;
 
+
+
 @RunWith(JUnitParamsRunner.class)
 public class ValidationMessagesTestWithExcel extends BaseTest {
     @Test
     @Parameters(method = "parametersForTestValidationMessages")
-    public void TC003_testValidationMessages(String userName,
-                                             String email,
-                                             String password,
-                                             String expectedErrorMessages) {
+    public void TC03_testValidationMessages(
+            String userName, String email, String password, String expectedMessages) {
         pageProvider.getLoginPage().openLoginPage();
         pageProvider.getLoginPage()
                 .enterTextIntoRegistrationUserNameField(userName)
                 .enterTextIntoRegistrationEmailField(email)
                 .enterTextIntoRegistrationPasswordField(password)
-                .checkErrorsMessages(expectedErrorMessages)
+                .checkErrorsMessages(expectedMessages)
         ;
     }
 
     public Collection parametersForTestValidationMessages() throws IOException {
-        String pathToExcelFile = ConfigProvider.configProperties.DATA_FILE_PATH() + "testDataSuit.xls";
+        String pathToDataFile = ConfigProvider.configProperties.DATA_FILE_PATH() + "testDataSuit.xls";
         String sheetName = "registrationErrors";
         boolean skipFirstRow = false;
-        logger.info("passToDataFile = " + pathToExcelFile);
+        logger.info("pathToDataFile = " + pathToDataFile);
         logger.info("sheetName = " + sheetName);
         logger.info("skipFirstRow = " + skipFirstRow);
-        return new ExcelSpreadsheetData(new FileInputStream(pathToExcelFile), sheetName, skipFirstRow).getData();
+        return new ExcelSpreadsheetData(new FileInputStream(pathToDataFile), sheetName, skipFirstRow).getData();
     }
+
+//    public Object[][] parametersForTestValidationMessages() {
+//        return new Object[][]{
+//                {"tr", "tr1", "tr2", ERROR_USERNAME + SEMICOLON + ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD},
+//                {"taras", "tr1", "tr2", ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD}
+//        };
+//    }
+
 }
+

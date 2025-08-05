@@ -6,18 +6,17 @@ import org.junit.Test;
 import static org.data.TestData.VALID_LOGIN_UI;
 import static org.data.TestData.VALID_PASSWORD_UI;
 
-public class LoginTestWithRefresh extends BaseTest {
-
+public class LoginRefreshPageTest extends BaseTest {
     @Test
-    public void loginTestWithRefresh() {
-        pageProvider.getLoginPage().openLoginPage()
+    public void loginRefreshPageTest() {
+        pageProvider.getLoginPage()
+                .openLoginPage()
                 .enterTextIntoInputLogin(VALID_LOGIN_UI)
                 .enterTextIntoPassword(VALID_PASSWORD_UI)
-                .refreshPage();
-        pageProvider.getLoginPage()
-                .clickOnButtonSignIn();
-        pageProvider.getHomePage()
+                .refreshPage()
                 .getHeaderForLoggedUserElement()
-                .checkButtonSignOutIsNotVisible();
+                .verifyButtonSignOutIsNotVisible()
+
+                ;
     }
 }

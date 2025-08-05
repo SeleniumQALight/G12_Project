@@ -137,6 +137,11 @@ public class LoginPage extends ParentPage {
         checkIsElementNotDisplayed(inputUserName);
         checkIsElementNotDisplayed(inputPassword);
     }
+    public void checkElementsForLoginIsVisible() {
+        checkIsElementDisplayed(inputUserName);
+        checkIsElementDisplayed(inputPassword);
+        checkIsButtonSignInVisible();
+    }
 
     @Step
     public LoginPage enterTextIntoRegistrationUserNameField(String userName) {

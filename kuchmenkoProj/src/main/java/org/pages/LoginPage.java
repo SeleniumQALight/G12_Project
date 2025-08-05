@@ -38,6 +38,9 @@ public class LoginPage extends ParentPage {
     @FindBy(id = "password-register")
     private WebElement inputPasswordRegistrationForm;
 
+    @FindBy(xpath = "//div[@class='alert alert-danger text-center']")
+    private WebElement invalidMessage;
+
     final static String listOfActualMessagesLocator = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
     @FindBy(xpath = listOfActualMessagesLocator)
     private List<WebElement> listOfActualMessages;
@@ -136,4 +139,34 @@ public class LoginPage extends ParentPage {
         softAssertions.assertAll();
         return this;
     }
+
+    public LoginPage loginFormInvalidCredentials() {
+        openLoginPage();
+        this.enterTextIntoInputLogin("invalidLogin");
+        this.enterTextIntoPassword("invalidPassword");
+        clickOnButtonSignIn();
+        return new LoginPage(webDriver);
+    }
+
+    public LoginPage verifySignInButtonIsVisible() {
+        checkIsElementDisplayed(buttonSignIn);
+        return this;
+    }
+
+
+    public LoginPage verifyInvalidMessageIsVisible() {
+        checkIsElementDisplayed(invalidMessage);
+        return this;
+    }
+
+    public LoginPage verifyTextOfInvalidMessage() {
+        checkTextInElement(invalidMessage,"Invalid username/password.");
+        return this;
+    }
+
+    public void verifyInputsAreNotVisible() {
+        checkElementIsNotDisplayed(inputUserName);
+        checkElementIsNotDisplayed(inputPassword);
+    }
+
 }
