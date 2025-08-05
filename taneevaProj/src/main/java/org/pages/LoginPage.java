@@ -70,6 +70,7 @@ public class LoginPage extends ParentPage {
         clearAndEnterTextToElement(inputUserName, login);
         return this;
     }
+
     @Step
     public LoginPage enterTextIntoPassword(String password) {
 //        WebElement inputPassword = webDriver.findElement(By.xpath("//input[@placeholder='Password']"));
@@ -79,6 +80,7 @@ public class LoginPage extends ParentPage {
         clearAndEnterTextToElement(inputPassword, password);
         return this;
     }
+
     @Step
     public void clickOnButtonSignIn() {
 //        webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
@@ -93,12 +95,14 @@ public class LoginPage extends ParentPage {
         checkIsElementDisplayed(buttonSignIn);
         return this;
     }
+
     @Step
     public LoginPage checkAlertMessageVisible() {
         checkIsElementDisplayed(alertTextMessage);
         logger.info("Alert message is displayed");
         return this;
     }
+
     @Step
     public LoginPage checkTextInAlertMessage(String expectedText) {
         checkTextInElement(alertTextMessage, expectedText);

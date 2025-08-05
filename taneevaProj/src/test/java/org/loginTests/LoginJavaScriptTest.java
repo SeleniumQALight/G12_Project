@@ -18,13 +18,10 @@ public class LoginJavaScriptTest extends BaseTest {
                 .checkIsButtonSignOutVisible();
 
         // Step 4: Open new tab in browser using JavaScript
-        ((JavascriptExecutor) webDriver).executeScript("window.open()");
+        pageProvider.getHomePage().openNewTab();
 
         // Step 5-6: Switch to new tab and Open login page
-        ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
-        String originalTab = tabs.get(0);
-        String newTab = tabs.get(1);
-        webDriver.switchTo().window(newTab);
+        pageProvider.getHomePage().switchToTab(1);
         webDriver.get("https://" + System.getProperty("evn", "aqa") + "-complexapp.onrender.com");
 
         // Step 7: Check that button SignOut is visible
@@ -33,7 +30,7 @@ public class LoginJavaScriptTest extends BaseTest {
                 .checkIsButtonSignOutVisible();
 
         // Step 8: Switch to main tab
-        webDriver.switchTo().window(originalTab);
+        pageProvider.getHomePage().switchToTab(0);
 
         // Step 9: Check that button SignOut is visible
         pageProvider.getHomePage()
@@ -41,8 +38,9 @@ public class LoginJavaScriptTest extends BaseTest {
                 .checkIsButtonSignOutVisible();
 
         // Step 10: Close new tab and switch to main tab
-        webDriver.switchTo().window(newTab).close();
-        webDriver.switchTo().window(originalTab);
+        pageProvider.getHomePage().switchToTab(1);
+        pageProvider.getHomePage().closeCurrentTab();
+        pageProvider.getHomePage().switchToTab(0);
 
         // Step 11: Check that button SignOut is visible
         pageProvider.getHomePage()
