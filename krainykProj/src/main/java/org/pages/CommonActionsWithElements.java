@@ -2,10 +2,7 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,6 +16,8 @@ public class CommonActionsWithElements {
     protected WebDriver webDriver;
     private Logger logger = Logger.getLogger(getClass());
     protected WebDriverWait webDriverWait10, webDriverWait15;
+    private static String originalHandle;
+
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -220,18 +219,61 @@ public class CommonActionsWithElements {
         }
     }
 
-    // open new tab using JavaScript
-    protected void openNewTab(String url) {
+    // open new tab
+    public void openNewTab() {
         try {
+            originalHandle = webDriver.getWindowHandle(); // Save the original tab handle
             ((JavascriptExecutor) webDriver).executeScript("window.open()");
-            logger.info("New tab opened with URL: " + url);
+            logger.info("New tab was opened");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    // switch to new tab
+    public void switchToNewTab() {
+        try {
+            for (String handle : webDriver.getWindowHandles()) {
+                if (!handle.equals(originalHandle)) {
+                    webDriver.switchTo().window(handle);
+                    logger.info("Switched to new tab " + handle);
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    // switch to original tab
+    public void switchToOriginalTab() {
+        try {
+            webDriver.switchTo().window(originalHandle);
+            logger.info("Switched to original tab " + originalHandle);
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    // close new tab and switch to original tab
+    public void closeNewTabAndSwitchToOriginal() {
+        try {
+            for (String handle : webDriver.getWindowHandles()) {
+                if (!handle.equals(originalHandle)) {
+                    webDriver.switchTo().window(handle);
+                    webDriver.close();
+                    webDriver.switchTo().window(originalHandle);
+                    logger.info("Closed new tab and switched to original tab " + originalHandle);
+                    break;
+                }
+            }
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
     }
 
     // refresh page
-    protected void refreshPage() {
+    public void refreshPage() {
         try {
             webDriver.navigate().refresh();
             logger.info("Page was refreshed");
@@ -239,6 +281,43 @@ public class CommonActionsWithElements {
             printErrorAndStopTest(e);
         }
     }
+
+    // pressing keys like Tab, Enter, etc.
+    public void pressKey(Keys key, int count) {
+        try {
+            for (int i = 0; i < count; i++) {
+                Actions actions = new Actions(webDriver);
+                actions.sendKeys(key).perform();
+                logger.info(key + " key was presed " + (i + 1) + " times on the page");
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    // pressing key to enter text
+    public void pressKey(Keys key) {
+        try {
+            Actions actions = new Actions(webDriver);
+            actions.sendKeys(key).perform();
+            logger.info(key.name() + " key was pressed on the page");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    // press key to enter text with actions
+    public void enterTextWithoutElement(String text) {
+        try {
+            Actions actions = new Actions(webDriver);
+            actions.sendKeys(text).perform();
+            logger.info("Text '" + text + "' was entered using keys");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+
 
     protected WebElement findElementByLocator(String locator, String text) {
         try {

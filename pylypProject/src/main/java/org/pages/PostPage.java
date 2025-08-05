@@ -49,7 +49,9 @@ public class PostPage extends ParentPage{
         String expectedText = "Is this post unique? : " + expectedValue;
         checkTextInElement(checkboxText, expectedText);
         return this;
-      
+
+    }
+
     public MyProfilePage clickOnDeleteButton() {
         clickOnElement(buttonDeletePost, "'Delete post button'");
         return new MyProfilePage(webDriver);

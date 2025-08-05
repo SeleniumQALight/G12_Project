@@ -10,10 +10,13 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.pages.elements.HeaderForLoggedUserElement;
 import org.utils.ConfigProvider;
 
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
@@ -163,13 +166,38 @@ public class CommonActionsWithElements {
     }
 
     // open new tab
-    protected void openNewTab() {
+    public HomePage openNewTab() {
         try{
             ((JavascriptExecutor) webDriver).executeScript("window.open();");
             logger.info("New tab was opened");
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
+        return new HomePage(webDriver);
+    }
+
+    public HomePage switchBetweenTwoTabs() {
+        List<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+        String currentTab = webDriver.getWindowHandle();
+        if (currentTab.equals(tabs.get(0))) {
+            webDriver.switchTo().window(tabs.get(1));
+            logger.info("Switched to new tab");
+        } else {
+            webDriver.switchTo().window(tabs.get(0));
+            logger.info("Switched to main tab");
+        }
+        return new HomePage(webDriver);
+    }
+
+    public HomePage switchToMainTabAndCloseNew() {
+        List<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+        webDriver.switchTo().window(tabs.get(1));
+        webDriver.close();
+        webDriver.switchTo().window(tabs.get(0));
+        logger.info("Switched to main tab and closed new tab");
+        return new HomePage(webDriver);
+
+
     }
 
 
@@ -248,4 +276,13 @@ public class CommonActionsWithElements {
     }
 
 
+    public HeaderForLoggedUserElement refreshPage() {
+        try {
+            webDriver.navigate().refresh();
+            logger.info("Page was refreshed");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+        return new HeaderForLoggedUserElement(webDriver);
+    }
 }

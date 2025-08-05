@@ -23,6 +23,7 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
     public MyProfilePage clickOnButtonMyProfile() {
         clickOnElement(buttonMyProfile);
         return new MyProfilePage(webDriver);
+
     }
     public void checkButtonSignOutVisible() {
         checkIsElementDisplayed(buttonSignOut);
@@ -35,5 +36,9 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
 
     public boolean isButtonSignOutVisible() {
         return isElementDisplayed(buttonSignOut);
+    }
+
+    public void checkButtonSignOutIsNotVisible() {
+        checkIsElementNotDisplayed(buttonSignOut);
     }
 }

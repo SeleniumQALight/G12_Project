@@ -18,11 +18,13 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("G12 Kuchmenko Post Body")
+                .clickOnUniquePostCheckbox("check")
                 .selectTextInDropdownAccess("Приватне повідомлення") // Private post
                 .clickOnSaveNewPostButton()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMassageDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
+                .checkIsPostUnique()
 
         ;
 
