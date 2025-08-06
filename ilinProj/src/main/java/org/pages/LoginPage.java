@@ -74,6 +74,7 @@ public class LoginPage extends ParentPage {
 
     @Step
     public LoginPage enterTextIntoPassword(String password) {
+        logger.info("TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST" + password);
         clearAndEnterTextToElement(inputPassword, password);
         return this;
     }
