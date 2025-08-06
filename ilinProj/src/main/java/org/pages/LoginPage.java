@@ -44,6 +44,7 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = listOfActualMessagesLocator)
     private List<WebElement> listOfActualMessages;
 
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }

@@ -1,10 +1,12 @@
 package org.pages.elements;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.pages.CommonActionsWithElements;
 import org.pages.CreateNewPostPage;
+import org.pages.LoginPage;
 import org.pages.MyProfilePage;
 
 public class HeaderForLoggedUserElement extends CommonActionsWithElements {
@@ -21,21 +23,36 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         super(webDriver);
     }
 
+    @Step
     public MyProfilePage clickOnButtonMyProfile() {
         clickOnElement(buttonMyProfile);
         return new MyProfilePage(webDriver);
     }
 
-    public void checkButtonSignOutVisible() {
+    @Step
+    public HeaderForLoggedUserElement checkButtonSignOutVisible() {
         checkIsElementDisplayed(buttonSignOut);
+        return new HeaderForLoggedUserElement(webDriver);
     }
 
+    @Step
     public CreateNewPostPage clickOnButtonCreateNewPost() {
         clickOnElement(buttonCreateNewPost);
         return new CreateNewPostPage(webDriver);
     }
 
+    @Step
     public boolean isButtonSignOutVisible() {
         return isElementDisplayed(buttonSignOut);
+    }
+
+    public LoginPage verifyButtonSignOutIsNotVisible() {
+        checkIsElementDisplayed(buttonSignOut);
+        return new LoginPage(webDriver);
+    }
+
+    public HeaderForLoggedUserElement verifyButtonCreatePostIsVisible() {
+        checkIsElementDisplayed(buttonCreateNewPost);
+        return this;
     }
 }

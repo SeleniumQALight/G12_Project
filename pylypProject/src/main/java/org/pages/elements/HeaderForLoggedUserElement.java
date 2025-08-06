@@ -1,10 +1,12 @@
 package org.pages.elements;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.pages.CommonActionsWithElements;
 import org.pages.CreateNewPostPage;
+import org.pages.HomePage;
 import org.pages.MyProfilePage;
 
 public class HeaderForLoggedUserElement extends CommonActionsWithElements {
@@ -33,6 +35,18 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
     public CreateNewPostPage clickOnButtonCreatePost() {
         clickOnElement(buttonCreatePost);
         return new CreateNewPostPage(webDriver);
+    }
+
+    // перевірка, що після логіну є кнопка Create Post
+    public HeaderForLoggedUserElement checkIsButtonCreatePostVisible() {
+        checkIsElementDisplayed(buttonCreatePost);
+        return this;
+    }
+
+    // перевірка, що кнопка Sign Out не показується
+    public HeaderForLoggedUserElement checkIsButtonSignOutNotVisible() {
+        Assert.assertFalse("Sign Out button should not be visible", isElementDisplayed(buttonSignOut));
+        return this;
     }
 
     public boolean isButtonSignOutVisible() {
