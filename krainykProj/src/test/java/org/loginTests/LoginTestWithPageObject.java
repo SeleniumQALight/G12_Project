@@ -25,7 +25,7 @@ public class LoginTestWithPageObject extends BaseTest {
     public void TC002_validLoginTest() {
         pageProvider.getLoginPage()
                 .openLoginPage()
-                .enterTextInInputLogin(VALID_LOGIN_UI+1)
+                .enterTextInInputLogin(VALID_LOGIN_UI)
                 .enterTextInInputPassword(VALID_PASSWORD_UI)
                 .clickOnButtonSignIn();
 
