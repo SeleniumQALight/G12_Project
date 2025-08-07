@@ -3,13 +3,16 @@ package org.registrationTest;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.baseTest.BaseTest;
+import org.categories.SmokeTestsFillter;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 
 import static org.data.RegistrationValidationMessages.*;
 
 
     @RunWith(JUnitParamsRunner.class)
+    @Category(SmokeTestsFillter.class)
     public class ValidationMessagesTest extends BaseTest {
         @Test
         @Parameters(method = "parametersForTestValidationMessages")
