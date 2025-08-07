@@ -1,7 +1,9 @@
 package org.loginTests;
 
 import org.baseTest.BaseTest;
+import org.categories.SmokeTestsFilter;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import static org.data.TestData.VALID_LOGIN_UI;
 import static org.data.TestData.VALID_PASSWORD_UI;
@@ -11,6 +13,7 @@ public class LoginTestWithPageObject extends BaseTest {
     public static final String INVALID_PASSWORD_UI = "123456qwerty21";
 
     @Test
+    @Category(SmokeTestsFilter.class)
     public void TC002_validLoginTest() {
         pageProvider.getLoginPage()
                 .openLoginPage()
