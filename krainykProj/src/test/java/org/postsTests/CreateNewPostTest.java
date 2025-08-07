@@ -41,6 +41,7 @@ public class CreateNewPostTest extends BaseTest {
 
     @After
     public void deletePosts() {
+        takeScreenshot("After test TC001_createNewPostTest, but before Post condition");
         logger.info("Post condition - delete test");
         pageProvider.getHomePage()
                 .openHomePageAndLoginIfNeeded()
