@@ -1,5 +1,6 @@
 package org.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,6 +18,9 @@ public class PostPage extends ParentPage {
 
     @FindBy(xpath = "//a[@class='text-primary mr-2']")
     private WebElement buttonEditPost;
+
+    private String isPostUniqueValue = "//p[text() = 'Is this post unique? : %s']";
+
 
 
     public PostPage(WebDriver webDriver) {
@@ -56,6 +60,12 @@ public class PostPage extends ParentPage {
 
     public PostPage checkIsPostUnique() {
         checkIsElementDisplayed(messageUniquePost);
+        return this;
+    }
+
+    public PostPage checkIsPostUnique(String isUnique) {
+        String formattedXpath = String.format(isPostUniqueValue, isUnique);
+        checkIsElementDisplayed(webDriver.findElement(By.xpath(formattedXpath)));
         return this;
     }
 
