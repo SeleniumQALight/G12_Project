@@ -40,6 +40,22 @@ public class LoginPage extends ParentPage {
     @FindBy(id = "password-register")
     private WebElement inputPasswordInRegistrationForm;
 
+    @FindBy(xpath = "//button[text()='Sign Out']")
+    private WebElement buttonSignOut;
+
+    final static String listOfElementsMassagesLocator = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
+    @FindBy(xpath = listOfElementsMassagesLocator)
+    private List<WebElement> listOfActualMassages;
+
+    @FindBy(id = "username-register")
+    private WebElement inputUserNameRegistrationForm;
+
+    @FindBy(id = "email-register")
+    private WebElement inputUserEmailRegistrationForm;
+
+    @FindBy(id = "password-register")
+    private WebElement inputPasswordInRegistrationForm;
+
     final static String listOfElementsMassagesLocator = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
     @FindBy(xpath = listOfElementsMassagesLocator)
     private List<WebElement> listOfActualMassages;
@@ -147,6 +163,77 @@ public class LoginPage extends ParentPage {
     }
 
     @Step
+    public LoginPage checkErrorMassages(String expectedErrorMassageAsString) {
+        //error1; error2;error3 ->[error1, error2, error3]
+        String[] expectedErrorMassages = expectedErrorMassageAsString.split(SEMICOLON);
+
+        webDriverWait10.until(ExpectedConditions.numberOfElementsToBe(By.xpath(listOfElementsMassagesLocator), expectedErrorMassages.length));
+
+        Utils_Custom.waitABit(1);
+
+        Assert.assertEquals("Number of error messages", expectedErrorMassages.length, listOfActualMassages.size());
+
+        SoftAssertions softAssertions = new SoftAssertions();
+        for (int i = 0; i < expectedErrorMassages.length; i++) {
+            softAssertions.assertThat(listOfActualMassages.get(i).getText())
+                    .as("Message " + i)
+                    .isIn(expectedErrorMassages);
+        }
+
+        softAssertions.assertAll();
+
+
+
+        return this;
+    }
+//HW 4 LogOutTest
+    public LoginPage checkLoginFieldIsVisible() {
+        checkIsElementDisplayed(inputUserName);
+        return this;
+    }
+
+    public LoginPage checkPasswordFieldIsVisible() {
+        checkIsElementDisplayed(inputPassword);
+        return this;
+    }
+
+    public LoginPage checkSignInButtonIsVisible() {
+        checkIsElementDisplayed(buttonSignIn);
+        return this;
+    }
+
+    public LoginPage clickOnSignOutButton() {
+        clickOnElement(buttonSignOut);
+        return this;
+    }
+
+    public LoginPage checkButtonSignOutVisible() {
+        checkIsElementDisplayed(buttonSignOut);
+        return this;
+    }
+
+    public LoginPage checkButtonSignOutNotVisible() {
+        checkIsElementNotDisplayed(buttonSignOut);
+        return this;
+    }
+
+
+    public LoginPage enterTextIntoRegistrationUserNameField(String userName) {
+        clearAndEnterTextToElement(inputUserNameRegistrationForm, userName);
+        return this;
+    }
+
+    public LoginPage enterTextIntoRegistrationEmailField(String email) {
+        clearAndEnterTextToElement(inputUserEmailRegistrationForm, email);
+        return this;
+    }
+
+    public LoginPage enterTextIntoRegistrationPasswordField(String password) {
+        clearAndEnterTextToElement(inputPasswordInRegistrationForm, password);
+        return this;
+
+    }
+
     public LoginPage checkErrorMassages(String expectedErrorMassageAsString) {
         //error1; error2;error3 ->[error1, error2, error3]
         String[] expectedErrorMassages = expectedErrorMassageAsString.split(SEMICOLON);
