@@ -4,8 +4,6 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.utils.ConfigProperties;
-import org.utils.ConfigProvider;
 import org.utils.ConfigProvider;
 
 import java.time.Duration;
@@ -46,4 +44,7 @@ abstract class ParentPage extends CommonActionsWithElements {
         webDriverWait10.until(ExpectedConditions.urlMatches(baseURL + regex));
     }
 
+    public MyProfilePage checkPostWithTitleIsPresent(String updatedTitle, int i) {
+        return null;
+    }
 }

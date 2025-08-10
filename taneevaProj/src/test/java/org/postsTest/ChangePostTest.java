@@ -8,7 +8,7 @@ import org.utils.Utils_Custom;
 public class ChangePostTest extends BaseTest {
 
     final String POST_TITLE = "TR005_G12 HW4_ Anj " + Utils_Custom.getDateAndTimeFormatted();
-    final String UPDATED_TITLE = "TR005_G12 HW4_ Anj_UPDATED " + Utils_Custom.getDateAndTimeFormatted();
+    final String UPDATED_TITLE = "HW4_UPDATED " + Utils_Custom.getDateAndTimeFormatted();
 
     @Test
     public void TC005_ChangePostTest() {
@@ -31,17 +31,16 @@ public class ChangePostTest extends BaseTest {
                 .waitForPostTitleVisible(UPDATED_TITLE)
                 .getheaderForLoggedUserElement()
                 .clickOnButtonMyProfile()
-                .checkIsRedirectedToMyProfilePage()
                 .checkPostWithTitleIsPresent(UPDATED_TITLE, 1);
 
     }
     @After
     public void cleanup() {
-        pageProvider.getLoginPage()
-                .openLoginPageAndFillLoginFormWithValidCred();
-                pageProvider.getPostPage()
-                .getheaderForLoggedUserElement().clickOnButtonMyProfile()
-                .deletePostTillPresent(UPDATED_TITLE)
-                .deletePostTillPresent(POST_TITLE);
+        logger.info("Post-condition: deleting posts if present");
+        pageProvider.getHomePage()
+                .openHomePageAndLoginIfNeeds()
+                .getHeaderForLoggedUserElement()
+                .clickOnButtonMyProfile()
+                .deletePostTillPresent(UPDATED_TITLE);
     }
 }

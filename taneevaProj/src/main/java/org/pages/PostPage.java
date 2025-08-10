@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.pages.elements.HeaderForLoggedUserElement;
 
 import java.time.Duration;
+import java.util.List;
 
 public class PostPage extends ParentPage {
 
@@ -87,8 +88,15 @@ public class PostPage extends ParentPage {
     }
 
     public PostPage checkTitleIsPresent(String expectedTitle) {
-        waitUntilTextToBePresentInElement(webDriver.findElement(postTitleLocator), expectedTitle);
-        Assert.assertEquals("Title is not matched", expectedTitle, getTitleText());
+        By locator = By.xpath("//div[@class='post-title' and text()='" + expectedTitle + "']");
+        List<WebElement> elements = webDriver.findElements(locator);
+
+        Assert.assertFalse("Post with title '" + expectedTitle + "' is not present on the page", elements.isEmpty());
+
+        WebElement postTitleElement = elements.get(0);
+        waitUntilTextToBePresentInElement(postTitleElement, expectedTitle);
+        Assert.assertEquals("Title is not matched", expectedTitle, postTitleElement.getText());
+
         return this;
     }
 
