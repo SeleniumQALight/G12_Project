@@ -2,9 +2,6 @@ package org.loginTests;
 
 import org.baseTest.BaseTest;
 import org.junit.Test;
-import org.openqa.selenium.JavascriptExecutor;
-
-import java.util.ArrayList;
 
 public class LoginJavaScriptTest extends BaseTest {
 
@@ -22,7 +19,7 @@ public class LoginJavaScriptTest extends BaseTest {
 
         // Step 5-6: Switch to new tab and Open login page
         pageProvider.getHomePage().switchToTab(1);
-        webDriver.get("https://" + System.getProperty("evn", "aqa") + "-complexapp.onrender.com");
+        pageProvider.getLoginPage().openLoginPage();
 
         // Step 7: Check that button SignOut is visible
         pageProvider.getHomePage()
