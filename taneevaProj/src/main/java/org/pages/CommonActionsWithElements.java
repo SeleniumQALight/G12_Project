@@ -35,8 +35,11 @@ public class CommonActionsWithElements {
     protected void clearAndEnterTextToElement(WebElement webElement, String text) {
         try {
             webElement.clear();
-            webElement.sendKeys(text);
-            logger.info(text + " was entered in element " + getElementName(webElement));
+            if (text != null && !text.isEmpty()) {
+                webElement.sendKeys(text);
+            } else {
+                throw new IllegalArgumentException("Text to send must not be null or empty");
+            }
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }

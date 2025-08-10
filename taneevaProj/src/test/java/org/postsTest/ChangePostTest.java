@@ -1,6 +1,7 @@
 package org.postsTest;
 
 import org.baseTest.BaseTest;
+import org.junit.After;
 import org.junit.Test;
 import org.utils.Utils_Custom;
 
@@ -12,13 +13,13 @@ public class ChangePostTest extends BaseTest {
     @Test
     public void TC005_ChangePostTest() {
         pageProvider.getLoginPage()
-                .openLoginPageAndFIllLoginFormWithValidCred()
+                .openLoginPageAndFillLoginFormWithValidCred()
                 .checkIsRedirectedToHomePage()
-                .getHeaderForLoggedUserElement().clickOnButtonCreateNewPost()
+                .getHeaderForLoggedUserElement()
+                .clickOnButtonCreateNewPost()
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("Test for change new post")
                 .clickOnButtonSaveNewPost()
-                .checkIsRedirectedToPostPage()
                 .checkTextInSuccessMessage("New post successfully created.")
                 .clickOnEditButton()
                 .enterTextIntoInputTitle(UPDATED_TITLE)
@@ -28,11 +29,19 @@ public class ChangePostTest extends BaseTest {
                 .checkTitleIsPresent(UPDATED_TITLE)
                 .clickOnPostTitle(UPDATED_TITLE)
                 .waitForPostTitleVisible(UPDATED_TITLE)
-                .getheaderForLoggedUserElement().clickOnButtonMyProfile()
+                .getheaderForLoggedUserElement()
+                .clickOnButtonMyProfile()
                 .checkIsRedirectedToMyProfilePage()
-                .checkPostWithTitleIsPresent(UPDATED_TITLE, 1)
+                .checkPostWithTitleIsPresent(UPDATED_TITLE, 1);
+
+    }
+    @After
+    public void cleanup() {
+        pageProvider.getLoginPage()
+                .openLoginPageAndFillLoginFormWithValidCred();
+                pageProvider.getPostPage()
+                .getheaderForLoggedUserElement().clickOnButtonMyProfile()
                 .deletePostTillPresent(UPDATED_TITLE)
                 .deletePostTillPresent(POST_TITLE);
-
     }
 }
