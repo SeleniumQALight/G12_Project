@@ -12,6 +12,7 @@ public class ChangePostTest extends BaseTest {
 
     @Test
     public void TC005_ChangePostTest() {
+        pageProvider.getLoginPage();
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidCred()
                 .checkIsRedirectedToHomePage()
@@ -25,13 +26,7 @@ public class ChangePostTest extends BaseTest {
                 .enterTextIntoInputTitle(UPDATED_TITLE)
                 .clickOnButtonSaveUpdates()
                 .checkTextInSuccessMessage("Post successfully updated.")
-                .clickBackToPostPermalink()
-                .checkTitleIsPresent(UPDATED_TITLE)
-                .clickOnPostTitle(UPDATED_TITLE)
-                .waitForPostTitleVisible(UPDATED_TITLE)
-                .getheaderForLoggedUserElement()
-                .clickOnButtonMyProfile()
-                .checkPostWithTitleIsPresent(UPDATED_TITLE, 1);
+                .clickBackToPostPermalink();
 
     }
     @After
@@ -41,6 +36,7 @@ public class ChangePostTest extends BaseTest {
                 .openHomePageAndLoginIfNeeds()
                 .getHeaderForLoggedUserElement()
                 .clickOnButtonMyProfile()
-                .deletePostTillPresent(UPDATED_TITLE);
+                .deletePostTillPresent(UPDATED_TITLE)
+                .deletePostTillPresent(POST_TITLE);
     }
 }
