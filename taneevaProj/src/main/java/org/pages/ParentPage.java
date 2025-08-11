@@ -1,15 +1,19 @@
 package org.pages;
 
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.utils.ConfigProvider;
 
 import java.time.Duration;
+import java.util.ArrayList;
 
 abstract class ParentPage extends CommonActionsWithElements {
-    protected String baseURL = "https://aqa-complexapp.onrender.com";
-
+    static String environment = System.getProperty("evn", "aqa");
+   // protected String baseURL = "https://"+environment+"-complexapp.onrender.com";
+    protected String baseURL = ConfigProvider.configProperties.base_url().replace("[env]", environment);
     public ParentPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -39,6 +43,18 @@ abstract class ParentPage extends CommonActionsWithElements {
 
     protected void waitForUrlToMatch(String regex) {
         webDriverWait10.until(ExpectedConditions.urlMatches(baseURL + regex));
+    }
+    public void openNewTab() {
+        ((JavascriptExecutor) webDriver).executeScript("window.open()");
+    }
+
+    public void switchToTab(int tabIndex) {
+        ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+        webDriver.switchTo().window(tabs.get(tabIndex));
+    }
+
+    public void closeCurrentTab() {
+        webDriver.close();
     }
 
 }

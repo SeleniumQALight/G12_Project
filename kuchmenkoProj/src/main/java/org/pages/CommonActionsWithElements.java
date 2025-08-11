@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.utils.ConfigProvider;
 
 import java.time.Duration;
 
@@ -19,8 +20,8 @@ public class CommonActionsWithElements {
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);// ініціалізує елементи описані в FindBy
-        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
+        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(ConfigProvider.configProperties.TIME_FOR_EXPLICIT_WAIT_LOW()));
+        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(ConfigProvider.configProperties.TIME_FOR_DEFAULT_WAIT()));
     }
 
     /* Method clearAndEnterTextToElement
@@ -52,7 +53,7 @@ public class CommonActionsWithElements {
                     .withMessage("Element is not clickable: " + webElement)
                     .until(ExpectedConditions.elementToBeClickable(webElement));
             String elementName = getElementName(webElement);
-                    webElement.click();
+            webElement.click();
             logger.info(elementName + "Element was clicked");
         } catch (Exception e) {
             printErrorAndStopTest(e);
@@ -103,6 +104,10 @@ public class CommonActionsWithElements {
         logger.info("Element is displayed as expected");
     }
 
+    protected void checkElementIsNotDisplayed(WebElement webElement) {
+        Assert.assertFalse("Element displayed, when it shouldn`t", isElementDisplayed(webElement));
+    }
+
     /* Method checkTextInElement
      * Checks if the text of the specified WebElement matches the expected text.
      * @param webElement - the WebElement to check
@@ -132,6 +137,49 @@ public class CommonActionsWithElements {
             Select select = new Select(webElement);
             select.selectByValue(value);
             logger.info("Value '" + value + "' was selected in the dropdown" + getElementName(webElement));
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    protected void checkboxIsChecked(WebElement webElement){
+        try{
+            boolean state = webElement.isSelected();
+            if (state) {
+                logger.info("Checkbox is checked");
+            } else {
+                webElement.click();
+                logger.info("Checkbox was checked");
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    protected void checkboxIsUnchecked(WebElement webElement){
+        try {
+            boolean state = webElement.isSelected();
+            if (!state) {
+                logger.info("Checkbox is unchecked");
+            } else {
+                webElement.click();
+                logger.info("Checkbox was unchecked");
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    protected void setCheckboxState(WebElement webElement, String state) {
+        try {
+            if (state.equalsIgnoreCase("check")) {
+                checkboxIsChecked(webElement);
+            } else if (state.equalsIgnoreCase("uncheck")) {
+                checkboxIsUnchecked(webElement);
+            } else {
+                logger.error("Invalid state: " + state);
+                Assert.fail("Invalid state: " + state);
+            }
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }

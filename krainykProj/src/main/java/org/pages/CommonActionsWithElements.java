@@ -2,12 +2,13 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.utils.ConfigProvider;
 
 import java.time.Duration;
 
@@ -15,12 +16,14 @@ public class CommonActionsWithElements {
     protected WebDriver webDriver;
     private Logger logger = Logger.getLogger(getClass());
     protected WebDriverWait webDriverWait10, webDriverWait15;
+    private static String originalHandle;
+
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this); // Initialize the elements described in this class in FindBy annotations
-        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
+        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(ConfigProvider.configProperties.TIME_FOR_EXPLICIT_WAIT_LOW()));
+        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(ConfigProvider.configProperties.TIME_FOR_DEFAULT_WAIT()));
     }
 
     /* Method clearAndEnterTextToElement
@@ -89,6 +92,21 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected boolean isElementDisplayed(WebElement webElement, String elementName) {
+        try {
+            boolean state = webElement.isDisplayed();
+            if (state) {
+                logger.info("Element is displayed: " + elementName);
+            } else {
+                logger.info("Element is not displayed: " + elementName);
+            }
+            return state;
+        } catch (Exception e) {
+            logger.info("Element is not found, so it is not displayed");
+            return false;
+        }
+    }
+
     /* Method checkElementDisplayed
      * Asserts that the specified WebElement is displayed on the page.
      * @param webElement - the WebElement to check
@@ -98,7 +116,17 @@ public class CommonActionsWithElements {
         logger.info("Element is displayed as expected");
     }
 
+    protected void checkIsElementDisplayed(WebElement webElement, String elementName) {
+        Assert.assertTrue("Element is not displayed", isElementDisplayed(webElement, elementName));
+        logger.info("Element is displayed as expected");
+    }
+
     protected void checkIsElementNotDisplayed(WebElement webElement) {
+        Assert.assertFalse("Element is displayed", isElementDisplayed(webElement));
+        logger.info("Element is not displayed as expected");
+    }
+
+    protected void checkIsElementNotDisplayed(WebElement webElement, String elementName) {
         Assert.assertFalse("Element is displayed", isElementDisplayed(webElement));
         logger.info("Element is not displayed as expected");
     }
@@ -166,6 +194,139 @@ public class CommonActionsWithElements {
             logger.info("Value '" + value + "' was selected in dropdown " + getElementName(webElement));
         } catch (Exception e) {
             printErrorAndStopTest(e);
+        }
+    }
+
+    // accept Alert
+    protected void acceptAlert() {
+        try {
+            webDriverWait10.until(ExpectedConditions.alertIsPresent());
+            webDriver.switchTo().alert().accept();
+            logger.info("Alert was accepted");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    // scroll to element using Actions class
+    protected void scrollToElement(WebElement webElement) {
+        try {
+            Actions actions = new Actions(webDriver);
+            actions.moveToElement(webElement).perform();
+            logger.info("Scrolled to element: " + getElementName(webElement));
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    // open new tab
+    public void openNewTab() {
+        try {
+            originalHandle = webDriver.getWindowHandle(); // Save the original tab handle
+            ((JavascriptExecutor) webDriver).executeScript("window.open()");
+            logger.info("New tab was opened");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    // switch to new tab
+    public void switchToNewTab() {
+        try {
+            for (String handle : webDriver.getWindowHandles()) {
+                if (!handle.equals(originalHandle)) {
+                    webDriver.switchTo().window(handle);
+                    logger.info("Switched to new tab " + handle);
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    // switch to original tab
+    public void switchToOriginalTab() {
+        try {
+            webDriver.switchTo().window(originalHandle);
+            logger.info("Switched to original tab " + originalHandle);
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    // close new tab and switch to original tab
+    public void closeNewTabAndSwitchToOriginal() {
+        try {
+            for (String handle : webDriver.getWindowHandles()) {
+                if (!handle.equals(originalHandle)) {
+                    webDriver.switchTo().window(handle);
+                    webDriver.close();
+                    webDriver.switchTo().window(originalHandle);
+                    logger.info("Closed new tab and switched to original tab " + originalHandle);
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    // refresh page
+    public void refreshPage() {
+        try {
+            webDriver.navigate().refresh();
+            logger.info("Page was refreshed");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    // pressing keys like Tab, Enter, etc.
+    public void pressKey(Keys key, int count) {
+        try {
+            for (int i = 0; i < count; i++) {
+                Actions actions = new Actions(webDriver);
+                actions.sendKeys(key).perform();
+                logger.info(key + " key was presed " + (i + 1) + " times on the page");
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    // pressing key to enter text
+    public void pressKey(Keys key) {
+        try {
+            Actions actions = new Actions(webDriver);
+            actions.sendKeys(key).perform();
+            logger.info(key.name() + " key was pressed on the page");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    // press key to enter text with actions
+    public void enterTextWithoutElement(String text) {
+        try {
+            Actions actions = new Actions(webDriver);
+            actions.sendKeys(text).perform();
+            logger.info("Text '" + text + "' was entered using keys");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+
+
+    protected WebElement findElementByLocator(String locator, String text) {
+        try {
+            return webDriver.findElement(
+                    By.xpath(String.format(locator, text)));
+        } catch (Exception e) {
+            logger.error("Element not found by locator: " + locator + " with text: " + text);
+            Assert.fail("Element not found by locator: " + locator + " with text: " + text);
+            return null; // This line will never be reached, but is needed to satisfy the compiler
         }
     }
 

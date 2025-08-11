@@ -12,10 +12,10 @@ public class CreateNewPostTest extends BaseTest {
     // date and time of creation of the test
     final String POST_TITLE = "TR001_G12 - Krainyk Viktoriia on " + getDateAndTimeFormatted();
     final String POST_BODY = "Body of the post created by Krainyk Viktoriia";
-    final String POST_UNIQUE = "check"; // or "uncheck" for non-unique posts. Pay attention that the checkbox is not checked by default
+    final String POST_UNIQUE = "check";
 
     @Test
-    public void TR001_createNewPostTest() {
+    public void TC001_createNewPostTest() {
         pageProvider.getLoginPage()
                 .openLoginPageAndFillLoginFormWithValidData()
                 .checkIsRedirectToHomePage()
@@ -41,6 +41,7 @@ public class CreateNewPostTest extends BaseTest {
 
     @After
     public void deletePosts() {
+        takeScreenshot("After test TC001_createNewPostTest, but before Post condition");
         logger.info("Post condition - delete test");
         pageProvider.getHomePage()
                 .openHomePageAndLoginIfNeeded()
