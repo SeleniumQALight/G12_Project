@@ -49,8 +49,8 @@ public class EditPostTest extends BaseTest {
                 .checkIsRedirectToMyProfilePage()
                 .clickOnPostTitle(POST_TITLE)
                 .clickOnEditButton()
-                .enterTextIntoInputTitle(POST_TITLE_EDITED);
-        pageProvider.getEditPostPage()
+                .checkIsRedirectToEditPostPage()
+                .enterTextIntoInputTitle(POST_TITLE_EDITED)
                 .clickOnButtonSaveUpdates()
                 .getHeaderForLoggedUserElement()
                 .clickOnButtonMyProfile()

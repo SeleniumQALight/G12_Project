@@ -69,9 +69,9 @@ private WebElement uniquePostText;
     }
 
 
-    public CreateNewPostPage clickOnEditButton() {
+    public EditPostPage clickOnEditButton() {
         clickOnElement(buttonEditPost, "'Edit post button'");
-        return new CreateNewPostPage(webDriver);
+        return new EditPostPage(webDriver);
 
     }
 
