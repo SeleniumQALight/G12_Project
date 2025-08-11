@@ -2,9 +2,7 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,6 +16,7 @@ public class CommonActionsWithElements {
     protected WebDriver webDriver;
     private Logger logger = Logger.getLogger(getClass());
     protected WebDriverWait webDriverWait10, webDriverWait15;
+    protected Actions actions;
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -26,6 +25,7 @@ public class CommonActionsWithElements {
                 ConfigProvider.configProperties.TIME_FOR_EXPLICIT_WAIT_LOW()));
         webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(
                 ConfigProvider.configProperties.TIME_FOR_DEFAULT_WAIT()));
+        this.actions = new Actions(webDriver);
     }
     /* Method clearAndEnterTextToElement
      * Cleans the text
@@ -191,7 +191,6 @@ logger.error ("Checkbox not found");
     //scroll to element using Actions
     protected void scrollToElement(WebElement webElement) {
         try {
-            Actions actions = new Actions(webDriver);
             actions.moveToElement(webElement).perform();
             logger.info("Scrolled to element: " + getElementName(webElement));
         } catch (Exception e) {
@@ -200,10 +199,44 @@ logger.error ("Checkbox not found");
     }
 
     //open new tab
-    protected void openNewTab() {
+    public void openNewTab() {
         try {
             ((JavascriptExecutor) webDriver).executeScript("window.open()");
             logger.info("New tab was opened");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    //switch to new tab
+    public void switchToNewTab() {
+        try {
+            String originalHandle = webDriver.getWindowHandle();
+            for (String handle : webDriver.getWindowHandles()) {
+                if (!handle.equals(originalHandle)) {
+                    webDriver.switchTo().window(handle);
+                    logger.info("Switched to new tab " + handle);
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+//    close new tab and switch to original tab
+    public void closeNewTabAndSwitchToOriginal() {
+        try {
+            String originalHandle = webDriver.getWindowHandle();
+            for (String handle : webDriver.getWindowHandles()) {
+                if (!handle.equals(originalHandle)) {
+                    webDriver.switchTo().window(handle);
+                    webDriver.close();
+                    webDriver.switchTo().window(originalHandle);
+                    logger.info("Closed new tab and switched to original tab " + originalHandle);
+                    break;
+                }
+            }
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -218,8 +251,53 @@ logger.error ("Checkbox not found");
         }
     }
 
+    public void refreshPage() {
+        try {
+            webDriver.navigate().refresh();
+            logger.info("Page was refreshed");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+
+    }
+
+public void pressKey(Keys key, int quantity) {
+    try {
+        for (int i = 0; i < quantity; i++) {
+            actions.sendKeys(key).perform();
+            logger.info(key.name() + " key was pressed on the page");
+        }
+    } catch (Exception e) {
+        printErrorAndStopTest(e);
+    }
+}
+
+    public void pressKey(Keys key) {
+        try {
+                actions.sendKeys(key).perform();
+                logger.info(key.name() + " key was pressed on the page");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+public void enterTextWithActions(String text) {
+    try {
+        actions.sendKeys(text).perform();
+        logger.info(text + " was entered into input using Actions");
+    } catch (Exception e) {
+        printErrorAndStopTest(e);
+    }
+}
+
     private void printErrorAndStopTest(Exception e) {
         logger.error("Error while working with element " + e.getMessage());
         Assert.fail("Error while working with element " + e.getMessage());
     }
+
+    protected WebElement findElementByLocator(String locator,String text) {
+        return webDriver.findElement(
+                By.xpath(String.format(locator, text)));
+    }
+
 }

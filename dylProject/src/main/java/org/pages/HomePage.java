@@ -3,8 +3,6 @@ package org.pages;
 import org.apache.log4j.Logger;
 import org.data.TestData;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.pages.elements.HeaderForLoggedUserElement;
 
 
@@ -31,7 +29,6 @@ public class HomePage extends ParentPage {
         return new HeaderForLoggedUserElement(webDriver);
     }
 
-
     public HomePage checkIsRedirectToHomePage() {
         checkUrl();
         getHeaderForLoggedUserElement().checkButtonSignOutVisible();
@@ -52,7 +49,9 @@ public class HomePage extends ParentPage {
         }
         return this;
     }
+
 }
+
 
 //    public void checkButtonSignOutVisible() {
 /// /        Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());

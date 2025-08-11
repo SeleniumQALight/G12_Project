@@ -1,11 +1,21 @@
 package org.pages;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
+import org.assertj.core.api.SoftAssertions;
 import org.data.TestData;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.utils.Utils_Custom;
+
+import java.util.List;
+
+import static org.data.RegistrationValidationMessages.SEMICOLON;
 
 public class LoginPage extends ParentPage{
     private Logger logger = Logger.getLogger(getClass());
@@ -19,6 +29,20 @@ public class LoginPage extends ParentPage{
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
 
+    @FindBy(id = "username-register")  // xpath = ".//*[@id='username-register']"
+    private WebElement inputUserNameRegistrationForm;
+
+    @FindBy(id = "email-register")
+    private WebElement inputEmailInRegistrationForm;
+
+    @FindBy(id = "password-register")
+    private WebElement inputPasswordInRegistrationForm;
+
+    final static String listOfActualMessagesLocator = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
+    @FindBy(xpath = listOfActualMessagesLocator)
+    private List<WebElement> listOfActualMessages;
+
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -28,12 +52,14 @@ public class LoginPage extends ParentPage{
         return "/";
     }
 
+    @Step
     public LoginPage openLoginPage() {
         webDriver.get(baseURL);
         logger.info("Login page was opened with url " + baseURL);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoInputLogin(String login) {
 //        WebElement inputUserName = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
 //        inputUserName.clear();
@@ -43,11 +69,13 @@ public class LoginPage extends ParentPage{
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoPassword(String password){
         clearAndEnterTextToElement(inputPassword, password);
         return this;
     }
 
+    @Step
     public void clickOnButtonSignIn(){
 ////        webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
 //        buttonSignIn.click();
@@ -59,11 +87,54 @@ public class LoginPage extends ParentPage{
      * Opens the login page and fills in the login form with valid credentials.
      * @return HomePage - returns an instance of HomePage after successful login
      */
+    @Step
     public HomePage openLoginPageAndFillLoginFormWithValidCred() {
         openLoginPage();
         this.enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
         this.enterTextIntoPassword(TestData.VALID_PASSWORD_UI);
         clickOnButtonSignIn();
         return new HomePage(webDriver);
+    }
+
+    @Step
+    public LoginPage enterTextIntoRegistrationUserNameField(String userName) {
+        clearAndEnterTextToElement(inputUserNameRegistrationForm, userName);
+        return this;
+    }
+
+    @Step
+    public LoginPage enterTextIntoRegistrationEmailField(String email) {
+        clearAndEnterTextToElement(inputEmailInRegistrationForm, email);
+        return this;
+    }
+
+    @Step
+    public LoginPage enterTextIntoRegistrationPasswordField(String password) {
+        clearAndEnterTextToElement(inputPasswordInRegistrationForm, password);
+        return this;
+    }
+
+    @Step
+    public LoginPage checkErrorsMessages(String expectedErrorMessagesAsString) {
+        // error1;error2;error3 -> [error1, error2, error3]
+        String[] expectedErrorMessages = expectedErrorMessagesAsString.split(SEMICOLON);
+
+
+        webDriverWait10.until(ExpectedConditions.numberOfElementsToBe(By.xpath(listOfActualMessagesLocator),expectedErrorMessages.length));
+
+        Utils_Custom.waitABit(1);
+
+        Assert.assertEquals("Number of messages ", expectedErrorMessages.length, listOfActualMessages.size());
+
+        SoftAssertions softAssertions = new SoftAssertions();
+        for (int i = 0; i < expectedErrorMessages.length; i++) {
+            softAssertions
+                    .assertThat(listOfActualMessages.get(i).getText())
+                    .as("Message number " + i)
+                    .isIn(expectedErrorMessages);
+        }
+
+        softAssertions.assertAll();
+        return this;
     }
 }

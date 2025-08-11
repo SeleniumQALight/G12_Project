@@ -15,6 +15,8 @@ import org.utils.ConfigProvider;
 
 import javax.swing.*;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
@@ -172,7 +174,7 @@ public class CommonActionsWithElements {
 
     //open new tab
 
-    protected void openNewTab() {
+    public void openNewTab() {
         try {
             ((JavascriptExecutor) webDriver).executeScript("window.open()");
             logger.info("New tab was opened");
@@ -230,6 +232,67 @@ public class CommonActionsWithElements {
         return webDriver.findElement(
                 By.xpath(String.format(locator, text)));
     }
+
+    //open new tab for Home task
+
+    public HomePage openNewTabWithJS() {
+        try {
+            ((JavascriptExecutor) webDriver).executeScript("window.open()");
+            logger.info("New tab was opened");
+            return new HomePage(webDriver);
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+            return null;
+        }
+    }
+
+    //switch to new tab
+    public HomePage switchToNewTab() {
+        try {
+            String originalHandle = webDriver.getWindowHandle();
+            for (String handle : webDriver.getWindowHandles()) {
+                if (!handle.equals(originalHandle)) {
+                    webDriver.switchTo().window(handle);
+                    logger.info("Switched to new tab " + handle);
+                    break;
+                }
+            } return new HomePage(webDriver);
+
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+            return null;
+        }
+    }
+
+    //    close new tab and switch to original tab
+    public HomePage closeNewTabAndSwitchToOriginal() {
+        try {
+            String originalHandle = webDriver.getWindowHandle();
+            for (String handle : webDriver.getWindowHandles()) {
+                if (!handle.equals(originalHandle)) {
+                    webDriver.switchTo().window(handle);
+                    webDriver.close();
+                    webDriver.switchTo().window(originalHandle);
+                    logger.info("Closed new tab and switched to original tab " + originalHandle);
+                    break;
+                }
+            } return new HomePage(webDriver);
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+            return null;
+
+        }
+    }
+
+    public void refreshPage() {
+        try {
+            webDriver.navigate().refresh();  // Метод для обновления страницы
+            logger.info("Page refreshed successfully");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);  // Обработка ошибок
+        }
+    }
+
 }
 
 

@@ -1,5 +1,6 @@
 package org.pages;
 
+import org.enums.CheckboxState;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,6 +14,12 @@ public class CreateNewPostPage extends ParentPage {
 
     @FindBy(xpath = "//button[text()='Save New Post']")
     private WebElement buttonSaveNewPost;
+
+    @FindBy(tagName = "select")
+    private WebElement dropdownAccess;
+
+    @FindBy(xpath = "//input[@name='uniquePost']")
+    private WebElement uniquePostCheckbox;
 
     public CreateNewPostPage(WebDriver webDriver) {
         super(webDriver);
@@ -44,4 +51,13 @@ public class CreateNewPostPage extends ParentPage {
         return new PostPage(webDriver);
     }
 
+    public CreateNewPostPage setUniquePostCheckboxState(CheckboxState desiredState) {
+        setCheckboxState(uniquePostCheckbox, desiredState);
+        return this;
+    }
+
+    public CreateNewPostPage selectTextInDropdownAccess(String textForSelection) {
+        selectTextInDropdown(dropdownAccess, textForSelection);
+        return this;
+    }
 }
