@@ -100,9 +100,9 @@ public class LoginPage extends ParentPage {
 
     // Method to check text in the alert message
 
-    public PostPage checkIsInvalidUsernameOrPasswordDisplayed() {
+    public LoginPage checkIsInvalidUsernameOrPasswordDisplayed() {
         checkIsElementDisplayed(invalidLoginOrPasswordAlert);
-        return this.checkIsInvalidUsernameOrPasswordDisplayed();
+        return this;
     }
 
     public LoginPage checkTextInAlertMessage(String expectedMessageText) {

@@ -141,7 +141,7 @@ public class CommonActionsWithElements {
 
     public void makeCheckboxSelected(WebElement webElement) {
         try {
-            if (webElement.isSelected()) {
+            if (!webElement.isSelected()) {
                 webElement.click();
                 logger.info("Checkbox " + getElementName(webElement) + " was selected");
             } else {
@@ -170,7 +170,7 @@ public class CommonActionsWithElements {
 
     // Method to get checkbox state
 
-    protected boolean isUniquePostCheckbox(WebElement webElement) {
+    protected boolean isUniquePostCheckboxSelected(WebElement webElement) {
         try {
             boolean state = webElement.isSelected();
             if (state) {
