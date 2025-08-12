@@ -12,7 +12,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.pages.elements.HeaderForLoggedUserElement;
 import org.utils.Utils_Custom;
 
 import java.util.List;
@@ -68,15 +67,10 @@ public class LoginPage extends ParentPage {
 
     @Step
     public LoginPage enterTextInInputLogin(String login) {
-//        WebElement inputUsername = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
-//        inputUsername.clear();
-//        inputUsername.sendKeys(login);
-//        logger.info(login + " was entered in input Username field");
-    public LoginPage enterTextIntoInputLogin(String login) {
-        //       WebElement inputUserName = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
-//        inputUserName.clear();
-//        inputUserName.sendKeys(login);
-//        logger.info(login + " was entered in input UserName");
+        WebElement inputUserName = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
+       inputUserName.clear();
+       inputUserName.sendKeys(login);
+      logger.info(login + " was entered in input UserName");
         clearAndEnterTextToElement(inputUserName, login);
         return this;
     }
@@ -181,9 +175,6 @@ public class LoginPage extends ParentPage {
 
     //HW 4 LogOutTest
     public LoginPage checkInputloginIsVisible() {
-
-    //HW 4 LogOutTest
-    public LoginPage checkLoginFieldIsVisible() {
         checkIsElementDisplayed(inputUserName);
         return this;
     }
