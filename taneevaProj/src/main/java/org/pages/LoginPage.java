@@ -6,10 +6,13 @@ import org.assertj.core.api.SoftAssertions;
 import org.data.TestData;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.pages.elements.HeaderForLoggedUserElement;
 import org.utils.Utils_Custom;
 
 import java.util.List;
@@ -69,6 +72,11 @@ public class LoginPage extends ParentPage {
 //        inputUsername.clear();
 //        inputUsername.sendKeys(login);
 //        logger.info(login + " was entered in input Username field");
+    public LoginPage enterTextIntoInputLogin(String login) {
+        //       WebElement inputUserName = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
+//        inputUserName.clear();
+//        inputUserName.sendKeys(login);
+//        logger.info(login + " was entered in input UserName");
         clearAndEnterTextToElement(inputUserName, login);
         return this;
     }
@@ -85,6 +93,7 @@ public class LoginPage extends ParentPage {
     }
 
     @Step
+
     public LoginPage checkButtonSignInVisible() {
         checkIsElementDisplayed(buttonSignIn);
         return this;
@@ -103,6 +112,7 @@ public class LoginPage extends ParentPage {
         logger.info("Alert message text is checked: " + expectedText);
         return this;
     }
+
 
     @Step
     public LoginPage checkInputUserNameAndPasswordNotVisible() {
@@ -165,11 +175,15 @@ public class LoginPage extends ParentPage {
 
         softAssertions.assertAll();
 
+
         return this;
     }
 
     //HW 4 LogOutTest
     public LoginPage checkInputloginIsVisible() {
+
+    //HW 4 LogOutTest
+    public LoginPage checkLoginFieldIsVisible() {
         checkIsElementDisplayed(inputUserName);
         return this;
     }
@@ -190,5 +204,51 @@ public class LoginPage extends ParentPage {
         enterTextInInputPassword(TestData.VALID_PASSWORD_UI);
         clickOnButtonSignIn();
         return new HomePage(webDriver);
+    }
+    //HW5
+    public LoginPage pressEnterOnSignUpButton() {
+        Actions actions = new Actions(webDriver);
+        actions.sendKeys("\uE007").build().perform(); // "\uE007" – це Enter
+        logger.info("Pressed Enter on Sign Up");
+        return this;
+    }
+
+    public LoginPage checkErrorMessagesCount(int expectedCount) {
+        webDriverWait10.until(ExpectedConditions.numberOfElementsToBe(
+                By.xpath(listOfElementsMassagesLocator), expectedCount
+        ));
+
+        Assert.assertEquals("Count of error messages", expectedCount, listOfActualMassages.size());
+        logger.info("Checked error messages count: " + expectedCount);
+        return this;
+    }
+
+    public LoginPage checkTextInErrorMessages(String expectedText) {
+        boolean isTextPresent = listOfActualMassages.stream()
+                .anyMatch(element -> element.getText().equals(expectedText));
+
+        Assert.assertTrue("Error message not found: " + expectedText, isTextPresent);
+        logger.info("Found expected error message: " + expectedText);
+        return this;
+    }
+    public LoginPage pressKey(Keys key) {
+        Actions actions = new Actions(webDriver);
+        actions.sendKeys(key).perform();
+        return this;
+    }
+
+    public LoginPage pressKey(Keys key, int times) {
+        Actions actions = new Actions(webDriver);
+        for (int i = 0; i < times; i++) {
+            actions.sendKeys(key);
+        }
+        actions.perform();
+        return this;
+    }
+
+    public LoginPage enterTextWithActions(String text) {
+        Actions actions = new Actions(webDriver);
+        actions.sendKeys(text).perform();
+        return this;
     }
 }

@@ -1,12 +1,14 @@
 package org.pages;
 
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.utils.ConfigProvider;
 
 import java.time.Duration;
+import java.util.ArrayList;
 
 abstract class ParentPage extends CommonActionsWithElements {
     static String environment = System.getProperty("evn", "aqa");
@@ -42,6 +44,18 @@ abstract class ParentPage extends CommonActionsWithElements {
 
     protected void waitForUrlToMatch(String regex) {
         webDriverWait10.until(ExpectedConditions.urlMatches(baseURL + regex));
+    }
+    public void openNewTab() {
+        ((JavascriptExecutor) webDriver).executeScript("window.open()");
+    }
+
+    public void switchToTab(int tabIndex) {
+        ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+        webDriver.switchTo().window(tabs.get(tabIndex));
+    }
+
+    public void closeCurrentTab() {
+        webDriver.close();
     }
 
     public MyProfilePage checkPostWithTitleIsPresent(String updatedTitle, int i) {
