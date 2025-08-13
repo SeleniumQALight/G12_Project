@@ -1,5 +1,6 @@
 package org.pages;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.data.TestData;
@@ -51,12 +52,14 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
+    @Step
     public LoginPage openLoginPage() {
         webDriver.get(baseUrl);
         logger.info("Login page was opened with URL: " + baseUrl);
         return this; // Return the current instance for method chaining
     }
 
+    @Step
     public LoginPage enterTextInInputLogin(String login) {
 //        WebElement inputUsername = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
 //        inputUsername.clear();
@@ -66,6 +69,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    @Step
     public LoginPage enterTextInInputPassword(String password) {
         clearAndEnterTextToElement(inputPassword, password);
         return this;
@@ -81,6 +85,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    @Step
     public void clickOnButtonSignIn() {
 //        webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
 //        buttonSignIn.click();
@@ -93,6 +98,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    @Step
     public LoginPage checkInputloginIsNotVisible() {
         checkIsElementNotDisplayed(inputUsername);
         return this;
@@ -103,6 +109,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    @Step
     public LoginPage checkInputPasswordIsNotVisible() {
         checkIsElementNotDisplayed(inputPassword);
         return this;
@@ -112,6 +119,7 @@ public class LoginPage extends ParentPage {
      * Opens the login page, fills in the login form with valid data, and clicks the Sign In button.
      * @return an instance of HomePage after successful login.
      */
+    @Step
     public HomePage openLoginPageAndFillLoginFormWithValidData() {
         openLoginPage();
         this.enterTextInInputLogin(TestData.VALID_LOGIN_UI);
@@ -132,21 +140,25 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationUserNameField(String userName) {
         clearAndEnterTextToElement(inputUsernameInRegistrationForm, userName);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationEmailField(String email) {
         clearAndEnterTextToElement(inputEmailInRegistrationForm, email);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationPasswordField(String password) {
         clearAndEnterTextToElement(inputPasswordInRegistrationForm, password);
         return this;
     }
 
+    @Step
     public LoginPage checkErrorsMessages(String expectedErrorMessageAsString) {
         // error1; error2; error3 -> [error1, nerror2, nerror3]
         String[] expectedErrorMessages = expectedErrorMessageAsString.split(SEMICOLON);

@@ -1,5 +1,6 @@
 package org.pages.elements;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -34,6 +35,7 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         checkIsElementNotDisplayed(buttonMyProfile);
     }
 
+    @Step
     public void checkButtonSignOutVisible() {
         checkIsElementDisplayed(buttonSignOut);
     }
@@ -42,6 +44,7 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         checkIsElementNotDisplayed(buttonSignOut);
     }
 
+    @Step
     public void checkButtonCreatePostVisible() {
         checkIsElementDisplayed(buttonCreateNewPost);
     }
