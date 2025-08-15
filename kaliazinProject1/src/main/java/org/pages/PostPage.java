@@ -12,6 +12,9 @@ public class PostPage extends ParentPage {
     @FindBy(xpath = "//button[@class='delete-post-button text-danger']")
     private WebElement buttonDeletePost;
 
+    @FindBy(xpath = "//p[text() = 'Is this post unique? : yes']")
+    private WebElement checkboxState;
+
     public PostPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -47,4 +50,5 @@ public class PostPage extends ParentPage {
         clickOnElement(buttonDeletePost, "'Delete post button'");
         return new MyProfilePage(webDriver);
     }
+
 }
