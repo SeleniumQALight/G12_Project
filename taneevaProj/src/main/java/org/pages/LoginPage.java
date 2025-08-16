@@ -67,10 +67,10 @@ public class LoginPage extends ParentPage {
 
     @Step
     public LoginPage enterTextInInputLogin(String login) {
-        WebElement inputUserName = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
-       inputUserName.clear();
-       inputUserName.sendKeys(login);
-      logger.info(login + " was entered in input UserName");
+//        WebElement inputUserName = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
+//       inputUserName.clear();
+//       inputUserName.sendKeys(login);
+//      logger.info(login + " was entered in input UserName");
         clearAndEnterTextToElement(inputUserName, login);
         return this;
     }

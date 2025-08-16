@@ -41,7 +41,7 @@ public class PostPage extends ParentPage {
 
     @Override
     protected String getRelatedURL() {
-        return "/post/[a-zA-Z0-9]*";
+        return "/post/[a-zA-Z0-9]{24}";
     }
 
     public HeaderForLoggedUserElement getheaderForLoggedUserElement() {
@@ -49,6 +49,7 @@ public class PostPage extends ParentPage {
     }
 
     public PostPage checkIsRedirectToPostPage() {
+        waitForUrlToMatch(getRelatedURL());
         checkURLWithPattern();
         return this;
     }
@@ -108,10 +109,6 @@ public class PostPage extends ParentPage {
         By clickableTitleLocator = By.xpath(String.format(CLICKABLE_POST_TITLE_LOCATOR_TEMPLATE, postTitle));
         clickOnElement(webDriver.findElement(clickableTitleLocator));
         return this;
-    }
-    protected void waitUntilElementVisible(By locator) {
-        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
     public PostPage waitForPostTitleVisible(String postTitle) {

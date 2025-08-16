@@ -2,6 +2,7 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -200,5 +201,9 @@ public class CommonActionsWithElements {
             logger.error("Unknown desired checkbox state: " + desiredState);
             Assert.fail("Unknown desired checkbox state: " + desiredState);
         }
+    }
+    protected void waitUntilElementVisible(By locator) {
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 }
