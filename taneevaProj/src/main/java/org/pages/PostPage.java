@@ -5,20 +5,35 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.pages.elements.HeaderForLoggedUserElement;
 
+import java.time.Duration;
+import java.util.List;
+
 public class PostPage extends ParentPage {
+
+    private final String POST_TITLE_LOCATOR_STRING = "//div[@class='post-title']";
+    private final By postTitleLocator = By.xpath(POST_TITLE_LOCATOR_STRING);
+
+    private final String CLICKABLE_POST_TITLE_LOCATOR_TEMPLATE =
+            "//a[contains(@class,'list-group-item') and .//strong[contains(text(), '%s')]]";
+
     @FindBy(xpath = "//*[@class='alert alert-success text-center']")
     private WebElement successMessage;
 
     @FindBy(xpath = "//button[@class='delete-post-button text-danger']")
     private WebElement buttonDeletePost;
 
-    @FindBy(xpath = ".//a[contains(@class,'edit-post')]")
+    @FindBy(xpath = "//a[@data-original-title='Edit']")
     private WebElement buttonEdit;
 
     @FindBy(xpath = "//p[contains(text(), 'Is this post unique?')]")
     private WebElement uniquePostText;
+
+    @FindBy(xpath = "//a[contains(@class,'small') and contains(@class,'font-weight-bold') and contains(text(),'Back to post permalink')]")
+    private WebElement backToPostPermalinkLink;
 
     public PostPage(WebDriver webDriver) {
         super(webDriver);
@@ -26,7 +41,7 @@ public class PostPage extends ParentPage {
 
     @Override
     protected String getRelatedURL() {
-        return "/post/[a-zA-Z0-9]*";
+        return "/post/[a-zA-Z0-9]{24}";
     }
 
     public HeaderForLoggedUserElement getheaderForLoggedUserElement() {
@@ -34,8 +49,8 @@ public class PostPage extends ParentPage {
     }
 
     public PostPage checkIsRedirectToPostPage() {
+        waitForUrlToMatch(getRelatedURL());
         checkURLWithPattern();
-        // TODO check same unique element on the page
         return this;
     }
 
@@ -59,20 +74,46 @@ public class PostPage extends ParentPage {
         return new MyProfilePage(webDriver);
     }
 
-    public PostPage checkIsRedirectedToPostPage() {
-        Assert.assertTrue("URL does not contain /post/", webDriver.getCurrentUrl().contains("/post/"));
-        return this;
-    }
     public CreateNewPostPage clickOnEditButton() {
         clickOnElement(buttonEdit);
         return new CreateNewPostPage(webDriver);
     }
+
+    public PostPage clickBackToPostPermalink() {
+        clickOnElement(backToPostPermalinkLink);
+        return this;
+    }
+    protected void waitUntilTextToBePresentInElement(WebElement element, String text) {
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.textToBePresentInElement(element, text));
+    }
+
     public PostPage checkTitleIsPresent(String expectedTitle) {
-        Assert.assertEquals("Title is not matched", expectedTitle, getTitleText());
+        By locator = By.xpath("//div[@class='post-title' and text()='" + expectedTitle + "']");
+        List<WebElement> elements = webDriver.findElements(locator);
+
+        Assert.assertFalse("Post with title '" + expectedTitle + "' is not present on the page", elements.isEmpty());
+
+        WebElement postTitleElement = elements.get(0);
+        waitUntilTextToBePresentInElement(postTitleElement, expectedTitle);
+        Assert.assertEquals("Title is not matched", expectedTitle, postTitleElement.getText());
+
         return this;
     }
 
     private String getTitleText() {
-        return webDriver.findElement(By.xpath("//div[@class='post-title']")).getText();
+        return webDriver.findElement(postTitleLocator).getText();
+    }
+
+    public PostPage clickOnPostTitle(String postTitle) {
+        By clickableTitleLocator = By.xpath(String.format(CLICKABLE_POST_TITLE_LOCATOR_TEMPLATE, postTitle));
+        clickOnElement(webDriver.findElement(clickableTitleLocator));
+        return this;
+    }
+
+    public PostPage waitForPostTitleVisible(String postTitle) {
+        By locator = By.xpath("//div[@class='post-title' and contains(text(), '" + postTitle + "')]");
+        waitUntilElementVisible(locator);
+        return this;
     }
 }

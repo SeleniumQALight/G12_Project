@@ -3,6 +3,7 @@ package org.postsTest;
 import org.baseTest.BaseTest;
 import org.junit.After;
 import org.junit.Test;
+import org.pages.elements.HeaderForLoggedUserElement;
 import org.utils.Utils_Custom;
 
 public class CreateNewPostTest extends BaseTest {
@@ -27,13 +28,13 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsSuccessMessageDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.")
                 .checkUniquenessOfPost("Is this post unique? : yes")
-        ;
-
-        ;
-        pageProvider.getPostPage()
                 .getheaderForLoggedUserElement().clickOnButtonMyProfile()
                 .checkIsRedirectedToMyProfilePage()
                 .checkPostWithTitleIsPresent(POST_TITLE, 1);
+    }
+
+    private HeaderForLoggedUserElement getheaderForLoggedUserElement() {
+        return null;
     }
 
     @After

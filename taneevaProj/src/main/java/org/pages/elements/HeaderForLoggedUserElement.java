@@ -35,7 +35,7 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
     }
 
     public MyProfilePage clickOnButtonMyProfile() {
-        clickOnElement(buttonMyProfile);
+        clickOnElement(buttonMyProfile,"My profile");
         return new MyProfilePage(webDriver);
     }
 

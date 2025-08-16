@@ -14,10 +14,10 @@ public class LoginRefreshTest extends BaseTest {
         loginPage.openLoginPage();
 
         //Step 2: Enter 'qaauto' login into input Login
-        loginPage.enterTextIntoInputLogin("qaauto");
+        loginPage.enterTextInInputLogin("qaauto");
 
         //Step 3: Enter '123456qwerty' password into input Password
-        loginPage.enterTextIntoPassword("123456qwerty");
+        loginPage.enterTextInInputPassword("123456qwerty");
 
         // Step 4: Refresh page
         webDriver.navigate().refresh();

@@ -12,7 +12,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.pages.elements.HeaderForLoggedUserElement;
 import org.utils.Utils_Custom;
 
 import java.util.List;
@@ -43,6 +42,9 @@ public class LoginPage extends ParentPage {
     @FindBy(id = "password-register")
     private WebElement inputPasswordInRegistrationForm;
 
+//    @FindBy(xpath = "//button[text()='Sign Out']")
+//    private WebElement buttonSignOut;
+
     final static String listOfElementsMassagesLocator = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
     @FindBy(xpath = listOfElementsMassagesLocator)
     private List<WebElement> listOfActualMassages;
@@ -64,30 +66,23 @@ public class LoginPage extends ParentPage {
     }
 
     @Step
-    public LoginPage enterTextIntoInputLogin(String login) {
-        //       WebElement inputUserName = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
-//        inputUserName.clear();
-//        inputUserName.sendKeys(login);
-//        logger.info(login + " was entered in input UserName");
+    public LoginPage enterTextInInputLogin(String login) {
+//        WebElement inputUserName = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
+//       inputUserName.clear();
+//       inputUserName.sendKeys(login);
+//      logger.info(login + " was entered in input UserName");
         clearAndEnterTextToElement(inputUserName, login);
         return this;
     }
 
     @Step
-    public LoginPage enterTextIntoPassword(String password) {
-//        WebElement inputPassword = webDriver.findElement(By.xpath("//input[@placeholder='Password']"));
-//        inputPassword.clear();
-//        inputPassword.sendKeys(password);
-//        logger.info(password + " was entered in input Password");
+    public LoginPage enterTextInInputPassword(String password) {
         clearAndEnterTextToElement(inputPassword, password);
         return this;
     }
 
     @Step
     public void clickOnButtonSignIn() {
-//        webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
-//        buttonSignIn.click();
-//        logger.info("Button Sinn In was clicked");
         clickOnElement(buttonSignIn);
     }
 
@@ -122,7 +117,6 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
-
     /**
      * Method openLoginPageAndFIllLoginFormWithValidCred
      * Opens the login page and fills in the login form with valid credentials.
@@ -130,11 +124,11 @@ public class LoginPage extends ParentPage {
      * @return HomePage - returns an instance of HomePage after successful login.
      */
     @Step
-    public HomePage openLoginPageAndFIllLoginFormWithValidCred() {
+    public HomePage openLoginPageAndFillLoginFormWithValidCred() {
         openLoginPage();
-        this.enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
-        this.enterTextIntoPassword(TestData.VALID_PASSWORD_UI);
-        this.clickOnButtonSignIn();
+        this.enterTextInInputLogin(TestData.VALID_LOGIN_UI);
+        this.enterTextInInputPassword(TestData.VALID_PASSWORD_UI);
+        clickOnButtonSignIn();
         return new HomePage(webDriver);
     }
 
@@ -157,8 +151,7 @@ public class LoginPage extends ParentPage {
     }
 
     @Step
-    public LoginPage checkErrorMassages(String expectedErrorMassageAsString) {
-        //error1; error2;error3 ->[error1, error2, error3]
+    public LoginPage checkErrorMessages(String expectedErrorMassageAsString) {
         String[] expectedErrorMassages = expectedErrorMassageAsString.split(SEMICOLON);
 
         webDriverWait10.until(ExpectedConditions.numberOfElementsToBe(By.xpath(listOfElementsMassagesLocator), expectedErrorMassages.length));
@@ -181,12 +174,12 @@ public class LoginPage extends ParentPage {
     }
 
     //HW 4 LogOutTest
-    public LoginPage checkLoginFieldIsVisible() {
+    public LoginPage checkInputloginIsVisible() {
         checkIsElementDisplayed(inputUserName);
         return this;
     }
 
-    public LoginPage checkPasswordFieldIsVisible() {
+    public LoginPage checkInputPasswordIsVisible() {
         checkIsElementDisplayed(inputPassword);
         return this;
     }
@@ -196,6 +189,13 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    public HomePage openLoginPageAndFIllLoginFormWithValidCred() {
+        openLoginPage();
+        enterTextInInputLogin(TestData.VALID_LOGIN_UI);
+        enterTextInInputPassword(TestData.VALID_PASSWORD_UI);
+        clickOnButtonSignIn();
+        return new HomePage(webDriver);
+    }
     //HW5
     public LoginPage pressEnterOnSignUpButton() {
         Actions actions = new Actions(webDriver);

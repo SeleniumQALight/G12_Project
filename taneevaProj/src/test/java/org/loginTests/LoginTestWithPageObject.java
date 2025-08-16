@@ -12,6 +12,9 @@ import static org.data.TestData.*;
 @Epic("Allure examples")
 @Feature("Junit 4 support")
 public class LoginTestWithPageObject extends BaseTest {
+    public static final String INVALID_LOGIN_UI = "qaauto00test";
+    public static final String INVALID_PASSWORD_UI = "123456qwerty00test";
+
     @Description("Some detailed test description")
     @Link("https://example.org")
     @Link(name = "allure", type = "mylink")
@@ -20,27 +23,26 @@ public class LoginTestWithPageObject extends BaseTest {
     @Story("Base support for bdd annotations")
     @Category(SmokeTestsFilter.class)
     public void validLogin() {
-        pageProvider.getLoginPage().
-                openLoginPage()
- //               .enterTextIntoInputLogin(VALID_LOGIN_UI)
-                .enterTextIntoInputLogin(TestData.VALID_LOGIN_UI+1)
-                .enterTextIntoPassword(VALID_PASSWORD_UI)
+        pageProvider.getLoginPage()
+                .openLoginPage()
+                .enterTextInInputLogin(VALID_LOGIN_UI)
+                .enterTextInInputPassword(VALID_PASSWORD_UI)
                 .clickOnButtonSignIn();
 
-        pageProvider.getHomePage()
-                .checkButtonCreatePostVisible();
+        pageProvider.getHomePage().getHeaderForLoggedUserElement()
+                .checkButtonSignOutVisible();
 
-        pageProvider.getLoginPage()
-                .checkInputUserNameAndPasswordNotVisible();
+        pageProvider.getHomePage().getHeaderForLoggedUserElement().checkButtonCreatePostVisible();
 
+        pageProvider.getLoginPage().checkInputUserNameAndPasswordNotVisible();
     }
 
     @Test
     public void invalidLogin() {
         pageProvider.getLoginPage()
                 .openLoginPage()
-                .enterTextIntoInputLogin("InvalidUser")
-                .enterTextIntoPassword("WrongPassword")
+                .enterTextInInputLogin(INVALID_LOGIN_UI)
+                .enterTextInInputPassword(INVALID_PASSWORD_UI)
                 .clickOnButtonSignIn();
 
         pageProvider.getLoginPage()

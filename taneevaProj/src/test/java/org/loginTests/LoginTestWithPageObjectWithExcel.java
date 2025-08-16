@@ -19,8 +19,8 @@ public class LoginTestWithPageObjectWithExcel extends BaseTest {
 
         pageProvider.getLoginPage()
                 .openLoginPage()
-                .enterTextIntoInputLogin(dataForValidLogin.get("login"))
-                .enterTextIntoPassword(dataForValidLogin.get("pass"))
+                .enterTextInInputLogin(dataForValidLogin.get("login"))
+                .enterTextInInputPassword(dataForValidLogin.get("pass"))
                 .clickOnButtonSignIn();
         pageProvider.getLoginPage().checkInputUserNameAndPasswordNotVisible();
 
