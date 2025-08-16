@@ -19,6 +19,9 @@ private WebElement uniquePostText;
     @FindBy(xpath = "//button[@class='delete-post-button text-danger']")
     private WebElement buttonDeletePost;
 
+    @FindBy(xpath = "//a[@data-original-title='Edit']")
+    private WebElement buttonEditPost;
+
     public PostPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -64,4 +67,13 @@ private WebElement uniquePostText;
         return new MyProfilePage(webDriver);
 
     }
+
+
+    public EditPostPage clickOnEditButton() {
+        clickOnElement(buttonEditPost, "'Edit post button'");
+        return new EditPostPage(webDriver);
+
+    }
+
+
 }
