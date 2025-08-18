@@ -73,4 +73,9 @@ public class MyProfilePage extends ParentPage {
         checkIsElementDisplayed(successMessageDelete);
         return this;
     }
+
+    public PostPage clickOnPostTitle(String postTitle) {
+        clickOnElement(findElementByLocator(postWithTitleLocator, postTitle),"Post with title " + postTitle);
+        return new PostPage(webDriver);
+    }
 }
