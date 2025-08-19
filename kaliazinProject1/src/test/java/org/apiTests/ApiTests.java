@@ -43,18 +43,34 @@ public class ApiTests extends BaseApiTest{
         }
 
         PostsDto[] expectedResult = {
-                new PostsDto("The second Default post",
-                        "This post was created automatically after cleaning the database",
-                        "All Users",
-                        "no",
-                         new AuthorDto(USER_NAME),
-                        false),
-                new PostsDto("The first Default post",
-                        "This post was created automatically after cleaning the database",
-                        "All Users",
-                        "no",
-                        new AuthorDto(USER_NAME),
-                        false)
+                PostsDto.builder()
+                        .title("The second Default post")
+                        .body("This post was created automatically after cleaning the database")
+                        .uniquePost("no")
+                        .select("All Users")
+                        .isVisitorOwner(false)
+                        .author(AuthorDto.builder().username(USER_NAME).build())
+                        .build(),
+                PostsDto.builder()
+                        .title("The first Default post")
+                        .body("This post was created automatically after cleaning the database")
+                        .uniquePost("no")
+                        .select("All Users")
+                        .isVisitorOwner(false)
+                        .author(AuthorDto.builder().username(USER_NAME).build())
+                        .build()
+//                new PostsDto("The second Default post",
+//                        "This post was created automatically after cleaning the database",
+//                        "All Users",
+//                        "no",
+//                         new AuthorDto(USER_NAME),
+//                        false),
+//                new PostsDto("The first Default post",
+//                        "This post was created automatically after cleaning the database",
+//                        "All Users",
+//                        "no",
+//                        new AuthorDto(USER_NAME),
+//                        false)
         };
 
         SoftAssertions softAssertions = new SoftAssertions();
