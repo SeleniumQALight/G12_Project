@@ -1,0 +1,51 @@
+package org.api;
+
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.builder.ResponseSpecBuilder;
+import io.restassured.filter.log.LogDetail;
+import io.restassured.http.ContentType;
+import io.restassured.matcher.DetailedCookieMatcher;
+import io.restassured.parsing.Parser;
+import io.restassured.response.Response;
+import io.restassured.response.ValidatableResponse;
+import io.restassured.specification.*;
+import org.apache.http.HttpStatus;
+import org.checkerframework.checker.units.qual.C;
+import org.hamcrest.Matcher;
+
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
+
+import static io.restassured.RestAssured.given;
+
+public class ApiHelper {
+
+    public static RequestSpecification requestSpecification = new RequestSpecBuilder()
+            .setContentType(ContentType.JSON)
+            .log(LogDetail.ALL)
+            .build();
+
+    public static ResponseSpecification responseSpecification = new ResponseSpecBuilder()
+            .log(LogDetail.ALL)
+            .expectStatusCode(HttpStatus.SC_OK)
+            .build();
+
+    public ValidatableResponse getAllPostsByUserRequest(String userName){
+        return getAllPostsByUserRequest(userName, HttpStatus.SC_OK);
+    }
+
+    public ValidatableResponse getAllPostsByUserRequest(String userName, int expectedStatusCode) {
+        return given()
+//                .contentType(ContentType.JSON)
+//                .log().all()
+                .spec(requestSpecification)
+                .when()
+                .get(EndPoints.POSTS_BY_USER, userName) // URL
+                .then()
+                .spec(responseSpecification.statusCode(expectedStatusCode));
+//                .log().all()
+//                .statusCode(expectedStatusCode);
+    }
+}
