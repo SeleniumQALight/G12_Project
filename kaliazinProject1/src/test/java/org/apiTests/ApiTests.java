@@ -1,6 +1,7 @@
 package org.apiTests;
 
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.apache.hc.core5.http.HttpStatus;
 import org.apache.log4j.Logger;
 import org.api.ApiHelper;
@@ -10,6 +11,9 @@ import org.api.dto.respoonseDto.PostsDto;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.List;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -33,7 +37,7 @@ public class ApiTests extends BaseApiTest{
                 .statusCode(200)
         // method #1 RestAssured asserts
         .body("[0].title", equalTo("The second Default post"))
-                .body("author.username", everyItem(equalTo(USER_NAME)))
+        .body("author.username", everyItem(equalTo(USER_NAME)))
         // method #2 DTO pr POJO
                 .extract().body().as(PostsDto[].class);
         logger.info("Number of Posts = " + actualResponse.length);
@@ -105,6 +109,34 @@ final String NOT_VALID_USER_NAME = "NotValidUserName";
 
         Assert.assertEquals("\"Sorry, invalid user requested. Wrong username - " +NOT_VALID_USER_NAME+" or there is no posts. Exception is undefined\""
                 , actualResponse);
+    }
+
+    @Test
+
+    public void getAllPostsByUserJsonPath(){
+        //method 4 Json path
+
+        Response actualResponse =
+                apiHelper.getAllPostsByUserRequest(USER_NAME).extract().response();
+        SoftAssertions softAssertions = new SoftAssertions();
+
+        List<String> actualListOfTitles = actualResponse.jsonPath().getList("title", String.class);
+
+        for (int i = 0; i <actualListOfTitles.size(); i++) {
+            softAssertions.assertThat(actualListOfTitles.get(i))
+                    .as ("Item number " + i )
+                    .contains("Default post");
+
+        }
+
+        List<Map> actualAuthorList = actualResponse.jsonPath().getList("author", Map.class);
+        for (Map actualAuthorObject : actualAuthorList){
+            softAssertions
+                    .assertThat(actualAuthorObject.get("username"))
+                    .as ("Field in userName in Author ")
+                    .isEqualTo(USER_NAME);
+        }
+        softAssertions.assertAll();
     }
 
 }
