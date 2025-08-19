@@ -1,7 +1,9 @@
 package org.apiTests;
 
 import io.restassured.http.ContentType;
+import org.apache.hc.core5.http.HttpStatus;
 import org.apache.log4j.Logger;
+import org.api.ApiHelper;
 import org.api.EndPoints;
 import org.api.dto.respoonseDto.AuthorDto;
 import org.api.dto.respoonseDto.PostsDto;
@@ -16,6 +18,7 @@ import static org.hamcrest.CoreMatchers.everyItem;
 public class ApiTests extends BaseApiTest{
     final String USER_NAME = "autoapi";
     private Logger logger = Logger.getLogger(getClass());
+    private ApiHelper apiHelper = new ApiHelper();
 
     @Test
     public void getAllPostsByUser(){
@@ -82,8 +85,26 @@ public class ApiTests extends BaseApiTest{
                                         .isEqualTo(expectedResult);
 
         softAssertions.assertAll();
-
-
-
     }
+    @Test
+
+    public void getAllPostsByUserNegative(){
+final String NOT_VALID_USER_NAME = "NotValidUserName";
+
+        String actualResponse =
+                apiHelper.getAllPostsByUserRequest(NOT_VALID_USER_NAME, HttpStatus.SC_BAD_REQUEST)
+                        // method 1 response as String
+                        // .get(EndPoints.POSTS_BY_USER, NOT_VALID_USER_NAME)
+                        // .then().statusCode(HttpStatus.SC_NOT_FOUND)
+                        // .extract().response().asString();
+                        // method 2 response as String
+                        // .get(EndPoints.POSTS_BY_USER, NOT_VALID_USER_NAME)
+                        // .then().statusCode(HttpStatus.SC_NOT_FOUND)
+                // method 3 response as String
+                        .extract().response().asString();
+
+        Assert.assertEquals("\"Sorry, invalid user requested. Wrong username - " +NOT_VALID_USER_NAME+" or there is no posts. Exception is undefined\""
+                , actualResponse);
+    }
+
 }
