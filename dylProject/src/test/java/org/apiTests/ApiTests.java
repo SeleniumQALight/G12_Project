@@ -1,6 +1,7 @@
 package org.apiTests;
 
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
 import org.api.ApiHelper;
@@ -11,6 +12,9 @@ import org.assertj.core.api.SoftAssertions;
 import org.json.HTTP;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.List;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -98,4 +102,44 @@ Assert.assertEquals("Message in response "
         ,"\"Sorry, invalid user requested. Wrong username - " + NOT_VALID_USER_NAME + " or there is no posts. Exception is undefined\""
         ,actualResponse);
     }
+
+
+    @Test
+    public void getAllPostsByUserJsonPath() {
+        //method #4 json path
+        Response actualResponse =
+                apiHelper.getAllPostsByUserRequest(USER_NAME).extract().response();
+
+        SoftAssertions softAssertions = new SoftAssertions();
+
+        List<String> actualListOfTitle = actualResponse.jsonPath()
+                .getList("title", String.class);
+
+        for (int i = 0; i < actualListOfTitle.size(); i++) {
+            softAssertions.assertThat(actualListOfTitle.get(i))
+                    .as("Item number " + i)
+                    .contains("Default post");
+        }
+
+        List<Map> actualAuthorList = actualResponse
+                .jsonPath().getList("author", Map.class);
+
+        for (Map actualAuthorObject : actualAuthorList) {
+            softAssertions
+                    .assertThat(actualAuthorObject.get("username"))
+                    .as("Field userName in Author ")
+                    .isEqualTo(USER_NAME);
+
+//            softAssertions
+//                    .assertThat(actualAuthorObject.get("avatar"))
+//                    .as("Field avatar in Author ")
+//                    .isEqualTo("https://gravatar.com/avatar/d11910f29dac63a985e29f5ef2c98857?s=128");
+        }
+
+
+
+        softAssertions.assertAll();
+    }
+
+
 }
