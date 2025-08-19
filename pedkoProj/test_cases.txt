@@ -45,6 +45,10 @@ Expected result:
 6.I see bottom My Profile
 7.I see bottom Chat
 
+Post condition:
+1.Delete user
+
+
 
 3# Send a message in the chat
 Username = AQAG12today
@@ -103,16 +107,26 @@ Pre-condition:
 2.Enter <login> into input login on Login page
 3.Enter <pass> into input password on Login page
 4.Click on button Ligin on Login page
+5.Click on button Create Post
+5.1 Redirect to the page https://aqa-complexapp.onrender.com/create-post
+6.Enter text <Title> into input title on Create post page
+7.Enter text <body, body, body,body, body, body,body, body, body> into textarea body on Create post page
+8.Click on the button Save New Post
 
 Steps:
 1.Click on bottom search
 1.1 A search input field is displayed.
-2.Enter value 12
+2.Enter value Title
 3.Click on the second variant
 
 Expected result:
-1.redirect to the page https://aqa-complexapp.onrender.com/post/67a26ec679a879004993bbca
+1.redirect to the page with post
 2.Displayed post
+
+
+Post condition:
+1.Delete post
+
 
 
 
