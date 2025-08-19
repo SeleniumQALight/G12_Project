@@ -164,4 +164,10 @@ public class LoginPage extends ParentPage {
         softAssertions.assertAll();
         return this;
     }
+
+    @Step
+    public LoginPage checkIsRedirectedToLoginPage() {
+        checkSignInButtonIsVisible();
+        return this;
+    }
 }
