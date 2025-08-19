@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.everyItem;
 
@@ -136,10 +137,13 @@ Assert.assertEquals("Message in response "
 //                    .isEqualTo("https://gravatar.com/avatar/d11910f29dac63a985e29f5ef2c98857?s=128");
         }
 
-
-
         softAssertions.assertAll();
     }
 
+    @Test
+    public void getAllPostsByUserSchemaValidation() {
+        apiHelper.getAllPostsByUserRequest(USER_NAME)
+                .assertThat().body(matchesJsonSchemaInClasspath("response.json"));
+    }
 
 }
