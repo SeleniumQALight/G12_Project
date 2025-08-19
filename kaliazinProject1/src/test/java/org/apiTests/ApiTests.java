@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.everyItem;
 
@@ -137,6 +138,15 @@ final String NOT_VALID_USER_NAME = "NotValidUserName";
                     .isEqualTo(USER_NAME);
         }
         softAssertions.assertAll();
+    }
+
+    @Test
+
+    public void getAllPostsByUserSchemaValidation(){
+        apiHelper.getAllPostsByUserRequest(USER_NAME)
+                .assertThat()
+                .body(matchesJsonSchemaInClasspath("response.json"))
+                .log().all();
     }
 
 }
