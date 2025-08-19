@@ -109,6 +109,12 @@ public class LoginPage extends ParentPage {
     }
     @Step
 
+    public LoginPage checkInputUserNameAndPasswordVisible() {
+        checkIsElementDisplayed(inputUserName);
+        checkIsElementDisplayed(inputPassword);
+        return this;
+    }
+
     public LoginPage checkAlertMessageVisible() {
         checkIsElementDisplayed(alertTextMessage);
         return this;

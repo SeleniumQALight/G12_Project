@@ -7,7 +7,7 @@ import org.utils.ConfigProvider;
 abstract public class ParentPage extends CommonActionsWithElements{
     static String environment = System.getProperty("env","aqa");
 //    protected String baseURL = "https://"+environment+"-complexapp.onrender.com";
-    protected String baseURL = ConfigProvider.configProperties.base_url().replace("[env]", environment);
+    public static String baseURL = ConfigProvider.configProperties.base_url().replace("[env]", environment);
     public ParentPage(WebDriver webDriver) {
         super(webDriver);
     }
