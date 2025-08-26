@@ -2,6 +2,7 @@ package org.pages;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.apache.log4j.Logger;
@@ -45,28 +46,35 @@ public class MyProfilePage extends ParentPage {
         return this;
     }
 
-    public MyProfilePage deletePostsTillPresent(String postTitle) {
-        List<WebElement> postList = getListOfPostsWithTitle(postTitle);
-        final int MAX_POST_COUNT = 100; //
-        int counter = 0;
-        while (!postList.isEmpty() && (counter < MAX_POST_COUNT)) {
-            clickOnElement(postList.get(0),
-                    "Post with title '" + postTitle + "'");
+public MyProfilePage deletePostsTillPresent(String postTitle) {
+    final int MAX_POST_COUNT = 100;
+    int counter = 0;
+
+    List<WebElement> postList = getListOfPostsWithTitle(postTitle);
+
+    while (!postList.isEmpty() && counter < MAX_POST_COUNT) {
+        try {
+            clickOnElement(postList.get(0), "Post with title '" + postTitle + "'");
             new PostPage(webDriver)
                     .checkIsRedirectedToPostPage()
                     .clickOnDeleteButton()
                     .checkIsRedirectedToMyProfilePage()
                     .checkIsMessagesSuccessDeletePresent();
             logger.info("Post with title '" + postTitle + "' is deleted");
-            postList = getListOfPostsWithTitle(postTitle);
-            counter++; // counter = counter + 1;
-        }
-        if (counter >= MAX_POST_COUNT) {
-            logger.error("Number of posts with title '" + postTitle + "' is more than " + MAX_POST_COUNT);
+        } catch (NoSuchElementException e) {
+            logger.warn("Post with title '" + postTitle + "' was not found. Maybe it was already deleted.");
         }
 
-        return this;
+        counter++;
+        postList = getListOfPostsWithTitle(postTitle); // оновлюємо список після видалення
     }
+
+    if (counter >= MAX_POST_COUNT) {
+        logger.error("Number of posts with title '" + postTitle + "' is more than " + MAX_POST_COUNT);
+    }
+
+    return this;
+}
 
     private MyProfilePage checkIsMessagesSuccessDeletePresent() {
         checkIsElementDisplayed(successMessageDelete);

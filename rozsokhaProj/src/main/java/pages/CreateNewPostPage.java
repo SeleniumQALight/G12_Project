@@ -17,6 +17,9 @@ public class CreateNewPostPage extends ParentPage {
     @FindBy(tagName = "select") //or (xpath = "//select")
     private WebElement dropdownAccess;
 
+    @FindBy(xpath = "//input[@name='uniquePost']")
+    private WebElement uniquePostCheckbox;
+
     public CreateNewPostPage(WebDriver webDriver) {
         super(webDriver);
     }
