@@ -5,14 +5,14 @@ import java.util.List;
 public class ExchangeRateByDateDto {
     private String date;
     private String bank;
-    private int baseCurrency;
+    private Integer baseCurrency;
     private String baseCurrencyLit;
     private List<ExchangeRateDto> exchangeRate;
 
     public ExchangeRateByDateDto() {
 
     }
-    public ExchangeRateByDateDto(String date, String bank, int baseCurrency, String baseCurrencyLit, List<ExchangeRateDto> exchangeRate) {
+    public ExchangeRateByDateDto(String date, String bank, Integer baseCurrency, String baseCurrencyLit, List<ExchangeRateDto> exchangeRate) {
         this.date = date;
         this.bank = bank;
         this.baseCurrency = baseCurrency;
@@ -40,7 +40,7 @@ public class ExchangeRateByDateDto {
         return baseCurrency;
     }
 
-    public void setBaseCurrency(int baseCurrency) {
+    public void setBaseCurrency(Integer baseCurrency) {
         this.baseCurrency = baseCurrency;
     }
 
