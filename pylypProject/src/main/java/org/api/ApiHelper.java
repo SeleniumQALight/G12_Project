@@ -1,12 +1,10 @@
 package org.api;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
-import io.restassured.matcher.DetailedCookieMatcher;
-import io.restassured.parsing.Parser;
-import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.*;
 import org.apache.http.HttpStatus;
@@ -32,6 +30,7 @@ public class ApiHelper {
     public static RequestSpecification requestSpecification = new RequestSpecBuilder()
             .setContentType(ContentType.JSON)
             .log(LogDetail.ALL)
+            .addFilter(new AllureRestAssured())
             .build();
 
     public static ResponseSpecification responseSpecification = new ResponseSpecBuilder()
