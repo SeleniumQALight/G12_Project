@@ -1,6 +1,6 @@
 package org.bdd.stepDefinitions;
 
-import org.bdd.stepDefinitions.helpers.WebDriverHelper;
+import org.bdd.helpers.WebDriverHelper;
 import org.pages.PageProvider;
 
 public class MainStepDefs {

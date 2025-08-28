@@ -2,7 +2,7 @@ package org.bdd.stepDefinitions;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import org.bdd.stepDefinitions.helpers.WebDriverHelper;
+import org.bdd.helpers.WebDriverHelper;
 
 public class Hook {
     WebDriverHelper webDriverHelper;

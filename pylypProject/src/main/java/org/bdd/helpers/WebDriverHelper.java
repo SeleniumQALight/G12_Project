@@ -1,4 +1,4 @@
-package org.bdd.stepDefinitions.helpers;
+package org.bdd.helpers;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;

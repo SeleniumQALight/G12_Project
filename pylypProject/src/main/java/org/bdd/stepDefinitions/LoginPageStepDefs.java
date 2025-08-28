@@ -2,7 +2,7 @@ package org.bdd.stepDefinitions;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
-import org.bdd.stepDefinitions.helpers.WebDriverHelper;
+import org.bdd.helpers.WebDriverHelper;
 import org.data.TestData;
 
 public class LoginPageStepDefs extends MainStepDefs {
