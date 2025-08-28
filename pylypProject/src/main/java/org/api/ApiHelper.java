@@ -5,19 +5,9 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
-import io.restassured.matcher.DetailedCookieMatcher;
-import io.restassured.parsing.Parser;
-import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.*;
 import org.apache.http.HttpStatus;
-import org.checkerframework.checker.units.qual.C;
-import org.hamcrest.Matcher;
-
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
 
 import static io.restassured.RestAssured.given;
 
