@@ -9,4 +9,6 @@ public class TestData {
 
     public static final String INVALID_LOGIN_UI = "wrongUser";
     public static final String INVALID_PASSWORD_UI = "wrongPass";
+    public static final String VALID_LOGIN_API = "g12olesiauser".toLowerCase();
+    public static final String VALID_PASSWORD_API = "123456qwerty";
 }
