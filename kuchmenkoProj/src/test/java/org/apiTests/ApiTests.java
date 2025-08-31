@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.everyItem;
 
@@ -81,9 +82,9 @@ public class ApiTests extends BaseApiTest {
 
         softAssertions
                 .assertThat(actualResponse)
-                        .usingRecursiveComparison()
-                                .ignoringFields("id", "createdDate", "author.avatar")
-                                        .isEqualTo(expectedResult);
+                .usingRecursiveComparison()
+                .ignoringFields("id", "createdDate", "author.avatar")
+                .isEqualTo(expectedResult);
         softAssertions.assertAll();
     }
 
@@ -94,10 +95,10 @@ public class ApiTests extends BaseApiTest {
         String actualResponse =
                 apiHelper
                         .getAllPostsByUserRequest(NOT_VALID_USER_NAME, HttpStatus.SC_BAD_REQUEST)
-                //method #3 response as String
+                        //method #3 response as String
                         .extract().response().asString();
 
-        Assert.assertEquals("\"Sorry, invalid user requested. Wrong username - "+NOT_VALID_USER_NAME+" or there is no posts. Exception is undefined\"",
+        Assert.assertEquals("\"Sorry, invalid user requested. Wrong username - " + NOT_VALID_USER_NAME + " or there is no posts. Exception is undefined\"",
                 actualResponse);
 
     }
@@ -127,5 +128,11 @@ public class ApiTests extends BaseApiTest {
         }
 
         softAssertions.assertAll();
+    }
+
+    @Test
+    public void getAllPostsByUserSchemaValidation() {
+        apiHelper.getAllPostsByUserRequest(USER_NAME)
+                .assertThat().body(matchesJsonSchemaInClasspath("response.json"));
     }
 }
