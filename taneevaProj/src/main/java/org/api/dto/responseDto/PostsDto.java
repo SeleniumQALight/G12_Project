@@ -10,13 +10,13 @@ import lombok.*;
 @Builder
 public class PostsDto {
     @JsonProperty("_id")
-    private String id;
-//    private String title;
-//    private String body;
-//    @JsonProperty("select1")
-//    private String select;
-//    private String uniquePost;
-//    private String createdDate;
+    private String _id;
+    private String title;
+    private String body;
+    @JsonProperty ("select1")
+    private String select;
+    private String uniquePost;
+    private String createdDate;
     private AuthorDto author;
     private Boolean isVisitorOwner;
 
@@ -32,7 +32,7 @@ public class PostsDto {
 //        this.author = author;
 //        this.isVisitorOwner = isVisitorOwner;
 //    }
-
+//
 //    public String getId() {
 //        return id;
 //    }
@@ -48,6 +48,7 @@ public class PostsDto {
 //    public void setTitle(String title) {
 //        this.title = title;
 //    }
+//
 //
 //    public String getBody() {
 //        return body;
@@ -80,10 +81,9 @@ public class PostsDto {
 //    public void setCreatedDate(String createdDate) {
 //        this.createdDate = createdDate;
 //    }
-//
-//    public AuthorDto getAuthor() {
-//        return author;
-//    }
+//public AuthorDto getAuthor() {
+//    return author;
+//}
 //
 //    public void setAuthor(AuthorDto author) {
 //        this.author = author;

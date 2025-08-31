@@ -2,9 +2,6 @@ package org.api.dto.responseDto;
 
 import lombok.*;
 
-public class AuthorDto {
-    private String username;
-
     @Getter
     @Setter
     @ToString
@@ -12,11 +9,11 @@ public class AuthorDto {
     @AllArgsConstructor
     @Builder
 
-    public  class AutorDto {
+    public class AuthorDto {
         private String username;
         private String avatar;
 
-//        public AutorDto(String username) {
+//        public AuthorDto(String username) {
 //        this.username = username;
 //    }
 
@@ -42,6 +39,6 @@ public class AuthorDto {
 //                "username='" + username + '\'' +
 //                ", avatar='" + avatar + '\'' +
 //                '}';
-    }
+//    }
 
 }
