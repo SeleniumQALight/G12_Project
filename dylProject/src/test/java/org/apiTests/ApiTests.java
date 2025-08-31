@@ -1,5 +1,6 @@
 package org.apiTests;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
@@ -32,6 +33,7 @@ public class ApiTests extends BaseApiTest {
         given()
                 .contentType(ContentType.JSON)
                 .log().all()
+                .filter(new AllureRestAssured())
                 .when()
                         .get(EndPoints.POSTS_BY_USER, USER_NAME)  // URL
                 .then()
