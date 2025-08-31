@@ -1,14 +1,13 @@
-package org.api.dto.responseDto;
+package org.api;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
-import io.restassured.http.ContentType;
+import io.restassured.http.*;
 import io.restassured.response.ValidatableResponse;
-import io.restassured.specification.RequestSpecification;
-import io.restassured.specification.ResponseSpecification;
+import io.restassured.specification.*;
 import org.apache.http.HttpStatus;
-import org.api.EndPoints;
+
 
 import static io.restassured.RestAssured.given;
 
@@ -23,22 +22,21 @@ public class ApiHelper {
             .expectStatusCode(HttpStatus.SC_OK)
             .build();
 
-
-    public ValidatableResponse getAllPostsByUserRequest(String userName){
+    public ValidatableResponse getAllPostsByUserRequest(String userName) {
         return getAllPostsByUserRequest(userName, HttpStatus.SC_OK);
     }
 
-    public ValidatableResponse getAllPostsByUserRequest(String userName, int expectedStatusCode){
+
+    public ValidatableResponse getAllPostsByUserRequest(String userName, int expectedStatusCode) {
         return given()
-//                .contentType(ContentType.JSON)
-//                .log().all()
+//        .contentType(ContentType.JSON)
+//        .log().all()
                 .spec(requestSpecification)
                 .when()
                 .get(EndPoints.POSTS_BY_USER, userName)
                 .then()
+//        .log().all()
+//        .statusCode(expectedStatusCode);
                 .spec(responseSpecification.statusCode(expectedStatusCode));
-//                .log().all()
-//                .statusCode(expectedStatusCode);
-
     }
 }

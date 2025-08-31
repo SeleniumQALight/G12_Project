@@ -5,7 +5,7 @@ import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
 import org.api.EndPoints;
-import org.api.dto.responseDto.ApiHelper;
+import org.api.ApiHelper;
 import org.api.dto.responseDto.AuthorDto;
 import org.api.dto.responseDto.PostsDto;
 import org.assertj.core.api.SoftAssertions;
@@ -67,7 +67,7 @@ public class ApiTests  extends BaseApiTest{
                         .select("All Users")
                         .isVisitorOwner(false)
                         .author(AuthorDto.builder().username(USER_NAME).build())
-                        .build();
+                        .build()
 //                new PostsDto("The second Default post",
 //                        "This post was created automatically after cleaning the database",
 //                        "All Users",
@@ -76,9 +76,11 @@ public class ApiTests  extends BaseApiTest{
 //                        false),
 //                new PostsDto("The first Default post",
 //                        "This post was created automatically after cleaning the database"
-////                        , "All Users" , "no", new AuthorDto(USER_NAME), false)
+//                       , "All Users" , "no", new AuthorDto(USER_NAME), false)
         };
+
         SoftAssertions softAssertions = new SoftAssertions();
+
         softAssertions
                 .assertThat(actualResponse)
                 .usingRecursiveComparison()
