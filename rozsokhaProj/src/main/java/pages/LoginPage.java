@@ -42,6 +42,9 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = listOfActualMessagesLocator)
     private List<WebElement> listOfActualMessages;
 
+    @FindBy(xpath = "//*[@class='alert alert-danger text-center']")
+    private WebElement invalidLoginOrPasswordAlert;
+
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -86,6 +89,33 @@ public class LoginPage extends ParentPage {
 //        logger.info("Button Sign In was clicked");
         clickOnElement(buttonSignIn);
     }
+
+    // Method to check that inputs for username and password are not visible
+
+    public void checkInputsUserNameAndPasswordNotVisible() {
+        checkIsElementNotDisplayed(inputUserName);
+        checkIsElementNotDisplayed(inputPassword);
+    }
+
+    // Method to check that the Sign In button is visible
+
+    public void checkButtonSignInVisible() {
+        checkIsElementDisplayed(buttonSignIn);
+        logger.info("Button Sign In is visible");
+    }
+
+    // Method to check text in the alert message
+
+    public LoginPage checkIsInvalidUsernameOrPasswordDisplayed() {
+        checkIsElementDisplayed(invalidLoginOrPasswordAlert);
+        return this;
+    }
+
+    public LoginPage checkTextInAlertMessage(String expectedMessageText) {
+        checkTextInElement(invalidLoginOrPasswordAlert, expectedMessageText);
+        return this;
+    }
+
 
     /**
      * Opens the login page, fills in the login form with valid credentials,
