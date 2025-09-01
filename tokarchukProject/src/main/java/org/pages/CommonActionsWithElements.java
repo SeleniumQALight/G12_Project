@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.utils.ConfigProvider;
 
 import java.time.Duration;
+import java.util.ArrayList;
 
 
 public class CommonActionsWithElements {
@@ -210,7 +211,7 @@ public class CommonActionsWithElements {
     }
 
     //open new tab
-    protected void openNewTab() {
+    public void openNewTab() {
         try {
             ((JavascriptExecutor) webDriver).executeScript("window.open()");
             logger.info("New tab was opened");
@@ -219,4 +220,47 @@ public class CommonActionsWithElements {
         }
     }
 
+    // switch to new tab
+    public void switchToNewTab() {
+        try {
+            ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+            webDriver.switchTo().window(tabs.get(1));
+            logger.info("Switched to new tab");
+        } catch (Exception e) {
+            printErrorAndStopTes(e);
+        }
+    }
+
+    // switch to original tab
+    public void switchToOriginalTab() {
+        try {
+            ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+            webDriver.switchTo().window(tabs.get(0));
+            logger.info("Switched to original tab");
+        } catch (Exception e) {
+            printErrorAndStopTes(e);
+        }
+    }
+
+    // close new tab and switch back to original
+    public void closeNewTabAndSwitchToOriginal() {
+        try {
+            ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+            webDriver.switchTo().window(tabs.get(1)).close();
+            webDriver.switchTo().window(tabs.get(0));
+            logger.info("Closed new tab and switched back to original");
+        } catch (Exception e) {
+            printErrorAndStopTes(e);
+        }
+    }
+
+
+    public void refreshPage() {
+        webDriver.navigate().refresh();
+        logger.info("Page was refreshed");
+    }
+
+    public void checkElementNotVisible(WebElement element, String message) {
+        Assert.assertFalse(message, isElementDisplayed(element));
+    }
 }
