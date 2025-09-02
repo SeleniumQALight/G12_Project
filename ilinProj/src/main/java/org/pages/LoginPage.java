@@ -182,4 +182,9 @@ public class LoginPage extends ParentPage {
         verifyButtonSignInIsVisible();
         return this;
     }
+
+
+    public void checkErrorText(String messageText) {
+        checkIsElementDisplayed(invalidMessage);
+    }
 }
