@@ -40,6 +40,10 @@ public class LoginPage extends ParentPage {
     final static String listOfActualErrorMessagesLocator = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
     @FindBy (xpath = listOfActualErrorMessagesLocator)
     private List<WebElement> listOfActualErrorMessages;
+    private WebElement alertMessageInCenter;
+    @FindBy(xpath = ".//div[@class='alert alert-danger text-center']")
+    private WebElement worningMessageInCenter;
+
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -124,6 +128,11 @@ public class LoginPage extends ParentPage {
                     .isIn(expectedErrorMessages);
         }
         softAssertions.assertAll();
+        return this;
+    }
+
+    public LoginPage checkTextInAlertMessage(String errorMessage) {
+        checkTextInElement(worningMessageInCenter, errorMessage);
         return this;
     }
 }
