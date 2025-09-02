@@ -11,11 +11,13 @@ import io.restassured.specification.ResponseSpecification;
 import org.apache.http.HttpStatus;
 
 import org.apache.log4j.Logger;
+import org.api.dto.requestDto.CreateNewPostDto;
 import org.api.dto.responseDto.PostsDto;
 import org.data.TestData;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
@@ -100,6 +102,28 @@ public class ApiHelper {
                 .delete(EndPoints.DELETE_POST, id)
                 .then()
                 .spec(responseSpecification);
+    }
+
+
+    public void createPosts(Integer numberOfPosts, String token, Map<String, String> postsData) {
+        for (int i = 0; i < numberOfPosts; i++) {
+            CreateNewPostDto newPostDtoBody =
+                    CreateNewPostDto.builder()
+                            .title(postsData.get("title") + " " + i)
+                            .body(postsData.get("body"))
+                            .select1(postsData.get("select"))
+                            .uniquePost(postsData.getOrDefault("uniquePost", "no"))
+                            .token(token)
+                            .build();
+
+             given()
+                     .spec(requestSpecification)
+                     .body(newPostDtoBody)
+                     .when()
+                     .post(EndPoints.CREATE_POST)
+                     .then()
+                     .spec(responseSpecification);
+        }
     }
 
 
