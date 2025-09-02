@@ -1,5 +1,6 @@
 package org.api;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -30,6 +31,7 @@ public class ApiHelper {
     public static ResponseSpecification responseSpecification = new ResponseSpecBuilder()
             .log(LogDetail.ALL)
             .expectStatusCode(HttpStatus.SC_OK)
+            .addFilter(new AllureRestAssured())
             .build();
 
     public ValidatableResponse getAllPostsByUserRequest(String userName){
