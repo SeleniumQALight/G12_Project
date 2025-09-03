@@ -18,14 +18,14 @@ public class LoginTestInNewTabWithJavaScript extends BaseTest {
 
         pageProvider.getLoginPage().openLoginPage();
         pageProvider.getHomePage().getHeaderForLoggedUserElement()
-                .isButtonSignOutVisible();
+                .checkButtonSignOutVisible();
 
         pageProvider.getHomePage().switchToOriginalTab();
         pageProvider.getHomePage().getHeaderForLoggedUserElement()
-                .isButtonSignOutVisible();
+                .checkButtonSignOutVisible();
 
-        pageProvider.getHomePage().closeNewTabAndSwitchToOriginal();
+        pageProvider.getHomePage().closeTabByIndex(1, 0);
         pageProvider.getHomePage().getHeaderForLoggedUserElement()
-                .isButtonSignOutVisible();
+                .checkButtonSignOutVisible();
     }
 }

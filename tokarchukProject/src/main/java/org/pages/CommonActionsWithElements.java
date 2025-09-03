@@ -243,12 +243,19 @@ public class CommonActionsWithElements {
     }
 
     // close new tab and switch back to original
-    public void closeNewTabAndSwitchToOriginal() {
+    public void closeTabByIndex(int indexToClose, int indexToSwitch) {
         try {
             ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
-            webDriver.switchTo().window(tabs.get(1)).close();
-            webDriver.switchTo().window(tabs.get(0));
-            logger.info("Closed new tab and switched back to original");
+
+            if (indexToClose >= tabs.size() || indexToSwitch >= tabs.size()) {
+                throw new IllegalArgumentException("Invalid tab index: " + indexToClose + " or " + indexToSwitch);
+            }
+
+            webDriver.switchTo().window(tabs.get(indexToClose)).close();
+            logger.info("Closed tab with index " + indexToClose);
+
+            webDriver.switchTo().window(tabs.get(indexToSwitch));
+            logger.info("Switched to tab with index " + indexToSwitch);
         } catch (Exception e) {
             printErrorAndStopTes(e);
         }
