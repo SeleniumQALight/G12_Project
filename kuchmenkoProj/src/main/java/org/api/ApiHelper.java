@@ -1,6 +1,5 @@
 package org.api;
 
-import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -9,7 +8,6 @@ import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.apache.http.HttpStatus;
-
 import org.apache.log4j.Logger;
 import org.api.dto.responseDto.PostsDto;
 import org.data.TestData;
@@ -26,7 +24,6 @@ public class ApiHelper {
     public static RequestSpecification requestSpecification = new RequestSpecBuilder()
             .setContentType(ContentType.JSON)
             .log(LogDetail.ALL)
-            .addFilter(new AllureRestAssured())
             .build();
 
     public static ResponseSpecification responseSpecification = new ResponseSpecBuilder()
@@ -34,11 +31,11 @@ public class ApiHelper {
             .expectStatusCode(HttpStatus.SC_OK)
             .build();
 
-    public ValidatableResponse getAllPostsByUserRequest(String userName){
+    public ValidatableResponse getAllPostsByUserRequest(String userName) {
         return getAllPostsByUserRequest(userName, HttpStatus.SC_OK);
     }
 
-    public ValidatableResponse getAllPostsByUserRequest(String userName, int expectedStatusCode){
+    public ValidatableResponse getAllPostsByUserRequest(String userName, int expectedStatusCode) {
         return given()
 //                .contentType(ContentType.JSON)
 //                .log().all()
@@ -46,20 +43,21 @@ public class ApiHelper {
                 .when()
                 .get(EndPoints.POSTS_BY_USER, userName)
                 .then()
-                .spec(responseSpecification.statusCode(expectedStatusCode));
 //                .log().all()
 //                .statusCode(expectedStatusCode);
+                .spec(responseSpecification.statusCode(expectedStatusCode));
     }
 
     /**
      * Method works with default user for API
+     *
      * @return
      */
     public String getToken() {
         return getToken(TestData.VALID_LOGIN_API, TestData.VALID_PASSWORD_API);
     }
 
-    public String getToken(String userName, String password){
+    public String getToken(String userName, String password) {
         JSONObject requestBody = new JSONObject();
         requestBody.put("username", userName);
         requestBody.put("password", password);
@@ -71,10 +69,8 @@ public class ApiHelper {
                 .post(EndPoints.LOGIN)
                 .then()
                 .spec(responseSpecification)
-                .extract().response().body().asString().replace("\"","");
-
+                .extract().response().body().asString().replace("\"", "");
     }
-
 
     public void deleteAllPostsTillPresent(String userName, String actualToken) {
         PostsDto[] listOfPosts = this.getAllPostsByUserRequest(userName.toLowerCase())
@@ -84,13 +80,14 @@ public class ApiHelper {
             deletePostById(actualToken, listOfPosts[i].getId());
             logger.info(
                     String.format("Post with id %s and title '%s' was deleted"
-                            ,listOfPosts[i].getId(), listOfPosts[i].getTitle())
+                            , listOfPosts[i].getId()
+                            , listOfPosts[i].getTitle())
             );
         }
     }
 
     private void deletePostById(String actualToken, String id) {
-        HashMap<String, String> bodyRequest = new HashMap<>();
+        HashMap<String, String > bodyRequest = new HashMap<>();
         bodyRequest.put("token", actualToken);
 
         given()
@@ -101,9 +98,4 @@ public class ApiHelper {
                 .then()
                 .spec(responseSpecification);
     }
-
-
-
-
-
 }

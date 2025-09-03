@@ -1,5 +1,6 @@
 package org.apiTests;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
@@ -30,6 +31,7 @@ public class ApiTests extends BaseApiTest{
                 given()
                 .contentType(ContentType.JSON)
                 .log().all()
+                        .filter(new AllureRestAssured())
          .when()
                 .get(EndPoints.POSTS_BY_USER, USER_NAME) // URL
          .then()
@@ -55,7 +57,7 @@ public class ApiTests extends BaseApiTest{
                 PostsDto.builder()
                         .title("The second Default post")
                         .body("This post was created automatically after cleaning the database")
-                        .uniquePost("no")
+                        .uniquePost("yes")
                         .select("All Users")
                         .isVisitorOwner(false)
                         .author(AuthorDto.builder().username(USER_NAME).build())
@@ -64,7 +66,7 @@ public class ApiTests extends BaseApiTest{
                         .title("The first Default post")
                         .body("This post was created automatically after cleaning the database")
                         .uniquePost("no")
-                        .select("All Users")
+                        .select("All Users1")
                         .isVisitorOwner(false)
                         .author(AuthorDto.builder().username(USER_NAME).build())
                         .build()
