@@ -40,8 +40,8 @@ public class HomePage extends ParentPage {
         if (getHeaderForLoggedUserElement().isButtonSignOutVisible()) {
             logger.info("User is already logged in");
         } else {
-            loginPage.enterTextIntoInputLogin(TestData.VALID_LOGIN_UI)
-                    .enterTextIntoPassword(TestData.VALID_PASSWORD_UI)
+            loginPage.enterTextInInputLogin(TestData.VALID_LOGIN_UI)
+                    .enterTextInInputPassword(TestData.VALID_PASSWORD_UI)
                     .clickOnButtonSignIn();
             checkIsRedirectedToHomePage();
             logger.info("User was logged in");
