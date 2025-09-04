@@ -15,7 +15,7 @@ public class MyProfileStepdefs extends MainStepDefs {
     }
 
     @And("I see {} posts in Posts list on MyProfile Page")
-    public void iSeePostsInPostsListOnMyProfilePage(String numberOfPosts) {
+    public void iSeePostsInPostsListOnMyProfilePage(int numberOfPosts) {
     pageProvider.getMyProfilePage().checkNumberOfPosts(numberOfPosts);
     }
 }

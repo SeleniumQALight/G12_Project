@@ -22,7 +22,7 @@ public class HomePageStefDefs extends MainStepDefs {
             userName = TestData.VALID_LOGIN_API;
         }
         if (ApiStepdefs.DEFAULT.equalsIgnoreCase(password)) {
-            password = TestData.VALID_LOGIN_API;
+            password = TestData.VALID_PASSWORD_API;
         }
         pageProvider.getLoginPage()
                 .openLoginPage()
