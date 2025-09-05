@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -83,20 +84,35 @@ public class LoginTestAllStepsInOneClass {
 
 
     private boolean isButtonOutVisible() {
-        boolean state = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
-        logger.info("Sign Out button visible - " + state);
-        return state;
+        try {
+            boolean state = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
+            logger.info("Sign Out button visible - " + state);
+            return state;
+        } catch (NoSuchElementException e) {
+            logger.info("Sign Out button not found");
+            return false;
+        }
     }
 
     private boolean isButtonOutPresent() {
-        return webDriver.findElements(By.xpath("//button[text()='Sign Out']")).size() > 0;
+        return !webDriver.findElements(By.xpath("//button[text()='Sign Out']")).isEmpty();
     }
 
     private boolean isButtonInVisible() {
-        return webDriver.findElement(By.xpath("//button[text()='Sign In']")).isDisplayed();
+        try {
+            return webDriver.findElement(By.xpath("//button[text()='Sign In']")).isDisplayed();
+        } catch (NoSuchElementException e) {
+            logger.info("Sign In button not found");
+            return false;
+        }
     }
 
     private boolean isInvalidMessageVisible() {
-        return webDriver.findElement(By.xpath("//div[@class='alert alert-danger text-center']")).isDisplayed();
+        try {
+            return webDriver.findElement(By.xpath("//div[@class='alert alert-danger text-center']")).isDisplayed();
+        } catch (NoSuchElementException e) {
+            logger.info("Invalid login message not found");
+            return false;
+        }
     }
 }
