@@ -1,8 +1,10 @@
 #LoginPage
 input.login=".//input[@id='login']"
-input.password="..."
-button.Ligin="..."
+input.password="//*[@placeholder='Password']"
+button.Ligin="//*[@class='btn btn-primary btn-sm']"
 
+
+#Sign UP page
 input.username ='//*[@id='username-register']'
 input.email = //*[@id='email-register']
 input.password = //*[@id='password-register']
@@ -14,7 +16,7 @@ input.search = //*[@class='live-search-field']
 
 
 #HomePage
-button.SignOut="..."
+button.SignOut="//*[@class='btn btn-sm btn-secondary']"
 
 
 #PostPage
