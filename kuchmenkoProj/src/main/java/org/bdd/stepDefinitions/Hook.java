@@ -19,6 +19,7 @@ public class Hook {
     @Before(order = 10)
     public void setUp(){
         RestAssured.baseURI = ParentPage.baseURL + "/api/";
+        apiHelper = new ApiHelper();
     }
 
     @After(order = 15)
@@ -28,6 +29,6 @@ public class Hook {
 
     @Before(value = "@deletePostsTillPresentForDefaultUser", order = 50)
     public void deletePostsForDefaultUserTillPresent(){
-        apiHelper.deleteAllPostsTillPresent(TestData.VALID_LOGIN_API, TestData.VALID_PASSWORD_API);
+        apiHelper.deleteAllPostsTillPresent(TestData.VALID_LOGIN_API, apiHelper.getToken());
     }
 }
