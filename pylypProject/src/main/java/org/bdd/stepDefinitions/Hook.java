@@ -30,7 +30,7 @@ public class Hook {
 
     @Before(value = "@deletePostsTillPresentForDefaultUser", order = 50)
     public void deletePostsForDefaultUserTillPresent() {
-        apiHelper.deleteAllPostsTillPresent(TestData.VALID_LOGIN_API, TestData.VALID_PASSWORD_API);
+        apiHelper.deleteAllPostsTillPresent(TestData.VALID_LOGIN_API, apiHelper.getToken());
     }
 
 
