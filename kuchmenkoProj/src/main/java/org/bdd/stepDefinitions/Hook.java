@@ -10,7 +10,7 @@ import org.pages.ParentPage;
 
 public class Hook {
     WebDriverHelper webDriverHelper;
-    ApiHelper apiHelper = new ApiHelper();
+    ApiHelper apiHelper;
 
     public Hook(WebDriverHelper webDriverHelper) {
         this.webDriverHelper = webDriverHelper;
