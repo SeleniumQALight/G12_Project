@@ -1,5 +1,6 @@
 package org.pages;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -40,7 +41,9 @@ public class CreateNewPostPage extends ParentPage {
     }
 
     public CreateNewPostPage enterTextIntoInputTitle(String title) {
-        clearAndEnterTextToElement(inputTitle, title);
+        inputTitle.clear();
+        inputTitle.sendKeys(title);
+        logger.info("Entered text into Title input: " + title);
         return this;
     }
 
