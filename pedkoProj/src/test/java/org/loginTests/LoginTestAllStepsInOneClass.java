@@ -14,53 +14,52 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.concurrent.TimeUnit;
 
 public class LoginTestAllStepsInOneClass {
-   private WebDriver webDriver;
-   private Logger logger = Logger.getLogger(getClass());
+    private WebDriver webDriver;
+    private Logger logger = Logger.getLogger(getClass());
 
-   @Before
-    public void setUp(){
+    @Before
+    public void setup(){
+        WebDriverManager.chromedriver().setup();
+        webDriver = new ChromeDriver();
+        webDriver.manage().window().maximize();
+        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        logger.info("Browser was opened");
+    }
 
-       WebDriverManager.chromedriver().setup();  //скачує виконуваний файлік,посередник
-       webDriver = new ChromeDriver();
-       webDriver.manage().window().maximize();
-       webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-       logger.info("Browser was opened");
-   }
-
-   @After
+    @After
     public void tearDown(){
-       webDriver.quit();
-       logger.info("Browser was closed");
+        webDriver.quit();
+        logger.info("Browser was closed");
+    }
 
-   }
 
-   @Test
-    public void validLogin() {
-      webDriver.get("https://aqa-complexapp.onrender.com");
-      logger.info("Site was opened");
+    @Test
+    public void validLogin(){
+        webDriver.get("https://aqa-complexapp.onrender.com");
+        logger.info("Site was opened");
 
-      WebElement inputUserName = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
-      inputUserName.clear();
-      inputUserName.sendKeys("qaauto");
-      logger.info("qaauto was entered in input UserName");
+        WebElement inputUserName = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
+        inputUserName.clear();
+        inputUserName.sendKeys("qaauto");
+        logger.info("qaauto was entered in input UserName");
 
-      WebElement inputPassword = webDriver.findElement(By.xpath("//input[@placeholder='Password']"));
-      inputPassword.clear();
-      inputPassword.sendKeys("123456qwerty");
-      logger.info("qaauto was entered in input Password");
+        WebElement inputPassword = webDriver.findElement(By.xpath("//input[@placeholder='Password']"));
+        inputPassword.clear();
+        inputPassword.sendKeys("123456qwerty");
+        logger.info("password was entered in input Password");
 
-      webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
-      logger.info("Button Sign In was clicked");
 
-      Assert.assertTrue("User in not LoggedIn: button SignOut is not visible", isButtonSignOutVisible());
-   }
+        webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
+        logger.info("Button Sign In was clicked");
 
-   private boolean isButtonSignOutVisible(){
+        Assert.assertTrue("User is not LoggedIN: button SignOut is not visible" , isButtonOutVisible() );
 
-      boolean state = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
-      logger.info( " Element visible - " + state);
-      return state;
+    }
 
-   }
+    private boolean isButtonOutVisible(){
+        boolean state = webDriver.findElement(By.xpath("//button[text()='Sign Out']")).isDisplayed();
+        logger.info( " element visible - " + state);
 
+        return state;
+    }
 }
