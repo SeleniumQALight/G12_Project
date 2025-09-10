@@ -2,12 +2,14 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.utils.ConfigProvider;
 
 import java.time.Duration;
 
@@ -22,8 +24,8 @@ public class CommonActionsWithElements {
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this); // initializes the elements described in FindBy
-        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));
+        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(ConfigProvider.configProperties.TIME_FOR_EXPLICIT_WAIT_LOW()));
+        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(ConfigProvider.configProperties.TIME_FOR_DEFAULT_WAIT()));
     }
 
     /*  Method clearAndTypeIntoInputField
@@ -34,8 +36,11 @@ public class CommonActionsWithElements {
     protected void clearAndEnterTextToElement(WebElement webElement, String text) {
         try {
             webElement.clear();
-            webElement.sendKeys(text);
-            logger.info(text + " was entered in element " + getElementName(webElement));
+            if (text != null && !text.isEmpty()) {
+                webElement.sendKeys(text);
+            } else {
+                throw new IllegalArgumentException("Text to send must not be null or empty");
+            }
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
@@ -196,5 +201,9 @@ public class CommonActionsWithElements {
             logger.error("Unknown desired checkbox state: " + desiredState);
             Assert.fail("Unknown desired checkbox state: " + desiredState);
         }
+    }
+    protected void waitUntilElementVisible(By locator) {
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 }
