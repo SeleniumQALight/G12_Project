@@ -12,10 +12,10 @@ public class ApiStepdefs {
     @Given("I create {} new posts via API for {string} user and {string} password")
     public void iCreateNewPostsViaAPIForDefaultUserAndDefaultPassword(
             Integer numberOfPosts, String userName, String password, DataTable dataTable) {
-        if (DEFAULT.equalsIgnoreCase(userName)) {
+        if (ApiStepdefs.DEFAULT.equalsIgnoreCase(userName)) {
             userName = TestData.VALID_LOGIN_API;
         }
-        if (DEFAULT.equalsIgnoreCase(password)) {
+        if (ApiStepdefs.DEFAULT.equalsIgnoreCase(password)) {
             password = TestData.VALID_PASSWORD_API;
         }
 
