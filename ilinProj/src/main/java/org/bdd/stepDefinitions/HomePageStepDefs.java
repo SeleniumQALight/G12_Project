@@ -20,11 +20,11 @@ public class HomePageStepDefs extends MainStepDefs{
     }
 
     @And("I open Home page as {string} user and {string} password")
-    public void iOpenHomePageAsDefaultUserAndDefaultPassword(String userName, String password) {
-        if (DEFAULT.equalsIgnoreCase(userName)){
+    public void iOpenHomePageAsDefaultUserAndDefaultPassword(String userName,String password) {
+        if (ApiStepdefs.DEFAULT.equalsIgnoreCase(userName)) {
             userName = TestData.VALID_LOGIN_API;
         }
-        if (DEFAULT.equalsIgnoreCase(password)){
+        if (ApiStepdefs.DEFAULT.equalsIgnoreCase(password)) {
             password = TestData.VALID_PASSWORD_API;
         }
         pageProvider.getLoginPage()

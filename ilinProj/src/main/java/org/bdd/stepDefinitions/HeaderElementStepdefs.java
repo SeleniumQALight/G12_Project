@@ -10,9 +10,6 @@ public class HeaderElementStepdefs extends MainStepDefs{
 
     @When("I click on button MyProfile on Header Element")
     public void iClickOnButtonMyProfileOnHeaderElement() {
-        pageProvider
-                .getHomePage()
-                .getHeaderForLoggedUserElement()
-                .clickOnButtonMyProfile();
+        pageProvider.getHomePage().getHeaderForLoggedUserElement().clickOnButtonMyProfile();
     }
 }

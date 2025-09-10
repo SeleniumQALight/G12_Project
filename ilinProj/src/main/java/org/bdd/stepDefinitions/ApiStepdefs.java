@@ -6,7 +6,7 @@ import org.api.ApiHelper;
 import org.data.TestData;
 
 public class ApiStepdefs {
-    final static String DEFAULT = "default";
+    static final String DEFAULT = "default";
     private ApiHelper apiHelper = new ApiHelper();
 
     @Given("I create {} new posts via API for {string} user and {string} password")
@@ -18,9 +18,9 @@ public class ApiStepdefs {
         if (DEFAULT.equalsIgnoreCase(password)) {
             password = TestData.VALID_PASSWORD_API;
         }
+
         String token = apiHelper.getToken(userName, password);
         apiHelper.createPosts(numberOfPosts, token, dataTable.asMap());
-
-
     }
+
 }
