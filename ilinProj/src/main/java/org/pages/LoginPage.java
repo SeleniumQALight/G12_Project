@@ -44,6 +44,9 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = listOfActualMessagesLocator)
     private List<WebElement> listOfActualMessages;
 
+    @FindBy(xpath = ".//div[@class='alert alert-danger text-center']")
+    private WebElement worningMessageInCenter;
+
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -180,6 +183,17 @@ public class LoginPage extends ParentPage {
         checkIsElementDisplayed(inputUserName);
         checkIsElementDisplayed(inputPassword);
         verifyButtonSignInIsVisible();
+        return this;
+    }
+
+
+    public void checkErrorText(String messageText) {
+        checkIsElementDisplayed(invalidMessage);
+    }
+
+    public LoginPage checkTextInAlertInCenter(String errorMessage) {
+        checkTextInElement(worningMessageInCenter, errorMessage);
+
         return this;
     }
 }
