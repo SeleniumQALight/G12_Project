@@ -1,10 +1,13 @@
 Feature: Login feature
 
+
+  @R001
   Scenario: R001 Valid login
     Given I open Login page
     When I login with valid cred
     Then I see avatar on HomePage
 
+  @R002
   Scenario Outline: R002 Login with invalid creds
     Given I open Login page
     When I enter '<login>' into input Login in Login page
