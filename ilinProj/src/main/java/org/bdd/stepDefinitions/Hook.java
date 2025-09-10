@@ -10,7 +10,7 @@ import org.pages.ParentPage;
 
 public class Hook {
     WebDriverHelper webDriverHelper;
-    ApiHelper apiHelper = new ApiHelper();
+    ApiHelper apiHelper;
 
     public Hook(WebDriverHelper webDriverHelper){
         this.webDriverHelper = webDriverHelper;
@@ -19,6 +19,7 @@ public class Hook {
     @Before(order = 10)
     public void setUp(){
         RestAssured.baseURI = ParentPage.baseURL + "/api";
+        apiHelper = new ApiHelper();
 
     }
 
