@@ -75,7 +75,7 @@ public class MyProfilePage extends ParentPage {
         return this;
     }
 
-    public MyProfilePage checkNumberOfPostsInPosts(String numberOfPosts) {
+    public MyProfilePage checkNumberOfPostsInPosts(int numberOfPosts) {
         Assert.assertEquals("Number of posts", numberOfPosts, postsList.size());
 
         return this;

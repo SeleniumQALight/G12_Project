@@ -11,7 +11,7 @@ import org.pages.ParentPage;
 public class Hook {
 
     WebDriverHelper webDriverHelper;
-    ApiHelper apiHelper = new ApiHelper();
+    ApiHelper apiHelper;
 
     public Hook(WebDriverHelper webDriverHelper) {
         this.webDriverHelper = webDriverHelper;
@@ -21,7 +21,7 @@ public class Hook {
     public void setUp(){
 //webDriverHelper = new WebDriverHelper();
         RestAssured.baseURI = ParentPage.baseUrl + "/api";
-        apiHelper = new ApiHelper();;
+        apiHelper = new ApiHelper();
  }
 
     @After(order = 15)
@@ -31,7 +31,7 @@ public class Hook {
 
     @Before(value = "@deletePostsTillPresentForDefaultUser", order = 50)
     public void deletePostsDefaultUserTillPresent(){
-        apiHelper.deleteAllPostsTillPresent(TestData.VALID_LOGIN_API, TestData.VALID_PASSWORD_API);
+        apiHelper.deleteAllPostsTillPresent(TestData.VALID_LOGIN_API, apiHelper.getToken());
     }
 
 }
