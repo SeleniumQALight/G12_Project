@@ -24,6 +24,9 @@ public class MyProfilePage extends ParentPage {
     @FindBy(xpath = "//*[text()='Post successfully deleted.']")
     private WebElement succsesMassageDelete;
 
+    @FindBy(xpath = ".//a[@class='list-group-item list-group-item-action']")
+    private List<WebElement> postsList;
+
     private String postWithTitleLocator = "//*[text()='%s']";
 
     public MyProfilePage checkIsRedirectedToMyProfilePage() {
@@ -38,7 +41,7 @@ public class MyProfilePage extends ParentPage {
 
     public MyProfilePage checkPostWithTitleIsPresent(String postTitle, int expectedAmountOfPosts) {
         Assert.assertEquals(
-                "Number of posts with title '" + postTitle + "' is not equal to expected",
+                "Amount of posts with title '" + postTitle + "'",
                 expectedAmountOfPosts,
                 getListOfPostsWithTitle(postTitle).size());
         logger.info("Post with title '" + postTitle + "' is present");
@@ -52,12 +55,12 @@ public class MyProfilePage extends ParentPage {
 
         while (!postsList.isEmpty() && (counter < MAX_POST_COUNT)) {
             clickOnElement(postsList.get(0),
-                    "Post with title '" + postTitle + "' from list of posts");
+                    "Post with title '" + postTitle + "'");
             new PostPage(webDriver)
                     .checkIsRedirectToPostPage()
                     .clickOnDeleteButton()
                     .checkISMassageSuccessDeletePresent();
-            logger.info("Post with title '" + postTitle + "' was deleted");
+            logger.info("Post with title '" + postTitle + " was deleted");
             postsList = getListOfPostsWithTitle(postTitle);
             counter++; //counter = counter + 1; рівнисильні записи
         }
@@ -69,6 +72,21 @@ public class MyProfilePage extends ParentPage {
 
     private MyProfilePage checkISMassageSuccessDeletePresent() {
         checkIsElementDisplayed(succsesMassageDelete);
+        return this;
+    }
+    public void clickOnPostTitle(String postTitleChange) {
+        List<WebElement> postsList = getListOfPostsWithTitle(postTitleChange);
+        if (postsList.isEmpty()) {
+            logger.error("Post with title '" + postTitleChange + "' is not present");
+            Assert.fail("Post with title '" + postTitleChange + "' is not present");
+        } else {
+            clickOnElement(postsList.get(0), "Post with title '" + postTitleChange + "'");
+            new PostPage(webDriver).checkIsRedirectToPostPage();
+        }
+    }
+    public MyProfilePage checkNumberOfPosts(String numberOfPosts) {
+        Assert.assertEquals("Number of posts ", numberOfPosts, postsList.size());
+
         return this;
     }
 }
