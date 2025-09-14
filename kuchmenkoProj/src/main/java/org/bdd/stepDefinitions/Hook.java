@@ -12,26 +12,23 @@ public class Hook {
     WebDriverHelper webDriverHelper;
     ApiHelper apiHelper;
 
-    public Hook(WebDriverHelper webDriverHelper){
+    public Hook(WebDriverHelper webDriverHelper) {
         this.webDriverHelper = webDriverHelper;
     }
 
     @Before(order = 10)
     public void setUp(){
-        RestAssured.baseURI = ParentPage.baseURL + "/api";
+        RestAssured.baseURI = ParentPage.baseURL + "/api/";
         apiHelper = new ApiHelper();
-
     }
 
-    @After(order = 10)
+    @After(order = 15)
     public void tearDown(){
         webDriverHelper.quiteDriver();
-
     }
 
     @Before(value = "@deletePostsTillPresentForDefaultUser", order = 50)
-    public void deletePostsForDefaultUserTillPresent() {
+    public void deletePostsForDefaultUserTillPresent(){
         apiHelper.deleteAllPostsTillPresent(TestData.VALID_LOGIN_API, apiHelper.getToken());
-
     }
 }
