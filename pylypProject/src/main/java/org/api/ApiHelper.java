@@ -83,9 +83,9 @@ public class ApiHelper {
                 .extract().response().body().as(PostsDto[].class);
 
         for (int i = 0; i < listOfPosts.length; i++) {
-            deletePostById(actualToken, listOfPosts[i].get_id());
+            deletePostById(actualToken, listOfPosts[i].getId());
             logger.info(
-                    String.format("Post with id %s and title '%s' was deleted", listOfPosts[i].get_id(), listOfPosts[i].getTitle())
+                    String.format("Post with id %s and title '%s' was deleted", listOfPosts[i].getId(), listOfPosts[i].getTitle())
             );
 
         }
