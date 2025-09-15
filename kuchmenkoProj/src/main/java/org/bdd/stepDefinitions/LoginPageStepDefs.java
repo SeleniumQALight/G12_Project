@@ -1,4 +1,4 @@
-package org.bdd.stepDefinition;
+package org.bdd.stepDefinitions;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -13,7 +13,7 @@ public class LoginPageStepDefs extends MainStepDefs{
     }
 
     @Given("I open Login Page")
-    public void iOpenLoginPage(){
+    public void iOpenLoginPage() {
         pageProvider.getLoginPage().openLoginPage();
     }
 
@@ -23,6 +23,7 @@ public class LoginPageStepDefs extends MainStepDefs{
         pageProvider.getLoginPage().enterTextIntoPassword(TestData.VALID_PASSWORD_UI);
         pageProvider.getLoginPage().clickOnButtonSignIn();
     }
+
     @When("I enter {string} into input Login in Login page")
     public void i_enter_into_input_login_in_login_page(String userName) {
         pageProvider.getLoginPage().enterTextIntoInputLogin(userName);
@@ -31,7 +32,6 @@ public class LoginPageStepDefs extends MainStepDefs{
     public void i_enter_into_input_pass_word_in_login_page(String password) {
         pageProvider.getLoginPage().enterTextIntoPassword(password);
     }
-
     @When("I click on button SignIn in Login page")
     public void i_click_on_button_sign_in_in_login_page() {
         pageProvider.getLoginPage().clickOnButtonSignIn();

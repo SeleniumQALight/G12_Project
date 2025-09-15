@@ -45,6 +45,9 @@ public class LoginPage extends ParentPage {
     @FindBy(xpath = listOfActualMessagesLocator)
     private List<WebElement> listOfActualMessages;
 
+    @FindBy(xpath = ".//div[@class='alert alert-danger text-center']")
+    private WebElement warningMessageInCenter;
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -169,4 +172,8 @@ public class LoginPage extends ParentPage {
         checkElementIsNotDisplayed(inputPassword);
     }
 
+    public LoginPage checkTextInAlertInCenter(String errorMessage) {
+        checkTextInElement(warningMessageInCenter,errorMessage);
+        return this;
+    }
 }

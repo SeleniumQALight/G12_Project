@@ -1,4 +1,4 @@
-package org.bdd.stepDefinition;
+package org.bdd.stepDefinitions;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -6,6 +6,7 @@ import io.restassured.RestAssured;
 import org.api.ApiHelper;
 import org.bdd.helpers.WebDriverHelper;
 import org.data.TestData;
+import org.pages.ParentPage;
 
 public class Hook {
     WebDriverHelper webDriverHelper;
@@ -17,8 +18,7 @@ public class Hook {
 
     @Before(order = 10)
     public void setUp(){
-//        webDriverHelper = new WebDriverHelper();
-        RestAssured.baseURI = ParentPage.baseUrl + "/api/";
+        RestAssured.baseURI = ParentPage.baseURL + "/api/";
         apiHelper = new ApiHelper();
     }
 
@@ -26,9 +26,9 @@ public class Hook {
     public void tearDown(){
         webDriverHelper.quiteDriver();
     }
-    @Before(value = "@deletePostsTillPresentForDefaultUser", order = 50)
-    public void deletePostsForDefaultUserTillPresent() {
-        apiHelper.deleteAllPostsTillPresent(TestData.VALID_LOGIN_API, TestData.VALID_PASSWORD_API);
 
+    @Before(value = "@deletePostsTillPresentForDefaultUser", order = 50)
+    public void deletePostsForDefaultUserTillPresent(){
+        apiHelper.deleteAllPostsTillPresent(TestData.VALID_LOGIN_API, apiHelper.getToken());
     }
 }

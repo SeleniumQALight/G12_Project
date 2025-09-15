@@ -42,6 +42,9 @@ public class LoginPage extends ParentPage {
     @FindBy(id = "password-register")
     private WebElement inputPasswordInRegistrationForm;
 
+    @FindBy(xpath = ".//div[@class='alert alert-danger text-center']")
+    private WebElement worningMessageInCenter;
+
 //    @FindBy(xpath = "//button[text()='Sign Out']")
 //    private WebElement buttonSignOut;
 
@@ -240,6 +243,11 @@ public class LoginPage extends ParentPage {
     public LoginPage enterTextWithActions(String text) {
         Actions actions = new Actions(webDriver);
         actions.sendKeys(text).perform();
+        return this;
+    }
+    public LoginPage checkTextInAlertInCenter(String errorMessage) {
+        checkTextInElement(worningMessageInCenter, errorMessage);
+
         return this;
     }
 }
