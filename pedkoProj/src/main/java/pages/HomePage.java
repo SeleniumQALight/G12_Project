@@ -18,4 +18,32 @@ public class HomePage extends ParentPage {
         checkIsElementDisplayed(buttonSignOut);
     }
 
+
+    public boolean isButtonSignOutDisplayed() {
+        return isElementDisplayedSafe(buttonSignOut);
+    }
+
+
+    @FindBy(xpath = "//a[text()='Create Post']")
+    private WebElement buttonCreatePost;
+
+    public boolean isButtonCreatePostDisplayed() {
+        return isElementDisplayedSafe(buttonCreatePost);
+    }
+
+
+    @FindBy(xpath = "//input[@placeholder='Username']")
+    private WebElement inputUserName;
+
+    @FindBy(xpath = "//input[@placeholder='Password']")
+    private WebElement inputPassword;
+
+    public boolean isInputUserNameHidden() {
+        return !isElementDisplayedSafe(inputUserName);
+    }
+
+    public boolean isInputPasswordHidden() {
+        return !isElementDisplayedSafe(inputPassword);
+    }
+
 }

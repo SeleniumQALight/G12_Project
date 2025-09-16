@@ -29,10 +29,7 @@ public class LoginPage extends ParentPage{
     }
 
     public void enterTextIntoInputLogin(String login) {
-       // WebElement inputUserName = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
-//        inputUserName.clear();
-//        inputUserName.sendKeys(login);
-//        logger.info(login +" was entered in input UserName");
+
         clearAndEnterTextToElement(inputUserName,login);
 
     }
@@ -43,11 +40,20 @@ public class LoginPage extends ParentPage{
 
     public void clickOnButtonSignIn() {
 
-        //   webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
-//            buttonSignIn.click();
-//            logger.info("Button Sign In was clicked");
         clickOnElement(buttonSignIn);
         }
+
+    public boolean isButtonSignInDisplayed() {
+        return isElementDisplayedSafe(buttonSignIn);
+    }
+
+
+    @FindBy(xpath = "//div[@class='alert alert-danger text-center']")
+    private WebElement invalidLoginMessage;
+
+    public boolean isInvalidLoginMessageDisplayed() {
+        return isElementDisplayedSafe(invalidLoginMessage);
+    }
     }
 
 
