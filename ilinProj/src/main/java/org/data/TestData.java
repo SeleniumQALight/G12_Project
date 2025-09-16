@@ -2,7 +2,10 @@ package org.data;
 
 import org.utils.ConfigProvider;
 
+import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class TestData {
     public final static String VALID_LOGIN_UI = System.getProperty("defaultLogin", ConfigProvider.configHiddenProperties.login());
@@ -14,4 +17,15 @@ public class TestData {
 
     public static final String VALID_LOGIN_API_BOOKS = "ArtemAqa";
     public static final String VALID_PASSWORD_API_BOOKS = "JafWqhEm@QtRW88";
+
+
+
+    public static final Map<String, BigDecimal> apiRates = new HashMap<>();
+    public static final Map<String, BigDecimal> uiRates  = new HashMap<>();
+
+    public static String key(String ccy, String side) {
+        return ccy.toUpperCase() + "_" + side.toLowerCase();
+    }
+
+
 }
