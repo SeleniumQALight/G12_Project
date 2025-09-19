@@ -1,0 +1,22 @@
+#1 Valid login
+
+login = qaauto
+pass = 123456qwerty
+
+Pre-condition:
+1.
+
+Steps:
+1. Open login page https://aqa-complexapp.onrender.com/
+Enter <login> in to input login on Login page
+Enter <pass> in to input password on Login page
+Click on button Login on Login page
+
+Expected result:
+1. I see SignOut button
+
+
+Post-condition
+1.
+
+#2
