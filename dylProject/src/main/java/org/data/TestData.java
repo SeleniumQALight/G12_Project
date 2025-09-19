@@ -2,6 +2,9 @@ package org.data;
 
 import org.utils.ConfigProvider;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class TestData {
 
     public static final String VALID_LOGIN_UI = System.getProperty("defaultLogin",
@@ -10,5 +13,9 @@ public class TestData {
     public static final String VALID_PASSWORD_UI = "123456qwerty";
     public static final String VALID_LOGIN_API = "hector".toLowerCase();
     public static final String VALID_PASSWORD_API = "hector123456";
+
+    public static Map<String, Double> ratesForCurrencyApi = new HashMap<>();
+
+    public static Map<String, Double> ratesForCurrencyUi = new HashMap<>();
 
 }
