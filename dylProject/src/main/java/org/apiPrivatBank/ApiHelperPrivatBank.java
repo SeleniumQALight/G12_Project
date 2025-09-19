@@ -9,6 +9,7 @@ import io.restassured.specification.ResponseSpecification;
 import org.apache.hc.core5.http.HttpStatus;
 import org.apache.log4j.Logger;
 import org.apiPrivatBank.dto.responseDto.ExchangeRatesIdFiveDTO;
+import org.junit.Assert;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,21 +50,16 @@ public class ApiHelperPrivatBank {
 
     public void getCurrencyExchangeRatesApi(String currency) {
         ExchangeRatesIdFiveDTO[] currenciesRates = getCurrenciesExchangeRatesByApi();
-        boolean currencyExists = false;
         for (ExchangeRatesIdFiveDTO rates : currenciesRates) {
             if (currency.equals(rates.getCcy())) {
                 ratesForCurrencyApi.put("buy", rates.getBuy());
                 ratesForCurrencyApi.put("sale", rates.getSale());
-                currencyExists = true;
-                break;
+                logger.info("Rates for " + currency + " by API: " + ratesForCurrencyApi);
+                return;
             }
         }
-        if (!currencyExists) {
-            ratesForCurrencyApi.put("buy", null);
-            ratesForCurrencyApi.put("sale", null);
-            logger.warn(currency + " currency not found in API response");
-        }
-
-        logger.info("Rates for " + currency + " by API: " + ratesForCurrencyApi);
+        Assert.fail(currency + " currency not found in API response");
     }
+
+
 }
