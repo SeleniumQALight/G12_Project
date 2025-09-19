@@ -14,4 +14,8 @@ public class TestData {
 
     public static final String VALID_LOGIN_API_BOOKS = "ArtemAqa";
     public static final String VALID_PASSWORD_API_BOOKS = "JafWqhEm@QtRW88";
+
+    public final static String ERROR_USERNAME = "Username must be at least 3 characters.";
+    public final static String ERROR_EMAIL = "You must provide a valid email address.";
+    public final static String ERROR_PASSWORD = "Password must be at least 12 characters.";
 }
