@@ -1,5 +1,6 @@
 package pages;
 
+import data.TestData;
 import org.apache.log4j.Logger;
 
 import org.openqa.selenium.WebDriver;
@@ -49,6 +50,14 @@ public class LoginPage extends ParentPage{
 //            logger.info("Button Sign In was clicked");
         clickOnElement(buttonSignIn);
         }
+
+    public HomePage openLoginPageAndFillLoginFormWithValidCred() {
+        openLoginPage();
+        this.enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
+        this.enterTextIntoPassword(TestData.VALID_PASSWORD_UI);
+        clickOnButtonSignIn();
+        return new HomePage(webDriver);
     }
+}
 
 
