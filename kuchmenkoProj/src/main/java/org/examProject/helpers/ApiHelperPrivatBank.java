@@ -48,20 +48,15 @@ public class ApiHelperPrivatBank {
 
     public void retrieveCurrencyRates(String targetCurrency) {
         ExchangeRatesIdFiveDTO[] rateList = fetchExchangeRates();
-        boolean found = false;
         for (ExchangeRatesIdFiveDTO rate : rateList) {
             if (targetCurrency.equals(rate.getCcy())) {
                 ratesForCurrencyApi.put("buy", rate.getBuy());
                 ratesForCurrencyApi.put("sale", rate.getSale());
-                found = true;
-                break;
+                LOGGER.info("API exchange rates for " + targetCurrency + ": " + ratesForCurrencyApi);
+                return;
             }
         }
-        if (!found) {
-            ratesForCurrencyApi.put("buy", null);
-            ratesForCurrencyApi.put("sale", null);
-            LOGGER.warn("Currency '" + targetCurrency + "' not detected in API results");
-        }
-        LOGGER.info("API exchange rates for " + targetCurrency + ": " + ratesForCurrencyApi);
+        LOGGER.error("Currency '" + targetCurrency + "' not detected in API results");
+        throw new AssertionError("Currency '" + targetCurrency + "' not found in API response");
     }
 }

@@ -3,6 +3,8 @@ package org.examProject.stepDefinitions;
 import io.cucumber.java.en.When;
 import org.apache.log4j.Logger;
 import org.bdd.helpers.WebDriverHelper;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.pages.CommonActionsWithElements;
@@ -17,19 +19,14 @@ public class PbUiStepdefs extends CommonActionsWithElements {
     @FindBy(xpath = "//li[@class='desctop exchangeRate']//button[@class='btn exchange-rate']")
     WebElement exchangeRatesButton;
 
-    @FindBy(xpath = "//td[@id='EUR_buy']")
-    WebElement eurBuyCell;
-    @FindBy(xpath = "//td[@id='EUR_sell']")
-    WebElement eurSellCell;
-
-    @FindBy(xpath = "//td[@id='USD_buy']")
-    WebElement usdBuyCell;
-    @FindBy(xpath = "//td[@id='USD_sell']")
-    WebElement usdSellCell;
-
     public PbUiStepdefs(WebDriverHelper webDriverHelper) {
         super(webDriverHelper.getWebDriver());
         this.webDriverHelper = webDriverHelper;
+    }
+
+    private WebElement getRateCell(WebDriver driver, String currency, String type) {
+        String xpath = String.format("//td[@id='%s_%s']", currency, type);
+        return driver.findElement(By.xpath(xpath));
     }
 
     @When("I fetch exchange rate for {} from the UI")
@@ -37,24 +34,12 @@ public class PbUiStepdefs extends CommonActionsWithElements {
         webDriver.get(BANK_HOME_URL);
         clickOnElement(exchangeRatesButton);
 
-        double eurBuyRate = Double.parseDouble(eurBuyCell.getText().trim());
-        double eurSellRate = Double.parseDouble(eurSellCell.getText().trim());
-        double usdBuyRate = Double.parseDouble(usdBuyCell.getText().trim());
-        double usdSellRate = Double.parseDouble(usdSellCell.getText().trim());
+        double buyRate = Double.parseDouble(getRateCell(webDriver, currencyCode, "buy").getText().trim());
+        double sellRate = Double.parseDouble(getRateCell(webDriver, currencyCode, "sell").getText().trim());
 
-        switch (currencyCode) {
-            case "EUR":
-                ratesForCurrencyUi.put("buy", eurBuyRate);
-                ratesForCurrencyUi.put("sale", eurSellRate);
-                break;
-            case "USD":
-                ratesForCurrencyUi.put("buy", usdBuyRate);
-                ratesForCurrencyUi.put("sale", usdSellRate);
-                break;
-            default:
-                ratesForCurrencyUi.put("buy", null);
-                ratesForCurrencyUi.put("sale", null);
-        }
+        ratesForCurrencyUi.put("buy", buyRate);
+        ratesForCurrencyUi.put("sale", sellRate);
+
         LOGGER.info("UI exchange rates for " + currencyCode + ": " + ratesForCurrencyUi);
     }
 }
