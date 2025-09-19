@@ -11,11 +11,11 @@ public class MyProfileStepdefs extends MainStepDefs {
 
     @Then("I was redirected to MyProfile page")
     public void iWasRedirectedToMyProfilePage() {
-        pageProvider.getMyProfilePage().checkIsRedirectToMyProfilePage();
+        pageProvider.getMyProfilePage().checkIsRedirectedToMyProfilePage();
     }
 
     @And("I see {} posts in Posts list on MyProfile Page")
-    public void iSeePostsInPostsListOnMyProfilePage(String numberOfPosts) {
+    public void iSeePostsInPostsListOnMyProfilePage(int numberOfPosts) {
         pageProvider.getMyProfilePage().checkNumberOfPosts(numberOfPosts);
     }
 }
