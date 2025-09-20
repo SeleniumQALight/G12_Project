@@ -3,7 +3,7 @@ package org.pages;
 import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
-import org.data.TestData;
+import data.TestData;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +15,7 @@ import org.utils.Utils_Custom;
 
 import java.util.List;
 
-import static org.data.RegistrationValidationMessages.SEMICOLON;
+import static data.RegistrationValidationMessages.SEMICOLON;
 
 public class LoginPage extends ParentPage{
     private Logger logger = Logger.getLogger(getClass());

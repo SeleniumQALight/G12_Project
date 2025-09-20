@@ -2,7 +2,7 @@ package org.pages;
 
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
-import org.data.TestData;
+import data.TestData;
 import org.junit.Assert;
 
 import org.openqa.selenium.By;
@@ -13,8 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.utils.Utils_Custom;
 
 import java.util.List;
-import static org.data.RegistrationValidationMessages.SEMICOLON;
-import java.util.List;
+import static data.RegistrationValidationMessages.SEMICOLON;
 
 public class LoginPage extends ParentPage {
     private Logger logger = Logger.getLogger(getClass());

@@ -3,7 +3,7 @@ package org.pages;
 
 import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
-import org.data.TestData;
+import data.TestData;
 import org.openqa.selenium.WebDriver;
 import org.pages.elements.HeaderForLoggedUserElement;
 

@@ -2,7 +2,6 @@ package org.registrationTests;
 
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
-import org.apache.log4j.Logger;
 import org.baseTest.BaseTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,11 +9,8 @@ import org.utils.ConfigProvider;
 import org.utils.ExcelSpreadsheetData;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Collection;
-
-import static org.data.RegistrationValidationMessages.*;
 
 @RunWith(JUnitParamsRunner.class)
 

@@ -7,7 +7,7 @@ import org.api.dto.requestDto.CreateNewPostDto;
 import org.api.dto.respoonseDto.AuthorDto;
 import org.api.dto.respoonseDto.PostsDto;
 import org.assertj.core.api.SoftAssertions;
-import org.data.TestData;
+import data.TestData;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

@@ -10,7 +10,7 @@ import io.restassured.specification.ResponseSpecification;
 import org.apache.http.HttpStatus;
 import org.api.dto.requestDto.CreateNewPostDto;
 import org.api.dto.respoonseDto.PostsDto;
-import org.data.TestData;
+import data.TestData;
 import org.json.JSONObject;
 
 import java.util.HashMap;

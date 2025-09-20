@@ -12,7 +12,7 @@ import org.apache.http.HttpStatus;
 
 import org.apache.log4j.Logger;
 import org.api.dto.responseDto.PostsDto;
-import org.data.TestData;
+import data.TestData;
 import org.json.JSONObject;
 
 import java.util.HashMap;

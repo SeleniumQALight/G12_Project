@@ -13,7 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.*;
-import static org.data.TestData.VALID_LOGIN_API;
+import static data.TestData.VALID_LOGIN_API;
 
 public class CreatePostByApi extends BaseApiTest {
 

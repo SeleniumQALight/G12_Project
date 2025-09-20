@@ -8,8 +8,6 @@ import org.utils.ExcelDriver;
 import java.io.IOException;
 import java.util.Map;
 
-import static org.data.TestData.*;
-
 public class LoginTestWithPageObjectWithExcel extends BaseTest {
     @Test
     public void validLogin() throws IOException {

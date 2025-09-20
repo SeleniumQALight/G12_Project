@@ -8,10 +8,9 @@ import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.apache.http.HttpStatus;
-import org.api.EndPoints;
 import org.api.dto.requestDto.CreateNewPostDto;
 import org.api.dto.responseDto.PostsDto;
-import org.data.TestData;
+import data.TestData;
 import org.json.JSONObject;
 
 import java.util.HashMap;

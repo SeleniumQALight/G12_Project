@@ -6,8 +6,8 @@ import org.categories.SmokeTestsFilter;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
-import static org.data.TestData.VALID_LOGIN_UI;
-import static org.data.TestData.VALID_PASSWORD_UI;
+import static data.TestData.VALID_LOGIN_UI;
+import static data.TestData.VALID_PASSWORD_UI;
 
 
 @Epic("Allure examples")

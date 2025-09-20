@@ -3,7 +3,7 @@ package org.bdd.stepDefinition;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import org.api.ApiHelper;
-import org.data.TestData;
+import data.TestData;
 
 public class ApiStepdefs {
     static final String DEFAULT = "default";

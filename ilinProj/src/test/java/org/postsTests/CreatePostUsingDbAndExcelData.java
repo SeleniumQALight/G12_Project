@@ -5,7 +5,6 @@ import junitparams.Parameters;
 import org.apache.log4j.Logger;
 import org.baseTest.BaseTest;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.utils.*;
@@ -14,7 +13,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Collection;
 
-import static org.data.TestData.VALID_NEW_LOGIN_UI;
+import static data.TestData.VALID_NEW_LOGIN_UI;
 
 import java.sql.SQLException;
 

@@ -5,7 +5,7 @@ import io.cucumber.java.Before;
 import io.restassured.RestAssured;
 import org.api.ApiHelper;
 import org.bdd.helpers.WebDriverHelper;
-import org.data.TestData;
+import data.TestData;
 import org.pages.ParentPage;
 
 public class Hook {

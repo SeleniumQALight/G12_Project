@@ -3,7 +3,7 @@ package org.bdd.stepDefinitions;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.bdd.helpers.WebDriverHelper;
-import org.data.TestData;
+import data.TestData;
 
 public class HomePageStefDefs extends MainStepDefs {
     public HomePageStefDefs(WebDriverHelper webDriverHelper) {

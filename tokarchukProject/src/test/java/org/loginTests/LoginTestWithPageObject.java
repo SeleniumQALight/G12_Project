@@ -6,8 +6,6 @@ import org.categories.SmokeTestsFillter;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
-import static org.data.TestData.*;
-
 @Epic("Allure examples")
 @Feature("Junit 4 support")
 

@@ -1,10 +1,7 @@
 package org.loginTests;
 
 import org.baseTest.BaseTest;
-import org.data.TestData;
 import org.junit.Test;
-
-import static org.data.TestData.*;
 
 public class LoginTestWithRefresh extends BaseTest {
      @Test

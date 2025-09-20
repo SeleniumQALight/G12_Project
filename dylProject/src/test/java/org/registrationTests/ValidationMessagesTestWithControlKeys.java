@@ -4,8 +4,6 @@ import org.baseTest.BaseTest;
 import org.junit.Test;
 import org.openqa.selenium.Keys;
 
-import static org.data.RegistrationValidationMessages.*;
-
 public class ValidationMessagesTestWithControlKeys extends BaseTest {
     @Test
     public void ValidationMessagesWithControlKeys() {

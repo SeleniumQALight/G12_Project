@@ -10,16 +10,10 @@ import io.restassured.specification.*;
 import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
 import org.api.dto.responseDto.PostsDto;
-import org.checkerframework.checker.units.qual.C;
-import org.data.TestData;
-import org.hamcrest.Matcher;
+import data.TestData;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
 
 import static io.restassured.RestAssured.given;
 

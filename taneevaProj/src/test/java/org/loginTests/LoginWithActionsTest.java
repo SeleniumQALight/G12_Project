@@ -4,8 +4,8 @@ import org.baseTest.BaseTest;
 import org.junit.Test;
 import org.openqa.selenium.Keys;
 
-import static org.data.TestData.VALID_LOGIN_UI;
-import static org.data.TestData.VALID_PASSWORD_UI;
+import static data.TestData.VALID_LOGIN_UI;
+import static data.TestData.VALID_PASSWORD_UI;
 
 public class LoginWithActionsTest extends BaseTest {
 

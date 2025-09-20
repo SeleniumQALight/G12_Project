@@ -2,7 +2,7 @@ package org.loginTests;
 
 import io.qameta.allure.*;
 import org.categories.SmokeTestFilters;
-import org.data.TestData;
+import data.TestData;
 import org.junit.Test;
 import org.baseTest.BaseTest;
 import org.junit.experimental.categories.Category;

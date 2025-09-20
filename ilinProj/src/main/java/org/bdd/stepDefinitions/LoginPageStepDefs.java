@@ -4,7 +4,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.bdd.helpers.WebDriverHelper;
-import org.data.TestData;
+import data.TestData;
 
 public class LoginPageStepDefs extends MainStepDefs{
     public LoginPageStepDefs(WebDriverHelper webDriverHelper) {

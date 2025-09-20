@@ -1,7 +1,7 @@
 package org.loginTests;
 
 import org.baseTest.BaseTest;
-import org.data.TestData;
+import data.TestData;
 import org.junit.Test;
 import org.openqa.selenium.Keys;
 

@@ -8,7 +8,7 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
-import org.data.TestData;
+import data.TestData;
 import org.json.JSONObject;
 import static org.hamcrest.Matchers.anyOf;
 

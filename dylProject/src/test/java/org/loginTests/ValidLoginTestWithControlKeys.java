@@ -1,11 +1,11 @@
 package org.loginTests;
 
 import org.baseTest.BaseTest;
-import org.data.TestData;
+import data.TestData;
 import org.junit.Test;
 import org.openqa.selenium.Keys;
 
-import static org.data.TestData.VALID_LOGIN_UI;
+import static data.TestData.VALID_LOGIN_UI;
 
 public class ValidLoginTestWithControlKeys extends BaseTest {
     @Test

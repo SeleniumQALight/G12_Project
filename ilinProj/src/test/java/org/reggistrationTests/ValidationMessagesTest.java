@@ -6,8 +6,6 @@ import org.baseTest.BaseTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.data.RegistrationValidationMessages.*;
-
 
 @RunWith(JUnitParamsRunner.class)
 public class ValidationMessagesTest extends BaseTest {

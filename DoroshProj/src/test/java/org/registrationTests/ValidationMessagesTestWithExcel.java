@@ -9,11 +9,8 @@ import org.utils.ConfigProvider;
 import org.utils.ExcelSpreadsheetData;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Collection;
-
-import static org.data.RegistrationValidationMessages.*;
 
 @RunWith(JUnitParamsRunner.class)
 
