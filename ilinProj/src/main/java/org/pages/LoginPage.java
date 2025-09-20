@@ -12,7 +12,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.utils.Utils_Custom;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static data.RegistrationValidationMessages.SEMICOLON;
 
@@ -156,27 +158,43 @@ public class LoginPage extends ParentPage {
 
     @Step
     public LoginPage checkErrorMessages(String expectedErrorMessageAsString) {
-        // error;error2;error3 -> [error1, error2, error3]
-        String[] expectedErrorMessages = expectedErrorMessageAsString.split(SEMICOLON);
+        String[] expectedErrorMessages = expectedErrorMessageAsString.split("\\s*;\\s*");
 
-        webDriverWait10.until(ExpectedConditions.numberOfElementsToBe(By.xpath(listOfActualMessagesLocator),expectedErrorMessages.length));
+        List<String> expected = Arrays.stream(expectedErrorMessages)
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .collect(Collectors.toList());
 
-        Utils_Custom.waitABit(1); // чекаємо 1 секунду, щоб месседжі встигли з'явитися
 
-        Assert.assertEquals("Number of messages ", expectedErrorMessages.length, listOfActualMessages.size());
+        webDriverWait10.until(ExpectedConditions.numberOfElementsToBe(
+                By.xpath(listOfActualMessagesLocator),
+                expected.size()
+        ));
 
-        SoftAssertions softAssertions = new SoftAssertions();
+        Utils_Custom.waitABit(1);
 
-        for (int i = 0; i < expectedErrorMessages.length; i++) {
-            softAssertions
-                    .assertThat(listOfActualMessages.get(i).getText())
-                    .as("Message number " + i)
-                    .isIn(expectedErrorMessages);
+
+        List<String> actual = listOfActualMessages.stream()
+                .map(WebElement::getText)
+                .map(String::trim)                 // <-- Критично!
+                .filter(s -> !s.isEmpty())
+                .collect(Collectors.toList());
+
+        Assert.assertEquals("Number of messages ", expected.size(), actual.size());
+
+        SoftAssertions soft = new SoftAssertions();
+        for (int i = 0; i < expected.size(); i++) {
+            String exp = expected.get(i);
+            soft.assertThat(actual)
+                    .as("Message number " + (i + 1))
+                    .contains(exp);                    // порядок не обов'язковий
 
         }
-        softAssertions.assertAll(); // перевіряємо всі месседжі, якщо хоча б один не пройшов, то тест валиться
+        soft.assertAll();
+
         return this;
     }
+
 
     @Step
     public LoginPage checkLoginPageElementsIsVisible(){

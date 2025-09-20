@@ -9,11 +9,14 @@ import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.*;
 import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
+import org.api.dto.requestDto.CreateNewPostDto;
 import org.api.dto.responseDto.PostsDto;
 import data.TestData;
+import org.data.TestData;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
@@ -32,7 +35,7 @@ public class ApiHelper {
             .expectStatusCode(HttpStatus.SC_OK)
             .build();
 
-    public ValidatableResponse getAllPostsByUserRequest(String userName){
+    public ValidatableResponse getAllPostsByUserRequest(String userName) {
         return getAllPostsByUserRequest(userName, HttpStatus.SC_OK);
     }
 
@@ -50,15 +53,16 @@ public class ApiHelper {
     }
 
     /**
-   * Method works with default user for API
-    * @return
+     * Method works with default user for API
+     *
+     * @return
      */
 
     public String getToken() {
         return getToken(TestData.VALID_LOGIN_API, TestData.VALID_PASSWORD_API);
     }
 
-    public String getToken(String userName, String password){
+    public String getToken(String userName, String password) {
         JSONObject requestBody = new JSONObject();
         requestBody.put("username", userName);
         requestBody.put("password", password);
@@ -70,7 +74,7 @@ public class ApiHelper {
                 .post(EndPoints.LOGIN)
                 .then()
                 .spec(responseSpecification)
-                .extract().response().body().asString().replace("\"","");
+                .extract().response().body().asString().replace("\"", "");
 
     }
 
@@ -79,10 +83,10 @@ public class ApiHelper {
         PostsDto[] listOfPosts = this.getAllPostsByUserRequest(userName.toLowerCase())
                 .extract().response().body().as(PostsDto[].class);
 
-        for (int i = 0; i < listOfPosts.length; i++){
-            deletePostById(actualToken, listOfPosts[i].get_id());
+        for (int i = 0; i < listOfPosts.length; i++) {
+            deletePostById(actualToken, listOfPosts[i].getId());
             logger.info(
-                    String.format("Post with id %s and title '%s' was deleted", listOfPosts[i].get_id(), listOfPosts[i].getTitle())
+                    String.format("Post with id %s and title '%s' was deleted", listOfPosts[i].getId(), listOfPosts[i].getTitle())
             );
 
         }
@@ -102,6 +106,26 @@ public class ApiHelper {
     }
 
 
+    public void createPosts(Integer numberOfPosts, String token, Map<String, String> postsData) {
+        for (int i = 0; i < numberOfPosts; i++) {
+            CreateNewPostDto newPostDtoBody =
+                    CreateNewPostDto.builder()
+                            .title(postsData.get("title") + " " + i)
+                            .body(postsData.get("body"))
+                            .select1(postsData.get("select"))
+                            .uniquePost(postsData.getOrDefault("uniquePost", "no"))
+                            .token(token)
+                            .build();
+
+            given()
+                    .spec(requestSpecification)
+                    .body(newPostDtoBody)
+                    .when()
+                    .post(EndPoints.CREATE_POST)
+                    .then()
+                    .spec(responseSpecification);
+        }
+    }
 }
 
 

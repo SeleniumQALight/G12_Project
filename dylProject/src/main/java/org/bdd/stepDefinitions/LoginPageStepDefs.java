@@ -1,5 +1,6 @@
 package org.bdd.stepDefinitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -40,5 +41,29 @@ pageProvider.getLoginPage().clickOnButtonSignIn();
     @Then("I see alert message with text {string}")
     public void i_see_alert_message_with_text(String errorMessage) {
    pageProvider.getLoginPage().checkTextInAlertInCenter(errorMessage);
+    }
+
+    @When("I enter {string} into input registrationUsername in Login page")
+    public void iEnterIntoInputRegistrationUsernameInLoginPage(String userName) {
+        pageProvider.getLoginPage()
+                .enterTextIntoRegistrationUserNameField(userName);
+    }
+
+    @And("I enter {string} into input registrationEmail in Login page")
+    public void iEnterIntoInputRegistrationEmailInLoginPage(String email) {
+        pageProvider.getLoginPage()
+                .enterTextIntoRegistrationEmailField(email);
+    }
+
+    @And("I enter {string} into input registrationPassword in Login page")
+    public void iEnterIntoInputRegistrationPasswordInLoginPage(String password) {
+        pageProvider.getLoginPage()
+                .enterTextIntoRegistrationPasswordField(password);
+    }
+
+    @Then("I check {string}")
+    public void iCheck(String validationMessages) {
+        pageProvider.getLoginPage()
+                .checkErrorsMessages(validationMessages);
     }
 }
