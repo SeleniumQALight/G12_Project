@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
+import static org.junit.Assert.assertEquals;
+
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
     private Logger logger = Logger.getLogger(getClass());
@@ -64,7 +66,7 @@ public class CommonActionsWithElements {
 
         }
     }
-          /* Method checkElementIsDisplayed
+    /* Method checkElementIsDisplayed
      * Asserts that the specified WebElement is displayed on the page.
      * @param webElement - the WebElement to check
      */
@@ -73,11 +75,23 @@ public class CommonActionsWithElements {
         logger.info("Element is displayed as expected");
     }
 
+    /*Method checkTextInElement
+     * Checks if the specified text is present in the WebElement.
+     * @param webElement - the WebElement to check
+     * @param expectedText - the text expected to be found in the element
+     */
+    protected void checkTextInElement(WebElement webElement, String expectedText){
+
+        String actualText = webElement.getText();
+        assertEquals("Text in element does not match expected text", expectedText, actualText);
+        logger.info("Text in element matches expected text: " + expectedText);
+    }
+
 
 
     private void printErrorAndStopTest(Exception e){
-        logger.error("Error while working with element "  + e);
-        Assert.fail("Error while working with element "  + e);
+        logger.error("Error while working with element "  + e.getMessage());
+        Assert.fail("Error while working with element "  + e.getMessage());
     }
 
 }
