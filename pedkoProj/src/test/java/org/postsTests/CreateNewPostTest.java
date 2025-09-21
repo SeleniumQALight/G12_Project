@@ -31,6 +31,6 @@ public class CreateNewPostTest extends BaseTest {
 
     @After
     public void deletePost(){
-        
+
     }
 }
