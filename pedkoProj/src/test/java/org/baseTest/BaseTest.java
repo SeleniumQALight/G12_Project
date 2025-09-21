@@ -30,5 +30,4 @@ public class BaseTest {
         webDriver.quit();
         logger.info("Browser was closed");
     }
-
 }
