@@ -10,4 +10,3 @@ Feature: PrivateBank Exchange Rate Verification
       | currency |
       | USD      |
       | EUR      |
-      | PLN      |
