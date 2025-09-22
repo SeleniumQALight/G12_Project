@@ -10,10 +10,13 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.pages.elements.HeaderForLoggedUserElement;
 import org.utils.ConfigProvider;
 
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
@@ -39,8 +42,8 @@ public class CommonActionsWithElements {
             webElement.sendKeys(text);
             logger.info(text + " was entered in element "  + getElementName(webElement));
         } catch (Exception e) {
-            logger.error("Error while working with element" );
-            Assert.fail("Error while working with element" );
+            logger.error("Error while working with element");
+            Assert.fail("Error while working with element");
         }
     }
 
@@ -101,6 +104,10 @@ public class CommonActionsWithElements {
         Assert.assertTrue("Element is not displayed", isElementDisplayed(webElement));
     }
 
+    protected void checkIsElementIsNotDisplayed(WebElement webElement) {
+        Assert.assertFalse("Element is displayed, but it should not be", isElementDisplayed(webElement));
+    }
+
 
     /* Method checkTextInElement
      * Checks if the text of the specified WebElement matches the expected text.
@@ -159,13 +166,38 @@ public class CommonActionsWithElements {
     }
 
     // open new tab
-    protected void openNewTab() {
+    public HomePage openNewTab() {
         try{
             ((JavascriptExecutor) webDriver).executeScript("window.open();");
             logger.info("New tab was opened");
         } catch (Exception e) {
             printErrorAndStopTest(e);
         }
+        return new HomePage(webDriver);
+    }
+
+    public HomePage switchBetweenTwoTabs() {
+        List<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+        String currentTab = webDriver.getWindowHandle();
+        if (currentTab.equals(tabs.get(0))) {
+            webDriver.switchTo().window(tabs.get(1));
+            logger.info("Switched to new tab");
+        } else {
+            webDriver.switchTo().window(tabs.get(0));
+            logger.info("Switched to main tab");
+        }
+        return new HomePage(webDriver);
+    }
+
+    public HomePage switchToMainTabAndCloseNew() {
+        List<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+        webDriver.switchTo().window(tabs.get(1));
+        webDriver.close();
+        webDriver.switchTo().window(tabs.get(0));
+        logger.info("Switched to main tab and closed new tab");
+        return new HomePage(webDriver);
+
+
     }
 
 
@@ -184,4 +216,73 @@ public class CommonActionsWithElements {
     }
 
 
+    /* * Method selectCheckboxIfNotSelected
+     * Selects the checkbox if it is not already selected.
+     * @param webElement - the WebElement representing the checkbox
+     */
+
+    protected void selectCheckboxForUniquePost(WebElement webElement){
+        try{
+            boolean state = webElement.isSelected();
+            if (state) {
+                logger.info("Checkbox is selected");
+            } else {
+                webElement.click();
+                logger.info("Checkbox was selected");
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    /* Method unselectCheckboxIfSelected
+     * Unselects the checkbox if it is currently selected.
+     * @param webElement - the WebElement representing the checkbox
+     */
+    protected void unselectCheckboxForUniquePost(WebElement webElement){
+        try {
+            boolean state = webElement.isSelected();
+            if (!state) {
+                logger.info("Checkbox is already unselected");
+            } else {
+                webElement.click();
+                logger.info("Checkbox was unselected");
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+
+    //Translated with DeepL.com (free version)
+    /*     * Method setCheckboxState
+     * Sets the state of the checkbox based on the provided state string.
+     * @param webElement - the WebElement representing the checkbox
+     * @param state - the desired state of the checkbox ("check" or "uncheck")
+     */
+    protected void setCheckboxState(WebElement webElement, String state) {
+        try {
+            if (state.equalsIgnoreCase("check")) {
+                selectCheckboxForUniquePost(webElement);
+            } else if (state.equalsIgnoreCase("uncheck")) {
+                unselectCheckboxForUniquePost(webElement);
+            } else {
+                logger.error("Invalid state provided: " + state);
+                Assert.fail("Invalid state provided: " + state);
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+
+    public HeaderForLoggedUserElement refreshPage() {
+        try {
+            webDriver.navigate().refresh();
+            logger.info("Page was refreshed");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+        return new HeaderForLoggedUserElement(webDriver);
+    }
 }

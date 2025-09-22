@@ -1,5 +1,6 @@
 package org.pages;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
@@ -37,9 +38,15 @@ public class LoginPage extends ParentPage {
     @FindBy(id = "password-register")
     private WebElement inputPasswordRegistrationForm;
 
+    @FindBy(xpath = "//div[@class='alert alert-danger text-center']")
+    private WebElement invalidMessage;
+
     final static String listOfActualMessagesLocator = "//*[@class='alert alert-danger small liveValidateMessage liveValidateMessage--visible']";
     @FindBy(xpath = listOfActualMessagesLocator)
     private List<WebElement> listOfActualMessages;
+
+    @FindBy(xpath = ".//div[@class='alert alert-danger text-center']")
+    private WebElement warningMessageInCenter;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -50,12 +57,14 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
+    @Step
     public LoginPage openLoginPage() {
         webDriver.get(baseURL);
         logger.info("Login page was opened with url " + baseURL);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoInputLogin(String login) {
 //        WebElement inputUserName = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
 //        inputUserName.clear();
@@ -65,6 +74,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoPassword(String password) {
 //        WebElement inputPassword = webDriver.findElement(By.xpath("//input[@placeholder='Password']"));
 //        inputPassword.clear();
@@ -74,6 +84,7 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    @Step
     public void clickOnButtonSignIn() {
 //        webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
 //        buttonSignIn.click();
@@ -81,6 +92,7 @@ public class LoginPage extends ParentPage {
         clickOnElement(buttonSignIn);
     }
 
+    @Step
     public HomePage openLoginPageAndFillLoginFormWithValidCred() {
         openLoginPage();
         this.enterTextIntoInputLogin(VALID_LOGIN_UI);
@@ -89,21 +101,25 @@ public class LoginPage extends ParentPage {
         return new HomePage(webDriver);
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationUserNameField(String userName) {
         clearAndEnterTextToElement(inputUserNameRegistrationForm, userName);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationEmailField(String email) {
         clearAndEnterTextToElement(inputEmailRegistrationForm, email);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationPasswordField(String password) {
         clearAndEnterTextToElement(inputPasswordRegistrationForm, password);
         return this;
     }
 
+    @Step
     public LoginPage checkErrorMessages(String expectedErrorMessagesAsString) {
         // error1;error2;error3 -> [error1, error2, error3]
         String[] expectedErrorMessages = expectedErrorMessagesAsString.split(SEMICOLON);
@@ -124,6 +140,40 @@ public class LoginPage extends ParentPage {
                    .isIn(expectedErrorMessages);
         }
         softAssertions.assertAll();
+        return this;
+    }
+
+    public LoginPage loginFormInvalidCredentials() {
+        openLoginPage();
+        this.enterTextIntoInputLogin("invalidLogin");
+        this.enterTextIntoPassword("invalidPassword");
+        clickOnButtonSignIn();
+        return new LoginPage(webDriver);
+    }
+
+    public LoginPage verifySignInButtonIsVisible() {
+        checkIsElementDisplayed(buttonSignIn);
+        return this;
+    }
+
+
+    public LoginPage verifyInvalidMessageIsVisible() {
+        checkIsElementDisplayed(invalidMessage);
+        return this;
+    }
+
+    public LoginPage verifyTextOfInvalidMessage() {
+        checkTextInElement(invalidMessage,"Invalid username/password.");
+        return this;
+    }
+
+    public void verifyInputsAreNotVisible() {
+        checkElementIsNotDisplayed(inputUserName);
+        checkElementIsNotDisplayed(inputPassword);
+    }
+
+    public LoginPage checkTextInAlertInCenter(String errorMessage) {
+        checkTextInElement(warningMessageInCenter,errorMessage);
         return this;
     }
 }

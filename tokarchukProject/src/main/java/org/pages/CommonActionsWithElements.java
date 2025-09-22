@@ -1,19 +1,32 @@
 package org.pages;
 
 import org.apache.log4j.Logger;
+import org.enums.CheckboxState;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.utils.ConfigProvider;
+
+import java.time.Duration;
+import java.util.ArrayList;
 
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
     private Logger logger = Logger.getLogger(getClass());
+    protected WebDriverWait webDriverWait10, webDriverWait15;
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this); //ініціалізує елементи описані в FindBy
+        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(ConfigProvider.configProperties.TIME_FOR_EXPLICIT_WAIT_LOW()));
+        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(ConfigProvider.configProperties.TIME_FOR_DEFAULT_WAIT()));
     }
     /* Method clearAndEnterTextToElement
      * Cleans the text field and enters the specified text into the element.
@@ -25,7 +38,7 @@ public class CommonActionsWithElements {
         try {
             webElement.clear();
             webElement.sendKeys(text);
-            logger.info(text + " was entered into the element: ");
+            logger.info(text + " was entered into the element: " + getElementName(webElement));
         } catch (Exception e) {
             printErrorAndStopTes(e);
         }
@@ -37,8 +50,25 @@ public class CommonActionsWithElements {
      */
     protected void clickOnElement(WebElement webElement) {
         try {
+            //  webDriverWait10.until(driver -> webElement.isDisplayed() && webElement.isEnabled());
+            webDriverWait10
+                    .withMessage("Element is not clickable: " + webElement)
+                    .until(ExpectedConditions.elementToBeClickable(webElement));
+            String elementName = getElementName(webElement);
             webElement.click();
-            logger.info("Element was clicked");
+            logger.info(elementName + " element was clicked");
+        } catch (Exception e) {
+            printErrorAndStopTes(e);
+        }
+    }
+
+    protected void clickOnElement(WebElement webElement, String elementName) {
+        try {
+            webDriverWait10
+                    .withMessage("Element is not clickable: " + webElement)
+                    .until(ExpectedConditions.elementToBeClickable(webElement));
+            webElement.click();
+            logger.info(elementName + " element was clicked");
         } catch (Exception e) {
             printErrorAndStopTes(e);
         }
@@ -53,9 +83,9 @@ public class CommonActionsWithElements {
         try {
             boolean state = webElement.isDisplayed();
             if (state) {
-                logger.info("Element is displayed");
+                logger.info(getElementName(webElement) + " element is displayed");
             } else {
-                logger.info("Element is not displayed");
+                logger.info(getElementName(webElement) + "element is not displayed");
             }
             return state;
         } catch (Exception e) {
@@ -84,8 +114,160 @@ public class CommonActionsWithElements {
         logger.info("Text in element matches expected text: " + expectedText);
     }
 
+    //select test in dropdown
+    protected void selectTextInDropdown(WebElement webElement, String text) {
+        try {
+            Select select = new Select(webElement);
+            select.selectByVisibleText(text);
+            logger.info("Text '" + text + "' was selected in dropdown" + getElementName(webElement));
+        } catch (Exception e) {
+            printErrorAndStopTes(e);
+        }
+    }
+
+    //select value in dropdown
+    protected void selectValueInDropdown(WebElement webElement, String value) {
+        try {
+            Select select = new Select(webElement);
+            select.selectByValue(value);
+            logger.info("Value '" + value + "' was selected in dropdown" + getElementName(webElement));
+        } catch (Exception e) {
+            printErrorAndStopTes(e);
+        }
+    }
+
+    //get element name
+    private String getElementName(WebElement webElement) {
+        try {
+            return webElement.getAccessibleName();
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
     private void printErrorAndStopTes(Exception e) {
         logger.error("Error while working with element: " + e.getMessage());
         Assert.fail("Error while working with element: " + e.getMessage());
+    }
+
+    protected boolean selectCheckboxIfNeeded(WebElement checkbox) {
+        if (!checkbox.isSelected()) {
+            clickOnElement(checkbox);
+            logger.info("Checkbox was checked.");
+            return true;
+        } else {
+            logger.info("Checkbox is already checked.");
+            return false;
+        }
+    }
+
+    protected boolean deselectCheckboxIfNeeded(WebElement checkbox) {
+        if (checkbox.isSelected()) {
+            clickOnElement(checkbox);
+            logger.info("Checkbox was unchecked.");
+            return true;
+        } else {
+            logger.info("Checkbox is already unchecked.");
+            return false;
+        }
+    }
+
+
+    protected void setCheckboxState(WebElement checkbox, CheckboxState desiredState) {
+        if (desiredState == CheckboxState.CHECK) {
+            selectCheckboxIfNeeded(checkbox);
+        } else if (desiredState == CheckboxState.UNCHECK) {
+            deselectCheckboxIfNeeded(checkbox);
+        } else {
+            logger.error("Unknown checkbox state: " + desiredState);
+            Assert.fail("Unknown checkbox state: " + desiredState);
+        }
+    }
+
+    protected void checkIsElementNotDisplayed(WebElement webElement) {
+        Assert.assertFalse("Element is displayed", isElementDisplayed(webElement));
+        logger.info("Element is not displayed as expected");
+    }
+
+    //accept Alert
+    protected void acceptAlert() {
+        try {
+            webDriver.switchTo().alert().accept();
+            logger.info("Alert was accepted");
+        } catch (Exception e) {
+            printErrorAndStopTes(e);
+        }
+    }
+
+    //scroll to element using Actions
+    protected void scrollToElement(WebElement webElement) {
+        try {
+            Actions actions = new Actions(webDriver);
+            actions.moveToElement(webElement).perform();
+            logger.info("Scrolled to element: " + getElementName(webElement));
+        } catch (Exception e) {
+            printErrorAndStopTes(e);
+        }
+    }
+
+    //open new tab
+    public void openNewTab() {
+        try {
+            ((JavascriptExecutor) webDriver).executeScript("window.open()");
+            logger.info("New tab was opened");
+        } catch (Exception e) {
+            printErrorAndStopTes(e);
+        }
+    }
+
+    // switch to new tab
+    public void switchToNewTab() {
+        try {
+            ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+            webDriver.switchTo().window(tabs.get(1));
+            logger.info("Switched to new tab");
+        } catch (Exception e) {
+            printErrorAndStopTes(e);
+        }
+    }
+
+    // switch to original tab
+    public void switchToOriginalTab() {
+        try {
+            ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+            webDriver.switchTo().window(tabs.get(0));
+            logger.info("Switched to original tab");
+        } catch (Exception e) {
+            printErrorAndStopTes(e);
+        }
+    }
+
+    // close new tab and switch back to original
+    public void closeTabByIndex(int indexToClose, int indexToSwitch) {
+        try {
+            ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
+
+            if (indexToClose >= tabs.size() || indexToSwitch >= tabs.size()) {
+                throw new IllegalArgumentException("Invalid tab index: " + indexToClose + " or " + indexToSwitch);
+            }
+
+            webDriver.switchTo().window(tabs.get(indexToClose)).close();
+            logger.info("Closed tab with index " + indexToClose);
+
+            webDriver.switchTo().window(tabs.get(indexToSwitch));
+            logger.info("Switched to tab with index " + indexToSwitch);
+        } catch (Exception e) {
+            printErrorAndStopTes(e);
+        }
+    }
+
+
+    public void refreshPage() {
+        webDriver.navigate().refresh();
+        logger.info("Page was refreshed");
+    }
+
+    public void checkElementNotVisible(WebElement element, String message) {
+        Assert.assertFalse(message, isElementDisplayed(element));
     }
 }

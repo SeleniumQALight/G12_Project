@@ -1,5 +1,6 @@
 package org.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,8 +13,13 @@ public class PostPage extends ParentPage{
     @FindBy(xpath = "//p[text() = 'Is this post unique? : yes']")
     private WebElement messageUniquePost;
 
+    private String messageUniquePostParams = "//p[text() = 'Is this post unique? : %s']";
+
     @FindBy(xpath = "//button[@class='delete-post-button text-danger']")
     private WebElement buttonDeletePost;
+
+    @FindBy(xpath = "//a[@data-original-title='Edit']")
+    private WebElement buttonEditPost;
 
     public PostPage(WebDriver webDriver) {
         super(webDriver);
@@ -50,8 +56,19 @@ checkIsElementDisplayed(messageUniquePost);
 return this;
     }
 
+    public PostPage checkIsPostUnique(String isUnique) {
+        checkIsElementDisplayed(webDriver.findElement(By.xpath(String.format(messageUniquePostParams, isUnique))));
+        return this;
+    }
+
     public MyProfilePage clickOnDeleteButton() {
-        clickOnElement(buttonDeletePost, "'Delete post button'");
+        clickOnElement(buttonDeletePost, "Delete post button");
         return new MyProfilePage(webDriver);
     }
+
+    public CreateNewPostPage clickOnEditButton() {
+        clickOnElement(buttonEditPost, "Edit post button");
+        return new CreateNewPostPage(webDriver);
+    }
+
 }

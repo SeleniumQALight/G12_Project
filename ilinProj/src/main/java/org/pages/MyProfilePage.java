@@ -17,6 +17,9 @@ public class MyProfilePage extends ParentPage {
     @FindBy(xpath = "//*[text()='Post successfully deleted.']")
     private WebElement successMessageDelete;
 
+    @FindBy(xpath = ".//a[@class='list-group-item list-group-item-action']")
+    private List<WebElement> postsList;
+
     public MyProfilePage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -38,7 +41,7 @@ public class MyProfilePage extends ParentPage {
 
     }
 
-    public MyProfilePage checkPostTitleIsPresent(String postTitle, int expectedAmount) {
+    public MyProfilePage checkNewPostTitleIsPresent(String postTitle, int expectedAmount) {
         Assert.assertEquals(
                 "Amount of posts with title '" + postTitle + "'",
                 expectedAmount,
@@ -75,5 +78,21 @@ public class MyProfilePage extends ParentPage {
         checkIsElementDisplayed(successMessageDelete);
         return this;
 
+    }
+
+    public void clickOnPostTitle(String postTitleChange) {
+        List<WebElement> postsList = getListOfPostsWithTitle(postTitleChange);
+        if (postsList.isEmpty()) {
+            logger.error("Post with title '" + postTitleChange + "' is not present");
+            Assert.fail("Post with title '" + postTitleChange + "' is not present");
+        } else {
+            clickOnElement(postsList.get(0), "Post with title '" + postTitleChange + "'");
+            new PostPage(webDriver).checkIsRedirectToPostPage();
+        }
+    }
+
+    public MyProfilePage checkNumberOfPostsInPosts(int numberOfPosts) {
+        Assert.assertEquals("Number of posts", numberOfPosts, postsList.size());
+        return this;
     }
 }

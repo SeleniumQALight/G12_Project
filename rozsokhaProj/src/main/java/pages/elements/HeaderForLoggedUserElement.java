@@ -1,11 +1,10 @@
 package pages.elements;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.CommonActionsWithElements;
-import pages.CreateNewPostPage;
-import pages.MyProfilePage;
+import pages.*;
 
 public class HeaderForLoggedUserElement extends CommonActionsWithElements {
     @FindBy(xpath = "//img[@alt='My profile']")
@@ -21,21 +20,35 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         super(webDriver);
     }
 
+    @Step
     public MyProfilePage clickOnButtonMyProfile() {
         clickOnElement(buttonMyProfile);
         return new MyProfilePage(webDriver);
     }
 
+    @Step
     public void checkButtonSignOutVisible() {
 //        Assert.assertTrue("Button Sign Out is not visible", isButtonSignOutVisible());
         checkIsElementDisplayed(buttonSignOut);
     }
 
+    public void checkButtonSignOutNotVisible() {
+        checkIsElementNotDisplayed(buttonSignOut);
+    }
+
+// Method to check if the Create Post button is visible
+
+    public void checkButtonCreatePostVisible() {
+        checkIsElementDisplayed(clickOnButtonCreatePost);
+    }
+
+    @Step
     public CreateNewPostPage clickOnButtonCreatePost() {
         clickOnElement(clickOnButtonCreatePost);
         return new CreateNewPostPage(webDriver);
     }
 
+    @Step
     public boolean isButtonSignOutVisible() {
         return isElementDisplayed(buttonSignOut);
     }

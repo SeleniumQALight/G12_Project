@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.pages.elements.HeaderForLoggedUserElement;
 
 public class PostPage extends ParentPage{
+  
     @FindBy(xpath = "//*[@class='alert alert-success text-center']")
     private WebElement successMessage;
 
@@ -39,6 +40,16 @@ public class PostPage extends ParentPage{
     public PostPage checkTextIsSuccessMessage(String expectedMessageText) {
         checkTextInElement(successMessage, expectedMessageText);
         return this;
+    }
+
+    @FindBy(xpath = "//p[contains(text(),'Is this post unique?')]")
+    private WebElement checkboxText;
+
+    public PostPage checkCheckboxValueIs(String expectedValue) {
+        String expectedText = "Is this post unique? : " + expectedValue;
+        checkTextInElement(checkboxText, expectedText);
+        return this;
+
     }
 
     public MyProfilePage clickOnDeleteButton() {

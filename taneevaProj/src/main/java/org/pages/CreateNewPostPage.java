@@ -1,5 +1,6 @@
 package org.pages;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,6 +22,9 @@ public class CreateNewPostPage extends ParentPage {
     @FindBy(tagName = "select") // "//select"
     private WebElement dropdownAccess;
 
+    @FindBy(xpath = ".//button[text()='Save Updates']")
+    private WebElement buttonSaveUpdates;
+
     public CreateNewPostPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -37,7 +41,9 @@ public class CreateNewPostPage extends ParentPage {
     }
 
     public CreateNewPostPage enterTextIntoInputTitle(String title) {
-        clearAndEnterTextToElement(inputTitle, title);
+        inputTitle.clear();
+        inputTitle.sendKeys(title);
+        logger.info("Entered text into Title input: " + title);
         return this;
     }
 
@@ -53,5 +59,15 @@ public class CreateNewPostPage extends ParentPage {
     public CreateNewPostPage selectTextInDropdownAccess(String textForSelection) {
         selectTextInDropdown(dropdownAccess, textForSelection);
         return this;
+    }
+    public CreateNewPostPage setUniquePostCheckbox(String state) {
+        actionsWithCheckbox(checkboxUniquePost, state);
+        return this;
+
+    }
+
+    public PostPage clickOnButtonSaveUpdates() {
+        clickOnElement(buttonSaveUpdates);
+        return new PostPage(webDriver);
     }
 }

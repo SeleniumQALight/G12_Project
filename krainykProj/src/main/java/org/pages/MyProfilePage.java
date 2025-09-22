@@ -54,7 +54,7 @@ public class MyProfilePage extends ParentPage {
         final int MAX_POST_COUNT = postList.size();
         int counter = 0;
         while (!postList.isEmpty() && (counter < MAX_POST_COUNT)) {
-            clickOnElement(postList.get(0), "'Poast with title '" + postTitle + "' was clicked");
+            clickOnElement(postList.get(0), "Post with title '" + postTitle + "' was clicked");
             new PostPage(webDriver)
                     .checkIsRedirectToPostPage()
                     .clickOnDeletePostButton()
@@ -71,7 +71,12 @@ public class MyProfilePage extends ParentPage {
     }
 
     private MyProfilePage checkIsMessageSuccessDeletePresent() {
-        checkIsElementDisplayed(successDeleteMessage);
+        checkIsElementDisplayed(successDeleteMessage, "Success delete message");
         return this;
+    }
+
+    public PostPage clickOnPostWithTitle(String postTitle) {
+        clickOnElement(findElementByLocator(postWithTitleLocator, postTitle), "Post with title " + postTitle);
+        return new PostPage(webDriver);
     }
 }
