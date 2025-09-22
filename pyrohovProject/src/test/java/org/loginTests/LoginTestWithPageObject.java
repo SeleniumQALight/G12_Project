@@ -14,7 +14,7 @@ public class LoginTestWithPageObject extends BaseTest { //
                 .enterTextIntoPassword(VALID_PASSWORD_UI)
                 .clickOnButtonSignIn();
 
-        pageProvider.getHomePage().checkButtonSignOutVisible(); //методи які почин з check в середині мають асершн який рбить перевірку,
+        pageProvider.getHomePage().getHeaderForLoggedUserElement().checkButtonSignOutVisible(); //методи які почин з check в середині мають асершн який рбить перевірку,
                                                                     //але якщо просто перевіряє та повертає стан - починається з is
     }
 }
