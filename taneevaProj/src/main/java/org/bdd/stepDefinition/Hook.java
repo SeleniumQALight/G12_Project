@@ -6,6 +6,7 @@ import io.restassured.RestAssured;
 import org.api.ApiHelper;
 import org.bdd.helpers.WebDriverHelper;
 import org.data.TestData;
+import org.pages.ParentPage;
 
 public class Hook {
     WebDriverHelper webDriverHelper;
@@ -18,7 +19,7 @@ public class Hook {
     @Before(order = 10)
     public void setUp(){
 //        webDriverHelper = new WebDriverHelper();
-        RestAssured.baseURI = ParentPage.baseUrl + "/api/";
+        RestAssured.baseURI = ParentPage.baseURL + "/api/";
         apiHelper = new ApiHelper();
     }
 
@@ -28,7 +29,7 @@ public class Hook {
     }
     @Before(value = "@deletePostsTillPresentForDefaultUser", order = 50)
     public void deletePostsForDefaultUserTillPresent() {
-        apiHelper.deleteAllPostsTillPresent(TestData.VALID_LOGIN_API, TestData.VALID_PASSWORD_API);
+        apiHelper.deleteAllPostsTillPresent(TestData.VALID_LOGIN_API, apiHelper.getToken());
 
     }
 }

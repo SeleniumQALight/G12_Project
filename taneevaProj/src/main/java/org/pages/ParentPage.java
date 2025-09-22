@@ -10,9 +10,9 @@ import org.utils.ConfigProvider;
 import java.time.Duration;
 import java.util.ArrayList;
 
-abstract class ParentPage extends CommonActionsWithElements {
+public abstract class ParentPage extends CommonActionsWithElements {
     static String environment = System.getProperty("env", "aqa");
-    protected String baseURL = ConfigProvider.configProperties.base_url().replace("[env]",environment);
+    public static String baseURL = ConfigProvider.configProperties.base_url().replace("[env]",environment);
 
     public ParentPage(WebDriver webDriver) {
         super(webDriver);

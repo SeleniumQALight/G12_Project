@@ -19,17 +19,17 @@ public class LoginPageStepDefs extends MainStepDefs{
 
     @When("I login with valid cred")
     public void iLoginWithValidCred() {
-        pageProvider.getLoginPage().enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
-        pageProvider.getLoginPage().enterTextIntoPassword(TestData.VALID_PASSWORD_UI);
+        pageProvider.getLoginPage().enterTextInInputLogin(TestData.VALID_LOGIN_UI);
+        pageProvider.getLoginPage().enterTextInInputPassword(TestData.VALID_PASSWORD_UI);
         pageProvider.getLoginPage().clickOnButtonSignIn();
     }
     @When("I enter {string} into input Login in Login page")
     public void i_enter_into_input_login_in_login_page(String userName) {
-        pageProvider.getLoginPage().enterTextIntoInputLogin(userName);
+        pageProvider.getLoginPage().enterTextInInputLogin(userName);
     }
     @When("I enter {string} into input PassWord in Login page")
     public void i_enter_into_input_pass_word_in_login_page(String password) {
-        pageProvider.getLoginPage().enterTextIntoPassword(password);
+        pageProvider.getLoginPage().enterTextInInputPassword(password);
     }
 
     @When("I click on button SignIn in Login page")
