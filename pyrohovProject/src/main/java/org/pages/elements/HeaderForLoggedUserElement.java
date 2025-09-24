@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.pages.CommonActionsWithElements;
 import org.pages.CreateNewPostPage;
+import org.pages.MyProfilePage;
 
 public class HeaderForLoggedUserElement extends CommonActionsWithElements {
 
@@ -22,8 +23,9 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         super(webDriver);
     }
 
-    public void clickOnButtonMyProfile() {
+    public MyProfilePage clickOnButtonMyProfile() {
         clickOnElement(buttonMyProfile);
+        return new MyProfilePage(webDriver);
     }
 
     public void checkButtonSignOutVisible() {
