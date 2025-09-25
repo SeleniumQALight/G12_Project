@@ -59,5 +59,3 @@ public class LoginPage extends ParentPage{
         return new HomePage(webDriver);
     }
 }
-
-
