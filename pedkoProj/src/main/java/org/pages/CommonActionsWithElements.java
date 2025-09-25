@@ -4,13 +4,24 @@ import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 import static org.junit.Assert.assertEquals;
 
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
     private Logger logger = Logger.getLogger(getClass());
+
+    @FindBy(xpath = "//input[@type='checkbox' and @name='uniquePost']")
+    private WebElement uniquePostCheckbox;
+    protected WebElement getUniquePostCheckbox() {
+        return uniquePostCheckbox;
+    }
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -94,4 +105,21 @@ public class CommonActionsWithElements {
         Assert.fail("Error while working with element "  + e.getMessage());
     }
 
+
+    public void setCheckboxState(WebElement checkbox, boolean state) {
+        try {
+            WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
+            wait.until(ExpectedConditions.elementToBeClickable(checkbox));
+
+            if (checkbox.isSelected() != state) {
+                checkbox.click();
+                wait.until(driver -> checkbox.isSelected() == state);
+                logger.info("Checkbox " + (state ? "selected" : "deselected"));
+            } else {
+                logger.info("Checkbox is already in the desired state: " + (state ? "selected" : "deselected"));
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
 }
