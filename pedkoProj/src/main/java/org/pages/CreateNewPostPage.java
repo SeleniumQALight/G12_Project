@@ -38,4 +38,9 @@ public class CreateNewPostPage extends ParentPage{
         clickOnElement(buttonSaveNewPost);
         return new PostPage(webDriver);
     }
+
+    public CreateNewPostPage selectUniquePostCheckbox(boolean state) {
+        setCheckboxState(getUniquePostCheckbox(), state);
+        return this;
+    }
 }

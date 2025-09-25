@@ -3,6 +3,7 @@ package org.pages;
 import org.data.TestData;
 import org.apache.log4j.Logger;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,6 +19,9 @@ public class LoginPage extends ParentPage{
 
     @FindBy(xpath = "//button[text()='Sign In']")
     private WebElement buttonSignIn;
+
+    @FindBy(xpath = "//div[@class='alert alert-danger text-center']")
+    private WebElement errorMessageElement;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -57,5 +61,22 @@ public class LoginPage extends ParentPage{
         this.enterTextIntoPassword(TestData.VALID_PASSWORD_UI);
         clickOnButtonSignIn();
         return new HomePage(webDriver);
+    }
+
+    public void checkButtonSignInVisible() {
+        Assert.assertTrue("The Sign In button should be visible.", isElementDisplayed(buttonSignIn));
+    }
+
+    public void checkErrorMessage(String expectedMessage) {
+        Assert.assertTrue("The error message is not displayed.", isElementDisplayed(errorMessageElement));
+        Assert.assertEquals("The error message does not match.", expectedMessage, errorMessageElement.getText());
+    }
+
+    public void checkInputLoginNotVisible() {
+        Assert.assertFalse("The login input should be hidden.", isElementDisplayed(inputUserName));
+    }
+
+    public void checkInputPasswordNotVisible() {
+        Assert.assertFalse("The password input should be hidden.", isElementDisplayed(inputPassword));
     }
 }
