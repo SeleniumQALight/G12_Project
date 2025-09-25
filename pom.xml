@@ -25,6 +25,7 @@
     <module>taneevaProj</module>
       <module>pyrohovProject</module>
       <module>pedkoProj</module>
+      <module>stafiichukProject</module>
   </modules>
 
   <properties>

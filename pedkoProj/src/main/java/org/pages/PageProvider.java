@@ -1,4 +1,4 @@
-package pages;
+package org.pages;
 
 import org.openqa.selenium.WebDriver;
 
@@ -16,4 +16,9 @@ public class PageProvider {
     public HomePage getHomePage(){
         return new HomePage(webDriver);
     }
+
+    public PostPage getPostPage() {
+        return new PostPage(webDriver);
+    }
 }
+
