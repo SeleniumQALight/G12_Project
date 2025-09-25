@@ -1,6 +1,7 @@
 package org.postsTests;
 
 import org.baseTest.BaseTest;
+import org.junit.After;
 import org.junit.Test;
 import org.utils.Utils_Custom;
 
@@ -30,6 +31,18 @@ public class CreateNewPostTest extends BaseTest {
                 .getHeaderForLoggedUserElement().clickOnButtonMyProfile()
                 .checkIsRedirectToMyProfilePage()
                 .checkPostWithTitleIsPresent(POST_TITLE, 1)
+
+        ;
+    }
+
+    @After
+    public void deletePost(){
+        logger.info("Post condition - delete posts");
+        pageProvider.getHomePage()
+                .openHomePageAndLoginIfNeeded()
+                .getHeaderForLoggedUserElement().clickOnButtonMyProfile()
+                .checkIsRedirectToMyProfilePage()
+                .deletePostTillPresent(POST_TITLE)
 
         ;
     }
