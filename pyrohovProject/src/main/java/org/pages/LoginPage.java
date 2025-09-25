@@ -1,6 +1,7 @@
 package org.pages;
 
 import org.apache.log4j.Logger;
+import org.data.TestData;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,22 +22,25 @@ public class LoginPage extends ParentPage{
         super(webDriver);
     }
 
-    public void openLoginPage() {
+    public LoginPage openLoginPage() {
         webDriver.get(baseURL);
         logger.info("Login page was opened with url " + baseURL);
+        return this; // повертаємо поточний об'єкт для можливості ланцюгового виклику методів
 
     }
 
-    public void enterTextIntiInputLogin(String login) {
+    public LoginPage enterTextIntiInputLogin(String login) {
         /* WebElement inputUserName = webDriver.findElement(By.xpath("//input[@placeholder='Username']")); */
 //        inputUserName.clear();
 //        inputUserName.sendKeys(login);
 //        logger.info(login + "was entered in input userName");
         clearAndEnterTextToElement(inputUserName, login);
+        return this; // повертаємо поточний об'єкт для можливості ланцюгового виклику методів
 
     }
-    public void enterTextIntoPassword (String password){
+    public LoginPage enterTextIntoPassword (String password){
         clearAndEnterTextToElement(inputPassword, password);
+        return this;
     //    WebElement inputPassword = webDriver.findElement(By.xpath("//input[@placeholder='Password']"));
 //
 
@@ -48,5 +52,12 @@ public class LoginPage extends ParentPage{
 //        logger.info("Button Sign In was clicked");
         clickOnElement(buttonSignIn);
     }
-
+        // Метод, який відкриває сторінку логіну та заповнює форму логіну з валідними даними
+    public HomePage openLoginPageAndFillLoginFormWithValidCred() {
+        openLoginPage();
+        this.enterTextIntiInputLogin(TestData.VALID_LOGIN_UI);
+        this.enterTextIntoPassword(TestData.VALID_PASSWORD_UI);
+        clickOnButtonSignIn();
+        return new HomePage(webDriver);
+    }
 }
