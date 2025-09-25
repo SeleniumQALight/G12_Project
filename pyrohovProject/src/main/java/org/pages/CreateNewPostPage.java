@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class CreateNewPostPage extends ParentPage{
+ public class CreateNewPostPage extends ParentPage{
     @FindBy(name = "title")
     private WebElement inputTitle;
 
@@ -18,9 +18,14 @@ public class CreateNewPostPage extends ParentPage{
         super(webDriver);
     }
 
+     @Override
+     protected String getRelativeURL() {
+         return "/create-post";
+     }
 
-    public CreateNewPostPage checkIsRedirectToCreateNewPostPage() {
-        //TODO check URL
+
+     public CreateNewPostPage checkIsRedirectToCreateNewPostPage() {
+         checkUrl();
         // TODO check some unique element on the page
             return this;
     }
