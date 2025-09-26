@@ -5,14 +5,22 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class CommonActionsWithElements {  //передача webDriver через конструктор
     protected WebDriver webDriver;
-    private Logger logger = Logger.getLogger(getClass()); // логгер для запису інформації про дії
+    private Logger logger = Logger.getLogger(getClass());
+    protected WebDriverWait webDriverWait10, webDriverWait15;// логгер для запису інформації про дії
 
     public CommonActionsWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
-        PageFactory.initElements(webDriver, this);// шніцалізує елементи описані в FindBy
+        PageFactory.initElements(webDriver, this);
+        webDriverWait10 = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        webDriverWait15 = new WebDriverWait(webDriver, Duration.ofSeconds(15));// шніцалізує елементи описані в FindBy
 
     }
 
@@ -38,7 +46,10 @@ public class CommonActionsWithElements {  //передача webDriver чере�
      */
     protected void clickOnElement(WebElement webElement) {
         try {
-            webElement.click(); // клікає на елемент
+            webDriverWait10
+                    .withMessage("Elemetn is not clickable: " + webElement)
+                    .until(ExpectedConditions.elementToBeClickable(webElement))
+                    .click(); // клікає на елемент
             logger.info("Element was clicked: " + webElement.toString());
         } catch (Exception e) {
             printErrorsAndStopTest(e);
