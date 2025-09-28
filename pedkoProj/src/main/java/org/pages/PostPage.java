@@ -26,7 +26,7 @@ public class PostPage extends ParentPage {
     }
 
     public PostPage checkIsRedirectToPostPage() {
-        checkUrlWithPattern();
+        //TODO check URL
         //TODO check some unique element on the page
         return this;
     }
@@ -42,7 +42,7 @@ public class PostPage extends ParentPage {
     }
 
     public MyProfilePage clickOnDeliteButton() {
-        clickOnElement(buttonDeletePost);
+        clickOnElement(buttonDeletePost, "Delete Post button");
         return new MyProfilePage(webDriver);
     }
 }

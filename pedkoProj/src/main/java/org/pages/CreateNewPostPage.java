@@ -15,6 +15,12 @@ public class CreateNewPostPage extends ParentPage{
     @FindBy(xpath = "//button[text()='Save New Post']")
     private WebElement buttonSaveNewPost;
 
+    @FindBy(tagName = "select")
+    private WebElement dropdownAccess;
+
+    @FindBy(xpath = "//input[@name='uniquePost']")
+    private WebElement uniquePostCheckbox;
+
     public CreateNewPostPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -43,4 +49,11 @@ public class CreateNewPostPage extends ParentPage{
         clickOnElement(buttonSaveNewPost);
         return new PostPage(webDriver);
     }
+
+    public CreateNewPostPage selectTextInDropdownAccess(String textInDropDown) {
+        selectTextInDropdown(dropdownAccess, textInDropDown);
+        return this;
+    }
+
+
 }

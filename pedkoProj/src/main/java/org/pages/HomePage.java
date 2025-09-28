@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.pages.elements.HeaderForLoggedUserElement;
 
 public class HomePage extends ParentPage {
-    Logger logger = Logger.getLogger(getClass());
+    Logger logger = Logger.getLogger(HomePage.class);
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
