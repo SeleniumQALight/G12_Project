@@ -18,7 +18,7 @@ public class CreateNewPostTest extends BaseTest {
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("G12 Dariia Pedko post body")
                 .selectUniquePostCheckbox(true)  // выбрать
-                .selectUniquePostCheckbox(false)
+               // .selectUniquePostCheckbox(false)
                 .clickOnButtonSaveNewPost()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()

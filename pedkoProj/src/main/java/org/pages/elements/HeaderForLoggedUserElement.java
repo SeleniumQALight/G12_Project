@@ -39,4 +39,9 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
     public void checkButtonSignOutNotVisible() {
         Assert.assertFalse("The 'Sign Out' button should not be visible.", isElementDisplayed(buttonSignOut));
     }
+
+    public HeaderForLoggedUserElement checkButtonCreatePostVisible() {
+        Assert.assertTrue("The Create Post button should be visible.", isElementDisplayed(buttonCreatePost));
+        return this;
+    }
 }

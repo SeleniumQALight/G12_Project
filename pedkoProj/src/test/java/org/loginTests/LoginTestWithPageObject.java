@@ -3,6 +3,7 @@ package org.loginTests;
 import org.data.TestData;
 import org.baseTest.BaseTest;
 import org.junit.Test;
+import org.pages.elements.HeaderForLoggedUserElement;
 
 public class LoginTestWithPageObject extends BaseTest {
     @Test
@@ -37,7 +38,7 @@ public class LoginTestWithPageObject extends BaseTest {
                 .enterTextIntoPassword(TestData.VALID_PASSWORD_UI)
                 .clickOnButtonSignIn();
 
-        pageProvider.getHomePage().checkButtonCreatePostVisible();
+        pageProvider.getHomePage().getHeaderForLoggedUserElement().checkButtonCreatePostVisible();
         pageProvider.getLoginPage().checkInputLoginNotVisible();
         pageProvider.getLoginPage().checkInputPasswordNotVisible();
     }

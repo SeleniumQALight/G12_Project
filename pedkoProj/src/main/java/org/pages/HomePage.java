@@ -25,8 +25,5 @@ public class HomePage extends ParentPage {
         return this;
     }
 
-    public void checkButtonCreatePostVisible() {
-        Assert.assertTrue("The Create Post button should be visible.", isElementDisplayed(createPostButton));
-    }
 
 }
