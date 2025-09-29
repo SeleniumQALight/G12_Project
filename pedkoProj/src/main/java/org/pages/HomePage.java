@@ -1,12 +1,15 @@
 package org.pages;
 
 import org.junit.Assert;
+import org.apache.log4j.Logger;
+import org.data.TestData;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.pages.elements.HeaderForLoggedUserElement;
 
 public class HomePage extends ParentPage {
+    Logger logger = Logger.getLogger(HomePage.class);
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
@@ -15,15 +18,33 @@ public class HomePage extends ParentPage {
     @FindBy(xpath = "//a[@class='btn btn-sm btn-success mr-2']")
     private WebElement createPostButton;
 
+    @Override
+    protected String getRelativeURL() {
+        return "/";
+    }
+
     public HeaderForLoggedUserElement getHeaderForLoggedUserElement(){
         return new HeaderForLoggedUserElement(webDriver);
     }
 
     public HomePage  checkIsRedirectToHomePage() {
-        // TODO check URL
+        checkUrl();
         getHeaderForLoggedUserElement().checkButtonSignOutVisible();
         return this;
     }
 
-
+    public HomePage openHomePageAndLoginIfNeeded() {
+        LoginPage loginPage = new LoginPage(webDriver);
+        loginPage.openLoginPage();
+        if(getHeaderForLoggedUserElement().isButtonSignOutVisible()){
+            logger.info("User is already logged in");
+        } else {
+            loginPage.enterTextIntoInputLogin(TestData.VALID_LOGIN_UI)
+                    .enterTextIntoPassword(TestData.VALID_PASSWORD_UI)
+                    .clickOnButtonSignIn();
+            checkIsRedirectToHomePage();
+            logger.info("User was logged in");
+        }
+        return this;
+    }
 }

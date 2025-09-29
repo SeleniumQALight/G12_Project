@@ -19,11 +19,11 @@ public class CreateNewPostTest extends BaseTest {
                 .enterTextIntoInputBody("G12 Dariia Pedko post body")
                 .selectUniquePostCheckbox(true)
                 //.selectUniquePostCheckbox(false)
+                .selectTextInDropdownAccess("Приватне повідомлення")
                 .clickOnButtonSaveNewPost()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.");
-
 
         pageProvider.getPostPage()
                 .getHeaderForLoggedUserElement().clickOnButtonMyProfile()
@@ -34,6 +34,11 @@ public class CreateNewPostTest extends BaseTest {
 
     @After
     public void deletePost(){
-
+        logger.info("Post condition - delete posts ");
+        pageProvider.getHomePage()
+         .openHomePageAndLoginIfNeeded()
+         .getHeaderForLoggedUserElement().clickOnButtonMyProfile()
+         .checkIsRedirectToMyProfilePage()
+         .delitePostsTillPresent(POST_TITLE);
     }
 }

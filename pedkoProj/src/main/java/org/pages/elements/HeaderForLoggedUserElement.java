@@ -36,6 +36,11 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
         return new CreateNewPostPage(webDriver);
     }
 
+    public boolean isButtonSignOutVisible() {
+        return isElementDisplayed(buttonSignOut);
+    }
+}
+
     public void checkButtonSignOutNotVisible() {
         Assert.assertFalse("The 'Sign Out' button should not be visible.", isElementDisplayed(buttonSignOut));
     }
