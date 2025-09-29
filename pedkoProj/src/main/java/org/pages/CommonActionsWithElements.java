@@ -105,7 +105,6 @@ public class CommonActionsWithElements {
         Assert.fail("Error while working with element "  + e.getMessage());
     }
 
-
     public void setCheckboxState(WebElement checkbox, boolean state) {
         try {
             WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
@@ -120,6 +119,25 @@ public class CommonActionsWithElements {
             }
         } catch (Exception e) {
             printErrorAndStopTest(e);
+        }
+    }
+
+
+    public void checkCheckbox(WebElement checkbox) {
+        setCheckboxState(checkbox, true);
+    }
+
+    public void uncheckCheckbox(WebElement checkbox) {
+        setCheckboxState(checkbox, false);
+    }
+
+    public void actionsWithCheckbox(WebElement checkbox, String stateOfCheckbox) {
+        if ("check".equalsIgnoreCase(stateOfCheckbox)) {
+            checkCheckbox(checkbox);
+        } else if ("uncheck".equalsIgnoreCase(stateOfCheckbox)) {
+            uncheckCheckbox(checkbox);
+        } else {
+            logger.warn("Incorrect checkbox state value:" + stateOfCheckbox);
         }
     }
 }

@@ -17,12 +17,13 @@ public class CreateNewPostTest extends BaseTest {
                 .checkIsRedirectToCreateNewPostPage()
                 .enterTextIntoInputTitle(POST_TITLE)
                 .enterTextIntoInputBody("G12 Dariia Pedko post body")
-                .selectUniquePostCheckbox(true)  // выбрать
-               // .selectUniquePostCheckbox(false)
+                .selectUniquePostCheckbox(true)
+                //.selectUniquePostCheckbox(false)
                 .clickOnButtonSaveNewPost()
                 .checkIsRedirectToPostPage()
                 .checkIsSuccessMessageDisplayed()
                 .checkTextInSuccessMessage("New post successfully created.");
+
 
         pageProvider.getPostPage()
                 .getHeaderForLoggedUserElement().clickOnButtonMyProfile()
