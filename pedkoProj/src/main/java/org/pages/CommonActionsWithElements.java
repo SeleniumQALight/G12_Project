@@ -190,4 +190,16 @@ public class CommonActionsWithElements {
             logger.warn("Incorrect checkbox state value:" + stateOfCheckbox);
         }
     }
+
+    public void checkUniquePostCheckbox() {
+        checkCheckbox(uniquePostCheckbox);
+    }
+
+    public void uncheckUniquePostCheckbox() {
+        uncheckCheckbox(uniquePostCheckbox);
+    }
+
+    public void actionsWithUniquePostCheckbox(String state) {
+        actionsWithCheckbox(uniquePostCheckbox, state);
+    }
 }
