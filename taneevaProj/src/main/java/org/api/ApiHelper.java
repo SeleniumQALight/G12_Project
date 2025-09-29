@@ -40,7 +40,6 @@ public class ApiHelper {
     public static ResponseSpecification responseSpecification = new ResponseSpecBuilder()
             .log(LogDetail.ALL)
             .expectStatusCode(HttpStatus.SC_OK)
-            .addFilter(new AllureRestAssured())
             .build();
 
 
