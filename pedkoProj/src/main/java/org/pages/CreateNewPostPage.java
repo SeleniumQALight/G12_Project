@@ -1,6 +1,7 @@
 package org.pages;
 
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -56,4 +57,9 @@ public class CreateNewPostPage extends ParentPage{
     }
 
 
+
+    public CreateNewPostPage selectUniquePostCheckbox(boolean state) {
+        setCheckboxState(getUniquePostCheckbox(), state);
+        return this;
+    }
 }

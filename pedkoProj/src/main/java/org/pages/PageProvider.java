@@ -21,4 +21,3 @@ public class PageProvider {
         return new PostPage(webDriver);
     }
 }
-
