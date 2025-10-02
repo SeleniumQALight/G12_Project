@@ -72,11 +72,12 @@
             <artifactId>owner</artifactId>
             <version>1.0.12</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.aeonbits.owner/owner -->
         <dependency>
-            <groupId>pl.pragmatists</groupId>
-            <artifactId>JUnitParams</artifactId>
-            <version>1.0.5</version>
-            <scope>test</scope>
+            <groupId>org.aeonbits.owner</groupId>
+            <artifactId>owner</artifactId>
+            <version>1.0.12</version>
         </dependency>
 
     </dependencies>
