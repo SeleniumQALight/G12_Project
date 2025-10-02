@@ -18,4 +18,115 @@ Expected result:
 
 
 Post condition:
+1.Log out
+
+#2 Sign Up for OurApp
+Exemple:
+Username = AQAG12today
+Email = show@more.cv
+pass = 1234567890QA
+
+Pre-condition:
 1.
+
+Steps:
+1.Open login page https://aqa-complexapp.onrender.com
+2.Enter <Username> into input username on Login page
+3.Enter <email> into input email on Login page
+4.Enter <password> into input password on Login page
+5.Click on button Sign up for OurApp
+
+Expected result:
+1.I see on first screen text Hello {username}, your feed is empty.
+2.I see on header {username}
+3.I see button Create Post
+4.I see button Sign Out
+5.I see search on header
+6.I see bottom My Profile
+7.I see bottom Chat
+
+Post condition:
+1.Delete user
+
+
+
+3# Send a message in the chat
+Username = AQAG12today
+pass = 1234567890QA
+
+Pre-condition:
+1.Open login page https://aqa-complexapp.onrender.com
+2.Enter <login> into input login on Login page
+3.Enter <pass> into input password on Login page
+4.Click on button Ligin on Login page
+
+Steps:
+1.Click on bottom Chat
+1.1 A modal window with the chat is displayed.
+2.Enter text 'What is Lorem Ipsum?
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
+3.Click enter
+
+Expected result:
+1.The text is displayed in chat window
+2.the text is displayed background-color: #007bff;
+
+
+4# Create Post
+Username = AQAG12today
+pass = 1234567890QA
+
+Pre-condition:
+1.Open login page https://aqa-complexapp.onrender.com
+2.Enter <login> into input login on Login page
+3.Enter <pass> into input password on Login page
+4.Click on button Ligin on Login page
+
+Steps:
+1.Click on button Create Post
+1.1 Redirect to the page https://aqa-complexapp.onrender.com/create-post
+2.Enter text <Title> into input title on Create post page
+3.Enter text <body, body, body,body, body, body,body, body, body> into textarea body on Create post page
+4.Click on the button Save New Post
+
+Expected result:
+1.Displayed page https://aqa-complexapp.onrender.com/post/{genereited id post}
+2.Displayed notification (green color) New post successfully created.
+3.Displayed edit
+4.Displayed delete
+
+Post condition:
+1.Delete post
+
+5# Search
+Username = AQAG12today
+pass = 1234567890QA
+
+Pre-condition:
+1.Open login page https://aqa-complexapp.onrender.com
+2.Enter <login> into input login on Login page
+3.Enter <pass> into input password on Login page
+4.Click on button Ligin on Login page
+5.Click on button Create Post
+5.1 Redirect to the page https://aqa-complexapp.onrender.com/create-post
+6.Enter text <Title> into input title on Create post page
+7.Enter text <body, body, body,body, body, body,body, body, body> into textarea body on Create post page
+8.Click on the button Save New Post
+
+Steps:
+1.Click on bottom search
+1.1 A search input field is displayed.
+2.Enter value Title
+3.Click on the second variant
+
+Expected result:
+1.redirect to the page with post
+2.Displayed post
+
+
+Post condition:
+1.Delete post
+
+
+
+
