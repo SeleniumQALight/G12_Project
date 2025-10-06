@@ -30,6 +30,8 @@ public class LoginTestWithPageObject extends BaseTest {
         pageProvider.getLoginPage().checkErrorMessage("Invalid username/password.");
     }
 
+}
+
     @Test
     public void validLoginAdditionalChecks() {
         pageProvider.getLoginPage()
