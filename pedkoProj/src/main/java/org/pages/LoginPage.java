@@ -126,7 +126,6 @@ public class LoginPage extends ParentPage {
         softAssertions.assertAll();
         return this;
     }
-}
 
     public void checkButtonSignInVisible() {
         Assert.assertTrue("The Sign In button should be visible.", isElementDisplayed(buttonSignIn));

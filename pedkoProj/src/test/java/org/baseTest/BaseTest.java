@@ -40,7 +40,7 @@ public class BaseTest {
     }
 
     private WebDriver initDriver() throws MalformedURLException {
-        String browserFromProperty = System.getProperty("Browser");
+        String browserFromProperty = System.getProperty("browser");
         logger.info("Browser is " + browserFromProperty);
         if ((browserFromProperty == null) || (browserFromProperty.equalsIgnoreCase("chrome"))) {
             WebDriverManager.chromedriver().setup();
