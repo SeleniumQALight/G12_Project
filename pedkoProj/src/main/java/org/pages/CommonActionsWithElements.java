@@ -203,4 +203,5 @@ public class CommonActionsWithElements {
     public void actionsWithUniquePostCheckbox(String state) {
         actionsWithCheckbox(uniquePostCheckbox, state);
     }
+
 }
