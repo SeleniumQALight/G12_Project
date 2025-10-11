@@ -1,11 +1,15 @@
 package org.pages;
 
 
+import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class CreateNewPostPage extends ParentPage{
+    private Logger logger = Logger.getLogger(getClass());
+
     @FindBy(name = "title") // "//*[@name='title']"
     private WebElement inputTitle;
 
@@ -20,6 +24,8 @@ public class CreateNewPostPage extends ParentPage{
 
     @FindBy(xpath = "//input[@name='uniquePost']")
     private WebElement uniquePostCheckbox;
+
+
 
     public CreateNewPostPage(WebDriver webDriver) {
         super(webDriver);
@@ -56,4 +62,9 @@ public class CreateNewPostPage extends ParentPage{
     }
 
 
-}
+    public CreateNewPostPage selectUniquePostCheckbox(boolean state) {
+        setCheckboxState(getUniquePostCheckbox(), state);
+        return this;
+    }
+
+    }
