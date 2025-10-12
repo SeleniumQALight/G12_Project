@@ -4,8 +4,8 @@ import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -18,6 +18,12 @@ import static org.junit.Assert.assertEquals;
 public class CommonActionsWithElements {
     protected WebDriver webDriver;
     private Logger logger = Logger.getLogger(getClass());
+
+    @FindBy(xpath = "//input[@type='checkbox' and @name='uniquePost']")
+    private WebElement uniquePostCheckbox;
+    protected WebElement getUniquePostCheckbox() {
+        return uniquePostCheckbox;
+    }
 
     protected WebDriverWait webDriverWait10, webDriverWait15;
 
@@ -148,6 +154,54 @@ public class CommonActionsWithElements {
     private void printErrorAndStopTest(Exception e){
         logger.error("Error while working with element "  + e.getMessage());
         Assert.fail("Error while working with element "  + e.getMessage());
+    }
+
+    public void setCheckboxState(WebElement checkbox, boolean state) {
+        try {
+            WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
+            wait.until(ExpectedConditions.elementToBeClickable(checkbox));
+
+            if (checkbox.isSelected() != state) {
+                checkbox.click();
+                wait.until(driver -> checkbox.isSelected() == state);
+                logger.info("Checkbox " + (state ? "selected" : "deselected"));
+            } else {
+                logger.info("Checkbox is already in the desired state: " + (state ? "selected" : "deselected"));
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+
+    public void checkCheckbox(WebElement checkbox) {
+        setCheckboxState(checkbox, true);
+    }
+
+    public void uncheckCheckbox(WebElement checkbox) {
+        setCheckboxState(checkbox, false);
+    }
+
+    public void actionsWithCheckbox(WebElement checkbox, String stateOfCheckbox) {
+        if ("check".equalsIgnoreCase(stateOfCheckbox)) {
+            checkCheckbox(checkbox);
+        } else if ("uncheck".equalsIgnoreCase(stateOfCheckbox)) {
+            uncheckCheckbox(checkbox);
+        } else {
+            logger.warn("Incorrect checkbox state value:" + stateOfCheckbox);
+        }
+    }
+
+    public void checkUniquePostCheckbox() {
+        checkCheckbox(uniquePostCheckbox);
+    }
+
+    public void uncheckUniquePostCheckbox() {
+        uncheckCheckbox(uniquePostCheckbox);
+    }
+
+    public void actionsWithUniquePostCheckbox(String state) {
+        actionsWithCheckbox(uniquePostCheckbox, state);
     }
 
 }

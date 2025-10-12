@@ -1,5 +1,6 @@
 package org.pages.elements;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,6 +9,7 @@ import org.pages.CreateNewPostPage;
 import org.pages.MyProfilePage;
 
 public class HeaderForLoggedUserElement extends CommonActionsWithElements {
+
     @FindBy(xpath = "//img[@alt='My profile']")
     private WebElement buttonMyProfile;
 
@@ -38,5 +40,13 @@ public class HeaderForLoggedUserElement extends CommonActionsWithElements {
     public boolean isButtonSignOutVisible() {
         return isElementDisplayed(buttonSignOut);
     }
-}
 
+    public void checkButtonSignOutNotVisible() {
+        Assert.assertFalse("The 'Sign Out' button should not be visible.", isElementDisplayed(buttonSignOut));
+    }
+
+    public HeaderForLoggedUserElement checkButtonCreatePostVisible() {
+        Assert.assertTrue("The Create Post button should be visible.", isElementDisplayed(buttonCreatePost));
+        return this;
+    }
+}

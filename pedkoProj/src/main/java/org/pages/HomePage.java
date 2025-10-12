@@ -1,5 +1,6 @@
 package org.pages;
 
+import org.junit.Assert;
 import org.apache.log4j.Logger;
 import org.data.TestData;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +14,9 @@ public class HomePage extends ParentPage {
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
+
+    @FindBy(xpath = "//a[@class='btn btn-sm btn-success mr-2']")
+    private WebElement createPostButton;
 
     @Override
     protected String getRelativeURL() {
