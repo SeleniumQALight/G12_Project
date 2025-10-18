@@ -1,12 +1,15 @@
 package org.loginTests;
 
+import org.categories.SmokeTestsFilter;
 import org.data.TestData;
 import org.baseTest.BaseTest;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.pages.elements.HeaderForLoggedUserElement;
 
 public class LoginTestWithPageObject extends BaseTest {
     @Test
+    @Category(SmokeTestsFilter.class)
     public void validLogin(){
         pageProvider.getLoginPage()
                 .openLoginPage()
@@ -18,6 +21,7 @@ public class LoginTestWithPageObject extends BaseTest {
     }
 
     @Test
+    @Category(SmokeTestsFilter.class)
     public void invalidLogin() {
         pageProvider.getLoginPage()
                 .openLoginPage()
