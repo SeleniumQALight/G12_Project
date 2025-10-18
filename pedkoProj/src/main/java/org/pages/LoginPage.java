@@ -42,6 +42,9 @@ public class LoginPage extends ParentPage {
     private List<WebElement>listOfActualMessages;
 
 
+    @FindBy(xpath = "//div[@class='alert alert-danger text-center']")
+    private WebElement errorMessageElement;
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -123,6 +126,21 @@ public class LoginPage extends ParentPage {
         softAssertions.assertAll();
         return this;
     }
+
+    public void checkButtonSignInVisible() {
+        Assert.assertTrue("The Sign In button should be visible.", isElementDisplayed(buttonSignIn));
+    }
+
+    public void checkErrorMessage(String expectedMessage) {
+        Assert.assertTrue("The error message is not displayed.", isElementDisplayed(errorMessageElement));
+        Assert.assertEquals("The error message does not match.", expectedMessage, errorMessageElement.getText());
+    }
+
+    public void checkInputLoginNotVisible() {
+        Assert.assertFalse("The login input should be hidden.", isElementDisplayed(inputUserName));
+    }
+
+    public void checkInputPasswordNotVisible() {
+        Assert.assertFalse("The password input should be hidden.", isElementDisplayed(inputPassword));
+    }
 }
-
-

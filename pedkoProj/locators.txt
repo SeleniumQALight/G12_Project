@@ -1,7 +1,27 @@
 #LoginPage
 input.login=".//input[@id='login']"
-input.password="..."
-button.Ligin="..."
+input.password="//*[@placeholder='Password']"
+button.Ligin="//*[@class='btn btn-primary btn-sm']"
+
+
+#Sign UP page
+input.username ='//*[@id='username-register']'
+input.email = //*[@id='email-register']
+input.password = //*[@id='password-register']
+button.Sign up for OurApp = //*[@class='py-3 mt-4 btn btn-lg btn-success btn-block']
+bottom.Chat = //*[@class='text-white mr-2 header-chat-icon']
+input.chat-field = //*[@class='chat-field']
+bottom.search = //*[@class='text-white mr-2 header-search-icon']
+input.search = //*[@class='live-search-field']
+
 
 #HomePage
-button.SignOut="..."
+button.SignOut="//*[@class='btn btn-sm btn-secondary']"
+
+
+#PostPage
+
+input.title = //*[@id='post-title']
+textarea.body = //*[@id='post-body']
+button.Save New Post = //*[@class='btn btn-primary']
+button.delete = //*[@class='delete-post-button text-danger']
