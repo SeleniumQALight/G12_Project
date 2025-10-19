@@ -17,4 +17,5 @@ import org.registrationTests.ValidationMessagesTest;
 })
 public class SmokeSuite {
 
+
 }
