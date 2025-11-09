@@ -1,5 +1,6 @@
 package org.pages;
 
+import io.qameta.allure.Step;
 import org.assertj.core.api.SoftAssertions;
 import org.data.TestData;
 import org.apache.log4j.Logger;
@@ -56,12 +57,13 @@ public class LoginPage extends ParentPage {
         return "/";
     }
 
+    @Step
     public LoginPage openLoginPage() {
         webDriver.get(baseURL);
         logger.info("Login page was opened with url " + baseURL);
         return this;
     }
-
+    @Step
     public LoginPage enterTextIntoInputLogin(String login) {
         // WebElement inputUserName = webDriver.findElement(By.xpath("//input[@placeholder='Username']"));
 //        inputUserName.clear();
@@ -71,11 +73,13 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoPassword(String password) {
         clearAndEnterTextToElement(inputPassword, password);
         return this;
     }
 
+    @Step
     public void clickOnButtonSignIn() {
 
         //   webDriver.findElement(By.xpath("//button[text()='Sign In']")).click();
@@ -84,6 +88,7 @@ public class LoginPage extends ParentPage {
         clickOnElement(buttonSignIn);
     }
 
+    @Step
     public HomePage openLoginPageAndFillLoginFormWithValidCred() {
         openLoginPage();
         this.enterTextIntoInputLogin(TestData.VALID_LOGIN_UI);
@@ -92,21 +97,25 @@ public class LoginPage extends ParentPage {
         return new HomePage(webDriver);
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationUserNameField(String userName) {
         clearAndEnterTextToElement(inputUserNameRegistrationForm, userName);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationEmailField(String email) {
       clearAndEnterTextToElement(inputEmailRegistrationForm, email);
         return this;
     }
 
+    @Step
     public LoginPage enterTextIntoRegistrationPasswordField(String password) {
         clearAndEnterTextToElement(inputPasswordRegistrationForm, password);
         return this;
     }
 
+    @Step
     public LoginPage checkErrorsMessages(String expectedErrorMessagesAsString) {
         //error1;error2;error3 -> ["error1","error2","error3"]
         String[] expectedErrorsMessages = expectedErrorMessagesAsString.split(SEMICOLON);
@@ -129,19 +138,23 @@ public class LoginPage extends ParentPage {
         return this;
     }
 
+    @Step
     public void checkButtonSignInVisible() {
         Assert.assertTrue("The Sign In button should be visible.", isElementDisplayed(buttonSignIn));
     }
 
+    @Step
     public void checkErrorMessage(String expectedMessage) {
         Assert.assertTrue("The error message is not displayed.", isElementDisplayed(errorMessageElement));
         Assert.assertEquals("The error message does not match.", expectedMessage, errorMessageElement.getText());
     }
 
+    @Step
     public void checkInputLoginNotVisible() {
         Assert.assertFalse("The login input should be hidden.", isElementDisplayed(inputUserName));
     }
 
+    @Step
     public void checkInputPasswordNotVisible() {
         Assert.assertFalse("The password input should be hidden.", isElementDisplayed(inputPassword));
     }

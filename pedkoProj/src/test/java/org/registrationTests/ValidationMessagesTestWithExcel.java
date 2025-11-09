@@ -3,18 +3,20 @@ package org.registrationTests;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.baseTest.BaseTest;
-import org.categories.SmokeTestsFilter;
-import org.data.RegistrationValidationMessages;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
+import org.utils.ConfigProvider;
+import org.utils.ExcelSpreadsheetData;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Collection;
 
 import static org.data.RegistrationValidationMessages.*;
-import static org.data.RegistrationValidationMessages.ERROR_PASSWORD;
 
 @RunWith(JUnitParamsRunner.class)
-@Category(SmokeTestsFilter.class)
-public class ValidationMessagesTest extends BaseTest {
+public class ValidationMessagesTestWithExcel extends BaseTest {
     @Test
     @Parameters(method = "parametersForTestValidationMessages")
     public void TC03_testValidationMessages(String userName, String email, String password, String expectedErrors) {
@@ -27,12 +29,14 @@ public class ValidationMessagesTest extends BaseTest {
         ;
     }
 
-    public Object[][] parametersForTestValidationMessages() {
-        return new Object[][]{
-                //{userName, email, password, expectedErrors}
-                {"dp", "dp", "dp", ERROR_USERNAME + SEMICOLON + ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD},
-                {"dar", "dp", "dp", ERROR_EMAIL + SEMICOLON + ERROR_PASSWORD}
-            };
+    public Collection parametersForTestValidationMessages() throws IOException {
+         String pathToDataFile = ConfigProvider.configProperties.DATA_FILE_PATH() + "testDataSuit.xls";
+         String sheetName = "registrationErrors";
+         boolean skipFirstRow = false;
+         logger.info("pathToDataFile: " + pathToDataFile);
+         logger.info("sheetName: " + sheetName);
+         logger.info("skipFirstRow: " + skipFirstRow);
+         return new ExcelSpreadsheetData(new FileInputStream(pathToDataFile), sheetName, skipFirstRow) .getData();
     }
 }
 
