@@ -73,4 +73,13 @@ public class MyProfilePage extends ParentPage {
         checkIsElementDisplayed(successMessegeDelete);
         return this;
     }
+
+    public PostPage clickOnPostWithTitle(String postTitle) {
+        List<WebElement> posts = webDriver.findElements(By.xpath(String.format("//*[text()='%s']", postTitle)));
+        if (posts.isEmpty()) {
+            throw new RuntimeException("Post with title '" + postTitle + "' not found!");
+        }
+        clickOnElement(posts.get(0), "Post with title '" + postTitle + "'");
+        return new PostPage(webDriver); // <-- возвращаем PostPage, а не MyProfilePage
+    }
 }
