@@ -4,8 +4,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.pages.elements.HeaderForLoggedUserElement;
+import org.pages.EditPostPage;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class PostPage extends ParentPage {
+
     @FindBy(xpath = "//*[@class='alert alert-success text-center']")
     private WebElement successMessage;
 
@@ -15,6 +21,8 @@ public class PostPage extends ParentPage {
     @FindBy(xpath = "//button[@class='delete-post-button text-danger']")
     private WebElement buttonDeletePost;
 
+    @FindBy(xpath = "//a[@data-original-title='Edit']")
+    private WebElement buttonEdit;
 
     public PostPage(WebDriver webDriver) {
         super(webDriver);
@@ -25,21 +33,20 @@ public class PostPage extends ParentPage {
         return "/post/[a-zA-Z0-9]*";
     }
 
-    public HeaderForLoggedUserElement getHeaderForLoggedUserElement(){
-        return new HeaderForLoggedUserElement(webDriver);
-    }
+    public HeaderForLoggedUserElement
+    getHeaderForLoggedUserElement(){
+        return new HeaderForLoggedUserElement(webDriver); }
 
     public PostPage checkIsRedirectToPostPage() {
         //TODO check URL
-        //TODO check some unique element on the page
+        // TODO check some unique element on the page
         return this;
-    }
+        }
 
     public PostPage checkIsSuccessMessageDisplayed() {
         checkIsElementDisplayed(successMessage);
         return this;
     }
-
 
     public PostPage checkTextInSuccessMessage(String expectedMessageText) {
         checkTextInElement(successMessage, expectedMessageText);
@@ -55,4 +62,16 @@ public class PostPage extends ParentPage {
         return new MyProfilePage(webDriver);
     }
 
+    public EditPostPage clickOnButtonEdit() {
+        // явное ожидание, пока элемент будет кликабельным
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(buttonEdit));
+
+        clickOnElement(buttonEdit, "Edit button");
+        return new EditPostPage(webDriver);
+    }
+
+    public EditPostPage checkIsRedirectToEditPostPage() {
+        return new EditPostPage(webDriver);
+    }
 }

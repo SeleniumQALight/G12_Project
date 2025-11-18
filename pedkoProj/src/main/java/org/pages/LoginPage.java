@@ -11,8 +11,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.utils.Utils_Custom;
 
+import java.time.Duration;
 import java.util.List;
 
 import static org.data.RegistrationValidationMessages.SEMICOLON;
@@ -155,5 +157,50 @@ public class LoginPage extends ParentPage {
     @Step
     public void checkInputPasswordNotVisible() {
         Assert.assertFalse("The password input should be hidden.", isElementDisplayed(inputPassword));
+    }
+
+    public LoginPage checkIsLoginFieldVisible() {
+        checkIsElementDisplayed(inputUserName);
+        logger.info("Login field is visible");
+        return this;
+    }
+
+    public LoginPage checkIsPasswordFieldVisible() {
+        checkIsElementDisplayed(inputPassword);
+        logger.info("Password field is visible");
+        return this;
+    }
+
+    public LoginPage checkIsSignInButtonVisible() {
+        checkIsElementDisplayed(buttonSignIn);
+        logger.info("Sign In button is visible");
+        return this;
+    }
+
+    public LoginPage waitForInputLoginToBeHidden() {
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(20));
+        wait.until(driver -> {
+            try {
+                WebElement el = driver.findElement(By.xpath("//input[@placeholder='Username']"));
+                return !el.isDisplayed(); // возвращаем true, когда элемент невидим
+            } catch (org.openqa.selenium.NoSuchElementException e) {
+                return true; // элемент полностью исчез из DOM
+            }
+        });
+        logger.info("Login input is hidden after logout.");
+        return this;
+    }
+
+    public LoginPage waitForButtonSignInVisible() {
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(20));
+        wait.until(driver -> {
+            try {
+                return buttonSignIn.isDisplayed();
+            } catch (org.openqa.selenium.NoSuchElementException e) {
+                return false;
+            }
+        });
+        logger.info("Button Sign In is visible.");
+        return this;
     }
 }
